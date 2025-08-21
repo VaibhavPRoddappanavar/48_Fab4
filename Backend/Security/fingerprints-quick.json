@@ -1,0 +1,106 @@
+[
+  {
+    "url": "https://juice-shop.herokuapp.com/",
+    "status": 200,
+    "server": "Heroku",
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/#/login",
+    "status": 200,
+    "server": "Heroku",
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/#/contact",
+    "status": 200,
+    "server": "Heroku",
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/#/about",
+    "status": 200,
+    "server": "Heroku",
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/#/photo-wall",
+    "status": 200,
+    "server": "Heroku",
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/#/score-board",
+    "status": 200,
+    "server": "Heroku",
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "status": 200,
+    "server": "github.com",
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/#/forgot-password",
+    "status": 200,
+    "server": "Heroku",
+    "errorHints": []
+  },
+  {
+    "url": "GET https://juice-shop.herokuapp.com/rest/admin/application-version",
+    "status": null,
+    "server": null,
+    "errorHints": [
+      "Request failed: Invalid URL"
+    ]
+  },
+  {
+    "url": "GET https://juice-shop.herokuapp.com/assets/i18n/en.json",
+    "status": null,
+    "server": null,
+    "errorHints": [
+      "Request failed: Invalid URL"
+    ]
+  },
+  {
+    "url": "GET https://juice-shop.herokuapp.com/rest/admin/application-configuration",
+    "status": null,
+    "server": null,
+    "errorHints": [
+      "Request failed: Invalid URL"
+    ]
+  },
+  {
+    "url": "GET https://juice-shop.herokuapp.com/rest/languages",
+    "status": null,
+    "server": null,
+    "errorHints": [
+      "Request failed: Invalid URL"
+    ]
+  },
+  {
+    "url": "GET https://juice-shop.herokuapp.com/api/Challenges/?name=Score%20Board",
+    "status": null,
+    "server": null,
+    "errorHints": [
+      "Request failed: Invalid URL"
+    ]
+  },
+  {
+    "url": "GET https://juice-shop.herokuapp.com/api/Quantitys/",
+    "status": null,
+    "server": null,
+    "errorHints": [
+      "Request failed: Invalid URL"
+    ]
+  },
+  {
+    "url": "GET https://juice-shop.herokuapp.com/rest/products/search?q=",
+    "status": null,
+    "server": null,
+    "errorHints": [
+      "Request failed: Invalid URL"
+    ]
+  }
+]

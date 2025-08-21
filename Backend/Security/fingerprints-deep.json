@@ -1,0 +1,326 @@
+[
+  {
+    "url": "https://juice-shop.herokuapp.com/",
+    "status": 200,
+    "server": "Heroku",
+    "tech": [],
+    "cookies": [],
+    "contentType": "text/html; charset=UTF-8",
+    "dbHints": [],
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/#/login",
+    "status": 200,
+    "server": "Heroku",
+    "tech": [],
+    "cookies": [],
+    "contentType": "text/html; charset=UTF-8",
+    "dbHints": [],
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/#/contact",
+    "status": 200,
+    "server": "Heroku",
+    "tech": [],
+    "cookies": [],
+    "contentType": "text/html; charset=UTF-8",
+    "dbHints": [],
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/#/forgot-password",
+    "status": 200,
+    "server": "Heroku",
+    "tech": [],
+    "cookies": [],
+    "contentType": "text/html; charset=UTF-8",
+    "dbHints": [],
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/#/register",
+    "status": 200,
+    "server": "Heroku",
+    "tech": [],
+    "cookies": [],
+    "contentType": "text/html; charset=UTF-8",
+    "dbHints": [],
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "status": 200,
+    "server": "github.com",
+    "tech": [],
+    "cookies": [
+      "_gh_sess=MRyUytqIYtYw08RmKxJHlEGnYevvG62SkbhkXnMB2l4hrnboLVHVpQYJ9JmOBIjisU5wIxcWGZOh1zmFVWzI8KgSnf5137VYhtbFRoSpj30dg25L1HFOKJ3%2BA2SeYtiATZRa1Q7zYoJlielME2WVv0ybnFl5EmISpGfdAeMj79DHcSLZ5BV%2FCrB1Hp1U3RyUebUKkadmDqRcRq1hQeJwk3fr7gkAdFCgl%2FbtNXdQ3wJSMW0KHBXb5S%2Blm0LAhG0Ki46wGL9r1%2BNKBw0wmrXPcg%3D%3D--qVu74KfKehWRIbrH--s684hsDafLIscEj9CTVN2g%3D%3D",
+      "_octo=GH1.1.591841273.1755817892",
+      "logged_in=no"
+    ],
+    "contentType": "text/html; charset=utf-8",
+    "dbHints": [],
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/login?return_to=https%3A%2F%2Fgithub.com%2Fjuice-shop%2Fjuice-shop",
+    "status": 200,
+    "server": "Heroku",
+    "tech": [],
+    "cookies": [],
+    "contentType": "text/html; charset=UTF-8",
+    "dbHints": [],
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E&source=header-repo&source_repo=juice-shop%2Fjuice-shop",
+    "status": 200,
+    "server": "Heroku",
+    "tech": [],
+    "cookies": [],
+    "contentType": "text/html; charset=UTF-8",
+    "dbHints": [],
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/contact/report-abuse?report=juice-shop%2Fjuice-shop+%28Repository+Funding+Links%29",
+    "status": 200,
+    "server": "Heroku",
+    "tech": [],
+    "cookies": [],
+    "contentType": "text/html; charset=UTF-8",
+    "dbHints": [],
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/ftp/legal.md",
+    "status": 200,
+    "server": "Heroku",
+    "tech": [],
+    "cookies": [],
+    "contentType": "text/markdown; charset=UTF-8",
+    "dbHints": [],
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/contact/report-content?content_url=https%3A%2F%2Fgithub.com%2Fjuice-shop%2Fjuice-shop&report=juice-shop+%28user%29",
+    "status": 200,
+    "server": "Heroku",
+    "tech": [],
+    "cookies": [],
+    "contentType": "text/html; charset=UTF-8",
+    "dbHints": [],
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/juice-shop/juice-shop/blob/master/swagger.yml",
+    "status": 200,
+    "server": "Heroku",
+    "tech": [],
+    "cookies": [],
+    "contentType": "text/html; charset=UTF-8",
+    "dbHints": [],
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/juice-shop/juice-shop/search?l=typescript",
+    "status": 200,
+    "server": "Heroku",
+    "tech": [],
+    "cookies": [],
+    "contentType": "text/html; charset=UTF-8",
+    "dbHints": [],
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/juice-shop/juice-shop/search?l=javascript",
+    "status": 200,
+    "server": "Heroku",
+    "tech": [],
+    "cookies": [],
+    "contentType": "text/html; charset=UTF-8",
+    "dbHints": [],
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/solutions#/login",
+    "status": 200,
+    "server": "Heroku",
+    "tech": [],
+    "cookies": [],
+    "contentType": "text/html; charset=UTF-8",
+    "dbHints": [],
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/solutions#/contact",
+    "status": 200,
+    "server": "Heroku",
+    "tech": [],
+    "cookies": [],
+    "contentType": "text/html; charset=UTF-8",
+    "dbHints": [],
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/sponsors#/login",
+    "status": 200,
+    "server": "Heroku",
+    "tech": [],
+    "cookies": [],
+    "contentType": "text/html; charset=UTF-8",
+    "dbHints": [],
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/enterprise#/login",
+    "status": 200,
+    "server": "Heroku",
+    "tech": [],
+    "cookies": [],
+    "contentType": "text/html; charset=UTF-8",
+    "dbHints": [],
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/premium-support#/login",
+    "status": 200,
+    "server": "Heroku",
+    "tech": [],
+    "cookies": [],
+    "contentType": "text/html; charset=UTF-8",
+    "dbHints": [],
+    "errorHints": []
+  },
+  {
+    "url": "https://juice-shop.herokuapp.com/juice-shop#/login",
+    "status": 200,
+    "server": "Heroku",
+    "tech": [],
+    "cookies": [],
+    "contentType": "text/html; charset=UTF-8",
+    "dbHints": [],
+    "errorHints": []
+  },
+  {
+    "url": "GET https://juice-shop.herokuapp.com/rest/admin/application-version",
+    "status": null,
+    "server": null,
+    "tech": [],
+    "cookies": [],
+    "contentType": null,
+    "dbHints": [],
+    "errorHints": [
+      "Request failed: Invalid URL"
+    ]
+  },
+  {
+    "url": "GET https://juice-shop.herokuapp.com/rest/admin/application-configuration",
+    "status": null,
+    "server": null,
+    "tech": [],
+    "cookies": [],
+    "contentType": null,
+    "dbHints": [],
+    "errorHints": [
+      "Request failed: Invalid URL"
+    ]
+  },
+  {
+    "url": "GET https://juice-shop.herokuapp.com/rest/languages",
+    "status": null,
+    "server": null,
+    "tech": [],
+    "cookies": [],
+    "contentType": null,
+    "dbHints": [],
+    "errorHints": [
+      "Request failed: Invalid URL"
+    ]
+  },
+  {
+    "url": "GET https://juice-shop.herokuapp.com/api/Challenges/?name=Score%20Board",
+    "status": null,
+    "server": null,
+    "tech": [],
+    "cookies": [],
+    "contentType": null,
+    "dbHints": [],
+    "errorHints": [
+      "Request failed: Invalid URL"
+    ]
+  },
+  {
+    "url": "GET https://juice-shop.herokuapp.com/api/Quantitys/",
+    "status": null,
+    "server": null,
+    "tech": [],
+    "cookies": [],
+    "contentType": null,
+    "dbHints": [],
+    "errorHints": [
+      "Request failed: Invalid URL"
+    ]
+  },
+  {
+    "url": "GET https://juice-shop.herokuapp.com/rest/products/search?q=",
+    "status": null,
+    "server": null,
+    "tech": [],
+    "cookies": [],
+    "contentType": null,
+    "dbHints": [],
+    "errorHints": [
+      "Request failed: Invalid URL"
+    ]
+  },
+  {
+    "url": "GET https://juice-shop.herokuapp.com/rest/user/whoami",
+    "status": null,
+    "server": null,
+    "tech": [],
+    "cookies": [],
+    "contentType": null,
+    "dbHints": [],
+    "errorHints": [
+      "Request failed: Invalid URL"
+    ]
+  },
+  {
+    "url": "GET https://juice-shop.herokuapp.com/rest/captcha/",
+    "status": null,
+    "server": null,
+    "tech": [],
+    "cookies": [],
+    "contentType": null,
+    "dbHints": [],
+    "errorHints": [
+      "Request failed: Invalid URL"
+    ]
+  },
+  {
+    "url": "GET https://juice-shop.herokuapp.com/api/Feedbacks/",
+    "status": null,
+    "server": null,
+    "tech": [],
+    "cookies": [],
+    "contentType": null,
+    "dbHints": [],
+    "errorHints": [
+      "Request failed: Invalid URL"
+    ]
+  },
+  {
+    "url": "GET https://juice-shop.herokuapp.com/api/SecurityQuestions/",
+    "status": null,
+    "server": null,
+    "tech": [],
+    "cookies": [],
+    "contentType": null,
+    "dbHints": [],
+    "errorHints": [
+      "Request failed: Invalid URL"
+    ]
+  }
+]

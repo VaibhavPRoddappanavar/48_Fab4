@@ -5,6 +5,7 @@ import { Shield, Search, Zap, CheckCircle, Loader2 } from "lucide-react"
 import { Progress } from "@/components/ui/progress"
 import { Card, CardContent } from "@/components/ui/card"
 import { Navigation } from "@/components/navigation"
+import { Footer } from "@/components/footer"
 
 interface ScanStep {
   id: string
@@ -114,10 +115,10 @@ export default function ScanProgress() {
   }, [scanType, navigate, steps.length])
 
   return (
-    <div className="min-h-screen bg-gradient-hero">
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
       <Navigation />
       
-      <div className="pt-32 pb-16 px-4 sm:px-6 lg:px-8">
+      <div className="flex-1 pt-32 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -221,6 +222,8 @@ export default function ScanProgress() {
           </Card>
         </div>
       </div>
+
+      <Footer />
     </div>
   )
 }

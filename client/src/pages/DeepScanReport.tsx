@@ -8,6 +8,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { ScoreCircle } from "@/components/score-circle"
 import { ReportCard, ReportIssue } from "@/components/report-card"
 import { Navigation } from "@/components/navigation"
+import { Footer } from "@/components/footer"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from "recharts"
 
 // Extended mock data for deep scan
@@ -144,10 +145,10 @@ export default function DeepScanReport() {
   const nonTechnicalIssues = allIssues.filter(issue => issue.nonTechnicalFix)
 
   return (
-    <div className="min-h-screen bg-gradient-hero">
+    <div className="min-h-screen bg-gradient-hero text-foreground flex flex-col">
       <Navigation />
       
-      <div className="pt-32 pb-16 px-4 sm:px-6 lg:px-8">
+      <div className="flex-1 pt-32 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <motion.div
@@ -398,6 +399,8 @@ export default function DeepScanReport() {
           </motion.div>
         </div>
       </div>
+
+      <Footer />
     </div>
   )
 }

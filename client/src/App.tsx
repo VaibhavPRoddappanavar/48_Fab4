@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/theme-provider";
+import { ParticleBackground } from "@/components/particle-background";
 import Index from "./pages/Index";
 import Landing from "./pages/Landing";
 import ScanProgress from "./pages/ScanProgress";
@@ -21,6 +22,7 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider defaultTheme="dark" storageKey="webaudit-ui-theme">
       <TooltipProvider>
+        <ParticleBackground />
         <Toaster />
         <Sonner />
         <BrowserRouter>

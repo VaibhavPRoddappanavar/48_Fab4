@@ -1,0 +1,181 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* WebAudit AI Design System - Professional SaaS Theme with gradients and security-focused colors */
+
+@layer base {
+  :root {
+    /* Base colors */
+    --background: 240 10% 97%;
+    --foreground: 222.2 84% 4.9%;
+
+    /* Card colors with subtle gradient effect */
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    /* Popover colors */
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    /* Primary blue-purple gradient theme */
+    --primary: 237 100% 60%;
+    --primary-foreground: 0 0% 100%;
+    --primary-variant: 260 100% 65%;
+
+    /* Secondary colors for cards and sections */
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    /* Muted colors for subtle elements */
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    /* Accent colors for highlights */
+    --accent: 237 100% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Destructive/Error colors */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* Severity colors for audit reports */
+    --severity-high: 0 84.2% 60.2%;
+    --severity-medium: 25 95% 53%;
+    --severity-low: 48 96% 53%;
+    --severity-info: 217.2 91.2% 59.8%;
+
+    /* Success and warning colors */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    --warning: 25 95% 53%;
+    --warning-foreground: 0 0% 100%;
+
+    /* Border and input colors */
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 237 100% 60%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(237 100% 60%), hsl(260 100% 65%));
+    --gradient-hero: linear-gradient(135deg, hsl(237 100% 60% / 0.1), hsl(260 100% 65% / 0.1));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(240 10% 98%));
+
+    /* Shadows */
+    --shadow-lg: 0 20px 25px -5px hsl(237 100% 60% / 0.1), 0 10px 10px -5px hsl(237 100% 60% / 0.04);
+    --shadow-card: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.06);
+
+    /* Radius */
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    /* Dark theme with improved contrast and professional look */
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    /* Dark cards with subtle gradient */
+    --card: 217.2 32.6% 17.5%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 217.2 32.6% 17.5%;
+    --popover-foreground: 210 40% 98%;
+
+    /* Primary colors in dark mode */
+    --primary: 237 100% 70%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --primary-variant: 260 100% 75%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 237 100% 70%;
+    --accent-foreground: 222.2 84% 4.9%;
+
+    --destructive: 0 62.8% 50.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* Dark mode severity colors */
+    --severity-high: 0 84.2% 60.2%;
+    --severity-medium: 25 95% 53%;
+    --severity-low: 48 96% 53%;
+    --severity-info: 217.2 91.2% 69.8%;
+
+    --success: 142 70% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 25 95% 53%;
+    --warning-foreground: 0 0% 100%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 237 100% 70%;
+
+    /* Dark gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(237 100% 70%), hsl(260 100% 75%));
+    --gradient-hero: linear-gradient(135deg, hsl(237 100% 70% / 0.1), hsl(260 100% 75% / 0.1));
+    --gradient-card: linear-gradient(145deg, hsl(217.2 32.6% 17.5%), hsl(217.2 32.6% 19.5%));
+
+    /* Dark shadows */
+    --shadow-lg: 0 20px 25px -5px hsl(0 0% 0% / 0.25), 0 10px 10px -5px hsl(0 0% 0% / 0.1);
+    --shadow-card: 0 4px 6px -1px hsl(0 0% 0% / 0.25), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Custom gradient backgrounds */
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+
+  /* Glass morphism effect */
+  .glass {
+    @apply backdrop-blur-sm bg-white/10 border border-white/20;
+  }
+
+  .dark .glass {
+    @apply backdrop-blur-sm bg-black/10 border border-white/10;
+  }
+
+  /* Custom shadow classes */
+  .shadow-elegant {
+    box-shadow: var(--shadow-lg);
+  }
+
+  .shadow-card-hover {
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .shadow-card-hover:hover {
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Animated gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-primary-variant bg-clip-text text-transparent;
+  }
+
+  /* Score circle animations */
+  .score-circle {
+    transition: stroke-dashoffset 2s ease-in-out;
+  }
+}

@@ -4,3 +4,6 @@
 # Node modules
 node_modules/
 
+Backend\package-lock.json
+
+Backend\package.json

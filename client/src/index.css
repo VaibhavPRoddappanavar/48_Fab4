@@ -178,4 +178,212 @@
   .score-circle {
     transition: stroke-dashoffset 2s ease-in-out;
   }
+
+  /* Binary rain animations */
+  @keyframes matrix-rain {
+    0% {
+      transform: translateY(-100vh);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+
+  .matrix-column {
+    animation: matrix-rain linear infinite;
+  }
+
+  @keyframes matrix-glow {
+    0%, 100% {
+      text-shadow: 0 0 5px #10B981, 0 0 10px #10B981;
+      opacity: 0.3;
+    }
+    50% {
+      text-shadow: 0 0 10px #10B981, 0 0 20px #10B981, 0 0 30px #10B981;
+      opacity: 0.8;
+    }
+  }
+
+  .matrix-char {
+    animation: matrix-glow 2s ease-in-out infinite;
+  }
+
+  /* New particle animations */
+  @keyframes binaryFall {
+    0% {
+      transform: translateY(-100vh);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.3;
+    }
+    90% {
+      opacity: 0.3;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+
+  .binary-fall {
+    animation: binaryFall linear infinite;
+  }
+
+  @keyframes particleFloat {
+    0% {
+      transform: translateY(-10px);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.6;
+    }
+    90% {
+      opacity: 0.6;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+
+  .particle-float {
+    animation: particleFloat linear infinite;
+  }
+
+  .binary-glow {
+    text-shadow: 0 0 10px #10B981;
+  }
+
+  /* Enhanced particle animations with increased brightness */
+  .binary-glow-enhanced {
+    text-shadow: 0 0 15px #10B981, 0 0 30px #10B981, 0 0 45px #059669;
+  }
+
+  .particle-float-enhanced {
+    animation: particleFloatEnhanced linear infinite;
+  }
+
+  @keyframes particleFloatEnhanced {
+    0% {
+      transform: translateY(-20px) scale(0.8);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.9;
+      transform: scale(1);
+    }
+    90% {
+      opacity: 0.9;
+    }
+    100% {
+      transform: translateY(100vh) scale(0.6);
+      opacity: 0;
+    }
+  }
+
+  .particle-orb {
+    animation: particleOrb linear infinite;
+  }
+
+  @keyframes particleOrb {
+    0% {
+      transform: translateY(-30px) translateX(0px);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.6;
+    }
+    50% {
+      transform: translateX(20px);
+    }
+    90% {
+      opacity: 0.4;
+    }
+    100% {
+      transform: translateY(100vh) translateX(-10px);
+      opacity: 0;
+    }
+  }
+
+  /* Enhanced particle animations with improved timing and reduced brightness */
+  .binary-glow-soft {
+    text-shadow: 0 0 8px #10B981, 0 0 16px #10B981;
+  }
+
+  .binary-fall-delayed {
+    animation: binaryFallDelayed linear infinite;
+  }
+
+  .particle-float-smooth {
+    animation: particleFloatSmooth linear infinite;
+  }
+
+  .particle-orb-delayed {
+    animation: particleOrbDelayed linear infinite;
+  }
+
+  @keyframes binaryFallDelayed {
+    0% {
+      transform: translateY(-100vh);
+      opacity: 0;
+    }
+    15% {
+      opacity: 0.3;
+    }
+    85% {
+      opacity: 0.3;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+
+  @keyframes particleFloatSmooth {
+    0% {
+      transform: translateY(-20px) scale(0.6);
+      opacity: 0;
+    }
+    15% {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+    85% {
+      opacity: 0.6;
+    }
+    100% {
+      transform: translateY(100vh) scale(0.4);
+      opacity: 0;
+    }
+  }
+
+  @keyframes particleOrbDelayed {
+    0% {
+      transform: translateY(-30px) translateX(0px) scale(0.8);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+    50% {
+      transform: translateX(15px);
+    }
+    90% {
+      opacity: 0.3;
+    }
+    100% {
+      transform: translateY(100vh) translateX(-5px) scale(0.6);
+      opacity: 0;
+    }
+  }
 }

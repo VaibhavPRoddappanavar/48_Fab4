@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Navigation } from "@/components/navigation"
 import { useToast } from "@/hooks/use-toast"
+import { Footer } from "@/components/footer"
 
 const contactMethods = [
   {
@@ -71,10 +72,10 @@ export default function Contact() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-hero">
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
       <Navigation />
       
-      <div className="pt-32 pb-16 px-4 sm:px-6 lg:px-8">
+      <div className="flex-1 pt-32 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <motion.div
@@ -225,34 +226,7 @@ export default function Contact() {
                 </CardContent>
               </Card>
 
-              {/* FAQ Section */}
-              <Card className="shadow-card-hover">
-                <CardHeader>
-                  <CardTitle>Quick Answers</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div>
-                    <h4 className="font-medium mb-2">Response Time</h4>
-                    <p className="text-sm text-muted-foreground">
-                      We typically respond within 24 hours during business days.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-2">Enterprise Support</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Need custom solutions? Our enterprise team can help with 
-                      on-premise deployments and custom integrations.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-2">Security Questions</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Have specific security concerns? Our experts are here to help 
-                      you understand and address vulnerabilities.
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
+              
             </motion.div>
           </div>
 
@@ -278,6 +252,13 @@ export default function Contact() {
           </motion.div>
         </div>
       </div>
+      
+      {/* Background Effects */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Background effects code */}
+      </div>
+
+      <Footer />
     </div>
   )
 }

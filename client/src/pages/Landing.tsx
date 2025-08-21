@@ -91,7 +91,7 @@ export default function Landing() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="inline-flex items-center px-4 py-2 bg-white/10 rounded-full text-white/90 text-sm font-medium mb-8 backdrop-blur-sm border border-white/20"
+                className="inline-flex items-center px-4 py-2 bg-primary/20 rounded-full text-primary text-sm font-medium mb-8 backdrop-blur-sm border border-primary/30"
               >
                 <Bot className="h-4 w-4 mr-2" />
                 AI-Powered Security Assistant
@@ -274,7 +274,7 @@ export default function Landing() {
                   </motion.div>
 
                   {/* Features List */}
-                  <div className="space-y-4">
+                  <div className="space-y-1">
                     
                     {/* Security Analysis */}
                     <motion.div 
@@ -376,7 +376,7 @@ export default function Landing() {
               className="relative w-full"
             >
               {/* Image container with enhanced styling */}
-              <div className="relative overflow-hidden rounded-3xl shadow-2xl border border-white/10 bg-gradient-to-br from-card/50 to-card/20 backdrop-blur-sm">
+              <div className="relative overflow-hidden rounded-2xl shadow-2xl border border-white/10 bg-gradient-to-br from-card/50 to-card/20 backdrop-blur-sm">
                 <img 
                   src="/hero.png" 
                   alt="WebAudit AI Dashboard" 
@@ -405,35 +405,97 @@ export default function Landing() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl lg:text-5xl font-bold text-white">Why Choose WebAudit AI?</h2>
-            <p className="mt-4 text-lg text-foreground/80 max-w-3xl mx-auto">
+            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">Why Choose WebAudit AI?</h2>
+            <p className="mt-4 text-lg text-foreground/80 max-w-3xl mx-auto leading-relaxed">
               Our platform provides a comprehensive suite of tools to analyze, secure, and optimize your website with the power of AI.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
                 initial={{ opacity: 0, y: 50, scale: 0.9 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.15, ease: "easeOut" }}
                 viewport={{ once: true }}
+                className="group"
               >
-                <Card className="bg-white/5 border-white/10 backdrop-blur-lg h-full flex flex-col">
-                  <CardHeader className="flex-row items-center gap-4">
-                    <div className="bg-gradient-to-br from-primary to-primary-variant p-3 rounded-lg">
-                      <feature.icon className="h-6 w-6 text-white" />
-                    </div>
-                    <CardTitle className="text-white">{feature.title}</CardTitle>
+                <Card className="relative bg-gradient-to-br from-slate-900/80 via-slate-800/60 to-slate-900/80 border border-slate-700/50 backdrop-blur-xl h-full flex flex-col overflow-hidden hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2">
+                  {/* Background Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary-variant/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  {/* Animated Border Glow */}
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/20 via-primary-variant/20 to-primary/20 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 -z-10" />
+                  
+                  <CardHeader className="relative pb-4 pt-8 px-8">
+                    {/* Icon Container with Enhanced Styling */}
+                    <motion.div 
+                      className="w-16 h-16 mb-6 mx-auto relative"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ duration: 0.3, ease: "easeOut" }}
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary-variant rounded-2xl shadow-lg group-hover:shadow-primary/40 transition-all duration-300" />
+                      <div className="relative w-full h-full bg-gradient-to-br from-primary via-primary to-primary-variant rounded-2xl flex items-center justify-center">
+                        <feature.icon className="h-8 w-8 text-white drop-shadow-sm" />
+                      </div>
+                      
+                      {/* Floating particles effect */}
+                      <div className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping transition-opacity duration-300" />
+                    </motion.div>
+                    
+                    <CardTitle className="text-2xl font-bold text-white text-center mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-primary/90 transition-all duration-300">
+                      {feature.title}
+                    </CardTitle>
                   </CardHeader>
-                  <CardContent className="flex-grow">
-                    <p className="text-foreground/80">{feature.description}</p>
+                  
+                  <CardContent className="relative flex-grow px-8 pb-8">
+                    <p className="text-slate-300 text-center leading-relaxed text-base group-hover:text-slate-200 transition-colors duration-300">
+                      {feature.description}
+                    </p>
+                    
+                    {/* Feature highlights for each card */}
+                    <div className="mt-6 pt-6 border-t border-slate-700/50">
+                      <div className="flex items-center justify-center gap-2 text-sm text-slate-400 group-hover:text-slate-300 transition-colors duration-300">
+                        {index === 0 && (
+                          <>
+                            <Zap className="h-4 w-4 text-primary" />
+                            <span>Under 30 seconds</span>
+                          </>
+                        )}
+                        {index === 1 && (
+                          <>
+                            <Search className="h-4 w-4 text-primary" />
+                            <span>4 Analysis Types</span>
+                          </>
+                        )}
+                        {index === 2 && (
+                          <>
+                            <Bot className="h-4 w-4 text-primary" />
+                            <span>Smart Recommendations</span>
+                          </>
+                        )}
+                      </div>
+                    </div>
                   </CardContent>
+                  
+                  {/* Bottom Accent Line */}
+                  <div className="h-1 w-0 group-hover:w-full bg-gradient-to-r from-primary to-primary-variant transition-all duration-700 ease-out" />
                 </Card>
               </motion.div>
             ))}
           </div>
+
+          {/* Additional CTA Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="text-center mt-16"
+          >
+            
+          </motion.div>
         </div>
       </section>
 

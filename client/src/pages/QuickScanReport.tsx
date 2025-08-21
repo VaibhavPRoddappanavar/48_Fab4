@@ -1,11 +1,13 @@
 import { motion } from "framer-motion"
 import { useNavigate } from "react-router-dom"
-import { Shield, Gauge, Eye, Search, Download, ArrowRight } from "lucide-react"
+import { Shield, Gauge, Eye, Search, Download, ArrowRight, Printer, Home, CheckCircle } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ScoreCircle } from "@/components/score-circle"
 import { ReportCard, ReportIssue } from "@/components/report-card"
 import { Navigation } from "@/components/navigation"
+import { Footer } from "@/components/footer"
+import { SeverityBadge } from "@/components/severity-badge"
 
 // Mock data - replace with real API data later
 const mockReportData = {
@@ -96,141 +98,106 @@ export default function QuickScanReport() {
     .slice(0, 5) // Top 5 issues
 
   return (
-    <div className="min-h-screen bg-gradient-hero">
+    <div className="min-h-screen bg-background text-foreground">
       <Navigation />
-      
-      <div className="pt-32 pb-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-12"
-          >
-            <h1 className="text-3xl sm:text-4xl font-bold mb-4">
-              Quick Scan Report
-            </h1>
-            <p className="text-xl text-muted-foreground mb-2">
-              Analysis for: <span className="font-semibold">{mockReportData.scanUrl}</span>
-            </p>
-            <p className="text-sm text-muted-foreground">
-              Scanned on {mockReportData.scanTime}
-            </p>
-          </motion.div>
-
-          {/* Overall Score */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="flex justify-center mb-12"
-          >
-            <Card className="glass shadow-elegant">
-              <CardContent className="p-8 text-center">
-                <ScoreCircle 
-                  score={mockReportData.overallScore} 
-                  size="lg"
-                  label="Overall Health"
-                  className="mb-4"
-                />
-                <h3 className="text-2xl font-bold mb-2">Website Health Score</h3>
-                <p className="text-muted-foreground">
-                  Your site is performing reasonably well with room for improvement
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
+      <div className="container mx-auto px-4 py-24">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Card className="bg-card/80 backdrop-blur-lg border-border/50 shadow-lg">
+            <CardHeader className="border-b border-border/50">
+              <div className="flex justify-between items-start">
+                <div>
+                  <CardTitle className="text-3xl font-bold text-foreground">Quick Scan Report</CardTitle>
+                  <CardDescription className="text-muted-foreground mt-1">
+                    Results for: <a href={mockReportData.scanUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{mockReportData.scanUrl}</a>
+                  </CardDescription>
+                </div>
+                <div className="flex items-center gap-4">
+                  <Button variant="outline" onClick={() => window.print()}>
+                    <Printer className="mr-2 h-4 w-4" />
+                    Print Report
+                  </Button>
+                  <Button className="bg-primary hover:bg-primary/90" onClick={() => navigate("/")}>
+                    <Home className="mr-2 h-4 w-4" />
+                    Back to Home
+                  </Button>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="flex flex-col items-center justify-center p-6">
+              <ScoreCircle score={mockReportData.overallScore} />
+              <p className="text-lg text-muted-foreground mt-4">
+                Your website's health score.
+              </p>
+            </CardContent>
+          </Card>
 
           {/* Category Scores */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12"
-          >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 my-12">
             {Object.entries(mockReportData.categories).map(([key, category], index) => {
               const Icon = categoryIcons[key as keyof typeof categoryIcons]
               
               return (
-                <motion.div
-                  key={key}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 + index * 0.1 }}
-                >
-                  <Card className="shadow-card-hover text-center">
-                    <CardHeader className="pb-4">
-                      <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center mx-auto mb-3">
-                        <Icon className="h-6 w-6 text-white" />
-                      </div>
-                      <CardTitle className="capitalize">{key}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <ScoreCircle 
-                        score={category.score} 
-                        size="sm"
-                        showLabel={false}
-                      />
-                    </CardContent>
-                  </Card>
-                </motion.div>
+                <Card key={key} className="bg-card/50 border-border/30 text-center">
+                  <CardHeader className="pb-4">
+                    <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mx-auto mb-3">
+                      <Icon className="h-6 w-6 text-white" />
+                    </div>
+                    <CardTitle className="capitalize text-foreground">{key}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <ScoreCircle 
+                      score={category.score} 
+                      size="sm"
+                      showLabel={false}
+                    />
+                  </CardContent>
+                </Card>
               )
             })}
-          </motion.div>
+          </div>
 
           {/* Top Issues */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="mb-12"
-          >
-            <h2 className="text-2xl font-bold mb-6">Top Issues Found</h2>
+          <div>
+            <h2 className="text-2xl font-bold text-foreground mb-4">Top Issues Found</h2>
             <div className="space-y-4">
               {sortedIssues.map((issue, index) => (
-                <motion.div
-                  key={issue.id}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.5 + index * 0.1 }}
-                >
-                  <ReportCard issue={issue} />
-                </motion.div>
+                <Card key={issue.id} className="bg-card/50 border-border/30">
+                  <CardHeader>
+                    <div className="flex justify-between items-center">
+                      <CardTitle className="text-lg text-foreground">{issue.title}</CardTitle>
+                      <SeverityBadge severity={issue.severity} />
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">{issue.description}</p>
+                  </CardContent>
+                </Card>
               ))}
             </div>
-          </motion.div>
+          </div>
 
-          {/* Actions */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Button
-              variant="hero"
-              size="lg"
-              onClick={() => {
-                sessionStorage.setItem("scanUrl", mockReportData.scanUrl)
-                navigate("/scan-progress?type=deep")
-              }}
-              className="flex-1 sm:flex-none"
-            >
-              <Search className="h-4 w-4 mr-2" />
-              Run Deep Scan
-              <ArrowRight className="h-4 w-4 ml-2" />
-            </Button>
-            
-            <Button
-              variant="outline"
-              size="lg"
-              className="flex-1 sm:flex-none"
-            >
-              <Download className="h-4 w-4 mr-2" />
-              Download PDF Report
-            </Button>
-          </motion.div>
-        </div>
+          {/* Upgrade CTA */}
+          <Card className="bg-gradient-to-r from-primary/20 to-primary/10 border-primary/30 mt-12">
+            <CardHeader>
+              <CardTitle className="text-xl text-foreground">Unlock Full Potential with Deep Scan</CardTitle>
+              <CardDescription className="text-muted-foreground">
+                Get a comprehensive analysis including SEO, accessibility, and more.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button size="lg" className="bg-primary hover:bg-primary/90" onClick={() => navigate('/scan-progress?type=deep')}>
+                <Search className="mr-2 h-5 w-5" />
+                Start Deep Scan Now
+              </Button>
+            </CardContent>
+          </Card>
+        </motion.div>
       </div>
+      <Footer />
     </div>
   )
 }

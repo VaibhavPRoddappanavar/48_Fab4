@@ -7,33 +7,33 @@
 @layer base {
   :root {
     /* Base colors */
-    --background: 240 10% 97%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 220 13% 9%;
+    --foreground: 210 40% 98%;
 
     /* Card colors with subtle gradient effect */
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 220 13% 15%;
+    --card-foreground: 210 40% 98%;
 
     /* Popover colors */
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 220 13% 15%;
+    --popover-foreground: 210 40% 98%;
 
-    /* Primary blue-purple gradient theme */
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 0 0% 100%;
-    --primary-variant: 217.2 91.2% 69.8%;
+    /* Primary green theme */
+    --primary: 142 76% 42%;
+    --primary-foreground: 210 40% 98%;
+    --primary-variant: 142 76% 52%;
 
     /* Secondary colors for cards and sections */
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 220 13% 25%;
+    --secondary-foreground: 210 40% 98%;
 
     /* Muted colors for subtle elements */
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 220 13% 25%;
+    --muted-foreground: 215 20.2% 65.1%;
 
     /* Accent colors for highlights */
-    --accent: 237 100% 60%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 142 76% 42%;
+    --accent-foreground: 210 40% 98%;
 
     /* Destructive/Error colors */
     --destructive: 0 84.2% 60.2%;
@@ -52,58 +52,53 @@
     --warning-foreground: 0 0% 100%;
 
     /* Border and input colors */
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 217.2 91.2% 59.8%;
+    --border: 220 13% 30%;
+    --input: 220 13% 30%;
+    --ring: 142 76% 42%;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(217.2 91.2% 59.8%), hsl(217.2 91.2% 69.8%));
-    --gradient-hero: none;
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(240 10% 98%));
+    --gradient-primary: linear-gradient(135deg, hsl(142 76% 42%), hsl(142 76% 52%));
+    --gradient-hero: linear-gradient(135deg, hsl(142 76% 42% / 0.1), hsl(142 76% 52% / 0.1));
+    --gradient-card: linear-gradient(145deg, hsl(220 13% 15%), hsl(220 13% 18%));
 
     /* Shadows */
-    --shadow-lg: 0 20px 25px -5px hsl(237 100% 60% / 0.1), 0 10px 10px -5px hsl(237 100% 60% / 0.04);
-    --shadow-card: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.06);
+    --shadow-lg: 0 20px 25px -5px hsl(0 0% 0% / 0.25), 0 10px 10px -5px hsl(0 0% 0% / 0.1);
+    --shadow-card: 0 4px 6px -1px hsl(0 0% 0% / 0.25), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
 
     /* Radius */
     --radius: 0.75rem;
   }
 
   .dark {
-    /* Base colors */
-    --background: 222.2 84% 4.9%;
+    /* Dark theme with improved contrast and professional look */
+    --background: 220 13% 9%;
     --foreground: 210 40% 98%;
 
-    /* Card colors */
-    --card: 222.2 84% 4.9%;
+    /* Dark cards with subtle gradient */
+    --card: 220 13% 15%;
     --card-foreground: 210 40% 98%;
 
-    /* Popover colors */
-    --popover: 222.2 84% 4.9%;
+    --popover: 220 13% 15%;
     --popover-foreground: 210 40% 98%;
 
-    /* Primary colors */
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 210 40% 98%;
-    --primary-variant: 217.2 91.2% 69.8%;
+    /* Primary colors in dark mode */
+    --primary: 142 71% 45%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --primary-variant: 142 71% 55%;
 
-    /* Secondary colors */
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 220 13% 25%;
     --secondary-foreground: 210 40% 98%;
 
-    /* Muted colors */
-    --muted: 217.2 32.6% 17.5%;
+    --muted: 220 13% 25%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    /* Accent colors */
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 142 71% 45%;
+    --accent-foreground: 222.2 84% 4.9%;
 
-    /* Destructive colors */
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 62.8% 50.6%;
     --destructive-foreground: 210 40% 98%;
 
-    /* Severity colors */
+    /* Dark mode severity colors */
     --severity-high: 0 84.2% 60.2%;
     --severity-medium: 25 95% 53%;
     --severity-low: 48 96% 53%;
@@ -114,14 +109,14 @@
     --warning: 25 95% 53%;
     --warning-foreground: 0 0% 100%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 217.2 91.2% 59.8%;
+    --border: 220 13% 30%;
+    --input: 220 13% 30%;
+    --ring: 142 71% 45%;
 
     /* Dark gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(217.2 91.2% 59.8%), hsl(217.2 91.2% 69.8%));
-    --gradient-hero: none;
-    --gradient-card: linear-gradient(145deg, hsl(217.2 32.6% 17.5%), hsl(217.2 32.6% 19.5%));
+    --gradient-primary: linear-gradient(135deg, hsl(142 71% 45%), hsl(142 71% 55%));
+    --gradient-hero: linear-gradient(135deg, hsl(142 71% 45% / 0.1), hsl(142 71% 55% / 0.1));
+    --gradient-card: linear-gradient(145deg, hsl(220 13% 15%), hsl(220 13% 18%));
 
     /* Dark shadows */
     --shadow-lg: 0 20px 25px -5px hsl(0 0% 0% / 0.25), 0 10px 10px -5px hsl(0 0% 0% / 0.1);

@@ -1,89 +1,108 @@
 import { useState } from "react"
-import { Link, NavLink } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import { motion } from "framer-motion"
-import { Menu, X } from "lucide-react"
+import { Shield, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { cn } from "@/lib/utils"
 
 const navItems = [
   { name: "Home", href: "/" },
-  { name: "Eligibility", href: "/eligibility" },
-  { name: "Guidance", href: "/guidance" },
-  { name: "Financial Advisor", href: "/financial-advisor" },
-  { name: "Education", href: "/education" },
+  { name: "Features", href: "/features" },
+  { name: "Pricing", href: "/pricing" },
+  { name: "About", href: "/about" },
+  { name: "Contact", href: "/contact" },
 ]
 
 export function Navigation() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const location = useLocation()
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md dark:bg-gray-900/80 border-b border-gray-200 dark:border-gray-800">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold text-gray-800 dark:text-white">LukaAI</span>
-            <span className="text-sm text-gray-500 dark:text-gray-400 mt-1">Financial Companion</span>
+            <div className="relative">
+              <Shield className="h-8 w-8 text-primary" />
+              <div className="absolute inset-0 h-8 w-8 bg-gradient-primary opacity-20 blur-sm" />
+            </div>
+            <span className="text-xl font-bold gradient-text">WebAudit AI</span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <NavLink
+              <Link
                 key={item.name}
                 to={item.href}
-                className={({ isActive }) =>
-                  `text-sm font-medium transition-colors hover:text-primary ${
-                    isActive ? "text-primary" : "text-gray-600 dark:text-gray-300"
-                  }`
-                }
+                className={cn(
+                  "relative px-3 py-2 text-sm font-medium transition-colors hover:text-primary",
+                  location.pathname === item.href
+                    ? "text-primary"
+                    : "text-muted-foreground"
+                )}
               >
                 {item.name}
-              </NavLink>
+                {location.pathname === item.href && (
+                  <motion.div
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-primary"
+                    layoutId="activeTab"
+                    initial={false}
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  />
+                )}
+              </Link>
             ))}
           </div>
 
-          {/* Right side actions */}
-          <div className="hidden md:flex items-center space-x-4">
+          {/* Actions */}
+          <div className="flex items-center space-x-4">
             <ThemeToggle />
-            <Button>Get Started</Button>
-          </div>
+            <Button variant="hero" className="hidden md:inline-flex">
+              Start Scanning
+            </Button>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
+            {/* Mobile menu button */}
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800"
+              className="md:hidden"
+              onClick={() => setIsOpen(!isOpen)}
             >
-              {isMobileMenuOpen ? <X /> : <Menu />}
-              <span className="sr-only">Toggle menu</span>
+              {isOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </Button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
+      {/* Mobile Navigation */}
+      {isOpen && (
         <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="md:hidden px-4 pt-2 pb-4 space-y-2 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800"
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "auto" }}
+          exit={{ opacity: 0, height: 0 }}
+          className="md:hidden bg-background border-t border-border"
         >
-          <div className="flex flex-col space-y-2">
+          <div className="px-4 py-4 space-y-2">
             {navItems.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-                onClick={() => setIsMobileMenuOpen(false)}
+                className={cn(
+                  "block px-3 py-2 text-sm font-medium rounded-md transition-colors",
+                  location.pathname === item.href
+                    ? "text-primary bg-primary/10"
+                    : "text-muted-foreground hover:text-primary hover:bg-muted"
+                )}
+                onClick={() => setIsOpen(false)}
               >
                 {item.name}
               </Link>
             ))}
-            <Button className="w-full mt-4">
-              Get Started
+            <Button variant="hero" className="w-full mt-4">
+              Start Scanning
             </Button>
           </div>
         </motion.div>

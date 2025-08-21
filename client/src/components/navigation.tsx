@@ -12,6 +12,7 @@ const navItems = [
   { name: "Pricing", href: "/pricing" },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
+  { name: "Scan", href: "/scan" },
 ]
 
 export function Navigation() {
@@ -60,8 +61,8 @@ export function Navigation() {
           {/* Actions */}
           <div className="flex items-center space-x-4">
             <ThemeToggle />
-            <Button variant="hero" className="hidden md:inline-flex">
-              Start Scanning
+            <Button asChild variant="hero" className="hidden md:inline-flex">
+              <Link to="/scan">Start Scanning</Link>
             </Button>
 
             {/* Mobile menu button */}
@@ -101,8 +102,8 @@ export function Navigation() {
                 {item.name}
               </Link>
             ))}
-            <Button variant="hero" className="w-full mt-4">
-              Start Scanning
+            <Button asChild variant="hero" className="w-full mt-4">
+              <Link to="/scan">Start Scanning</Link>
             </Button>
           </div>
         </motion.div>

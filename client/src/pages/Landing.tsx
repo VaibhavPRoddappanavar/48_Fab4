@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { motion } from "framer-motion"
 import { useNavigate } from "react-router-dom"
 import { 
@@ -10,7 +10,13 @@ import {
   Eye, 
   Users,
   ArrowRight,
-  CheckCircle
+  CheckCircle,
+  AlertTriangle,
+  Activity,
+  Lock,
+  Wifi,
+  Database,
+  Globe
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -45,245 +51,388 @@ const benefits = [
 ]
 
 export default function Landing() {
-  const [url, setUrl] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
-  const { toast } = useToast()
+  const [scanningActive, setScanningActive] = useState(false)
+  const [vulnerabilities, setVulnerabilities] = useState(0)
+  const [securityScore, setSecurityScore] = useState(85)
 
-  const validateUrl = (url: string) => {
-    try {
-      const urlObj = new URL(url.startsWith('http') ? url : `https://${url}`)
-      return urlObj.hostname.length > 0
-    } catch {
-      return false
-    }
-  }
+  // Simulate scanning animation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setScanningActive(prev => !prev)
+      setVulnerabilities(prev => Math.floor(Math.random() * 12) + 1)
+      setSecurityScore(prev => Math.min(95, Math.max(75, prev + (Math.random() - 0.5) * 10)))
+    }, 3000)
 
-  const handleScan = async (scanType: "quick" | "deep") => {
-    if (!url.trim()) {
-      toast({
-        title: "URL Required",
-        description: "Please enter a website URL to scan",
-        variant: "destructive"
-      })
-      return
-    }
+    return () => clearInterval(interval)
+  }, [])
 
-    if (!validateUrl(url)) {
-      toast({
-        title: "Invalid URL",
-        description: "Please enter a valid website URL",
-        variant: "destructive"
-      })
-      return
-    }
-
-    setIsLoading(true)
-    
-    // Store URL in sessionStorage for the scan pages
-    sessionStorage.setItem("scanUrl", url)
-    
-    // Simulate navigation delay
-    setTimeout(() => {
-      navigate(`/scan-progress?type=${scanType}`)
-    }, 500)
+  const handleScan = () => {
+    navigate('/scan');
   }
 
   return (
-    <div className="min-h-screen bg-gradient-hero">
+    <div className="min-h-screen bg-background text-foreground">
       <Navigation />
       
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-32 pb-16 px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="text-left"
             >
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-                <span className="gradient-text">Secure & Optimize</span>
+              {/* AI Badge */}
+              <motion.div 
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="inline-flex items-center px-4 py-2 bg-white/10 rounded-full text-white/90 text-sm font-medium mb-8 backdrop-blur-sm border border-white/20"
+              >
+                <Bot className="h-4 w-4 mr-2" />
+                AI-Powered Security Assistant
+              </motion.div>
+
+              <motion.h1 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight mb-6"
+              >
+                Make Your Website
                 <br />
-                Your Website with AI
-              </h1>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-                WebAudit AI provides comprehensive security scans, performance analysis, and 
-                intelligent recommendations to help you build better, safer websites.
-              </p>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-variant">
+                  Safer & Faster
+                </span>
+              </motion.h1>
+              
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                className="text-xl text-foreground/80 max-w-xl mb-8 leading-relaxed"
+              >
+                WebAudit AI helps you identify and fix critical security, performance, and accessibility issues before they impact your users.
+              </motion.p>
+
+              {/* CTA Buttons */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.9 }}
+                className="flex flex-col sm:flex-row gap-4"
+              >
+                <Button
+                  size="lg"
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-4 text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                  onClick={handleScan}
+                >
+                  Get Started
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+                
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="border-white/30 text-white hover:bg-white/10 font-medium px-8 py-4 text-lg backdrop-blur-sm transition-all duration-300"
+                >
+                  <Eye className="mr-2 h-5 w-5" />
+                  Book Demo
+                </Button>
+              </motion.div>
             </motion.div>
 
-            {/* URL Input Section */}
+            {/* Right Content - 3D Spline Element */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="max-w-2xl mx-auto"
+              initial={{ opacity: 0, x: 50, scale: 0.9 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+              className="relative h-[500px]"
             >
-              <Card className="glass border-white/20 shadow-elegant">
-                <CardContent className="p-6">
-                  <div className="space-y-4">
-                    <Input
-                      type="url"
-                      placeholder="Enter your website URL (e.g., example.com)"
-                      value={url}
-                      onChange={(e) => setUrl(e.target.value)}
-                      className="text-lg h-12"
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                          handleScan("quick")
-                        }
-                      }}
-                    />
-                    <div className="flex gap-3 justify-center">
-                      <Button
-                        size="lg"
-                        onClick={() => handleScan("quick")}
-                        disabled={isLoading}
-                        className="flex-1 sm:flex-none"
-                      >
-                        <Zap className="h-4 w-4 mr-2" />
-                        Quick Scan
-                      </Button>
-                      <Button
-                        variant="hero"
-                        size="lg"
-                        onClick={() => handleScan("deep")}
-                        disabled={isLoading}
-                        className="flex-1 sm:flex-none"
-                      >
-                        <Search className="h-4 w-4 mr-2" />
-                        Deep Scan
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              <iframe 
+                src='https://my.spline.design/techinspired3dassets01protection-7ggJD5jdEmQEoSR91ur7yVcQ/' 
+                frameBorder='0' 
+                width='100%' 
+                height='100%'
+                className="rounded-2xl"
+                title="WebAudit AI 3D Protection Element"
+                style={{ 
+                  border: 'none',
+                  outline: 'none',
+                  background: 'transparent'
+                }}
+              />
+
+              <motion.div
+                animate={{ 
+                  y: [0, -10, 0],
+                  rotate: [0, 5, 0]
+                }}
+                transition={{ 
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="absolute -top-6 -right-6 w-16 h-16 bg-gradient-to-r from-primary to-primary-variant rounded-2xl flex items-center justify-center shadow-lg z-10"
+              >
+                <Shield className="h-8 w-8 text-white" />
+              </motion.div>
+
+              <motion.div
+                animate={{ 
+                  y: [0, 10, 0],
+                  rotate: [0, -5, 0]
+                }}
+                transition={{ 
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 1
+                }}
+                className="absolute -bottom-4 -left-4 w-12 h-12 bg-gradient-to-r from-green-400 to-emerald-500 rounded-xl flex items-center justify-center shadow-lg z-10"
+              >
+                <Gauge className="h-6 w-6 text-white" />
+              </motion.div>
             </motion.div>
           </div>
         </div>
 
-        {/* Animated Background Elements */}
+        {/* Background Effects */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-primary opacity-10 rounded-full blur-3xl" />
-          <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-primary opacity-10 rounded-full blur-3xl" />
+          <motion.div
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.05, 0.1, 0.05],
+              rotate: [0, 10, 0],
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute -top-40 -right-32 w-[500px] h-[500px] bg-gradient-to-r from-primary/10 to-primary-variant/10 rounded-full blur-3xl"
+          />
+          <motion.div
+            animate={{
+              scale: [1.1, 1, 1.1],
+              opacity: [0.07, 0.15, 0.07],
+              rotate: [0, -15, 0],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 5,
+            }}
+            className="absolute -bottom-40 -left-32 w-[500px] h-[500px] bg-gradient-to-r from-secondary/10 to-accent/10 rounded-full blur-3xl"
+          />
+        </div>
+      </section>
+      {/* Image and 3D Element Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-[2fr,3fr] gap-12 items-center">
+            {/* Left side - Modern WebAudit Features Showcase */}
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="relative w-full h-auto"
+            >
+              {/* Main Container with a more refined glass effect */}
+              <div className="relative bg-slate-900/70 rounded-3xl backdrop-blur-xl border border-slate-700/50 shadow-2xl shadow-black/40 overflow-hidden">
+                
+                {/* Aurora Background Effect */}
+                <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] opacity-10"
+                     style={{
+                       background: "radial-gradient(circle at center, hsl(var(--primary)) 0%, transparent 50%)"
+                     }}
+                />
+
+                {/* Content Container */}
+                <div className="relative p-8 flex flex-col">
+                  
+                  {/* Header Section */}
+                  <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    viewport={{ once: true }}
+                    className="text-center mb-10"
+                  >
+                    <h3 className="text-3xl font-bold text-white mb-3">
+                      One Scan, <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-variant">Total Clarity</span>
+                    </h3>
+                    <p className="text-slate-400 max-w-md mx-auto">
+                      Our AI-powered audit covers every critical aspect of your website's health.
+                    </p>
+                  </motion.div>
+
+                  {/* Features List */}
+                  <div className="space-y-4">
+                    
+                    {/* Security Analysis */}
+                    <motion.div 
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
+                      viewport={{ once: true }}
+                      className="group flex items-center gap-4 p-4 rounded-2xl bg-slate-800/50 border border-slate-700 hover:bg-slate-800/80 hover:border-primary/40 transition-all duration-300"
+                    >
+                      <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-primary-variant rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
+                        <Shield className="h-6 w-6 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-white">Security Analysis</h4>
+                        <p className="text-sm text-slate-400">Find and fix vulnerabilities before they're exploited.</p>
+                      </div>
+                      <ArrowRight className="h-5 w-5 text-slate-600 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
+                    </motion.div>
+
+                    {/* Performance Optimization */}
+                    <motion.div 
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
+                      viewport={{ once: true }}
+                      className="group flex items-center gap-4 p-4 rounded-2xl bg-slate-800/50 border border-slate-700 hover:bg-slate-800/80 hover:border-primary/40 transition-all duration-300"
+                    >
+                      <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-primary-variant rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
+                        <Gauge className="h-6 w-6 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-white">Performance Optimization</h4>
+                        <p className="text-sm text-slate-400">Boost load times and improve user experience.</p>
+                      </div>
+                      <ArrowRight className="h-5 w-5 text-slate-600 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
+                    </motion.div>
+
+                    {/* SEO & Accessibility */}
+                    <motion.div 
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.4, duration: 0.5, ease: "easeOut" }}
+                      viewport={{ once: true }}
+                      className="group flex items-center gap-4 p-4 rounded-2xl bg-slate-800/50 border border-slate-700 hover:bg-slate-800/80 hover:border-primary/40 transition-all duration-300"
+                    >
+                      <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-primary-variant rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
+                        <Search className="h-6 w-6 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-white">SEO & Accessibility</h4>
+                        <p className="text-sm text-slate-400">Improve rankings and reach a wider audience.</p>
+                      </div>
+                      <ArrowRight className="h-5 w-5 text-slate-600 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
+                    </motion.div>
+
+                    {/* AI-Powered Fixes */}
+                    <motion.div 
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.5, duration: 0.5, ease: "easeOut" }}
+                      viewport={{ once: true }}
+                      className="group flex items-center gap-4 p-4 rounded-2xl bg-slate-800/50 border border-slate-700 hover:bg-slate-800/80 hover:border-primary/40 transition-all duration-300"
+                    >
+                      <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-primary-variant rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
+                        <Bot className="h-6 w-6 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-white">AI-Powered Fixes</h4>
+                        <p className="text-sm text-slate-400">Get actionable, intelligent recommendations.</p>
+                      </div>
+                      <ArrowRight className="h-5 w-5 text-slate-600 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
+                    </motion.div>
+
+                  </div>
+
+                  {/* Bottom CTA */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6, duration: 0.6, ease: "easeOut" }}
+                    viewport={{ once: true }}
+                    className="mt-10 text-center"
+                  >
+                    <Button size="lg" variant="outline" className="bg-transparent border-slate-600 hover:bg-primary/10 hover:border-primary/30 hover:text-primary transition-all duration-300">
+                      Explore All Features
+                    </Button>
+                  </motion.div>
+
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Right side for Image - 60% width */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="relative w-full"
+            >
+              {/* Image container with enhanced styling */}
+              <div className="relative overflow-hidden rounded-3xl shadow-2xl border border-white/10 bg-gradient-to-br from-card/50 to-card/20 backdrop-blur-sm">
+                <img 
+                  src="/hero.png" 
+                  alt="WebAudit AI Dashboard" 
+                  className="w-full h-auto object-cover transform transition-all duration-500 hover:scale-105"
+                />
+                
+                {/* Image overlay for better integration */}
+                <div className="absolute inset-0 bg-gradient-to-t from-background/20 via-transparent to-transparent pointer-events-none" />
+              </div>
+              
+              
+              
+            
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Comprehensive Website Analysis
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Get detailed insights into your website's security, performance, and optimization opportunities
+            <h2 className="text-4xl lg:text-5xl font-bold text-white">Why Choose WebAudit AI?</h2>
+            <p className="mt-4 text-lg text-foreground/80 max-w-3xl mx-auto">
+              Our platform provides a comprehensive suite of tools to analyze, secure, and optimize your website with the power of AI.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="shadow-card-hover h-full">
-                  <CardHeader>
-                    <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center mb-4">
+                <Card className="bg-white/5 border-white/10 backdrop-blur-lg h-full flex flex-col">
+                  <CardHeader className="flex-row items-center gap-4">
+                    <div className="bg-gradient-to-br from-primary to-primary-variant p-3 rounded-lg">
                       <feature.icon className="h-6 w-6 text-white" />
                     </div>
-                    <CardTitle className="text-xl">{feature.title}</CardTitle>
-                    <CardDescription className="text-base">
-                      {feature.description}
-                    </CardDescription>
+                    <CardTitle className="text-white">{feature.title}</CardTitle>
                   </CardHeader>
+                  <CardContent className="flex-grow">
+                    <p className="text-foreground/80">{feature.description}</p>
+                  </CardContent>
                 </Card>
               </motion.div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-muted/30">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-                Why Choose WebAudit AI?
-              </h2>
-              <p className="text-lg text-muted-foreground mb-8">
-                Our AI-powered platform helps you identify and fix critical issues 
-                before they impact your users or business.
-              </p>
-              
-              <div className="space-y-4">
-                {benefits.map((benefit, index) => (
-                  <motion.div
-                    key={benefit}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="flex items-center space-x-3"
-                  >
-                    <CheckCircle className="h-5 w-5 text-success flex-shrink-0" />
-                    <span>{benefit}</span>
-                  </motion.div>
-                ))}
-              </div>
-
-              <Button variant="hero" size="lg" className="mt-8">
-                Start Free Scan
-                <ArrowRight className="h-4 w-4 ml-2" />
-              </Button>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <Card className="glass shadow-elegant">
-                <CardContent className="p-8">
-                  <div className="grid grid-cols-2 gap-6">
-                    <div className="text-center">
-                      <div className="text-3xl font-bold gradient-text">99.9%</div>
-                      <div className="text-sm text-muted-foreground">Accuracy</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-3xl font-bold gradient-text">&lt;30s</div>
-                      <div className="text-sm text-muted-foreground">Scan Time</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-3xl font-bold gradient-text">50+</div>
-                      <div className="text-sm text-muted-foreground">Check Types</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-3xl font-bold gradient-text">24/7</div>
-                      <div className="text-sm text-muted-foreground">Monitoring</div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
           </div>
         </div>
       </section>

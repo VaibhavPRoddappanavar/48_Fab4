@@ -13,6 +13,7 @@ import About from "./pages/About";
 import Pricing from "./pages/Pricing";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import Scan from "./pages/Scan";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Landing />} />
+            <Route path="/scan" element={<Scan />} />
             <Route path="/scan-progress" element={<ScanProgress />} />
             <Route path="/quick-scan-report" element={<QuickScanReport />} />
             <Route path="/deep-scan-report" element={<DeepScanReport />} />

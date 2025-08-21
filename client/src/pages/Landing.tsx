@@ -1,4 +1,4 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { motion } from "framer-motion"
 import { useNavigate } from "react-router-dom"
 import { 
@@ -10,7 +10,13 @@ import {
   Eye, 
   Users,
   ArrowRight,
-  CheckCircle
+  CheckCircle,
+  AlertTriangle,
+  Activity,
+  Lock,
+  Wifi,
+  Database,
+  Globe
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -45,53 +51,24 @@ const benefits = [
 ]
 
 export default function Landing() {
-  const [url, setUrl] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
-  const { toast } = useToast()
-  const urlInputSectionRef = useRef<HTMLDivElement>(null)
+  const [scanningActive, setScanningActive] = useState(false)
+  const [vulnerabilities, setVulnerabilities] = useState(0)
+  const [securityScore, setSecurityScore] = useState(85)
 
-  const validateUrl = (url: string) => {
-    try {
-      const urlObj = new URL(url.startsWith('http') ? url : `https://${url}`)
-      return urlObj.hostname.length > 0
-    } catch {
-      return false
-    }
-  }
+  // Simulate scanning animation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setScanningActive(prev => !prev)
+      setVulnerabilities(prev => Math.floor(Math.random() * 12) + 1)
+      setSecurityScore(prev => Math.min(95, Math.max(75, prev + (Math.random() - 0.5) * 10)))
+    }, 3000)
 
-  const handleScan = async (scanType: "quick" | "deep") => {
-    if (!url.trim()) {
-      toast({
-        title: "URL Required",
-        description: "Please enter a website URL to scan",
-        variant: "destructive"
-      })
-      return
-    }
+    return () => clearInterval(interval)
+  }, [])
 
-    if (!validateUrl(url)) {
-      toast({
-        title: "Invalid URL",
-        description: "Please enter a valid website URL",
-        variant: "destructive"
-      })
-      return
-    }
-
-    setIsLoading(true)
-    
-    // Store URL in sessionStorage for the scan pages
-    sessionStorage.setItem("scanUrl", url)
-    
-    // Simulate navigation delay
-    setTimeout(() => {
-      navigate(`/scan-progress?type=${scanType}`)
-    }, 500)
-  }
-
-  const handleScrollToInput = () => {
-    urlInputSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+  const handleScan = () => {
+    navigate('/scan');
   }
 
   return (
@@ -152,7 +129,7 @@ export default function Landing() {
                 <Button
                   size="lg"
                   className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-4 text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
-                  onClick={handleScrollToInput}
+                  onClick={handleScan}
                 >
                   Get Started
                   <ArrowRight className="ml-2 h-5 w-5" />
@@ -164,7 +141,7 @@ export default function Landing() {
                   className="border-white/30 text-white hover:bg-white/10 font-medium px-8 py-4 text-lg backdrop-blur-sm transition-all duration-300"
                 >
                   <Eye className="mr-2 h-5 w-5" />
-                  Watch Demo
+                  Book Demo
                 </Button>
               </motion.div>
             </motion.div>
@@ -176,7 +153,6 @@ export default function Landing() {
               transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
               className="relative h-[500px]"
             >
-              {/* 3D Spline Element - No Container */}
               <iframe 
                 src='https://my.spline.design/techinspired3dassets01protection-7ggJD5jdEmQEoSR91ur7yVcQ/' 
                 frameBorder='0' 
@@ -191,7 +167,6 @@ export default function Landing() {
                 }}
               />
 
-              {/* Floating Elements */}
               <motion.div
                 animate={{ 
                   y: [0, -10, 0],
@@ -257,6 +232,168 @@ export default function Landing() {
           />
         </div>
       </section>
+      {/* Image and 3D Element Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-[2fr,3fr] gap-12 items-center">
+            {/* Left side - Modern WebAudit Features Showcase */}
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="relative w-full h-auto"
+            >
+              {/* Main Container with a more refined glass effect */}
+              <div className="relative bg-slate-900/70 rounded-3xl backdrop-blur-xl border border-slate-700/50 shadow-2xl shadow-black/40 overflow-hidden">
+                
+                {/* Aurora Background Effect */}
+                <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] opacity-10"
+                     style={{
+                       background: "radial-gradient(circle at center, hsl(var(--primary)) 0%, transparent 50%)"
+                     }}
+                />
+
+                {/* Content Container */}
+                <div className="relative p-8 flex flex-col">
+                  
+                  {/* Header Section */}
+                  <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    viewport={{ once: true }}
+                    className="text-center mb-10"
+                  >
+                    <h3 className="text-3xl font-bold text-white mb-3">
+                      One Scan, <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-variant">Total Clarity</span>
+                    </h3>
+                    <p className="text-slate-400 max-w-md mx-auto">
+                      Our AI-powered audit covers every critical aspect of your website's health.
+                    </p>
+                  </motion.div>
+
+                  {/* Features List */}
+                  <div className="space-y-4">
+                    
+                    {/* Security Analysis */}
+                    <motion.div 
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
+                      viewport={{ once: true }}
+                      className="group flex items-center gap-4 p-4 rounded-2xl bg-slate-800/50 border border-slate-700 hover:bg-slate-800/80 hover:border-primary/40 transition-all duration-300"
+                    >
+                      <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-primary-variant rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
+                        <Shield className="h-6 w-6 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-white">Security Analysis</h4>
+                        <p className="text-sm text-slate-400">Find and fix vulnerabilities before they're exploited.</p>
+                      </div>
+                      <ArrowRight className="h-5 w-5 text-slate-600 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
+                    </motion.div>
+
+                    {/* Performance Optimization */}
+                    <motion.div 
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
+                      viewport={{ once: true }}
+                      className="group flex items-center gap-4 p-4 rounded-2xl bg-slate-800/50 border border-slate-700 hover:bg-slate-800/80 hover:border-primary/40 transition-all duration-300"
+                    >
+                      <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-primary-variant rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
+                        <Gauge className="h-6 w-6 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-white">Performance Optimization</h4>
+                        <p className="text-sm text-slate-400">Boost load times and improve user experience.</p>
+                      </div>
+                      <ArrowRight className="h-5 w-5 text-slate-600 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
+                    </motion.div>
+
+                    {/* SEO & Accessibility */}
+                    <motion.div 
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.4, duration: 0.5, ease: "easeOut" }}
+                      viewport={{ once: true }}
+                      className="group flex items-center gap-4 p-4 rounded-2xl bg-slate-800/50 border border-slate-700 hover:bg-slate-800/80 hover:border-primary/40 transition-all duration-300"
+                    >
+                      <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-primary-variant rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
+                        <Search className="h-6 w-6 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-white">SEO & Accessibility</h4>
+                        <p className="text-sm text-slate-400">Improve rankings and reach a wider audience.</p>
+                      </div>
+                      <ArrowRight className="h-5 w-5 text-slate-600 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
+                    </motion.div>
+
+                    {/* AI-Powered Fixes */}
+                    <motion.div 
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.5, duration: 0.5, ease: "easeOut" }}
+                      viewport={{ once: true }}
+                      className="group flex items-center gap-4 p-4 rounded-2xl bg-slate-800/50 border border-slate-700 hover:bg-slate-800/80 hover:border-primary/40 transition-all duration-300"
+                    >
+                      <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-primary-variant rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
+                        <Bot className="h-6 w-6 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-white">AI-Powered Fixes</h4>
+                        <p className="text-sm text-slate-400">Get actionable, intelligent recommendations.</p>
+                      </div>
+                      <ArrowRight className="h-5 w-5 text-slate-600 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
+                    </motion.div>
+
+                  </div>
+
+                  {/* Bottom CTA */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6, duration: 0.6, ease: "easeOut" }}
+                    viewport={{ once: true }}
+                    className="mt-10 text-center"
+                  >
+                    <Button size="lg" variant="outline" className="bg-transparent border-slate-600 hover:bg-primary/10 hover:border-primary/30 hover:text-primary transition-all duration-300">
+                      Explore All Features
+                    </Button>
+                  </motion.div>
+
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Right side for Image - 60% width */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="relative w-full"
+            >
+              {/* Image container with enhanced styling */}
+              <div className="relative overflow-hidden rounded-3xl shadow-2xl border border-white/10 bg-gradient-to-br from-card/50 to-card/20 backdrop-blur-sm">
+                <img 
+                  src="/hero.png" 
+                  alt="WebAudit AI Dashboard" 
+                  className="w-full h-auto object-cover transform transition-all duration-500 hover:scale-105"
+                />
+                
+                {/* Image overlay for better integration */}
+                <div className="absolute inset-0 bg-gradient-to-t from-background/20 via-transparent to-transparent pointer-events-none" />
+              </div>
+              
+              
+              
+            
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
       {/* Features Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
@@ -297,59 +434,6 @@ export default function Landing() {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* URL Input Section */}
-      <section ref={urlInputSectionRef} className="py-16 px-4 sm:px-6 lg:px-8 bg-white/5 backdrop-blur-sm">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl font-bold text-white mb-8">Ready to Secure Your Website?</h2>
-            
-            <Card className="bg-white/10 border-white/20 shadow-2xl backdrop-blur-xl">
-              <CardContent className="p-8">
-                <div className="space-y-6">
-                  <Input
-                    type="url"
-                    placeholder="Enter your website URL (e.g., example.com)"
-                    value={url}
-                    onChange={(e) => setUrl(e.target.value)}
-                    className="text-lg h-14 bg-white/90 border-white/30 text-gray-800 placeholder:text-gray-500"
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        handleScan("quick")
-                      }
-                    }}
-                  />
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Button
-                      size="lg"
-                      onClick={() => handleScan("quick")}
-                      disabled={isLoading}
-                      className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-semibold px-8 py-4 text-lg shadow-xl transform hover:scale-105 transition-all duration-300"
-                    >
-                      <Zap className="h-5 w-5 mr-2" />
-                      Quick Scan (30s)
-                    </Button>
-                    <Button
-                      size="lg"
-                      onClick={() => handleScan("deep")}
-                      disabled={isLoading}
-                      className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-4 text-lg shadow-xl transform hover:scale-105 transition-all duration-300"
-                    >
-                      <Search className="h-5 w-5 mr-2" />
-                      Deep Scan (2min)
-                    </Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
         </div>
       </section>
 

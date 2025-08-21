@@ -91,7 +91,7 @@ export default function Landing() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="inline-flex items-center px-4 py-2 bg-white/10 rounded-full text-white/90 text-sm font-medium mb-8 backdrop-blur-sm border border-white/20"
+                className="inline-flex items-center px-4 py-2 bg-primary/20 rounded-full text-primary text-sm font-medium mb-8 backdrop-blur-sm border border-primary/30"
               >
                 <Bot className="h-4 w-4 mr-2" />
                 AI-Powered Security Assistant

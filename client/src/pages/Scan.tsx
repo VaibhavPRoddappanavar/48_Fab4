@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { useNavigate } from "react-router-dom"
-import { Zap, Search, Shield, Bot, ArrowRight, CheckCircle } from "lucide-react"
+import { Zap, Search, Shield, Bot, ArrowRight, CheckCircle, AlertCircle, Globe } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -33,16 +33,70 @@ const scanFeatures = [
 export default function Scan() {
   const [url, setUrl] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [urlError, setUrlError] = useState("")
+  const [isValidUrl, setIsValidUrl] = useState(false)
   const navigate = useNavigate()
   const { toast } = useToast()
 
-  const validateUrl = (url: string) => {
-    try {
-      const urlObj = new URL(url.startsWith('http') ? url : `https://${url}`)
-      return urlObj.hostname.length > 0
-    } catch {
+  const validateUrl = (inputUrl: string) => {
+    if (!inputUrl.trim()) {
+      setUrlError("")
+      setIsValidUrl(false)
       return false
     }
+
+    try {
+      // Clean the URL - remove extra spaces and common prefixes
+      let cleanUrl = inputUrl.trim()
+      
+      // Check for common invalid patterns
+      if (cleanUrl.includes(' ') || cleanUrl.includes('..') || cleanUrl.length < 3) {
+        setUrlError("Please enter a valid website URL")
+        setIsValidUrl(false)
+        return false
+      }
+
+      // Add https if no protocol is specified
+      if (!cleanUrl.startsWith('http://') && !cleanUrl.startsWith('https://')) {
+        cleanUrl = `https://${cleanUrl}`
+      }
+
+      const urlObj = new URL(cleanUrl)
+      
+      // Check if hostname is valid
+      if (!urlObj.hostname || urlObj.hostname.length < 3) {
+        setUrlError("Please enter a valid domain name")
+        setIsValidUrl(false)
+        return false
+      }
+
+      // Check for valid domain format (at least one dot)
+      if (!urlObj.hostname.includes('.')) {
+        setUrlError("Please enter a complete domain (e.g., example.com)")
+        setIsValidUrl(false)
+        return false
+      }
+
+      // Check for localhost or invalid domains
+      if (urlObj.hostname === 'localhost' || urlObj.hostname.startsWith('127.') || urlObj.hostname.startsWith('192.168.')) {
+        setUrlError("Please enter a public website URL")
+        setIsValidUrl(false)
+        return false
+      }
+
+      setUrlError("")
+      setIsValidUrl(true)
+      return true
+    } catch (error) {
+      setUrlError("Please enter a valid website URL")
+      setIsValidUrl(false)
+      return false
+    }
+  }
+
+  const handleUrlChange = (value: string) => {
+    setUrl(value)
+    validateUrl(value)
   }
 
   const handleScan = async (scanType: "quick" | "deep") => {
@@ -55,10 +109,10 @@ export default function Scan() {
       return
     }
 
-    if (!validateUrl(url)) {
+    if (!isValidUrl) {
       toast({
         title: "Invalid URL",
-        description: "Please enter a valid website URL",
+        description: urlError || "Please enter a valid website URL",
         variant: "destructive"
       })
       return
@@ -66,7 +120,18 @@ export default function Scan() {
 
     setIsLoading(true)
     
-    sessionStorage.setItem("scanUrl", url)
+    // Clean and store the URL
+    let cleanUrl = url.trim()
+    if (!cleanUrl.startsWith('http://') && !cleanUrl.startsWith('https://')) {
+      cleanUrl = `https://${cleanUrl}`
+    }
+    
+    sessionStorage.setItem("scanUrl", cleanUrl)
+    
+    toast({
+      title: "Scan Started",
+      description: `Starting ${scanType} scan for ${cleanUrl}`,
+    })
     
     setTimeout(() => {
       navigate(`/scan-progress?type=${scanType}`)
@@ -168,18 +233,59 @@ export default function Scan() {
                   <div className="space-y-6">
                     {/* URL Input */}
                     <div className="relative">
-                      <Input
-                        type="url"
-                        placeholder="Enter your website URL (e.g., example.com)"
-                        value={url}
-                        onChange={(e) => setUrl(e.target.value)}
-                        className="text-lg h-16 bg-slate-800/50 border border-slate-600/50 text-white placeholder:text-slate-400 focus:border-primary/50 focus:bg-slate-800/70 transition-all duration-300"
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter") {
-                            handleScan("quick")
-                          }
-                        }}
-                      />
+                      <div className="relative">
+                        <Globe className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
+                        <Input
+                          type="url"
+                          placeholder="Enter your website URL (e.g., example.com)"
+                          value={url}
+                          onChange={(e) => handleUrlChange(e.target.value)}
+                          className={`text-lg h-16 pl-12 pr-12 bg-slate-800/50 border text-white placeholder:text-slate-400 focus:bg-slate-800/70 transition-all duration-300 ${
+                            urlError 
+                              ? "border-red-500/50 focus:border-red-500/70" 
+                              : isValidUrl 
+                              ? "border-green-500/50 focus:border-green-500/70" 
+                              : "border-slate-600/50 focus:border-primary/50"
+                          }`}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" && isValidUrl) {
+                              handleScan("quick")
+                            }
+                          }}
+                        />
+                        {/* Status Icon */}
+                        <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+                          {urlError ? (
+                            <AlertCircle className="h-5 w-5 text-red-400" />
+                          ) : isValidUrl ? (
+                            <CheckCircle className="h-5 w-5 text-green-400" />
+                          ) : null}
+                        </div>
+                      </div>
+                      
+                      {/* Error Message */}
+                      {urlError && (
+                        <motion.p
+                          initial={{ opacity: 0, y: -5 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="text-red-400 text-sm mt-2 flex items-center gap-1"
+                        >
+                          <AlertCircle className="h-4 w-4" />
+                          {urlError}
+                        </motion.p>
+                      )}
+                      
+                      {/* Valid URL Message */}
+                      {isValidUrl && !urlError && (
+                        <motion.p
+                          initial={{ opacity: 0, y: -5 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="text-green-400 text-sm mt-2 flex items-center gap-1"
+                        >
+                          <CheckCircle className="h-4 w-4" />
+                          Ready to scan this website
+                        </motion.p>
+                      )}
                     </div>
 
                     {/* Scan Buttons */}
@@ -187,28 +293,28 @@ export default function Scan() {
                       <Button
                         size="lg"
                         onClick={() => handleScan("quick")}
-                        disabled={isLoading}
-                        className="relative overflow-hidden bg-gradient-to-r from-primary to-primary-variant hover:from-primary/90 hover:to-primary-variant/90 text-white font-semibold px-6 py-4 text-base shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 group"
+                        disabled={isLoading || !isValidUrl}
+                        className="relative overflow-hidden bg-gradient-to-r from-primary to-primary-variant hover:from-primary/90 hover:to-primary-variant/90 text-white font-semibold px-6 py-4 text-base shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 group disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                       >
                         <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-variant/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         <Zap className="h-5 w-5 mr-2 relative z-10" />
                         <div className="relative z-10">
                           <div className="font-semibold">Quick Scan</div>
-                          <div className="text-xs opacity-90">30 seconds</div>
+                          <div className="text-xs opacity-90">Under 1 minute</div>
                         </div>
                       </Button>
 
                       <Button
                         size="lg"
                         onClick={() => handleScan("deep")}
-                        disabled={isLoading}
-                        className="relative overflow-hidden bg-gradient-to-r from-primary to-primary-variant hover:from-primary/90 hover:to-primary-variant/90 text-white font-semibold px-6 py-4 text-base shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 group border-2 border-primary/30"
+                        disabled={isLoading || !isValidUrl}
+                        className="relative overflow-hidden bg-gradient-to-r from-primary to-primary-variant hover:from-primary/90 hover:to-primary-variant/90 text-white font-semibold px-6 py-4 text-base shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 group border-2 border-primary/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                       >
                         <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-variant/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         <Search className="h-5 w-5 mr-2 relative z-10" />
                         <div className="relative z-10">
                           <div className="font-semibold">Deep Scan</div>
-                          <div className="text-xs opacity-90">2 minutes</div>
+                          <div className="text-xs opacity-90">5-10 minutes</div>
                         </div>
                       </Button>
                     </div>

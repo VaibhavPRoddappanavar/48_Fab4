@@ -205,46 +205,40 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="border-t border-slate-800"
-        >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-              <div className="flex items-center space-x-6">
-                <p className="text-sm text-slate-400">
-                  © 2025 WebAudit AI. All rights reserved.
-                </p>
-                <div className="hidden md:flex items-center space-x-1 text-xs text-slate-500">
-                  <span>Made with</span>
-                  <motion.span
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 1, repeat: Infinity }}
-                    className="text-red-400"
-                  >
-                    ❤️
-                  </motion.span>
-                  <span>for a safer web</span>
-                </div>
-              </div>
-              
-              {/* Scroll to Top Button */}
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={scrollToTop}
-                className="text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all duration-300 group"
+        {/* Bottom Bar with Copyright */}
+        <div className="border-t border-slate-800">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+                className="text-slate-400 text-sm"
               >
-                <ArrowUp className="h-4 w-4 mr-2 group-hover:-translate-y-1 transition-transform duration-300" />
-                Back to top
-              </Button>
+                © {new Date().getFullYear()} WebAudit AI by <span className="text-primary font-semibold">Fab4</span>. All rights reserved.
+              </motion.div>
+              
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                viewport={{ once: true }}
+                className="flex items-center space-x-6 text-slate-400 text-sm"
+              >
+                <Link to="#" className="hover:text-primary transition-colors duration-300">
+                  Privacy Policy
+                </Link>
+                <Link to="#" className="hover:text-primary transition-colors duration-300">
+                  Terms of Service
+                </Link>
+                <Link to="/contact" className="hover:text-primary transition-colors duration-300">
+                  Support
+                </Link>
+              </motion.div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </footer>
   )

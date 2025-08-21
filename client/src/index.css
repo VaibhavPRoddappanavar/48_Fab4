@@ -313,4 +313,77 @@
       opacity: 0;
     }
   }
+
+  /* Enhanced particle animations with improved timing and reduced brightness */
+  .binary-glow-soft {
+    text-shadow: 0 0 8px #10B981, 0 0 16px #10B981;
+  }
+
+  .binary-fall-delayed {
+    animation: binaryFallDelayed linear infinite;
+  }
+
+  .particle-float-smooth {
+    animation: particleFloatSmooth linear infinite;
+  }
+
+  .particle-orb-delayed {
+    animation: particleOrbDelayed linear infinite;
+  }
+
+  @keyframes binaryFallDelayed {
+    0% {
+      transform: translateY(-100vh);
+      opacity: 0;
+    }
+    15% {
+      opacity: 0.3;
+    }
+    85% {
+      opacity: 0.3;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+
+  @keyframes particleFloatSmooth {
+    0% {
+      transform: translateY(-20px) scale(0.6);
+      opacity: 0;
+    }
+    15% {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+    85% {
+      opacity: 0.6;
+    }
+    100% {
+      transform: translateY(100vh) scale(0.4);
+      opacity: 0;
+    }
+  }
+
+  @keyframes particleOrbDelayed {
+    0% {
+      transform: translateY(-30px) translateX(0px) scale(0.8);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+    50% {
+      transform: translateX(15px);
+    }
+    90% {
+      opacity: 0.3;
+    }
+    100% {
+      transform: translateY(100vh) translateX(-5px) scale(0.6);
+      opacity: 0;
+    }
+  }
 }

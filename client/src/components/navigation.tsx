@@ -3,16 +3,15 @@ import { Link, useLocation } from "react-router-dom"
 import { motion } from "framer-motion"
 import { Shield, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { ThemeToggle } from "@/components/theme-toggle"
 import { cn } from "@/lib/utils"
 
 const navItems = [
   { name: "Home", href: "/" },
+  { name: "Scan", href: "/scan" },
   { name: "Features", href: "/features" },
   { name: "Pricing", href: "/pricing" },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
-  { name: "Scan", href: "/scan" },
 ]
 
 export function Navigation() {
@@ -29,7 +28,7 @@ export function Navigation() {
               <Shield className="h-8 w-8 text-primary" />
               <div className="absolute inset-0 h-8 w-8 bg-gradient-primary opacity-20 blur-sm" />
             </div>
-            <span className="text-xl font-bold gradient-text">WebAudit AI</span>
+            <span className="text-xl font-bold gradient-text">WEBSecurity AI</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -60,7 +59,6 @@ export function Navigation() {
 
           {/* Actions */}
           <div className="flex items-center space-x-4">
-            <ThemeToggle />
             <Button asChild variant="hero" className="hidden md:inline-flex">
               <Link to="/scan">Start Scanning</Link>
             </Button>

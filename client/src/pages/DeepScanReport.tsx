@@ -33,6 +33,7 @@ import { ReportCard, ReportIssue } from "@/components/report-card"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, PieChart, Pie, Cell } from "recharts"
+import { generatePdf } from "@/lib/pdf-generator"
 
 // Extended mock data for deep scan
 const mockDeepScanData = {
@@ -191,6 +192,10 @@ export default function DeepScanReport() {
   const nonTechnicalIssues = allIssues.filter(issue => issue.nonTechnicalFix)
   const topIssues = allIssues.slice(0, 6) // Top 6 issues
 
+  const handleExport = () => {
+    generatePdf(mockDeepScanData);
+  };
+
   return (
     <div className="min-h-screen bg-slate-900 text-foreground">
       <Navigation />
@@ -230,7 +235,10 @@ export default function DeepScanReport() {
                 <Settings className="h-4 w-4" />
                 SETTINGS
               </Button>
-              <Button className="bg-slate-700 hover:bg-slate-600 text-emerald-400 px-4 py-2 rounded-md flex items-center gap-2">
+              <Button 
+                onClick={handleExport}
+                className="bg-slate-700 hover:bg-slate-600 text-emerald-400 px-4 py-2 rounded-md flex items-center gap-2"
+              >
                 <Download className="h-4 w-4" />
                 EXPORT
               </Button>

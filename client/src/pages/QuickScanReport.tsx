@@ -28,6 +28,7 @@ import { ReportCard, ReportIssue } from "@/components/report-card"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { SeverityBadge } from "@/components/severity-badge"
+import { generatePdf } from "@/lib/pdf-generator"
 
 // Mock data - replace with real API data later
 const mockReportData = {
@@ -137,6 +138,10 @@ export default function QuickScanReport() {
     })
     .slice(0, 5) // Top 5 issues
 
+  const handleExport = () => {
+    generatePdf(mockReportData);
+  };
+
   return (
     <div className="min-h-screen bg-slate-900 text-foreground">
       <Navigation />
@@ -172,7 +177,10 @@ export default function QuickScanReport() {
                 <RefreshCw className="h-4 w-4" />
                 RESTART AUDIT
               </Button>
-              <Button className="bg-slate-700 hover:bg-slate-600 text-emerald-400 px-4 py-2 rounded-md flex items-center gap-2">
+              <Button 
+                onClick={handleExport}
+                className="bg-slate-700 hover:bg-slate-600 text-emerald-400 px-4 py-2 rounded-md flex items-center gap-2"
+              >
                 <Download className="h-4 w-4" />
                 EXPORT
               </Button>

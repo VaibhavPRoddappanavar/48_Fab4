@@ -58,7 +58,7 @@
 
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(142 76% 42%), hsl(142 76% 52%));
-    --gradient-hero: linear-gradient(135deg, hsl(142 76% 42% / 0.1), hsl(142 76% 52% / 0.1));
+    --gradient-hero4: linear-gradient(135deg, hsl(142 76% 42% / 0.1), hsl(142 76% 52% / 0.1));
     --gradient-card: linear-gradient(145deg, hsl(220 13% 15%), hsl(220 13% 18%));
 
     /* Shadows */
@@ -115,7 +115,7 @@
 
     /* Dark gradients */
     --gradient-primary: linear-gradient(135deg, hsl(142 71% 45%), hsl(142 71% 55%));
-    --gradient-hero: linear-gradient(135deg, hsl(142 71% 45% / 0.1), hsl(142 71% 55% / 0.1));
+    --gradient-hero4: linear-gradient(135deg, hsl(142 71% 45% / 0.1), hsl(142 71% 55% / 0.1));
     --gradient-card: linear-gradient(145deg, hsl(220 13% 15%), hsl(220 13% 18%));
 
     /* Dark shadows */
@@ -134,8 +134,8 @@
   }
 
   /* Custom gradient backgrounds */
-  .gradient-hero {
-    background: var(--gradient-hero);
+  .gradient-hero4 {
+    background: var(--gradient-hero4);
   }
 
   .gradient-primary {

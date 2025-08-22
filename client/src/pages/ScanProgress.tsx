@@ -245,7 +245,7 @@ export default function ScanProgress() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-hero text-foreground flex flex-col">
+    <div className="min-h-screen bg-gradient-hero4 text-foreground flex flex-col">
       <Navigation />
       
       <div className="flex-1 pt-24 pb-16 px-4 sm:px-6 lg:px-8">

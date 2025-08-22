@@ -75,7 +75,7 @@ export default function Landing() {
     <div className="min-h-screen bg-background text-foreground">
       <Navigation />
       
-      {/* Hero Section */}
+      {/* hero4 Section */}
       <section className="relative overflow-hidden pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -378,7 +378,7 @@ export default function Landing() {
               {/* Image container with enhanced styling */}
               <div className="relative overflow-hidden rounded-2xl shadow-2xl border border-white/10 bg-gradient-to-br from-card/50 to-card/20 backdrop-blur-sm">
                 <img 
-                  src="/hero.png" 
+                  src="/hero4.png" 
                   alt="WebAudit AI Dashboard" 
                   className="w-full h-auto object-cover transform transition-all duration-500 hover:scale-105"
                 />

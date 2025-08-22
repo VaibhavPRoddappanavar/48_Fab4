@@ -142,7 +142,7 @@ export default function Scan() {
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <Navigation />
       
-      {/* Hero Section */}
+      {/* hero4 Section */}
       <section className="relative flex-1 overflow-hidden pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">

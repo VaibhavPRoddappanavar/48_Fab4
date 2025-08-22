@@ -59,7 +59,7 @@ export function Navigation() {
 
           {/* Actions */}
           <div className="flex items-center space-x-4">
-            <Button asChild variant="hero" className="hidden md:inline-flex">
+            <Button asChild variant="hero4" className="hidden md:inline-flex">
               <Link to="/scan">Start Scanning</Link>
             </Button>
 
@@ -100,7 +100,7 @@ export function Navigation() {
                 {item.name}
               </Link>
             ))}
-            <Button asChild variant="hero" className="w-full mt-4">
+            <Button asChild variant="hero4" className="w-full mt-4">
               <Link to="/scan">Start Scanning</Link>
             </Button>
           </div>

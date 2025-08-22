@@ -160,7 +160,7 @@ export default function Contact() {
                     
                     <Button
                       type="submit"
-                      variant="hero"
+                      variant="hero4"
                       size="lg"
                       className="w-full"
                       disabled={isSubmitting}
@@ -244,7 +244,7 @@ export default function Contact() {
                   Don't wait for security issues to impact your business. 
                   Start your free website audit today.
                 </p>
-                <Button variant="hero" size="lg">
+                <Button variant="hero4" size="lg">
                   Start Free Audit
                 </Button>
               </CardContent>

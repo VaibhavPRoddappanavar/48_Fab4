@@ -1,7 +1,29 @@
 {
-  "generatedAt": "2025-08-22T08:27:32.234Z",
+  "generatedAt": "2025-08-22T08:44:46.339Z",
   "pages": [
-    "http://demo.owasp-juice.shop"
+    "http://demo.owasp-juice.shop",
+    "http://demo.owasp-juice.shop/#/login",
+    "http://demo.owasp-juice.shop/#/contact",
+    "http://demo.owasp-juice.shop/#/about",
+    "http://demo.owasp-juice.shop/#/photo-wall",
+    "http://demo.owasp-juice.shop/#/score-board",
+    "http://demo.owasp-juice.shop/redirect?to=https://github.com/juice-shop/juice-shop",
+    "http://demo.owasp-juice.shop/#/forgot-password",
+    "http://demo.owasp-juice.shop/#/register"
   ],
-  "apiEndpoints": []
+  "apiEndpoints": [
+    "GET https://demo.owasp-juice.shop/rest/admin/application-configuration",
+    "GET https://demo.owasp-juice.shop/rest/admin/application-version",
+    "GET https://demo.owasp-juice.shop/assets/i18n/en.json",
+    "GET https://demo.owasp-juice.shop/rest/languages",
+    "GET https://demo.owasp-juice.shop/rest/products/search?q=",
+    "GET https://demo.owasp-juice.shop/api/Challenges/?name=Score%20Board",
+    "GET https://demo.owasp-juice.shop/api/Quantitys/",
+    "GET https://demo.owasp-juice.shop/api/SecurityQuestions/",
+    "GET https://demo.owasp-juice.shop/rest/user/whoami",
+    "GET https://demo.owasp-juice.shop/rest/captcha/",
+    "GET https://demo.owasp-juice.shop/api/Feedbacks/",
+    "GET https://demo.owasp-juice.shop/rest/memories/",
+    "GET https://demo.owasp-juice.shop/api/Challenges/?sort=name"
+  ]
 }

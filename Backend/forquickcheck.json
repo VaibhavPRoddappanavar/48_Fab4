@@ -1,14 +1,23 @@
 {
-  "generatedAt": "2025-08-22T08:24:31.970Z",
+  "generatedAt": "2025-08-22T08:44:08.704Z",
   "pages": [
-    "http://demo.owasp-juice.shop/",
+    "http://demo.owasp-juice.shop",
     "http://demo.owasp-juice.shop/#/login",
     "http://demo.owasp-juice.shop/#/contact",
     "http://demo.owasp-juice.shop/#/about",
     "http://demo.owasp-juice.shop/#/photo-wall",
+    "http://demo.owasp-juice.shop/#/score-board",
     "http://demo.owasp-juice.shop/redirect?to=https://github.com/juice-shop/juice-shop",
-    "http://demo.owasp-juice.shop/#/forgot-password",
-    "http://demo.owasp-juice.shop/#/register"
+    "http://demo.owasp-juice.shop/#/forgot-password"
   ],
-  "apiEndpoints": []
+  "apiEndpoints": [
+    "GET https://demo.owasp-juice.shop/rest/admin/application-configuration",
+    "GET https://demo.owasp-juice.shop/rest/admin/application-version",
+    "GET https://demo.owasp-juice.shop/assets/i18n/en.json",
+    "GET https://demo.owasp-juice.shop/rest/languages",
+    "GET https://demo.owasp-juice.shop/rest/products/search?q=",
+    "GET https://demo.owasp-juice.shop/api/Challenges/?name=Score%20Board",
+    "GET https://demo.owasp-juice.shop/api/Quantitys/",
+    "GET https://demo.owasp-juice.shop/api/SecurityQuestions/"
+  ]
 }

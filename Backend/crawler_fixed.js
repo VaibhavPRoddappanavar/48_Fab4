@@ -11,7 +11,7 @@ const __dirname = path.dirname(__filename);
 // Simple breadth-first crawler using Puppeteer
 // Usage: node crawler.js <startUrl> [maxPages]
 
-async function crawl(startUrl, maxPages = 200) {
+async function crawl(startUrl, maxPages = 80) {
   const startDomain = new URL(startUrl).hostname;
   const browser = await puppeteer.launch({ headless: true });
 
@@ -64,75 +64,18 @@ async function crawl(startUrl, maxPages = 200) {
     }
   };
 
-  // Add common web app routes to improve discovery
-  const seedCommonRoutes = (baseUrl) => {
-    const commonPaths = [
-      "/#/admin",
-      "/#/dashboard",
-      "/#/profile",
-      "/#/account",
-      "/#/settings",
-      "/#/users",
-      "/#/user",
-      "/#/products",
-      "/#/product",
-      "/#/orders",
-      "/#/order",
-      "/#/cart",
-      "/#/checkout",
-      "/#/payment",
-      "/#/search",
-      "/#/help",
-      "/#/support",
-      "/#/privacy",
-      "/#/terms",
-      "/#/legal",
-      "/#/security",
-      "/#/api",
-      "/#/docs",
-      "/admin",
-      "/dashboard",
-      "/profile",
-      "/account",
-      "/settings",
-      "/api",
-      "/login",
-      "/register",
-      "/signup",
-      "/logout",
-      "/forgot-password",
-      "/reset-password",
-    ];
-
-    return commonPaths
-      .map((path) => {
-        try {
-          return new URL(path, baseUrl).toString();
-        } catch (e) {
-          return null;
-        }
-      })
-      .filter(Boolean);
-  };
-
   const queue = [normalizePage(startUrl)];
-
-  // Add common routes to improve discovery
-  const commonRoutes = seedCommonRoutes(startUrl);
-  console.log(
-    `🌱 Seeding ${commonRoutes.length} common routes for better discovery`
-  );
-  queue.push(...commonRoutes.map(normalizePage));
-
   // Timing/config for idle detector
   const idleThreshold = 300; // ms without outstanding XHR/fetch to consider page idle
   const maxWaitPerPage = 1200; // hard max per page
 
   // Quick-check settings: produce a small JSON file quickly
-  const quickLimitPages = 15; // write quick file after this many pages visited
-  const quickTimeMs = 10000; // or after this many milliseconds since start
+  const quickLimitPages = 8; // write quick file after this many pages visited
+  const quickTimeMs = 6000; // or after this many milliseconds since start
   const startTime = Date.now();
   let quickWritten = false;
+
+  console.log(`🚀 Starting crawl of ${startUrl} (max ${maxPages} pages)...`);
 
   while (queue.length > 0 && visited.size < maxPages) {
     const url = queue.shift();
@@ -286,6 +229,7 @@ async function crawl(startUrl, maxPages = 200) {
   }
 
   await browser.close();
+
   // Write deep-check JSON with full results
   try {
     const deepData = {
@@ -321,14 +265,16 @@ async function crawl(startUrl, maxPages = 200) {
 }
 
 // Run if this file is executed directly
-if (process.argv[1].endsWith("crawler.js")) {
+if (
+  process.argv[1].endsWith("crawler.js") ||
+  process.argv[1].endsWith("crawler_fixed.js")
+) {
   const startUrl = process.argv[2];
-  const maxPages = parseInt(process.argv[3], 10) || 200;
+  const maxPages = parseInt(process.argv[3], 10) || 80;
   if (!startUrl) {
     console.error("Usage: node crawler.js <startUrl> [maxPages]");
     process.exit(1);
   }
-  console.log(`🚀 Starting crawl of ${startUrl} (max ${maxPages} pages)...`);
   crawl(startUrl, maxPages).catch((e) => {
     console.error("Crawl failed", e);
     process.exit(1);

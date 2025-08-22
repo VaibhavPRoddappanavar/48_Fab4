@@ -1,0 +1,400 @@
+[
+  {
+    "route": "https://juice-shop.herokuapp.com/",
+    "attack": "headers",
+    "evidence": "Critical headers missing: CSP, Server: Heroku",
+    "severity": "medium",
+    "solution": {
+      "solution": "Implement Content Security Policy and remove the 'Server' header to mitigate potential information disclosure and cross-site scripting attacks.",
+      "remediation_steps": [
+        "Step 1: Configure a Content Security Policy (CSP) header to restrict the sources from which resources can be loaded.",
+        "Step 2: Remove the 'Server' header from the server response to prevent information leakage.",
+        "Step 3: Test the application to ensure the CSP is correctly implemented and the 'Server' header is removed."
+      ],
+      "code_snippet": "/* Node.js using Helmet */\nconst express = require('express');\nconst helmet = require('helmet');\nconst app = express();\n\napp.use(helmet.contentSecurityPolicy({\n  directives: {\n    defaultSrc: [\"'self'\"],\n    scriptSrc: [\"'self'\", \"'unsafe-inline'\", \"https://trusted-cdn.com\"],\n    styleSrc: [\"'self'\", \"'unsafe-inline'\", \"https://trusted-cdn.com\"],\n    imgSrc: [\"'self'\", \"data:\"],\n    fontSrc: [\"'self'\", \"https://trusted-cdn.com\"],\n    connectSrc: [\"'self'\", \"ws://localhost:*\"]\n  }\n}));\n\napp.use(helmet.hidePoweredBy()); //Removes the 'X-Powered-By' header (if present)\n\n//Or using nginx:\n#In nginx.conf\nadd_header Content-Security-Policy \"default-src 'self'; script-src 'self' 'unsafe-inline' https://trusted-cdn.com; style-src 'self' 'unsafe-inline' https://trusted-cdn.com; img-src 'self' data:; font-src 'self' https://trusted-cdn.com; connect-src 'self' ws://localhost:*\";\nhide_header Server;",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Content Security Policy Cheat Sheet",
+          "url": "https://owasp.org/www-project-content-security-policy/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Understanding Content Security Policy (CSP)",
+          "url": "https://scotthelme.co.uk/content-security-policy-an-introduction/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Content Security Policy (CSP) Explained",
+          "url": "https://youtube.com/watch?v=qY5i_xsJt7w",
+          "youtube_id": "qY5i_xsJt7w"
+        }
+      ],
+      "cwe_cve": "CWE-200",
+      "priority": "P2",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule RESPONSE_HEADERS:Server \"/.*/\" \"id:100,phase:3,t:none,nolog,pass,setvar:tx.remove_server_header=1\"",
+        "SecRule TX:remove_server_header \"1\" \"id:101,phase:5,t:none,nolog,pass,ctl:respHeaderName=Server,respHeaderValue='''\""
+      ],
+      "notes": "Implementing a robust CSP is crucial to prevent XSS attacks. Regularly review and update the policy as application dependencies evolve."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/#/login",
+    "attack": "headers",
+    "evidence": "Critical headers missing: CSP, Server: Heroku",
+    "severity": "medium",
+    "solution": {
+      "solution": "Implement Content Security Policy (CSP) and remove or mask the Server header to mitigate information disclosure.",
+      "remediation_steps": [
+        "Step 1: Implement a Content Security Policy (CSP) header to restrict the sources from which the browser can load resources.",
+        "Step 2: Remove the Server header or mask it with a less specific value to avoid revealing server software and version information.",
+        "Step 3: Test the application to ensure that CSP is implemented correctly and does not block legitimate resources."
+      ],
+      "code_snippet": "nginx:\nadd_header Content-Security-Policy \"default-src 'self';\";\nserver_tokens off; # Mask/Remove Server header\n\nNode.js (using Helmet):\nconst helmet = require('helmet');\napp.use(helmet.contentSecurityPolicy({\n  directives: {\n    defaultSrc: [\"'self'\"]\n  }\n}));\napp.use(helmet.hidePoweredBy());",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Content Security Policy Cheat Sheet",
+          "url": "https://owasp.org/www-project-secure-headers/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "A Complete Guide to Content Security Policy",
+          "url": "https://content-security-policy.com/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Content Security Policy (CSP) - Securing Your Web Application",
+          "url": "https://www.youtube.com/watch?v=nU0pS3wQ3Rw",
+          "youtube_id": "nU0pS3wQ3Rw"
+        }
+      ],
+      "cwe_cve": "CWE-200",
+      "priority": "P2",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule RESPONSE_HEADERS:Content-Security-Policy \"!@rx .*\" \"id:123456,phase:4,t:none,block,msg:'Missing Content-Security-Policy header'\""
+      ],
+      "notes": "Carefully configure CSP to avoid blocking necessary resources; test thoroughly in a non-production environment first."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/#/contact",
+    "attack": "headers",
+    "evidence": "Critical headers missing: CSP, Server: Heroku",
+    "severity": "medium",
+    "solution": {
+      "solution": "Implement Content Security Policy (CSP) and remove or mask the Server header to mitigate information disclosure and prevent certain attacks.",
+      "remediation_steps": [
+        "Step 1: Configure the web server to set a restrictive Content Security Policy header that whitelists trusted sources for scripts, styles, and other resources.",
+        "Step 2: Remove or mask the Server header to prevent attackers from fingerprinting the server software and version.",
+        "Step 3: Test the CSP implementation to ensure it does not break legitimate application functionality and that the Server header is properly handled."
+      ],
+      "code_snippet": "nginx:\nadd_header Content-Security-Policy \"default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://apis.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:;\";\nserver_tokens off;\n\nNode.js (Helmet):\nconst helmet = require('helmet');\napp.use(helmet.contentSecurityPolicy({\n  directives: {\n    defaultSrc: [\"'self'\"],\n    scriptSrc: [\"'self'\", \"'unsafe-inline'\", \"'unsafe-eval'\", \"https://apis.google.com\"],\n    styleSrc: [\"'self'\", \"'unsafe-inline'\", \"https://fonts.googleapis.com\"],\n    imgSrc: [\"'self'\", \"data:\"],\n  },\n}));\napp.use(helmet.hidePoweredBy());",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Content Security Policy Cheat Sheet",
+          "url": "https://owasp.org/www-project-secure-headers/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "A Complete Guide to Content Security Policy",
+          "url": "https://content-security-policy.com/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Content Security Policy (CSP) - Computerphile",
+          "url": "https://youtube.com/watch?v=J5kSiWTkoco",
+          "youtube_id": "J5kSiWTkoco"
+        }
+      ],
+      "cwe_cve": "CWE-200",
+      "priority": "P2",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule RESPONSE_HEADERS:Server \"@rx .\" \"id:123456,phase:4,t:none,nolog,pass,setvar:'tx.drop_server_header=1'\"",
+        "SecRule TX:drop_server_header \"1\" \"id:123457,phase:5,t:none,nolog,pass,setenv:remove-response-header=Server\""
+      ],
+      "notes": "Ensure the CSP is tailored to the specific requirements of the application to avoid blocking legitimate resources."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/#/about",
+    "attack": "headers",
+    "evidence": "Critical headers missing: CSP, Server: Heroku",
+    "severity": "medium",
+    "solution": {
+      "solution": "Implement Content Security Policy and remove or mask server identification headers to mitigate information leakage and enhance security.",
+      "remediation_steps": [
+        "Step 1: Configure Content Security Policy (CSP) in the web server configuration or application code to define allowed sources for resources.",
+        "Step 2: Remove or mask the 'Server' header in the web server configuration to prevent disclosing server information.",
+        "Step 3: Test the application to ensure CSP is correctly implemented and doesn't break functionality. Verify the 'Server' header is removed or masked."
+      ],
+      "code_snippet": "nginx:\nadd_header Content-Security-Policy \"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:\";\nserver_tokens off; # Hides the server version\n\nNode.js (helmet):\nconst helmet = require('helmet');\napp.use(helmet.contentSecurityPolicy({\n  directives: {\n    defaultSrc: [\"'self'\"],\n    scriptSrc: [\"'self'\", \"'unsafe-inline'\"]\n  }\n}));\napp.use(helmet.hidePoweredBy());",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Content Security Policy Cheat Sheet",
+          "url": "https://owasp.org/www-project-cheat-sheets/cheatsheets/Content_Security_Policy_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Hiding Server Information in Nginx",
+          "url": "https://www.nginx.com/resources/wiki/start/topics/security/misc/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Content Security Policy (CSP) Introduction",
+          "url": "https://youtube.com/watch?v=k9nN-R3H22k",
+          "youtube_id": "k9nN-R3H22k"
+        }
+      ],
+      "cwe_cve": "CWE-200",
+      "priority": "P2",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRuleRemoveById 930000",
+        "SecRule RESPONSE_HEADERS:Server \"@rx .*\" \"id:123456,phase:5,t:none,deny,msg:'Server Header Injection Attempt'\""
+      ],
+      "notes": "CSP can be complex to configure initially. Start with a report-only mode and gradually enforce stricter policies. Ensure policies don't block legitimate resources."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/#/photo-wall",
+    "attack": "headers",
+    "evidence": "Critical headers missing: CSP, Server: Heroku",
+    "severity": "medium",
+    "solution": {
+      "solution": "Implement Content Security Policy (CSP) and remove server identification to harden application security.",
+      "remediation_steps": [
+        "Step 1: Configure the web server (e.g., Nginx) to add a Content-Security-Policy header.",
+        "Step 2: Remove or mask the 'Server' header to prevent information leakage.",
+        "Step 3: Test the CSP implementation to ensure proper functionality and prevent unintended blocking of resources."
+      ],
+      "code_snippet": "nginx:\nadd_header Content-Security-Policy \"default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; object-src 'none';\";\nserver_tokens off;",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Content Security Policy Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "A Complete Guide to Content Security Policy",
+          "url": "https://content-security-policy.com/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "What is Content Security Policy? (CSP Explained)",
+          "url": "https://www.youtube.com/watch?v=jFp6YF3mvdQ",
+          "youtube_id": "jFp6YF3mvdQ"
+        }
+      ],
+      "cwe_cve": "CWE-200",
+      "priority": "P2",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRuleRemoveById 981203",
+        "SecRule RESPONSE_HEADERS:Server \"@rx .\" \"id:1234,phase:4,t:none,deny,status:403,msg:'Server Header Detected'\""
+      ],
+      "notes": "Carefully review and adjust the CSP directives to match the application's specific requirements and avoid breaking functionality."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/#/score-board",
+    "attack": "headers",
+    "evidence": "Critical headers missing: CSP, Server: Heroku",
+    "severity": "medium",
+    "solution": {
+      "solution": "Implement Content Security Policy (CSP) and hide server information to mitigate potential risks.",
+      "remediation_steps": [
+        "Step 1: Configure CSP headers to restrict the sources of content that the browser is allowed to load.",
+        "Step 2: Remove or obfuscate the Server header to prevent information disclosure about the server technology.",
+        "Step 3: Test the application thoroughly to ensure that CSP does not break any functionality."
+      ],
+      "code_snippet": "## nginx configuration\nadd_header Content-Security-Policy \"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self';\";\nserver_tokens off;\n\n## Node.js using Helmet\nconst helmet = require('helmet');\napp.use(helmet.contentSecurityPolicy({\n  directives: {\n    defaultSrc: [\"'self'\"],\n    scriptSrc: [\"'self'\", \"'unsafe-inline'\"]\n  }\n}));\napp.use(helmet.hidePoweredBy());",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Content Security Policy Cheat Sheet",
+          "url": "https://owasp.org/www-project-cheat-sheets/cheatsheets/Content_Security_Policy_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "doc",
+          "title": "Helmet.js Documentation",
+          "url": "https://helmetjs.github.io/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Content Security Policy (CSP) - HTTP Headers",
+          "url": "https://www.youtube.com/watch?v=zeGnkDsA5v8",
+          "youtube_id": "zeGnkDsA5v8"
+        }
+      ],
+      "cwe_cve": "CWE-200",
+      "priority": "P2",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule RESPONSE_HEADERS:Server \"@rx .\" \"id:123456,phase:4,t:none,nolog,pass,setvar:tx.remove_server_header=1\"",
+        "Header always unset Server"
+      ],
+      "notes": "Ensure that the CSP policy is carefully crafted to avoid blocking legitimate resources. Start with a report-only policy and monitor for violations before enforcing it."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "sqli",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&q=%27",
+    "evidence": "SQL error signature detected",
+    "severity": "critical",
+    "solution": {
+      "solution": "Implement robust input validation and parameterized queries to prevent SQL injection vulnerabilities in the redirect functionality.",
+      "remediation_steps": [
+        "Step 1: Sanitize and validate the 'to' parameter in the redirect endpoint to ensure it only accepts valid and expected URLs.",
+        "Step 2: Implement parameterized queries or prepared statements to interact with the database, preventing malicious SQL code injection.",
+        "Step 3: Enforce strict data type validation on all user-supplied inputs to the redirect functionality.",
+        "Step 4: Implement URL whitelisting to restrict the 'to' parameter to a predefined set of trusted domains.",
+        "Step 5: Conduct thorough penetration testing to verify the effectiveness of the implemented security measures."
+      ],
+      "code_snippet": "const { URL } = require('url');\n\napp.get('/redirect', (req, res) => {\n  const to = req.query.to;\n\n  try {\n    const url = new URL(to);\n    // Whitelist allowed origins\n    const allowedOrigins = ['https://juice-shop.herokuapp.com', 'https://github.com'];\n    if (!allowedOrigins.includes(url.origin)) {\n      return res.status(400).send('Invalid redirect target.');\n    }\n\n    // IMPORTANT: Never execute raw SQL queries with user input!\n    // BAD EXAMPLE:  db.query(`SELECT * FROM users WHERE url = '${to}'`);\n    \n    // Instead of executing SQL directly, consider using server-side redirects\n    return res.redirect(to);\n\n  } catch (error) {\n    console.error('Invalid URL:', error);\n    return res.status(400).send('Invalid URL.');\n  }\n});",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "SQL Injection Prevention Cheat Sheet",
+          "url": "https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A1-Injection",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Preventing SQL Injection in Node.js",
+          "url": "https://snyk.io/blog/sql-injection-nodejs/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "SQL Injection Explained",
+          "url": "https://www.youtube.com/watch?v=ciNHyuxqnEg",
+          "youtube_id": "ciNHyuxqnEg"
+        }
+      ],
+      "cwe_cve": "CWE-89",
+      "priority": "P0",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule REQUEST_URI \"@rx redirect\\\\?to=\" \"id:123456,phase:2,t:urlDecode,t:htmlEntityDecode,ctl:requestBodyProcessor=URLENCODED,deny,status:403,msg:'Potential SQL Injection in Redirect Parameter'\"",
+        "SecRule ARGS:to \"@detectSQLi\" \"id:123457,phase:2,t:urlDecode,t:htmlEntityDecode,deny,status:403,msg:'SQL Injection Attempt in Redirect Parameter'\""
+      ],
+      "notes": "Always validate and sanitize user inputs, especially when constructing database queries or redirect URLs. Prioritize using parameterized queries to prevent SQL injection attacks."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "headers",
+    "evidence": "Critical headers missing: Server: github.com",
+    "severity": "medium",
+    "solution": {
+      "solution": "Implement response headers to prevent information leakage and enforce security policies.",
+      "remediation_steps": [
+        "Step 1: Configure the web server (e.g., Nginx, Apache) to include necessary security headers.",
+        "Step 2: Add the 'Server' header with a generic value or remove it entirely to prevent information leakage.",
+        "Step 3: Test the application to verify that the headers are correctly set and the application functions as expected."
+      ],
+      "code_snippet": "nginx:\nadd_header Server 'MyWebApp';\n\nNode.js (Helmet):\nconst helmet = require('helmet');\napp.use(helmet.hidePoweredBy());",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Secure Headers Project",
+          "url": "https://owasp.org/www-project-secure-headers/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Understanding and Implementing HTTP Headers",
+          "url": "https://www.keycdn.com/blog/http-headers",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "HTTP Security Headers - Computerphile",
+          "url": "https://youtube.com/watch?v=Unn96qE-Bdc",
+          "youtube_id": "Unn96qE-Bdc"
+        }
+      ],
+      "cwe_cve": "CWE-200",
+      "priority": "P2",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule RESPONSE_HEADERS:Server \"@rx ^(Apache|nginx|IIS).*$\" \"id:123456,phase:4,t:lowercase,deny,msg:'Server header detected',logdata:%{MATCHED_VAR},severity:2,tag:'application-security',tag:'header-disclosure'\""
+      ],
+      "notes": "Ensure that all relevant headers are configured to enhance application security and privacy."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/#/forgot-password",
+    "attack": "headers",
+    "evidence": "Critical headers missing: CSP, Server: Heroku",
+    "severity": "medium",
+    "solution": {
+      "solution": "Implement Content Security Policy (CSP) and remove/mask the Server header to enhance security and reduce information leakage.",
+      "remediation_steps": [
+        "Step 1: Configure CSP to restrict the sources from which resources can be loaded, mitigating XSS attacks.",
+        "Step 2: Remove or mask the Server header to prevent attackers from gaining information about the server software and potential vulnerabilities.",
+        "Step 3: Test the implementation to ensure the website functions correctly with the new headers and that no CSP violations occur."
+      ],
+      "code_snippet": "```nginx\nadd_header Content-Security-Policy \"default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; object-src 'none';\";\nserver_tokens off; # Hides the nginx version\n```\n```javascript\n// Node.js with Helmet\nconst helmet = require('helmet');\napp.use(helmet.contentSecurityPolicy({\n  directives: {\n    defaultSrc: [\"'self'\"],\n    scriptSrc: [\"'self'\", \"'unsafe-inline'\", \"'unsafe-eval'\"],\n    styleSrc: [\"'self'\", \"'unsafe-inline'\"],\n    imgSrc: [\"'self'\", \"data:\"],\n    fontSrc: [\"'self'\"],\n    objectSrc: [\"'none'\"],\n  },\n}));\napp.use(helmet.hidePoweredBy()); // Hides the X-Powered-By header\n```",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Content Security Policy Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Understanding and Mitigating Server Header Information Leakage",
+          "url": "https://blog.qualys.com/security/2013/06/17/understanding-and-mitigating-server-header-information-leakage",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Content Security Policy (CSP) - HTTP Headers",
+          "url": "https://www.youtube.com/watch?v=0_N4mNAeL_U",
+          "youtube_id": "0_N4mNAeL_U"
+        }
+      ],
+      "cwe_cve": "CWE-200",
+      "priority": "P2",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRuleRemoveById 950001",
+        "SecRuleRemoveById 920420",
+        "SecRuleRemoveById 930120"
+      ],
+      "notes": "Ensure thorough testing is performed after implementing CSP to prevent unintended blocking of legitimate resources."
+    }
+  }
+]

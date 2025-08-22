@@ -1,0 +1,289 @@
+{
+  "url": "https://demo.owasp-juice.shop/",
+  "timestamp": "2025-08-21T22:09:37.170Z",
+  "overallScore": 82,
+  "scores": {
+    "performance": 65,
+    "accessibility": 77,
+    "bestPractices": 95,
+    "seo": 92,
+    "pwa": 50
+  },
+  "metrics": {
+    "performance": {
+      "score": 65,
+      "metrics": {
+        "domContentLoaded": 1.5999999046325684,
+        "loadComplete": 19.300000071525574,
+        "firstPaint": 4078.5999999046326,
+        "firstContentfulPaint": 7194,
+        "timeToInteractive": 4063.1999999284744,
+        "dnsLookup": 0,
+        "tcpConnect": 1015.5,
+        "serverResponse": 1024.3000000715256,
+        "totalResources": 39,
+        "transferSize": 9633,
+        "encodedBodySize": 9333,
+        "decodedBodySize": 80117,
+        "largestContentfulPaint": 0,
+        "cumulativeLayoutShift": 0,
+        "totalLoadTime": 17825,
+        "responseStatus": 200,
+        "responseHeaders": {
+          "accept-ranges": "bytes",
+          "access-control-allow-origin": "*",
+          "cache-control": "public, max-age=0",
+          "content-encoding": "br",
+          "content-type": "text/html; charset=UTF-8",
+          "date": "Thu, 21 Aug 2025 22:09:15 GMT",
+          "etag": "W/\"138f5-198ce074c21\"",
+          "feature-policy": "payment 'self'",
+          "last-modified": "Thu, 21 Aug 2025 19:07:21 GMT",
+          "nel": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}",
+          "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=S6rYHJZV51gjh4%2Bq2QTufgpYfmId0sYGlN4FQbLNNp0%3D\\u0026sid=812dcc77-0bd0-43b1-a5f1-b25750382959\\u0026ts=1755814155\"}],\"max_age\":3600}",
+          "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=S6rYHJZV51gjh4%2Bq2QTufgpYfmId0sYGlN4FQbLNNp0%3D&sid=812dcc77-0bd0-43b1-a5f1-b25750382959&ts=1755814155\"",
+          "server": "Heroku",
+          "vary": "Accept-Encoding",
+          "via": "1.1 heroku-router",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "SAMEORIGIN",
+          "x-recruiting": "/#/jobs"
+        }
+      },
+      "opportunities": [
+        {
+          "type": "improve-fcp",
+          "description": "Improve First Contentful Paint",
+          "suggestion": "Optimize critical rendering path, reduce server response time"
+        }
+      ]
+    },
+    "accessibility": {
+      "score": 77,
+      "issues": [
+        {
+          "type": "missing-form-labels",
+          "severity": "high",
+          "count": 1,
+          "description": "Form inputs missing proper labels"
+        },
+        {
+          "type": "heading-hierarchy",
+          "severity": "medium",
+          "count": 1,
+          "description": "Improper heading hierarchy detected"
+        }
+      ],
+      "summary": {
+        "totalImages": 13,
+        "imagesWithAlt": 13,
+        "totalForms": 0,
+        "totalHeadings": 6,
+        "elementsWithAria": 64,
+        "focusableElements": 25,
+        "contrastIssues": 0
+      }
+    },
+    "bestPractices": {
+      "score": 95,
+      "issues": [
+        {
+          "type": "excessive-inline-styles",
+          "severity": "low",
+          "count": 85,
+          "description": "Many inline styles found, consider using CSS classes"
+        }
+      ],
+      "summary": {
+        "totalElements": 423,
+        "maxDomDepth": 21,
+        "totalScripts": 7,
+        "totalStylesheets": 2,
+        "totalImages": 13,
+        "inlineStyles": 85,
+        "hasViewport": true,
+        "hasFavicon": true,
+        "hasCharset": true
+      }
+    },
+    "seo": {
+      "score": 92,
+      "issues": [
+        {
+          "type": "multiple-h1",
+          "severity": "medium",
+          "description": "Multiple H1 headings found"
+        }
+      ],
+      "data": {
+        "title": "OWASP Juice Shop",
+        "titleLength": 16,
+        "metaDescription": "Probably the most modern and sophisticated insecure web application",
+        "metaDescriptionLength": 67,
+        "h1Count": 2,
+        "h1Text": "Welcome to OWASP Juice Shop!",
+        "canonical": null,
+        "language": "en",
+        "robots": null,
+        "headingStructure": {
+          "h1": 2,
+          "h2": 1,
+          "h3": 3,
+          "h4": 0,
+          "h5": 0,
+          "h6": 0
+        }
+      }
+    },
+    "pwa": {
+      "score": 50,
+      "features": {
+        "hasServiceWorker": true,
+        "hasManifest": false,
+        "isResponsive": true,
+        "worksOffline": false,
+        "installable": false
+      },
+      "manifestUrl": null,
+      "viewport": "width=device-width, initial-scale=1"
+    },
+    "metadata": {
+      "url": "https://demo.owasp-juice.shop/#/",
+      "title": "OWASP Juice Shop",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+      "timestamp": "2025-08-21T22:09:37.168Z",
+      "viewport": {
+        "width": 1920,
+        "height": 1080,
+        "devicePixelRatio": 1.0000000298023224
+      },
+      "technologies": {
+        "hasJQuery": true,
+        "hasReact": false,
+        "hasAngular": false,
+        "hasVue": false,
+        "hasBootstrap": false
+      }
+    }
+  },
+  "issueBreakdown": {
+    "performance": {
+      "score": 65,
+      "issues": [
+        {
+          "type": "slow-loading",
+          "severity": "high",
+          "description": "Slow loading: 17825ms (should be < 3000ms)",
+          "currentValue": 17825,
+          "targetValue": 3000,
+          "unit": "ms"
+        },
+        {
+          "type": "slow-fcp",
+          "severity": "high",
+          "description": "Slow First Contentful Paint: 7194ms (should be < 1800ms)",
+          "currentValue": 7194,
+          "targetValue": 1800,
+          "unit": "ms"
+        }
+      ],
+      "recommendations": [
+        "Optimize server response time, enable compression",
+        "Optimize critical rendering path, reduce render-blocking resources"
+      ],
+      "opportunities": [
+        {
+          "type": "improve-fcp",
+          "description": "Improve First Contentful Paint",
+          "suggestion": "Optimize critical rendering path, reduce server response time"
+        }
+      ]
+    },
+    "accessibility": {
+      "score": 77,
+      "issues": [
+        {
+          "type": "missing-form-labels",
+          "severity": "high",
+          "description": "Form inputs missing proper labels",
+          "count": 1
+        },
+        {
+          "type": "heading-hierarchy",
+          "severity": "medium",
+          "description": "Improper heading hierarchy detected",
+          "count": 1
+        }
+      ],
+      "recommendations": [
+        "Add proper labels or aria-label attributes to form inputs",
+        "Use proper heading order (h1 → h2 → h3)"
+      ],
+      "stats": {
+        "totalImages": 13,
+        "imagesWithAlt": 13,
+        "totalForms": 0,
+        "totalHeadings": 6,
+        "elementsWithAria": 64,
+        "focusableElements": 25,
+        "contrastIssues": 0
+      }
+    },
+    "bestPractices": {
+      "score": 95,
+      "issues": [],
+      "recommendations": []
+    },
+    "seo": {
+      "score": 92,
+      "issues": [],
+      "recommendations": [],
+      "currentValues": {
+        "title": "OWASP Juice Shop",
+        "titleLength": 16,
+        "metaDescription": "Probably the most modern and sophisticated insecure web application",
+        "metaDescriptionLength": 67,
+        "h1Count": 2,
+        "h1Text": "Welcome to OWASP Juice Shop!",
+        "canonical": null,
+        "language": "en",
+        "robots": null,
+        "headingStructure": {
+          "h1": 2,
+          "h2": 1,
+          "h3": 3,
+          "h4": 0,
+          "h5": 0,
+          "h6": 0
+        }
+      }
+    },
+    "pwa": {
+      "score": 50,
+      "issues": [
+        {
+          "type": "no-manifest",
+          "severity": "medium",
+          "description": "No Web App Manifest found"
+        },
+        {
+          "type": "not-installable",
+          "severity": "medium",
+          "description": "Not installable as PWA"
+        }
+      ],
+      "recommendations": [
+        "Add manifest.json for app-like experience",
+        "Ensure manifest has name, start_url, and icons"
+      ],
+      "features": {
+        "hasServiceWorker": true,
+        "hasManifest": false,
+        "isResponsive": true,
+        "worksOffline": false,
+        "installable": false
+      }
+    }
+  },
+  "lastUpdated": "2025-08-21T22:09:37.700Z"
+}

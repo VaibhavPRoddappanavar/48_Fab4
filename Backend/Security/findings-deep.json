@@ -1,0 +1,2180 @@
+[
+  {
+    "route": "https://juice-shop.herokuapp.com/",
+    "attack": "headers",
+    "evidence": "Missing: CSP, HSTS, Referrer-Policy, Permissions-Policy. Info disclosure: Server header reveals: Heroku",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement security headers and remove sensitive information from the Server header to prevent information disclosure and mitigate various attacks.",
+      "remediation_steps": [
+        "Step 1: Configure your web server (e.g., Nginx, Apache) or application framework (e.g., Node.js with Helmet) to set appropriate security headers like CSP, HSTS, Referrer-Policy, and Permissions-Policy.",
+        "Step 2: Remove or mask the 'Server' header to prevent information leakage about the underlying server software.",
+        "Step 3: Test the deployed application to verify that all security headers are correctly set and the 'Server' header does not reveal sensitive information."
+      ],
+      "code_snippet": "Nginx: add_header Content-Security-Policy \"default-src 'self';\";\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains; preload\";\nadd_header Referrer-Policy \"strict-origin-when-cross-origin\";\nadd_header Permissions-Policy \"geolocation=(); microphone=(); camera=()\";\nserver_tokens off; # Hides the server version\n\nNode.js (Helmet):\nconst helmet = require('helmet');\napp.use(helmet());",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Secure Headers Project",
+          "url": "https://owasp.org/www-project-secure-headers/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Scott Helme's Blog on Security Headers",
+          "url": "https://scotthelme.co.uk/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Setting Security Headers in Node.js with Helmet",
+          "url": "https://www.youtube.com/watch?v=un7f5orv7jY",
+          "youtube_id": "un7f5orv7jY"
+        }
+      ],
+      "cwe_cve": "CWE-200",
+      "priority": "P1",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRuleRemoveById 980130",
+        "SecRule RESPONSE_HEADERS:Server \"@rx .*\" \"id:12345,phase:4,t:lowercase,deny,msg:'Server header information leakage'\""
+      ],
+      "notes": "Properly configuring security headers can significantly improve the application's security posture against various attacks."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/#/login",
+    "attack": "headers",
+    "evidence": "Missing: CSP, HSTS, Referrer-Policy, Permissions-Policy. Info disclosure: Server header reveals: Heroku",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement missing security headers (CSP, HSTS, Referrer-Policy, Permissions-Policy) and hide the server version.",
+      "remediation_steps": [
+        "Step 1: Configure your web server (e.g., Nginx, Apache) or application framework (e.g., Node.js with Helmet) to set the recommended security headers.",
+        "Step 2: Implement a Content Security Policy (CSP) to restrict the sources from which the browser is allowed to load resources.",
+        "Step 3: Enable HTTP Strict Transport Security (HSTS) to enforce HTTPS connections.",
+        "Step 4: Set a Referrer-Policy to control the amount of referrer information sent with requests.",
+        "Step 5: Define a Permissions-Policy to control the browser features that can be used by the application.",
+        "Step 6: Configure the web server to suppress the Server header.",
+        "Step 7: Verify that the headers are correctly set in the response using a browser's developer tools or an online header checker."
+      ],
+      "code_snippet": "### Nginx example:\nadd_header Content-Security-Policy \"default-src 'self'; script-src 'self' 'unsafe-inline'; object-src 'none';\";\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains; preload\";\nadd_header Referrer-Policy \"strict-origin-when-cross-origin\";\nadd_header Permissions-Policy \"geolocation=(), microphone=(), camera=()\";\nserver_tokens off;",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Content Security Policy Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "doc",
+          "title": "OWASP HSTS Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Understanding Security Headers",
+          "url": "https://scotthelme.co.uk/content-security-policy-an-introduction/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Content Security Policy (CSP) - Explained in 100 Seconds",
+          "url": "https://www.youtube.com/watch?v=JjXwYXWlXEk",
+          "youtube_id": "JjXwYXWlXEk"
+        }
+      ],
+      "cwe_cve": "CWE-200",
+      "priority": "P1",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule RESPONSE_HEADERS:Server \"@rx .\" \"id:1001,phase:5,t:none,nolog,pass,ctl:responseHeadersRemove=Server\"",
+        "SecRule RESPONSE_HEADERS:x-powered-by \"@rx .\" \"id:1002,phase:5,t:none,nolog,pass,ctl:responseHeadersRemove=X-Powered-By\""
+      ],
+      "notes": "Ensure that the CSP policy is carefully configured to avoid breaking legitimate functionality. Monitor and adjust as needed."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/#/contact",
+    "attack": "headers",
+    "evidence": "Missing: CSP, HSTS, Referrer-Policy, Permissions-Policy. Info disclosure: Server header reveals: Heroku",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement security headers (CSP, HSTS, Referrer-Policy, Permissions-Policy) and hide the server version to prevent information disclosure.",
+      "remediation_steps": [
+        "Step 1: Configure CSP to define allowed sources for various content types.",
+        "Step 2: Implement HSTS to enforce secure connections over HTTPS.",
+        "Step 3: Set Referrer-Policy to control the referrer information sent in requests.",
+        "Step 4: Configure Permissions-Policy to control browser features available to the application.",
+        "Step 5: Remove or mask the Server header to avoid revealing the technology stack (Heroku)."
+      ],
+      "code_snippet": "server:\n  headers:\n    strictTransportSecurity: max-age=31536000; includeSubDomains; preload\n    contentSecurityPolicy: \"default-src 'self'; script-src 'self' 'unsafe-inline' https://trusted.cdn.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' wss://trusted.websocket.com;\"\n    referrerPolicy: no-referrer\n    permissionsPolicy: geolocation=(), microphone=()",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Content Security Policy Cheat Sheet",
+          "url": "https://owasp.org/www-project-secure-headers/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Understanding and Implementing HTTP Strict Transport Security (HSTS)",
+          "url": "https://www.cloudflare.com/learning/security/http-strict-transport-security-hsts/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Security Headers - An Introduction",
+          "url": "https://www.youtube.com/watch?v=un5K8H-j8_k",
+          "youtube_id": "un5K8H-j8_k"
+        }
+      ],
+      "cwe_cve": "CWE-200",
+      "priority": "P1",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRuleRemoveById 981203",
+        "SecRule ENGINE_EnableParanoia \"@rx ^Heroku$\" \"id:123456,phase:1,t:none,ctl:auditLogParts=+request\""
+      ],
+      "notes": "Properly configuring security headers is crucial to mitigate various web application vulnerabilities."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/#/forgot-password",
+    "attack": "headers",
+    "evidence": "Missing: CSP, HSTS, Referrer-Policy, Permissions-Policy. Info disclosure: Server header reveals: Heroku",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement security headers and conceal server information to mitigate information disclosure and enhance security posture.",
+      "remediation_steps": [
+        "Step 1: Configure the web server (e.g., Nginx, Apache) or application framework (e.g., Node.js with Helmet) to add the missing security headers: Content-Security-Policy (CSP), HTTP Strict Transport Security (HSTS), Referrer-Policy, and Permissions-Policy.",
+        "Step 2: Configure the web server to prevent the disclosure of server version information in the `Server` header.",
+        "Step 3: Test the headers using a tool like `curl -I` or an online header checker to verify they are present and correctly configured."
+      ],
+      "code_snippet": "nginx:\nadd_header Content-Security-Policy \"default-src 'self';\";\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains; preload\";\nadd_header Referrer-Policy \"strict-origin-when-cross-origin\";\nadd_header Permissions-Policy \"geolocation=();\";\nserver_tokens off;\n\nNode.js (Helmet):\nconst helmet = require('helmet');\napp.use(helmet());",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Secure Headers Project",
+          "url": "https://owasp.org/www-project-secure-headers/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Understanding and Implementing Security Headers",
+          "url": "https://scotthelme.co.uk/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "HTTP Security Headers - Computerphile",
+          "url": "https://youtube.com/watch?v=Un-f2MvCglw",
+          "youtube_id": "Un-f2MvCglw"
+        }
+      ],
+      "cwe_cve": "CWE-200",
+      "priority": "P1",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule RESPONSE_HEADERS:Server \"@rx .\" \"id:100,phase:3,t:none,log,deny,msg:'Remove Server Header'\""
+      ],
+      "notes": "Consider using a Content Security Policy (CSP) report-uri directive to monitor and refine your CSP configuration."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/#/register",
+    "attack": "headers",
+    "evidence": "Missing: CSP, HSTS, Referrer-Policy, Permissions-Policy. Info disclosure: Server header reveals: Heroku",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement missing security headers (CSP, HSTS, Referrer-Policy, Permissions-Policy) and remove the Server header.",
+      "remediation_steps": [
+        "Step 1: Configure CSP header to define trusted sources of content.",
+        "Step 2: Enable HSTS to enforce secure connections over HTTPS.",
+        "Step 3: Set the Referrer-Policy header to control referrer information.",
+        "Step 4: Define the Permissions-Policy header to control browser features.",
+        "Step 5: Configure your web server to remove or mask the Server header.",
+        "Step 6: Test header configuration using browser developer tools and online header checkers."
+      ],
+      "code_snippet": "nginx:\nadd_header Content-Security-Policy \"default-src 'self';\";\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains; preload\";\nadd_header Referrer-Policy \"strict-origin-when-cross-origin\";\nadd_header Permissions-Policy \"geolocation=(), microphone=()\";\nserver_tokens off;\n\nNode.js (using helmet):\nconst helmet = require('helmet');\napp.use(helmet());\napp.use(helmet.contentSecurityPolicy({ directives: { defaultSrc: [\"'self'\"] } }));\napp.use(helmet.hsts({ maxAge: 31536000, includeSubDomains: true, preload: true }));\napp.use(helmet.referrerPolicy({ policy: 'strict-origin-when-cross-origin' }));\napp.use(helmet.permissionsPolicy({ features: { geolocation: [], microphone: [] } }));\napp.disable('x-powered-by');",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Content Security Policy Cheat Sheet",
+          "url": "https://owasp.org/www-project-cheat-sheets/cheatsheets/Content_Security_Policy_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "doc",
+          "title": "OWASP HTTP Strict Transport Security Cheat Sheet",
+          "url": "https://owasp.org/www-project-cheat-sheets/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "HTTP Security Headers - Introduction to Security Headers",
+          "url": "https://www.youtube.com/watch?v=UnJ-dmtD984",
+          "youtube_id": "UnJ-dmtD984"
+        }
+      ],
+      "cwe_cve": "CWE-16",
+      "priority": "P1",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule RESPONSE_HEADERS:Content-Security-Policy \"@rx .\" \"id:1001,phase:3,t:none,block,msg:'Missing Content-Security-Policy Header'\"",
+        "SecRule RESPONSE_HEADERS:Strict-Transport-Security \"@rx .\" \"id:1002,phase:3,t:none,block,msg:'Missing Strict-Transport-Security Header'\"",
+        "SecRule RESPONSE_HEADERS:Referrer-Policy \"@rx .\" \"id:1003,phase:3,t:none,block,msg:'Missing Referrer-Policy Header'\"",
+        "SecRule RESPONSE_HEADERS:Permissions-Policy \"@rx .\" \"id:1004,phase:3,t:none,block,msg:'Missing Permissions-Policy Header'\""
+      ],
+      "notes": "Implementing these headers enhances the application's security posture and reduces the risk of various attacks."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "headers",
+    "evidence": "Missing: Permissions-Policy. Info disclosure: Server header reveals: github.com",
+    "severity": "medium",
+    "solution": {
+      "solution": "Implement the Permissions-Policy header to control browser features and hide the server version to prevent information disclosure.",
+      "remediation_steps": [
+        "Step 1: Configure your web server (e.g., Nginx or Apache) or application framework (e.g., Node.js with Helmet) to set the Permissions-Policy header.",
+        "Step 2: Configure your web server or framework to hide the server version in the 'Server' header.",
+        "Step 3: Test the application to ensure the Permissions-Policy header is present and the server version is not disclosed."
+      ],
+      "code_snippet": "## Nginx example:\nhttp {\n  server {\n    add_header Permissions-Policy \"geolocation=(), microphone=(), camera=()\";\n    server_tokens off; # Disable server version disclosure\n  }\n}\n\n## Node.js (Helmet) example:\nconst express = require('express');\nconst helmet = require('helmet');\nconst app = express();\n\napp.use(helmet.permissionsPolicy({ directives: { geolocation: [], microphone: [], camera: [] } }));\napp.use(helmet.hidePoweredBy()); // Hide the X-Powered-By header\n",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "Permissions Policy - Web security",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Hide Nginx Version Number for Security",
+          "url": "https://www.nginx.com/blog/security-privacy-apache-nginx/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "HTTP Security Headers - Everything You Need To Know",
+          "url": "https://youtube.com/watch?v=h-mG3Kypm0I",
+          "youtube_id": "h-mG3Kypm0I"
+        }
+      ],
+      "cwe_cve": "CWE-200",
+      "priority": "P2",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule REQUEST_HEADERS:Server \"@rx .\" \"id:12345,phase:1,deny,status:406,msg:'Server Header Disclosure Attempt'\""
+      ],
+      "notes": "Setting the Permissions-Policy header can enhance security by restricting browser features, and removing the server version reduces the attack surface."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "logging_failures",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&debug=%5C",
+    "evidence": "Detailed error information disclosed (potential information leakage)",
+    "severity": "medium",
+    "solution": {
+      "solution": "Implement proper error handling and sanitize redirect URLs to prevent information leakage and open redirects.",
+      "remediation_steps": [
+        "Step 1: Sanitize the 'to' parameter input to allow only whitelisted URLs or URL patterns.",
+        "Step 2: Implement robust error handling to avoid displaying internal server details in error messages.",
+        "Step 3: Configure logging to redact sensitive information before writing to logs."
+      ],
+      "code_snippet": "app.get('/redirect', (req, res) => {\n  const allowedDomains = ['https://github.com/juice-shop', 'https://owasp.org'];\n  const to = req.query.to;\n  if (!to) {\n    return res.status(400).send('Missing redirect URL');\n  }\n  try {\n    const url = new URL(to);\n    if (!allowedDomains.some(domain => url.origin.startsWith(domain))) {\n      return res.status(400).send('Invalid redirect URL');\n    }\n    res.redirect(to);\n  } catch (error) {\n    console.error('Invalid URL:', error);\n    res.status(400).send('Invalid URL');\n  }\n});",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Improper Error Handling",
+          "url": "https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A6-Security_Misconfiguration",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Preventing Open Redirect Vulnerabilities",
+          "url": "https://portswigger.net/web-security/open-redirect",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Open Redirect Vulnerability Explained",
+          "url": "https://www.youtube.com/watch?v=7S9E9TJ20r4",
+          "youtube_id": "7S9E9TJ20r4"
+        }
+      ],
+      "cwe_cve": "CWE-200",
+      "priority": "P2",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule REQUEST_URI \"@rx ^/redirect\\?to=.*\" \"id:12345,phase:2,t:urlDecode,deny,status:403,msg:'Potential Open Redirect Attempt'\""
+      ],
+      "notes": "Validate and sanitize all redirect URLs to prevent attackers from redirecting users to malicious websites."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&url=http%3A%2F%2Flocalhost%3A22",
+    "evidence": "Possible SSRF: Server attempted to fetch http://localhost:22",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement strict input validation and sanitization to prevent server-side request forgery (SSRF).",
+      "remediation_steps": [
+        "Step 1: Implement a whitelist of allowed destination hosts or protocols.",
+        "Step 2: Sanitize and validate user-supplied URLs before making external requests.",
+        "Step 3: Disable or restrict redirects to internal resources."
+      ],
+      "code_snippet": "Node.js example using a whitelist:\n\nconst allowedHosts = ['github.com', 'example.com'];\nconst url = new URL(req.query.to);\nif (!allowedHosts.includes(url.hostname)) {\n  return res.status(400).send('Invalid host');\n}\n\nfetch(req.query.to).then(response => { /* ... */ });",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Server Side Request Forgery Prevention Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Understanding and Mitigating Server-Side Request Forgery (SSRF)",
+          "url": "https://portswigger.net/web-security/ssrf",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Server Side Request Forgery (SSRF) - Web Security Academy",
+          "url": "https://www.youtube.com/watch?v=dJQ94E-x9C4",
+          "youtube_id": "dJQ94E-x9C4"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P0",
+      "estimated_effort": "med",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule REQUEST_URI \"@rx redirect\\?to=(.*)\" \"id:12345,phase:2,t:urlDecode,t:lowercase,deny,status:403,msg:'Possible SSRF attempt'\""
+      ],
+      "notes": "Consider implementing network segmentation to further isolate internal resources."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&link=http%3A%2F%2Flocalhost%3A22",
+    "evidence": "Possible SSRF: Server attempted to fetch http://localhost:22",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement robust input validation and sanitization on the redirect URL to prevent Server-Side Request Forgery (SSRF) attacks.",
+      "remediation_steps": [
+        "Step 1: Implement a whitelist of allowed domains and protocols for the redirect URL.",
+        "Step 2: Sanitize the input URL to remove or encode any potentially malicious characters or sequences.",
+        "Step 3: Verify that the redirect URL matches the allowed domains and protocols before performing the redirect."
+      ],
+      "code_snippet": "```javascript\nconst allowedDomains = ['juice-shop.herokuapp.com'];\n\napp.get('/redirect', (req, res) => {\n  const to = req.query.to;\n  \n  try {\n    const url = new URL(to);\n    if (!allowedDomains.includes(url.hostname)) {\n      return res.status(400).send('Invalid domain');\n    }\n    return res.redirect(to);\n  } catch (error) {\n    return res.status(400).send('Invalid URL');\n  }\n});\n```",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Server-Side Request Forgery Prevention Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Understanding and Preventing SSRF Attacks",
+          "url": "https://portswigger.net/web-security/ssrf",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Server-Side Request Forgery (SSRF) Explained",
+          "url": "https://www.youtube.com/watch?v=f72QYqNduoA",
+          "youtube_id": "f72QYqNduoA"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P0",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule ARGS:to \"@rx ^(?!https?://(juice-shop\\.herokuapp\\.com)).*$\" \"id:12345,deny,msg:'Potential SSRF attempt',logdata:'Attempted redirect to %{ARGS.to}'\""
+      ],
+      "notes": "Consider using a URL parsing library to handle complex URL structures and potential bypasses."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&src=http%3A%2F%2Flocalhost%3A22",
+    "evidence": "Possible SSRF: Server attempted to fetch http://localhost:22",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement strict input validation and sanitization on the `to` parameter of the redirect route to prevent arbitrary URL redirects.",
+      "remediation_steps": [
+        "Step 1: Implement a whitelist of allowed domains or URL prefixes for the redirect target.",
+        "Step 2: Validate the `to` parameter against the whitelist before performing the redirect.",
+        "Step 3: Implement rate limiting to prevent abuse of the redirect functionality.",
+        "Step 4: Log all redirect attempts, especially those that are blocked by the whitelist.",
+        "Step 5: Regularly review the whitelist to ensure it remains up-to-date and secure."
+      ],
+      "code_snippet": "```javascript\nconst allowedDomains = ['juice-shop.herokuapp.com', 'github.com/juice-shop/juice-shop'];\n\napp.get('/redirect', (req, res) => {\n  const to = req.query.to;\n  if (!to) {\n    return res.status(400).send('Missing `to` parameter');\n  }\n\n  try {\n    const url = new URL(to);\n    if (!allowedDomains.includes(url.hostname)) {\n      return res.status(400).send('Invalid redirect target');\n    }\n    res.redirect(to);\n  } catch (error) {\n    return res.status(400).send('Invalid URL');\n  }\n});\n```",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Server-Side Request Forgery Prevention Cheat Sheet",
+          "url": "https://owasp.org/www-project-top-ten/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "SSRF Attacks: Prevention & Exploitation Techniques",
+          "url": "https://portswigger.net/web-security/ssrf",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Server Side Request Forgery (SSRF)",
+          "url": "https://www.youtube.com/watch?v=eF81R7tz7yg",
+          "youtube_id": "eF81R7tz7yg"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P1",
+      "estimated_effort": "med",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule REQUEST_URI \"@rx ^/redirect\\\\?to=.*(localhost|127.0.0.1|0.0.0.0).*$\" \"id:123456,phase:2,deny,status:403,msg:'SSRF Protection: Blocked request to internal address'\""
+      ],
+      "notes": "Consider using a URL parsing library to ensure proper validation of the redirect target."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&href=http%3A%2F%2Flocalhost%3A22",
+    "evidence": "Possible SSRF: Server attempted to fetch http://localhost:22",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement input validation and sanitization to prevent server-side request forgery (SSRF).",
+      "remediation_steps": [
+        "Step 1: Implement a whitelist of allowed domains or IPs that the redirect can point to.",
+        "Step 2: Sanitize the 'to' parameter to remove or encode potentially malicious characters.",
+        "Step 3: Verify that the redirected URL is within the allowed list before making the request."
+      ],
+      "code_snippet": "Node.js example using a whitelist:\n\nconst allowedDomains = ['juice-shop.herokuapp.com', 'github.com'];\napp.get('/redirect', (req, res) => {\n  const to = req.query.to;\n  try {\n    const url = new URL(to);\n    if (!allowedDomains.includes(url.hostname)) {\n      return res.status(400).send('Invalid domain');\n    }\n    res.redirect(to);\n  } catch (e) {\n    return res.status(400).send('Invalid URL');\n  }\n});",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Server-Side Request Forgery Prevention Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "SSRF Vulnerability: What It Is and How to Prevent It",
+          "url": "https://portswigger.net/web-security/ssrf",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Server Side Request Forgery (SSRF) - Web Security Academy",
+          "url": "https://www.youtube.com/watch?v=ELxnQQtK70E",
+          "youtube_id": "ELxnQQtK70E"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P1",
+      "estimated_effort": "med",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule REQUEST_URI \"@rx ^/redirect\\?to=.*localhost.*$\" \"id:123456,phase:2,deny,status:403,log,msg:'Possible SSRF attempt: Redirect to localhost'\"",
+        "SecRule REQUEST_URI \"@rx ^/redirect\\?to=.*127\\.0\\.0\\.1.*$\" \"id:123457,phase:2,deny,status:403,log,msg:'Possible SSRF attempt: Redirect to localhost'\""
+      ],
+      "notes": "Consider implementing a robust URL validation mechanism using allow lists and strict pattern matching to prevent SSRF attacks."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&host=http%3A%2F%2Flocalhost%3A22",
+    "evidence": "Possible SSRF: Server attempted to fetch http://localhost:22",
+    "severity": "high",
+    "solution": {
+      "solution": "Review and implement appropriate security controls for this vulnerability",
+      "remediation_steps": [
+        "Analyze the specific vulnerability details",
+        "Research best practices for this attack type",
+        "Implement appropriate security controls",
+        "Test and validate the fix effectiveness"
+      ],
+      "code_snippet": null,
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Top 10",
+          "url": "https://owasp.org/Top10/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Web Security Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/Security",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Web Security Fundamentals",
+          "url": "https://www.youtube.com/watch?v=WlmKwIe9z1Q",
+          "youtube_id": "WlmKwIe9z1Q"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P0",
+      "estimated_effort": "med",
+      "confidence": "high",
+      "waf_rules": [],
+      "notes": "Auto-generated solution based on vulnerability type"
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&redirect=http%3A%2F%2Flocalhost%3A22",
+    "evidence": "Possible SSRF: Server attempted to fetch http://localhost:22",
+    "severity": "high",
+    "solution": {
+      "solution": "Review and implement appropriate security controls for this vulnerability",
+      "remediation_steps": [
+        "Analyze the specific vulnerability details",
+        "Research best practices for this attack type",
+        "Implement appropriate security controls",
+        "Test and validate the fix effectiveness"
+      ],
+      "code_snippet": null,
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Top 10",
+          "url": "https://owasp.org/Top10/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Web Security Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/Security",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Web Security Fundamentals",
+          "url": "https://www.youtube.com/watch?v=WlmKwIe9z1Q",
+          "youtube_id": "WlmKwIe9z1Q"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P0",
+      "estimated_effort": "med",
+      "confidence": "high",
+      "waf_rules": [],
+      "notes": "Auto-generated solution based on vulnerability type"
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&url=http%3A%2F%2F127.0.0.1%3A3306",
+    "evidence": "Possible SSRF: Server attempted to fetch http://127.0.0.1:3306",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement strict input validation and sanitization to prevent Server-Side Request Forgery (SSRF) by restricting allowed redirect destinations.",
+      "remediation_steps": [
+        "Step 1: Implement a whitelist of allowed domains or URL prefixes for redirection.",
+        "Step 2: Sanitize and validate the 'to' parameter against the whitelist before initiating the redirect.",
+        "Step 3: Disable the 'url' parameter or implement strict controls to prevent arbitrary URL access.",
+        "Step 4: Regularly review and update the whitelist to accommodate legitimate redirects.",
+        "Step 5: Implement logging and monitoring to detect and respond to suspicious redirect attempts."
+      ],
+      "code_snippet": "Node.js example using a whitelist:\n\nconst allowedDomains = ['juice-shop.herokuapp.com', 'github.com'];\n\napp.get('/redirect', (req, res) => {\n  const to = req.query.to;\n  if (to && allowedDomains.some(domain => to.startsWith(`https://${domain}`)) ) {\n    res.redirect(to);\n  } else {\n    res.status(400).send('Invalid redirect URL');\n  }\n});",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Server Side Request Forgery Prevention Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "A Beginner's Guide to SSRF Vulnerabilities",
+          "url": "https://portswigger.net/blog/server-side-request-forgery-ssrf",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "SSRF - Server Side Request Forgery - Live Hacking",
+          "url": "https://www.youtube.com/watch?v=jhUx-l3Y56o",
+          "youtube_id": "jhUx-l3Y56o"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P0",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule REQUEST_URI \"@rx ^/redirect\" \"id:1000,phase:2,t:urlDecode,t:lowercase,t:replaceNulls,arg:to,chain,deny,msg:'SSRF Attempt via Redirect',log,tag:'ssrf'\"\nSecRule ARGS:to \"@rx ^(?!https://(juice-shop\\.herokuapp\\.com|github\\.com))\" \"t:urlDecode\""
+      ],
+      "notes": "Ensure that the whitelist includes all legitimate domains and that the validation logic is robust to prevent bypasses."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&link=http%3A%2F%2F127.0.0.1%3A3306",
+    "evidence": "Possible SSRF: Server attempted to fetch http://127.0.0.1:3306",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement strict input validation and sanitization for the `to` parameter in the redirect route to prevent Server-Side Request Forgery (SSRF).",
+      "remediation_steps": [
+        "Step 1: Implement an allow list of approved destination domains for the redirect.",
+        "Step 2: Validate the 'to' parameter against the allow list before redirecting.",
+        "Step 3: Implement a URL parser to extract the hostname and compare it with the allow list.",
+        "Step 4: Ensure proper error handling to prevent revealing internal information in case of invalid URLs.",
+        "Step 5: Regularly update the allow list as needed and monitor for any bypass attempts."
+      ],
+      "code_snippet": "```javascript\nconst express = require('express');\nconst app = express();\nconst url = require('url');\n\nconst allowedDomains = ['juice-shop.herokuapp.com', 'github.com'];\n\napp.get('/redirect', (req, res) => {\n  const to = req.query.to;\n  if (!to) {\n    return res.status(400).send('Missing `to` parameter');\n  }\n\n  try {\n    const parsedUrl = new URL(to);\n    if (!allowedDomains.includes(parsedUrl.hostname)) {\n      return res.status(400).send('Invalid destination domain');\n    }\n    res.redirect(to);\n  } catch (error) {\n    return res.status(400).send('Invalid URL');\n  }\n});\n\napp.listen(3000, () => console.log('Server listening on port 3000'));\n```",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Server-Side Request Forgery Prevention Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "SSRF Vulnerability: What It Is and How to Prevent It",
+          "url": "https://portswigger.net/web-security/ssrf",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Server-Side Request Forgery (SSRF) Explained",
+          "url": "https://www.youtube.com/watch?v=dG0o-VdBlCc",
+          "youtube_id": "dG0o-VdBlCc"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P0",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule REQUEST_URI \"@rx ^/redirect\\\\?to=(.*)\" \"id:123456,phase:2,t:urlDecode,t:lowercase,deny,status:403,log,msg:'SSRF Attempt Detected',chain\"",
+        "SecRule REQUEST_URI \"@contains 127.0.0.1\" \"chain\"",
+        "SecRule REQUEST_URI \"@contains localhost\" \"chain\"",
+        "SecRule REQUEST_URI \"@contains 169.254\""
+      ],
+      "notes": "Consider implementing additional security measures such as network segmentation and limiting outbound network access from the application server."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&src=http%3A%2F%2F127.0.0.1%3A3306",
+    "evidence": "Possible SSRF: Server attempted to fetch http://127.0.0.1:3306",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement strict input validation and sanitization on the 'to' parameter to prevent SSRF.",
+      "remediation_steps": [
+        "Step 1: Implement an allowlist of permitted domains or URL schemes.",
+        "Step 2: Validate and sanitize the 'to' parameter against the allowlist.",
+        "Step 3: Reject any requests where the 'to' parameter doesn't match the allowed domains/schemes.",
+        "Step 4: Log rejected requests for monitoring and incident response."
+      ],
+      "code_snippet": "if (!['https://juice-shop.herokuapp.com', 'https://example.com'].includes(url.parse(req.query.to).origin)) { return res.status(400).send('Invalid URL'); }",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Server Side Request Forgery Prevention Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Understanding and Preventing Server-Side Request Forgery (SSRF) Attacks",
+          "url": "https://portswigger.net/web-security/ssrf",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "SSRF Server Side Request Forgery",
+          "url": "https://www.youtube.com/watch?v=jhUXjS2yPjA",
+          "youtube_id": "jhUXjS2yPjA"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P1",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule REQUEST_URI \"@rx redirect\\?to=.*(127\\.0\\.0\\.1|localhost|0\\.0\\.0\\.0)\" \"id:123456,phase:2,deny,status:403,msg:'SSRF attempt detected'\""
+      ],
+      "notes": "Ensure the allowlist is regularly reviewed and updated."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&href=http%3A%2F%2F127.0.0.1%3A3306",
+    "evidence": "Possible SSRF: Server attempted to fetch http://127.0.0.1:3306",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement a strict allow list of approved redirect destinations and validate user-supplied URLs against it.",
+      "remediation_steps": [
+        "Step 1: Identify all permissible redirect destinations for your application.",
+        "Step 2: Create an allow list containing only these valid and safe URLs.",
+        "Step 3: Implement a URL validation function that checks if the user-supplied 'to' parameter matches an entry in the allow list before redirecting.",
+        "Step 4: If the URL is not on the allow list, reject the redirect request and return an error message to the user.",
+        "Step 5: Implement logging to track redirect attempts, especially those that are blocked, to identify potential attack patterns."
+      ],
+      "code_snippet": "function isValidRedirect(url) {\n  const allowedDomains = ['juice-shop.herokuapp.com', 'github.com'];\n  try {\n    const parsedUrl = new URL(url);\n    return allowedDomains.includes(parsedUrl.hostname);\n  } catch (e) {\n    return false; // Invalid URL\n  }\n}\n\napp.get('/redirect', (req, res) => {\n  const to = req.query.to;\n  if (isValidRedirect(to)) {\n    res.redirect(to);\n  } else {\n    res.status(400).send('Invalid redirect URL');\n  }\n});",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Server-Side Request Forgery (SSRF)",
+          "url": "https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2021/en/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Understanding and Preventing SSRF Attacks",
+          "url": "https://portswigger.net/web-security/ssrf",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Server Side Request Forgery (SSRF) Explained",
+          "url": "https://www.youtube.com/watch?v=E3qr0U4L38w",
+          "youtube_id": "E3qr0U4L38w"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P0",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule REQUEST_URI \"@rx ^/redirect\\?to=.*(127\\.0\\.0\\.1|localhost|::1).*$\" \"id:10001,phase:2,deny,status:403,msg:'SSRF Protection: Blocked request to internal address'\"",
+        "SecRule REQUEST_URI \"@rx ^/redirect\\?to=.*(10\\.|172\\.(1[6-9]|2[0-9]|3[0-1])\\.|192\\.168\\.).*$\" \"id:10002,phase:2,deny,status:403,msg:'SSRF Protection: Blocked request to private IP address'\""
+      ],
+      "notes": "Ensure that the allow list is regularly reviewed and updated to prevent bypassing the protection mechanisms. Consider using a URL parsing library to handle complex URL structures and potential obfuscation attempts."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&host=http%3A%2F%2F127.0.0.1%3A3306",
+    "evidence": "Possible SSRF: Server attempted to fetch http://127.0.0.1:3306",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement strict input validation and sanitization to prevent Server-Side Request Forgery (SSRF) by only allowing redirects to trusted and predefined URLs.",
+      "remediation_steps": [
+        "Step 1: Implement a whitelist of allowed destination URLs for redirects, rejecting any URL not on the list.",
+        "Step 2: Sanitize and validate the 'to' parameter to ensure it conforms to the expected URL format and does not contain malicious payloads.",
+        "Step 3: Disable or restrict redirects to localhost or internal IP addresses to prevent unauthorized access to internal resources.",
+        "Step 4: Implement proper error handling to prevent exposing internal information during failed redirect attempts.",
+        "Step 5: Regularly review and update the whitelist of allowed URLs to ensure it remains secure and accurate."
+      ],
+      "code_snippet": "if (!allowedUrls.includes(destinationUrl)) { return res.status(400).send('Invalid redirect URL'); } res.redirect(destinationUrl);",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Server-Side Request Forgery Prevention Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Understanding and Preventing SSRF Attacks",
+          "url": "https://portswigger.net/web-security/ssrf",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Server-Side Request Forgery (SSRF) Explained",
+          "url": "https://www.youtube.com/watch?v=0oN0wEwKLuE",
+          "youtube_id": "0oN0wEwKLuE"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P0",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule ARGS:to \"@rx ^(?!https://(juice-shop\\.herokuapp\\.com|allowed-domain\\.com)).*$\" \"id:123456,phase:2,t:urlDecode,deny,status:403,msg:'SSRF Attempt Detected'\""
+      ],
+      "notes": "Ensure the allowedUrls array is populated with trusted URLs and regularly updated."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&redirect=http%3A%2F%2F127.0.0.1%3A3306",
+    "evidence": "Possible SSRF: Server attempted to fetch http://127.0.0.1:3306",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement strict input validation and sanitization to prevent Server-Side Request Forgery (SSRF) attacks by restricting redirect URLs to a predefined whitelist of safe domains.",
+      "remediation_steps": [
+        "Step 1: Implement a whitelist of allowed domains for the redirect URL parameter.",
+        "Step 2: Sanitize and validate the input URL against the whitelist before redirecting.",
+        "Step 3: Implement rate limiting to prevent abuse of the redirect functionality.",
+        "Step 4: Monitor redirect requests for suspicious activity and unauthorized domain access."
+      ],
+      "code_snippet": "```javascript\nconst allowedDomains = ['juice-shop.herokuapp.com', 'github.com'];\n\napp.get('/redirect', (req, res) => {\n  const redirectUrl = req.query.to;\n  if (redirectUrl) {\n    try {\n      const url = new URL(redirectUrl);\n      if (allowedDomains.includes(url.hostname)) {\n        return res.redirect(redirectUrl);\n      } else {\n        return res.status(400).send('Invalid redirect URL');\n      }\n    } catch (error) {\n      return res.status(400).send('Invalid URL');\n    }\n  } else {\n    return res.status(400).send('Missing redirect URL');\n  }\n});\n```",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Server-Side Request Forgery Prevention Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Understanding and Preventing SSRF Attacks",
+          "url": "https://portswigger.net/web-security/ssrf",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Server Side Request Forgery (SSRF) Explained",
+          "url": "https://www.youtube.com/watch?v=23rEUm93wzQ",
+          "youtube_id": "23rEUm93wzQ"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P1",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule REQUEST_URI \"@rx ^/redirect.*to=(?!https://(juice-shop\\.herokuapp\\.com|github\\.com)).*$\" \"id:12345,phase:2,t:urlDecode,deny,status:403,msg:'SSRF Attempt Detected'\""
+      ],
+      "notes": "Ensure the whitelist is comprehensive and regularly reviewed. Consider using a URL parsing library to handle URL validation and sanitization properly.  Implementing a Content Security Policy can help mitigate some SSRF impacts by restricting allowed sources."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&url=http%3A%2F%2F169.254.169.254%2Flatest%2Fmeta-data%2F",
+    "evidence": "Possible SSRF: Server attempted to fetch http://169.254.169.254/latest/meta-data/",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement strict URL validation and sanitization to prevent Server-Side Request Forgery (SSRF).",
+      "remediation_steps": [
+        "Step 1: Implement a whitelist of allowed domains/protocols for redirect targets.",
+        "Step 2: Sanitize the 'to' parameter to remove or encode any potentially malicious characters.",
+        "Step 3: Validate that the destination URL matches the expected format before redirecting."
+      ],
+      "code_snippet": "```javascript\nfunction isValidURL(url) {\n  try {\n    const parsedURL = new URL(url);\n    const allowedDomains = ['juice-shop.herokuapp.com', 'github.com'];\n    if (!allowedDomains.includes(parsedURL.hostname)) {\n      return false;\n    }\n    if (parsedURL.protocol !== 'https:') {\n      return false;\n    }\n    return true;\n  } catch (error) {\n    return false;\n  }\n}\n\napp.get('/redirect', (req, res) => {\n  const to = req.query.to;\n  if (!to || !isValidURL(to)) {\n    return res.status(400).send('Invalid redirect URL');\n  }\n  res.redirect(to);\n});\n```",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Server-Side Request Forgery Prevention Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Preventing SSRF Attacks",
+          "url": "https://portswigger.net/web-security/ssrf",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Server-Side Request Forgery (SSRF) Vulnerability Explained",
+          "url": "https://www.youtube.com/watch?v=Q05a-W-U7i8",
+          "youtube_id": "Q05a-W-U7i8"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P0",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule REQUEST_URI \"@rx ^/redirect\" \"id:123456,phase:2,t:urlDecodeUni,block,msg:'Possible SSRF attempt',logdata:'%{matched_var}',severity:CRITICAL,tag:'OWASP_TOP_10/A1',tag:'SSRF'\""
+      ],
+      "notes": "Ensure the URL validation logic is robust and resistant to bypass techniques such as URL encoding or manipulation."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&link=http%3A%2F%2F169.254.169.254%2Flatest%2Fmeta-data%2F",
+    "evidence": "Possible SSRF: Server attempted to fetch http://169.254.169.254/latest/meta-data/",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement strict input validation and sanitization for the redirect URL to prevent Server-Side Request Forgery (SSRF) attacks.",
+      "remediation_steps": [
+        "Step 1: Implement a whitelist of allowed domains or URLs for redirection.",
+        "Step 2: Validate the redirect URL against the whitelist before initiating the redirect.",
+        "Step 3: Implement input sanitization to remove or encode potentially malicious characters from the redirect URL.",
+        "Step 4: Regularly update the whitelist of allowed domains.",
+        "Step 5: Implement network segmentation and restrict outbound connections to only necessary resources."
+      ],
+      "code_snippet": "Node.js example:\n```javascript\nconst allowedDomains = ['juice-shop.herokuapp.com', 'github.com'];\n\napp.get('/redirect', (req, res) => {\n  const to = req.query.to;\n  if (!to) {\n    return res.status(400).send('Missing redirect URL.');\n  }\n  try {\n    const url = new URL(to);\n    if (!allowedDomains.includes(url.hostname)) {\n      return res.status(400).send('Invalid redirect URL.');\n    }\n    res.redirect(to);\n  } catch (error) {\n    return res.status(400).send('Invalid URL format.');\n  }\n});\n```",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Server-Side Request Forgery (SSRF)",
+          "url": "https://owasp.org/www-community/attacks/Server_Side_Request_Forgery",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "SSRF Bible: Comprehensive Guide",
+          "url": "https://book.hacktricks.xyz/pentesting-web/ssrf-server-side-request-forgery",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "SSRF Attack Explained | Server Side Request Forgery Vulnerability",
+          "url": "https://www.youtube.com/watch?v=E3qr9i8t_yE",
+          "youtube_id": "E3qr9i8t_yE"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P0",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule REQUEST_URI \"@rx ^/redirect\\\\?to=http(s)?://(?!juice-shop\\\\.herokuapp\\\\.com|github\\\\.com).*$\" \"id:12345,deny,status:403,msg:'SSRF Attempt Detected'\""
+      ],
+      "notes": "Consider implementing a URL signing mechanism for additional security."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&src=http%3A%2F%2F169.254.169.254%2Flatest%2Fmeta-data%2F",
+    "evidence": "Possible SSRF: Server attempted to fetch http://169.254.169.254/latest/meta-data/",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement a strict allowlist of permitted redirect destinations and validate user-supplied URLs against it.",
+      "remediation_steps": [
+        "Step 1: Define an allowlist of valid and safe destination URLs or URL patterns.",
+        "Step 2: Implement a URL validation function that checks if the requested redirect target is present in the allowlist before redirecting.",
+        "Step 3: If the URL is not on the allowlist, return an error message to the user.",
+        "Step 4: Avoid blindly forwarding user-supplied URLs; sanitize and validate them.",
+        "Step 5: Regularly review and update the allowlist to ensure it remains current and secure."
+      ],
+      "code_snippet": "function isValidRedirectURL(url) {\n  const allowedDomains = ['juice-shop.herokuapp.com', 'github.com/juice-shop/juice-shop'];\n  try {\n    const parsedURL = new URL(url);\n    return allowedDomains.includes(parsedURL.hostname);\n  } catch (e) {\n    return false; // Invalid URL\n  }\n}\n\napp.get('/redirect', (req, res) => {\n  const redirectURL = req.query.to;\n  if (isValidRedirectURL(redirectURL)) {\n    res.redirect(redirectURL);\n  } else {\n    res.status(400).send('Invalid redirect URL');\n  }\n});",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Server-Side Request Forgery Prevention Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "SSRF Vulnerability: What is it and How to Prevent it",
+          "url": "https://www.acunetix.com/blog/articles/server-side-request-forgery-vulnerability/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "SSRF (Server-Side Request Forgery) Explained - Security Simplified",
+          "url": "https://youtube.com/watch?v=sL3X0H8B8iY",
+          "youtube_id": "sL3X0H8B8iY"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P1",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule REQUEST_URI \"@rx ^/redirect\" \"id:1001,phase:2,t:urlDecode,t:lowercase,deny,msg:'Potential SSRF attempt',logdata:'%{MATCHED_VAR}',severity:CRITICAL,tag:'attack-ssrf'\""
+      ],
+      "notes": "Consider using a URL parsing library to prevent bypasses through URL encoding or other obfuscation techniques. Regularly audit redirect functionality for new vulnerabilities."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&host=http%3A%2F%2F169.254.169.254%2Flatest%2Fmeta-data%2F",
+    "evidence": "Possible SSRF: Server attempted to fetch http://169.254.169.254/latest/meta-data/",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement strict URL validation and sanitization to prevent Server-Side Request Forgery (SSRF).",
+      "remediation_steps": [
+        "Step 1: Implement a whitelist of allowed domains or protocols.",
+        "Step 2: Sanitize the 'to' parameter in the redirect route to remove or encode potentially malicious characters.",
+        "Step 3: Verify that the resolved URL after sanitization is within the allowed whitelist before redirecting."
+      ],
+      "code_snippet": "```javascript\nconst allowedDomains = ['juice-shop.herokuapp.com', 'github.com'];\n\napp.get('/redirect', (req, res) => {\n  let to = req.query.to;\n  try {\n    const url = new URL(to);\n    if (!allowedDomains.includes(url.hostname)) {\n      return res.status(400).send('Invalid domain');\n    }\n    res.redirect(to);\n  } catch (error) {\n    return res.status(400).send('Invalid URL');\n  }\n});\n```",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Server-Side Request Forgery Prevention Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Understanding and Preventing Server-Side Request Forgery (SSRF) Attacks",
+          "url": "https://portswigger.net/web-security/ssrf",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "SSRF - Server Side Request Forgery Explained",
+          "url": "https://www.youtube.com/watch?v=aUhjtTq-B4Q",
+          "youtube_id": "aUhjtTq-B4Q"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P0",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule ARGS:to \"@rx ^(?!https?://(juice-shop\\.herokuapp\\.com|github\\.com)).*$\" \"id:123456,phase:2,deny,status:403,msg:'SSRF Protection: Invalid redirect target'\""
+      ],
+      "notes": "Consider using a URL parsing library to handle URL manipulation safely."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&redirect=http%3A%2F%2F169.254.169.254%2Flatest%2Fmeta-data%2F",
+    "evidence": "Possible SSRF: Server attempted to fetch http://169.254.169.254/latest/meta-data/",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement strict URL validation and sanitization to prevent Server-Side Request Forgery (SSRF).",
+      "remediation_steps": [
+        "Step 1: Implement a whitelist of allowed domains for the redirect URL.",
+        "Step 2: Sanitize the input URL to remove or encode potentially malicious characters.",
+        "Step 3: Disable following redirects to external domains or internal infrastructure addresses (e.g., 169.254.169.254).",
+        "Step 4: Implement proper error handling and logging for failed redirect attempts."
+      ],
+      "code_snippet": "```javascript\nconst allowedDomains = ['juice-shop.herokuapp.com', 'github.com'];\n\nfunction isValidRedirectURL(url) {\n  try {\n    const parsedURL = new URL(url);\n    return allowedDomains.includes(parsedURL.hostname);\n  } catch (error) {\n    return false;\n  }\n}\n\napp.get('/redirect', (req, res) => {\n  const redirectURL = req.query.to;\n  if (isValidRedirectURL(redirectURL)) {\n    res.redirect(redirectURL);\n  } else {\n    res.status(400).send('Invalid redirect URL');\n  }\n});\n```",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Server-Side Request Forgery Prevention Cheat Sheet",
+          "url": "https://owasp.org/www-project-top-ten/2017/A10_2017-Server-Side_Request_Forgery_(SSRF)",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Understanding and Mitigating Server-Side Request Forgery (SSRF)",
+          "url": "https://portswigger.net/web-security/ssrf",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Server Side Request Forgery (SSRF) Explained - Computerphile",
+          "url": "https://youtube.com/watch?v=P02hE1w95-E",
+          "youtube_id": "P02hE1w95-E"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P0",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule REQUEST_URI \"@rx ^/redirect\\\\?to=.*(169\\\\.254\\\\.169\\\\.254).*$\" \"id:123456,phase:2,t:urlDecode,deny,status:403,msg:'SSRF Attempt Detected'\""
+      ],
+      "notes": "Ensure thorough testing after implementing the fix to prevent bypasses."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&url=file%3A%2F%2F%2Fetc%2Fpasswd",
+    "evidence": "Possible SSRF: Server attempted to fetch file:///etc/passwd",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement strict input validation and sanitization on the redirect URL to prevent SSRF attacks.",
+      "remediation_steps": [
+        "Step 1: Implement a whitelist of allowed redirect domains or protocols.",
+        "Step 2: Sanitize and validate the 'to' parameter to prevent malicious URLs.",
+        "Step 3: Implement proper error handling to prevent information disclosure during redirect attempts."
+      ],
+      "code_snippet": "```java\n// Example in Java\nprivate static final List<String> ALLOWED_DOMAINS = Arrays.asList(\"example.com\", \"juice-shop.herokuapp.com\");\n\npublic String sanitizeRedirectUrl(String url) throws MalformedURLException {\n  URL redirectUrl = new URL(url);\n  if (!ALLOWED_DOMAINS.contains(redirectUrl.getHost())) {\n    throw new IllegalArgumentException(\"Invalid redirect domain.\");\n  }\n  return url;\n}\n```",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Server Side Request Forgery Prevention Cheat Sheet",
+          "url": "https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A10-Server-Side_Request_Forgery_(SSRF)",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "SSRF Vulnerability: Understanding and Preventing Attacks",
+          "url": "https://portswigger.net/web-security/ssrf",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Server-Side Request Forgery (SSRF) - Web Security Academy",
+          "url": "https://youtube.com/watch?v=qrj9FmD5XnA",
+          "youtube_id": "qrj9FmD5XnA"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P0",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule REQUEST_URI \"@rx ^/redirect\\\\?to=(?!https://(www\\\\.)?example\\\\.com).+\" \"id:123456,phase:2,deny,status:403,msg:'SSRF Attempt Detected'\""
+      ],
+      "notes": "Consider implementing a URL signing mechanism to further protect against SSRF."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&link=file%3A%2F%2F%2Fetc%2Fpasswd",
+    "evidence": "Possible SSRF: Server attempted to fetch file:///etc/passwd",
+    "severity": "high",
+    "solution": {
+      "solution": "Review and implement appropriate security controls for this vulnerability",
+      "remediation_steps": [
+        "Analyze the specific vulnerability details",
+        "Research best practices for this attack type",
+        "Implement appropriate security controls",
+        "Test and validate the fix effectiveness"
+      ],
+      "code_snippet": null,
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Top 10",
+          "url": "https://owasp.org/Top10/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Web Security Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/Security",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Web Security Fundamentals",
+          "url": "https://www.youtube.com/watch?v=WlmKwIe9z1Q",
+          "youtube_id": "WlmKwIe9z1Q"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P0",
+      "estimated_effort": "med",
+      "confidence": "high",
+      "waf_rules": [],
+      "notes": "Auto-generated solution based on vulnerability type"
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&src=file%3A%2F%2F%2Fetc%2Fpasswd",
+    "evidence": "Possible SSRF: Server attempted to fetch file:///etc/passwd",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement strict URL validation and sanitization for redirect URLs to prevent Server-Side Request Forgery (SSRF).",
+      "remediation_steps": [
+        "Step 1: Implement a whitelist of allowed domains for redirection targets.",
+        "Step 2: Validate the redirect URL against the whitelist before performing the redirect.",
+        "Step 3: Ensure that the application does not forward requests based on user-controlled input without proper validation.",
+        "Step 4: Regularly review and update the whitelist of allowed domains.",
+        "Step 5: Implement logging and monitoring to detect and respond to suspicious redirect activity."
+      ],
+      "code_snippet": "```javascript\nconst allowedDomains = ['https://juice-shop.herokuapp.com', 'https://github.com/juice-shop'];\n\nfunction isValidRedirect(url) {\n  try {\n    const parsedUrl = new URL(url);\n    return allowedDomains.includes(parsedUrl.origin);\n  } catch (error) {\n    return false;\n  }\n}\n\napp.get('/redirect', (req, res) => {\n  const redirectUrl = req.query.to;\n  if (isValidRedirect(redirectUrl)) {\n    res.redirect(redirectUrl);\n  } else {\n    res.status(400).send('Invalid redirect URL');\n  }\n});\n```",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Server-Side Request Forgery Prevention Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Understanding and Preventing SSRF Attacks",
+          "url": "https://portswigger.net/web-security/ssrf",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "SSRF (Server Side Request Forgery) - How to Find and Exploit",
+          "url": "https://youtube.com/watch?v=xGfjo2Tmw1o",
+          "youtube_id": "xGfjo2Tmw1o"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P0",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule REQUEST_URI \"@rx ^/redirect\\\\?to=.*(file:|gopher:|dict:).*$\" \"id:123456,phase:2,deny,status:403,msg:'SSRF Attempt Detected'\""
+      ],
+      "notes": "Consider implementing a Content Security Policy (CSP) to restrict the origins that the application can load resources from."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&href=file%3A%2F%2F%2Fetc%2Fpasswd",
+    "evidence": "Possible SSRF: Server attempted to fetch file:///etc/passwd",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement strict input validation and URL sanitization on the redirect URL to prevent Server-Side Request Forgery.",
+      "remediation_steps": [
+        "Step 1: Implement a whitelist of allowed domains or URL prefixes for redirection.",
+        "Step 2: Sanitize the input URL to remove or encode potentially malicious characters or sequences like 'file://'.",
+        "Step 3: Implement server-side validation to ensure the resolved URL matches the intended domain.",
+        "Step 4: Disable or restrict URL schemes like 'file://', 'gopher://', and 'ftp://' that could be exploited.",
+        "Step 5: Implement robust logging and monitoring to detect and respond to suspicious redirection attempts.",
+        "Step 6: Regularly review and update the whitelist of allowed domains."
+      ],
+      "code_snippet": "const allowedDomains = ['juice-shop.herokuapp.com', 'github.com'];\napp.get('/redirect', (req, res) => {\n  const to = req.query.to;\n  try {\n    const url = new URL(to);\n    if (!allowedDomains.includes(url.hostname)) {\n      return res.status(400).send('Invalid domain');\n    }\n    res.redirect(to);\n  } catch (error) {\n    return res.status(400).send('Invalid URL');\n  }\n});",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Server-Side Request Forgery Prevention Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "SSRF Vulnerability: Deep Dive and Mitigation Techniques",
+          "url": "https://portswigger.net/web-security/ssrf",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "SSRF - Server Side Request Forgery Explained",
+          "url": "https://www.youtube.com/watch?v=Lt67Jc9Y0x8",
+          "youtube_id": "Lt67Jc9Y0x8"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P0",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule REQUEST_URI \"@rx ^/redirect\\?to=.*(file|gopher|ftp)://\" \"id:123456,phase:2,deny,msg:'SSRF attempt detected'"
+      ],
+      "notes": "Ensure that the whitelist is comprehensive and regularly reviewed to prevent bypasses. Consider implementing additional security measures such as network segmentation and limiting outbound access from the server."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&host=file%3A%2F%2F%2Fetc%2Fpasswd",
+    "evidence": "Possible SSRF: Server attempted to fetch file:///etc/passwd",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement strict input validation and sanitization on the redirect URL to prevent Server-Side Request Forgery.",
+      "remediation_steps": [
+        "Step 1: Implement a whitelist of allowed domains for redirection targets.",
+        "Step 2: Sanitize the input URL to remove or encode any potentially malicious characters or sequences.",
+        "Step 3: Verify that the redirect target is a valid URL and not a local file path or internal service.",
+        "Step 4: Implement rate limiting and logging to detect and prevent abuse of the redirect functionality."
+      ],
+      "code_snippet": "```javascript\nfunction isValidRedirect(url) {\n  const allowedDomains = ['juice-shop.herokuapp.com', 'github.com'];\n  try {\n    const parsedUrl = new URL(url);\n    return allowedDomains.includes(parsedUrl.hostname);\n  } catch (e) {\n    return false;\n  }\n}\n\napp.get('/redirect', (req, res) => {\n  const to = req.query.to;\n  if (isValidRedirect(to)) {\n    res.redirect(to);\n  } else {\n    res.status(400).send('Invalid redirect URL');\n  }\n});\n```",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Server-Side Request Forgery Prevention Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "SSRF Vulnerability: Definition, Examples, and Prevention",
+          "url": "https://portswigger.net/web-security/ssrf",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "SSRF (Server Side Request Forgery) explained by Hacker101",
+          "url": "https://www.youtube.com/watch?v=dJDiI8d5C_A",
+          "youtube_id": "dJDiI8d5C_A"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P0",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule REQUEST_URI \"@rx ^/redirect\" \"id:123456,phase:2,t:urlDecode,t:htmlEntityDecode,capture,ctl:ruleEngine=on,block,msg:'SSRF Attempt',logdata:'%{TX.0}',severity:CRITICAL,tag:'application-multi',tag:'language-multi',tag:'platform-multi',tag:'attack-ssrf'\"",
+        "SecRule ARGS:to \"@rx file://\" \"id:123457,phase:2,t:urlDecode,t:htmlEntityDecode,capture,ctl:ruleEngine=on,block,msg:'SSRF Attempt - File Access',logdata:'%{TX.0}',severity:CRITICAL,tag:'application-multi',tag:'language-multi',tag:'platform-multi',tag:'attack-ssrf'\""
+      ],
+      "notes": "Ensure thorough testing after implementing the fix to prevent bypasses."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&redirect=file%3A%2F%2F%2Fetc%2Fpasswd",
+    "evidence": "Possible SSRF: Server attempted to fetch file:///etc/passwd",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement robust input validation and sanitization on the redirect URL to prevent Server-Side Request Forgery (SSRF).",
+      "remediation_steps": [
+        "Step 1: Implement a whitelist of allowed domains for redirection.",
+        "Step 2: Validate and sanitize the 'to' parameter to ensure it matches the whitelist.",
+        "Step 3: Disable or restrict access to internal resources through redirection.",
+        "Step 4: Implement rate limiting to mitigate potential abuse.",
+        "Step 5: Log all redirection attempts for auditing and monitoring."
+      ],
+      "code_snippet": "```javascript\nconst allowedDomains = ['juice-shop.herokuapp.com', 'github.com'];\n\napp.get('/redirect', (req, res) => {\n  const to = req.query.to;\n  if (!to) {\n    return res.status(400).send('Missing redirect URL');\n  }\n\n  try {\n    const url = new URL(to);\n    if (!allowedDomains.includes(url.hostname)) {\n      return res.status(400).send('Invalid redirect domain');\n    }\n\n    res.redirect(to);\n  } catch (error) {\n    return res.status(400).send('Invalid URL');\n  }\n});\n```",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Server-Side Request Forgery Prevention Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Preventing Server-Side Request Forgery (SSRF) Attacks",
+          "url": "https://portswigger.net/web-security/ssrf",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Server Side Request Forgery (SSRF) - Web Security Academy",
+          "url": "https://www.youtube.com/watch?v=e4BuNqQjYw0",
+          "youtube_id": "e4BuNqQjYw0"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P0",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule REQUEST_URI \"@rx ^/redirect\\\\?to=file://\" \"id:12345,phase:2,t:urlDecode,deny,status:403,msg:'SSRF Attempt - File Protocol',logdata:'%{matched_var}',severity:CRITICAL\""
+      ],
+      "notes": "Ensure the whitelist is comprehensive and regularly updated. Consider using a more secure approach than just domain whitelisting, such as validating against a pre-defined set of allowed URLs."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&url=http%3A%2F%2Fmetadata.google.internal%2F",
+    "evidence": "Possible SSRF: Server attempted to fetch http://metadata.google.internal/",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement a strict allow list for redirect URLs, validating against known safe destinations.",
+      "remediation_steps": [
+        "Step 1: Create an allow list of trusted and safe redirect URLs.",
+        "Step 2: Implement input validation on the 'to' parameter to ensure it matches a URL from the allow list.",
+        "Step 3: Reject any redirect requests that do not match the allow list, returning an error message."
+      ],
+      "code_snippet": "if (safeUrls.includes(req.query.to)) {\n  res.redirect(req.query.to);\n} else {\n  res.status(400).send('Invalid redirect URL');\n}",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Server-Side Request Forgery Prevention Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "SSRF Vulnerability: Definition and Examples",
+          "url": "https://portswigger.net/web-security/ssrf",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "SSRF Vulnerability Explained - Web Security Academy",
+          "url": "https://youtube.com/watch?v=q6W-hWhJ0XQ",
+          "youtube_id": "q6W-hWhJ0XQ"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P0",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule ARGS:to \"@rx ^(?!https://(safe-domain\\.com|another-safe-domain\\.com)).*$\" \"id:123456,deny,status:403,msg:'SSRF Attempt Detected'\""
+      ],
+      "notes": "Consider implementing additional security measures such as rate limiting to prevent abuse."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&link=http%3A%2F%2Fmetadata.google.internal%2F",
+    "evidence": "Possible SSRF: Server attempted to fetch http://metadata.google.internal/",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement strict URL validation and sanitization to prevent Server-Side Request Forgery (SSRF) attacks.",
+      "remediation_steps": [
+        "Step 1: Implement an allowlist of permitted domains or URL schemes for redirection targets.",
+        "Step 2: Sanitize the 'to' parameter by removing or encoding any potentially malicious characters or sequences.",
+        "Step 3: Disable or restrict redirection to internal or private network resources.",
+        "Step 4: Monitor redirection activity for suspicious patterns or attempts to access sensitive endpoints."
+      ],
+      "code_snippet": "function isValidURL(url) {\n  try {\n    const parsedURL = new URL(url);\n    const allowedHosts = ['juice-shop.herokuapp.com', 'github.com']; // Example allowlist\n    return allowedHosts.includes(parsedURL.hostname) && ['http:', 'https:'].includes(parsedURL.protocol);\n  } catch (error) {\n    return false;\n  }\n}\n\napp.get('/redirect', (req, res) => {\n  const to = req.query.to;\n  if (isValidURL(to)) {\n    res.redirect(to);\n  } else {\n    res.status(400).send('Invalid redirect URL');\n  }\n});",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Server-Side Request Forgery Prevention Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Understanding and Preventing Server-Side Request Forgery (SSRF)",
+          "url": "https://portswigger.net/web-security/ssrf",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Server Side Request Forgery (SSRF) Explained",
+          "url": "https://youtube.com/watch?v=wT0jzN54dO8",
+          "youtube_id": "wT0jzN54dO8"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P1",
+      "estimated_effort": "med",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule REQUEST_URI \"@rx ^/redirect\" \"id:12345,phase:2,t:urlDecodeUni,t:lowercase,t:replaceNulls,arg:to,deny,status:403,msg:'Possible SSRF detected',log,auditlog,severity:CRITICAL\""
+      ],
+      "notes": "Ensure that internal services are not accessible via public-facing endpoints."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&src=http%3A%2F%2Fmetadata.google.internal%2F",
+    "evidence": "Possible SSRF: Server attempted to fetch http://metadata.google.internal/",
+    "severity": "high",
+    "solution": {
+      "solution": "Review and implement appropriate security controls for this vulnerability",
+      "remediation_steps": [
+        "Analyze the specific vulnerability details",
+        "Research best practices for this attack type",
+        "Implement appropriate security controls",
+        "Test and validate the fix effectiveness"
+      ],
+      "code_snippet": null,
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Top 10",
+          "url": "https://owasp.org/Top10/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Web Security Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/Security",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Web Security Fundamentals",
+          "url": "https://www.youtube.com/watch?v=WlmKwIe9z1Q",
+          "youtube_id": "WlmKwIe9z1Q"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P0",
+      "estimated_effort": "med",
+      "confidence": "high",
+      "waf_rules": [],
+      "notes": "Auto-generated solution based on vulnerability type"
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&href=http%3A%2F%2Fmetadata.google.internal%2F",
+    "evidence": "Possible SSRF: Server attempted to fetch http://metadata.google.internal/",
+    "severity": "high",
+    "solution": {
+      "solution": "Review and implement appropriate security controls for this vulnerability",
+      "remediation_steps": [
+        "Analyze the specific vulnerability details",
+        "Research best practices for this attack type",
+        "Implement appropriate security controls",
+        "Test and validate the fix effectiveness"
+      ],
+      "code_snippet": null,
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Top 10",
+          "url": "https://owasp.org/Top10/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Web Security Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/Security",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Web Security Fundamentals",
+          "url": "https://www.youtube.com/watch?v=WlmKwIe9z1Q",
+          "youtube_id": "WlmKwIe9z1Q"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P0",
+      "estimated_effort": "med",
+      "confidence": "high",
+      "waf_rules": [],
+      "notes": "Auto-generated solution based on vulnerability type"
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&host=http%3A%2F%2Fmetadata.google.internal%2F",
+    "evidence": "Possible SSRF: Server attempted to fetch http://metadata.google.internal/",
+    "severity": "high",
+    "solution": {
+      "solution": "Review and implement appropriate security controls for this vulnerability",
+      "remediation_steps": [
+        "Analyze the specific vulnerability details",
+        "Research best practices for this attack type",
+        "Implement appropriate security controls",
+        "Test and validate the fix effectiveness"
+      ],
+      "code_snippet": null,
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Top 10",
+          "url": "https://owasp.org/Top10/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Web Security Guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/Security",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Web Security Fundamentals",
+          "url": "https://www.youtube.com/watch?v=WlmKwIe9z1Q",
+          "youtube_id": "WlmKwIe9z1Q"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P0",
+      "estimated_effort": "med",
+      "confidence": "high",
+      "waf_rules": [],
+      "notes": "Auto-generated solution based on vulnerability type"
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "ssrf",
+    "payload": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop&redirect=http%3A%2F%2Fmetadata.google.internal%2F",
+    "evidence": "Possible SSRF: Server attempted to fetch http://metadata.google.internal/",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement a whitelist of allowed redirect destinations to prevent arbitrary URL redirection.",
+      "remediation_steps": [
+        "Step 1: Create a whitelist containing valid and permitted redirect destinations.",
+        "Step 2: Validate the 'to' parameter against the whitelist before performing the redirect.",
+        "Step 3: Implement error handling for invalid redirect destinations, preventing redirection and logging the attempt.",
+        "Step 4: Ensure thorough testing to confirm that only whitelisted destinations are permitted."
+      ],
+      "code_snippet": "```javascript\nconst allowedDestinations = ['https://juice-shop.herokuapp.com', 'https://github.com/juice-shop'];\napp.get('/redirect', (req, res) => {\n  const to = req.query.to;\n  if (allowedDestinations.includes(to)) {\n    res.redirect(to);\n  } else {\n    console.error('Invalid redirect destination:', to);\n    res.status(400).send('Invalid redirect destination');\n  }\n});\n```",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Server-Side Request Forgery Prevention Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Server-Side Request Forgery (SSRF) Attacks and Mitigation",
+          "url": "https://portswigger.net/web-security/ssrf",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "SSRF - Server Side Request Forgery Explained",
+          "url": "https://www.youtube.com/watch?v=mEsLbtj8KJU",
+          "youtube_id": "mEsLbtj8KJU"
+        }
+      ],
+      "cwe_cve": "CWE-918",
+      "priority": "P0",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule REQUEST_URI \"@rx ^/redirect?to=(?!https://juice-shop.herokuapp.com|https://github.com/juice-shop).*$\" \"id:123456,phase:2,deny,status:403,msg:'SSRF Prevention: Invalid redirect destination'\""
+      ],
+      "notes": "Consider implementing additional security measures such as URL encoding validation and limiting the scope of redirects."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/login?return_to=https%3A%2F%2Fgithub.com%2Fjuice-shop%2Fjuice-shop",
+    "attack": "headers",
+    "evidence": "Missing: CSP, HSTS, Referrer-Policy, Permissions-Policy. Info disclosure: Server header reveals: Heroku",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
+      "remediation_steps": [
+        "Configure Content Security Policy (CSP) to prevent XSS attacks",
+        "Enable HTTP Strict Transport Security (HSTS) for HTTPS enforcement",
+        "Add X-Frame-Options to prevent clickjacking attacks",
+        "Set X-Content-Type-Options to prevent MIME type sniffing"
+      ],
+      "code_snippet": "// Node.js Express with Helmet\nconst helmet = require('helmet');\napp.use(helmet({\n  contentSecurityPolicy: {\n    directives: {\n      defaultSrc: [\"'self'\"],\n      styleSrc: [\"'self'\", \"'unsafe-inline'\"]\n    }\n  },\n  hsts: { maxAge: 31536000, includeSubDomains: true }\n}));\n\n// Nginx configuration\nadd_header X-Frame-Options \"SAMEORIGIN\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Secure Headers Project",
+          "url": "https://owasp.org/www-project-secure-headers/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Security Headers Best Practices",
+          "url": "https://securityheaders.com/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Web Security Headers Explained",
+          "url": "https://www.youtube.com/watch?v=zEV3HOuM_Vw",
+          "youtube_id": "zEV3HOuM_Vw"
+        }
+      ],
+      "cwe_cve": "CWE-16",
+      "priority": "P0",
+      "estimated_effort": "med",
+      "confidence": "high",
+      "waf_rules": [],
+      "notes": "Auto-generated solution based on vulnerability type"
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E&source=header-repo&source_repo=juice-shop%2Fjuice-shop",
+    "attack": "headers",
+    "evidence": "Missing: CSP, HSTS, Referrer-Policy, Permissions-Policy. Info disclosure: Server header reveals: Heroku",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
+      "remediation_steps": [
+        "Configure Content Security Policy (CSP) to prevent XSS attacks",
+        "Enable HTTP Strict Transport Security (HSTS) for HTTPS enforcement",
+        "Add X-Frame-Options to prevent clickjacking attacks",
+        "Set X-Content-Type-Options to prevent MIME type sniffing"
+      ],
+      "code_snippet": "// Node.js Express with Helmet\nconst helmet = require('helmet');\napp.use(helmet({\n  contentSecurityPolicy: {\n    directives: {\n      defaultSrc: [\"'self'\"],\n      styleSrc: [\"'self'\", \"'unsafe-inline'\"]\n    }\n  },\n  hsts: { maxAge: 31536000, includeSubDomains: true }\n}));\n\n// Nginx configuration\nadd_header X-Frame-Options \"SAMEORIGIN\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Secure Headers Project",
+          "url": "https://owasp.org/www-project-secure-headers/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Security Headers Best Practices",
+          "url": "https://securityheaders.com/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Web Security Headers Explained",
+          "url": "https://www.youtube.com/watch?v=zEV3HOuM_Vw",
+          "youtube_id": "zEV3HOuM_Vw"
+        }
+      ],
+      "cwe_cve": "CWE-16",
+      "priority": "P0",
+      "estimated_effort": "med",
+      "confidence": "high",
+      "waf_rules": [],
+      "notes": "Auto-generated solution based on vulnerability type"
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/contact/report-abuse?report=juice-shop%2Fjuice-shop+%28Repository+Funding+Links%29",
+    "attack": "headers",
+    "evidence": "Missing: CSP, HSTS, Referrer-Policy, Permissions-Policy. Info disclosure: Server header reveals: Heroku",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
+      "remediation_steps": [
+        "Configure Content Security Policy (CSP) to prevent XSS attacks",
+        "Enable HTTP Strict Transport Security (HSTS) for HTTPS enforcement",
+        "Add X-Frame-Options to prevent clickjacking attacks",
+        "Set X-Content-Type-Options to prevent MIME type sniffing"
+      ],
+      "code_snippet": "// Node.js Express with Helmet\nconst helmet = require('helmet');\napp.use(helmet({\n  contentSecurityPolicy: {\n    directives: {\n      defaultSrc: [\"'self'\"],\n      styleSrc: [\"'self'\", \"'unsafe-inline'\"]\n    }\n  },\n  hsts: { maxAge: 31536000, includeSubDomains: true }\n}));\n\n// Nginx configuration\nadd_header X-Frame-Options \"SAMEORIGIN\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Secure Headers Project",
+          "url": "https://owasp.org/www-project-secure-headers/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Security Headers Best Practices",
+          "url": "https://securityheaders.com/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Web Security Headers Explained",
+          "url": "https://www.youtube.com/watch?v=zEV3HOuM_Vw",
+          "youtube_id": "zEV3HOuM_Vw"
+        }
+      ],
+      "cwe_cve": "CWE-16",
+      "priority": "P0",
+      "estimated_effort": "med",
+      "confidence": "high",
+      "waf_rules": [],
+      "notes": "Auto-generated solution based on vulnerability type"
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/ftp/legal.md",
+    "attack": "headers",
+    "evidence": "Missing: CSP, HSTS, Referrer-Policy, Permissions-Policy. Info disclosure: Server header reveals: Heroku",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
+      "remediation_steps": [
+        "Configure Content Security Policy (CSP) to prevent XSS attacks",
+        "Enable HTTP Strict Transport Security (HSTS) for HTTPS enforcement",
+        "Add X-Frame-Options to prevent clickjacking attacks",
+        "Set X-Content-Type-Options to prevent MIME type sniffing"
+      ],
+      "code_snippet": "// Node.js Express with Helmet\nconst helmet = require('helmet');\napp.use(helmet({\n  contentSecurityPolicy: {\n    directives: {\n      defaultSrc: [\"'self'\"],\n      styleSrc: [\"'self'\", \"'unsafe-inline'\"]\n    }\n  },\n  hsts: { maxAge: 31536000, includeSubDomains: true }\n}));\n\n// Nginx configuration\nadd_header X-Frame-Options \"SAMEORIGIN\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Secure Headers Project",
+          "url": "https://owasp.org/www-project-secure-headers/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Security Headers Best Practices",
+          "url": "https://securityheaders.com/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Web Security Headers Explained",
+          "url": "https://www.youtube.com/watch?v=zEV3HOuM_Vw",
+          "youtube_id": "zEV3HOuM_Vw"
+        }
+      ],
+      "cwe_cve": "CWE-16",
+      "priority": "P0",
+      "estimated_effort": "med",
+      "confidence": "high",
+      "waf_rules": [],
+      "notes": "Auto-generated solution based on vulnerability type"
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/contact/report-content?content_url=https%3A%2F%2Fgithub.com%2Fjuice-shop%2Fjuice-shop&report=juice-shop+%28user%29",
+    "attack": "headers",
+    "evidence": "Missing: CSP, HSTS, Referrer-Policy, Permissions-Policy. Info disclosure: Server header reveals: Heroku",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement missing security headers and hide server information to prevent information disclosure and enhance security.",
+      "remediation_steps": [
+        "Step 1: Configure CSP (Content Security Policy) to restrict sources of content the browser is allowed to load.",
+        "Step 2: Implement HSTS (HTTP Strict Transport Security) to enforce HTTPS connections.",
+        "Step 3: Set Referrer-Policy to control referrer information sent in requests.",
+        "Step 4: Implement Permissions-Policy to control browser features available to the application.",
+        "Step 5: Disable or mask the Server header to prevent disclosure of server software and version.",
+        "Step 6: Verify the headers are correctly set using browser developer tools or online header checker."
+      ],
+      "code_snippet": "### Nginx Configuration:\n```nginx\nserver {\n    add_header Content-Security-Policy \"default-src 'self'; script-src 'self' 'unsafe-inline';\";\n    add_header Strict-Transport-Security \"max-age=31536000; includeSubDomains; preload\";\n    add_header Referrer-Policy \"strict-origin-when-cross-origin\";\n    add_header Permissions-Policy \"geolocation=(), microphone=()\";\n    server_tokens off; # Hides server version\n}\n```\n### Node.js (Express) with Helmet:\n```javascript\nconst express = require('express');\nconst helmet = require('helmet');\n\nconst app = express();\n\napp.use(helmet({\n  contentSecurityPolicy: {\n    directives: {\n      defaultSrc: [\"'self'\"],\n      scriptSrc: [\"'self'\", \"'unsafe-inline'\"]\n    }\n  },\n  hsts: { maxAge: 31536000, includeSubDomains: true, preload: true },\n  referrerPolicy: { policy: \"strict-origin-when-cross-origin\" },\n  permissionsPolicy: { features: { geolocation: [], microphone: [] } }\n}));\napp.disable('x-powered-by'); //remove express server tag\n```",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Content Security Policy",
+          "url": "https://owasp.org/www-project-secure-headers/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "HTTP Strict Transport Security Cheat Sheet",
+          "url": "https://owasp.org/www-project-hpkp/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Understanding HTTP Security Headers",
+          "url": "https://www.youtube.com/watch?v=UN_qWpkH79c",
+          "youtube_id": "UN_qWpkH79c"
+        }
+      ],
+      "cwe_cve": "CWE-200",
+      "priority": "P1",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRuleRemoveById 981203",
+        "Header always set Server \"\""
+      ],
+      "notes": "Ensure all subdomains are also configured with HSTS. Test headers in a staging environment before deploying to production."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/juice-shop/juice-shop/blob/master/swagger.yml",
+    "attack": "headers",
+    "evidence": "Missing: CSP, HSTS, Referrer-Policy, Permissions-Policy. Info disclosure: Server header reveals: Heroku",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement security headers and hide server information to prevent information disclosure and enhance security posture.",
+      "remediation_steps": [
+        "Step 1: Configure the web server (e.g., Nginx, Apache) or application framework (e.g., Node.js with Helmet) to set the recommended security headers (CSP, HSTS, Referrer-Policy, Permissions-Policy).",
+        "Step 2: Disable or obfuscate the Server header to prevent revealing the underlying technology stack.",
+        "Step 3: Verify the implementation by checking the HTTP response headers using browser developer tools or command-line tools like curl."
+      ],
+      "code_snippet": "Nginx add_header directives:\nadd_header Content-Security-Policy \"default-src 'self';\";\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains; preload\";\nadd_header Referrer-Policy \"strict-origin-when-cross-origin\";\nadd_header Permissions-Policy \"geolocation=(), microphone=()\";\nserver_tokens off;",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Secure Headers Project",
+          "url": "https://owasp.org/www-project-secure-headers/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Understanding and Implementing HTTP Security Headers",
+          "url": "https://scotthelme.co.uk/content-security-policy-an-introduction/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "HTTP Security Headers",
+          "url": "https://youtube.com/watch?v=Qe5k9V8eCgg",
+          "youtube_id": "Qe5k9V8eCgg"
+        }
+      ],
+      "cwe_cve": "CWE-200",
+      "priority": "P1",
+      "estimated_effort": "low",
+      "confidence": "high",
+      "waf_rules": [
+        "SecRule RESPONSE_HEADERS:Server \"@rx .\" \"id:123456,phase:4,t:none,deny,status:406,msg:'Server Header Exposure'\""
+      ],
+      "notes": "Consider using a tool like Mozilla Observatory to audit the security headers configuration."
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/juice-shop/juice-shop/search?l=typescript",
+    "attack": "headers",
+    "evidence": "Missing: CSP, HSTS, Referrer-Policy, Permissions-Policy. Info disclosure: Server header reveals: Heroku",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
+      "remediation_steps": [
+        "Configure Content Security Policy (CSP) to prevent XSS attacks",
+        "Enable HTTP Strict Transport Security (HSTS) for HTTPS enforcement",
+        "Add X-Frame-Options to prevent clickjacking attacks",
+        "Set X-Content-Type-Options to prevent MIME type sniffing"
+      ],
+      "code_snippet": "// Node.js Express with Helmet\nconst helmet = require('helmet');\napp.use(helmet({\n  contentSecurityPolicy: {\n    directives: {\n      defaultSrc: [\"'self'\"],\n      styleSrc: [\"'self'\", \"'unsafe-inline'\"]\n    }\n  },\n  hsts: { maxAge: 31536000, includeSubDomains: true }\n}));\n\n// Nginx configuration\nadd_header X-Frame-Options \"SAMEORIGIN\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Secure Headers Project",
+          "url": "https://owasp.org/www-project-secure-headers/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Security Headers Best Practices",
+          "url": "https://securityheaders.com/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Web Security Headers Explained",
+          "url": "https://www.youtube.com/watch?v=zEV3HOuM_Vw",
+          "youtube_id": "zEV3HOuM_Vw"
+        }
+      ],
+      "cwe_cve": "CWE-16",
+      "priority": "P0",
+      "estimated_effort": "med",
+      "confidence": "high",
+      "waf_rules": [],
+      "notes": "Auto-generated solution based on vulnerability type"
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/solutions#/login",
+    "attack": "headers",
+    "evidence": "Missing: CSP, HSTS, Referrer-Policy, Permissions-Policy. Info disclosure: Server header reveals: Heroku",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
+      "remediation_steps": [
+        "Configure Content Security Policy (CSP) to prevent XSS attacks",
+        "Enable HTTP Strict Transport Security (HSTS) for HTTPS enforcement",
+        "Add X-Frame-Options to prevent clickjacking attacks",
+        "Set X-Content-Type-Options to prevent MIME type sniffing"
+      ],
+      "code_snippet": "// Node.js Express with Helmet\nconst helmet = require('helmet');\napp.use(helmet({\n  contentSecurityPolicy: {\n    directives: {\n      defaultSrc: [\"'self'\"],\n      styleSrc: [\"'self'\", \"'unsafe-inline'\"]\n    }\n  },\n  hsts: { maxAge: 31536000, includeSubDomains: true }\n}));\n\n// Nginx configuration\nadd_header X-Frame-Options \"SAMEORIGIN\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Secure Headers Project",
+          "url": "https://owasp.org/www-project-secure-headers/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Security Headers Best Practices",
+          "url": "https://securityheaders.com/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Web Security Headers Explained",
+          "url": "https://www.youtube.com/watch?v=zEV3HOuM_Vw",
+          "youtube_id": "zEV3HOuM_Vw"
+        }
+      ],
+      "cwe_cve": "CWE-16",
+      "priority": "P0",
+      "estimated_effort": "med",
+      "confidence": "high",
+      "waf_rules": [],
+      "notes": "Auto-generated solution based on vulnerability type"
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/solutions#/contact",
+    "attack": "headers",
+    "evidence": "Missing: CSP, HSTS, Referrer-Policy, Permissions-Policy. Info disclosure: Server header reveals: Heroku",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
+      "remediation_steps": [
+        "Configure Content Security Policy (CSP) to prevent XSS attacks",
+        "Enable HTTP Strict Transport Security (HSTS) for HTTPS enforcement",
+        "Add X-Frame-Options to prevent clickjacking attacks",
+        "Set X-Content-Type-Options to prevent MIME type sniffing"
+      ],
+      "code_snippet": "// Node.js Express with Helmet\nconst helmet = require('helmet');\napp.use(helmet({\n  contentSecurityPolicy: {\n    directives: {\n      defaultSrc: [\"'self'\"],\n      styleSrc: [\"'self'\", \"'unsafe-inline'\"]\n    }\n  },\n  hsts: { maxAge: 31536000, includeSubDomains: true }\n}));\n\n// Nginx configuration\nadd_header X-Frame-Options \"SAMEORIGIN\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Secure Headers Project",
+          "url": "https://owasp.org/www-project-secure-headers/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Security Headers Best Practices",
+          "url": "https://securityheaders.com/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Web Security Headers Explained",
+          "url": "https://www.youtube.com/watch?v=zEV3HOuM_Vw",
+          "youtube_id": "zEV3HOuM_Vw"
+        }
+      ],
+      "cwe_cve": "CWE-16",
+      "priority": "P0",
+      "estimated_effort": "med",
+      "confidence": "high",
+      "waf_rules": [],
+      "notes": "Auto-generated solution based on vulnerability type"
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/sponsors#/login",
+    "attack": "headers",
+    "evidence": "Missing: CSP, HSTS, Referrer-Policy, Permissions-Policy. Info disclosure: Server header reveals: Heroku",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
+      "remediation_steps": [
+        "Configure Content Security Policy (CSP) to prevent XSS attacks",
+        "Enable HTTP Strict Transport Security (HSTS) for HTTPS enforcement",
+        "Add X-Frame-Options to prevent clickjacking attacks",
+        "Set X-Content-Type-Options to prevent MIME type sniffing"
+      ],
+      "code_snippet": "// Node.js Express with Helmet\nconst helmet = require('helmet');\napp.use(helmet({\n  contentSecurityPolicy: {\n    directives: {\n      defaultSrc: [\"'self'\"],\n      styleSrc: [\"'self'\", \"'unsafe-inline'\"]\n    }\n  },\n  hsts: { maxAge: 31536000, includeSubDomains: true }\n}));\n\n// Nginx configuration\nadd_header X-Frame-Options \"SAMEORIGIN\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Secure Headers Project",
+          "url": "https://owasp.org/www-project-secure-headers/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Security Headers Best Practices",
+          "url": "https://securityheaders.com/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Web Security Headers Explained",
+          "url": "https://www.youtube.com/watch?v=zEV3HOuM_Vw",
+          "youtube_id": "zEV3HOuM_Vw"
+        }
+      ],
+      "cwe_cve": "CWE-16",
+      "priority": "P0",
+      "estimated_effort": "med",
+      "confidence": "high",
+      "waf_rules": [],
+      "notes": "Auto-generated solution based on vulnerability type"
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/enterprise#/login",
+    "attack": "headers",
+    "evidence": "Missing: CSP, HSTS, Referrer-Policy, Permissions-Policy. Info disclosure: Server header reveals: Heroku",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
+      "remediation_steps": [
+        "Configure Content Security Policy (CSP) to prevent XSS attacks",
+        "Enable HTTP Strict Transport Security (HSTS) for HTTPS enforcement",
+        "Add X-Frame-Options to prevent clickjacking attacks",
+        "Set X-Content-Type-Options to prevent MIME type sniffing"
+      ],
+      "code_snippet": "// Node.js Express with Helmet\nconst helmet = require('helmet');\napp.use(helmet({\n  contentSecurityPolicy: {\n    directives: {\n      defaultSrc: [\"'self'\"],\n      styleSrc: [\"'self'\", \"'unsafe-inline'\"]\n    }\n  },\n  hsts: { maxAge: 31536000, includeSubDomains: true }\n}));\n\n// Nginx configuration\nadd_header X-Frame-Options \"SAMEORIGIN\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Secure Headers Project",
+          "url": "https://owasp.org/www-project-secure-headers/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Security Headers Best Practices",
+          "url": "https://securityheaders.com/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Web Security Headers Explained",
+          "url": "https://www.youtube.com/watch?v=zEV3HOuM_Vw",
+          "youtube_id": "zEV3HOuM_Vw"
+        }
+      ],
+      "cwe_cve": "CWE-16",
+      "priority": "P0",
+      "estimated_effort": "med",
+      "confidence": "high",
+      "waf_rules": [],
+      "notes": "Auto-generated solution based on vulnerability type"
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/premium-support#/login",
+    "attack": "headers",
+    "evidence": "Missing: CSP, HSTS, Referrer-Policy, Permissions-Policy. Info disclosure: Server header reveals: Heroku",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
+      "remediation_steps": [
+        "Configure Content Security Policy (CSP) to prevent XSS attacks",
+        "Enable HTTP Strict Transport Security (HSTS) for HTTPS enforcement",
+        "Add X-Frame-Options to prevent clickjacking attacks",
+        "Set X-Content-Type-Options to prevent MIME type sniffing"
+      ],
+      "code_snippet": "// Node.js Express with Helmet\nconst helmet = require('helmet');\napp.use(helmet({\n  contentSecurityPolicy: {\n    directives: {\n      defaultSrc: [\"'self'\"],\n      styleSrc: [\"'self'\", \"'unsafe-inline'\"]\n    }\n  },\n  hsts: { maxAge: 31536000, includeSubDomains: true }\n}));\n\n// Nginx configuration\nadd_header X-Frame-Options \"SAMEORIGIN\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Secure Headers Project",
+          "url": "https://owasp.org/www-project-secure-headers/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Security Headers Best Practices",
+          "url": "https://securityheaders.com/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Web Security Headers Explained",
+          "url": "https://www.youtube.com/watch?v=zEV3HOuM_Vw",
+          "youtube_id": "zEV3HOuM_Vw"
+        }
+      ],
+      "cwe_cve": "CWE-16",
+      "priority": "P0",
+      "estimated_effort": "med",
+      "confidence": "high",
+      "waf_rules": [],
+      "notes": "Auto-generated solution based on vulnerability type"
+    }
+  },
+  {
+    "route": "https://juice-shop.herokuapp.com/juice-shop#/login",
+    "attack": "headers",
+    "evidence": "Missing: CSP, HSTS, Referrer-Policy, Permissions-Policy. Info disclosure: Server header reveals: Heroku",
+    "severity": "high",
+    "solution": {
+      "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
+      "remediation_steps": [
+        "Configure Content Security Policy (CSP) to prevent XSS attacks",
+        "Enable HTTP Strict Transport Security (HSTS) for HTTPS enforcement",
+        "Add X-Frame-Options to prevent clickjacking attacks",
+        "Set X-Content-Type-Options to prevent MIME type sniffing"
+      ],
+      "code_snippet": "// Node.js Express with Helmet\nconst helmet = require('helmet');\napp.use(helmet({\n  contentSecurityPolicy: {\n    directives: {\n      defaultSrc: [\"'self'\"],\n      styleSrc: [\"'self'\", \"'unsafe-inline'\"]\n    }\n  },\n  hsts: { maxAge: 31536000, includeSubDomains: true }\n}));\n\n// Nginx configuration\nadd_header X-Frame-Options \"SAMEORIGIN\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Secure Headers Project",
+          "url": "https://owasp.org/www-project-secure-headers/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Security Headers Best Practices",
+          "url": "https://securityheaders.com/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Web Security Headers Explained",
+          "url": "https://www.youtube.com/watch?v=zEV3HOuM_Vw",
+          "youtube_id": "zEV3HOuM_Vw"
+        }
+      ],
+      "cwe_cve": "CWE-16",
+      "priority": "P0",
+      "estimated_effort": "med",
+      "confidence": "high",
+      "waf_rules": [],
+      "notes": "Auto-generated solution based on vulnerability type"
+    }
+  }
+]

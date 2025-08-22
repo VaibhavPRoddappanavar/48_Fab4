@@ -11,7 +11,7 @@ const __dirname = path.dirname(__filename);
 // Simple breadth-first crawler using Puppeteer
 // Usage: node crawler.js <startUrl> [maxPages]
 
-async function crawl(startUrl, maxPages = 80) {
+async function crawl(startUrl, maxPages = 20) {
   const startDomain = new URL(startUrl).hostname;
   const browser = await puppeteer.launch({ headless: true });
 
@@ -270,7 +270,7 @@ if (
   process.argv[1].endsWith("crawler_fixed.js")
 ) {
   const startUrl = process.argv[2];
-  const maxPages = parseInt(process.argv[3], 10) || 80;
+  const maxPages = parseInt(process.argv[3], 10) || 20;
   if (!startUrl) {
     console.error("Usage: node crawler.js <startUrl> [maxPages]");
     process.exit(1);

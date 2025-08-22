@@ -1,54 +1,48 @@
 [
   {
-    "url": "https://juice-shop.herokuapp.com/",
+    "url": "https://demo.owasp-juice.shop/",
     "status": 200,
     "server": "Heroku",
     "errorHints": []
   },
   {
-    "url": "https://juice-shop.herokuapp.com/#/login",
+    "url": "https://demo.owasp-juice.shop/#/login",
     "status": 200,
     "server": "Heroku",
     "errorHints": []
   },
   {
-    "url": "https://juice-shop.herokuapp.com/#/contact",
+    "url": "https://demo.owasp-juice.shop/#/contact",
     "status": 200,
     "server": "Heroku",
     "errorHints": []
   },
   {
-    "url": "https://juice-shop.herokuapp.com/#/about",
+    "url": "https://demo.owasp-juice.shop/#/about",
     "status": 200,
     "server": "Heroku",
     "errorHints": []
   },
   {
-    "url": "https://juice-shop.herokuapp.com/#/photo-wall",
+    "url": "https://demo.owasp-juice.shop/#/photo-wall",
     "status": 200,
     "server": "Heroku",
     "errorHints": []
   },
   {
-    "url": "https://juice-shop.herokuapp.com/#/score-board",
+    "url": "https://demo.owasp-juice.shop/#/score-board",
     "status": 200,
     "server": "Heroku",
     "errorHints": []
   },
   {
-    "url": "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
+    "url": "https://demo.owasp-juice.shop/redirect?to=https://github.com/juice-shop/juice-shop",
     "status": 200,
     "server": "github.com",
     "errorHints": []
   },
   {
-    "url": "https://juice-shop.herokuapp.com/#/forgot-password",
-    "status": 200,
-    "server": "Heroku",
-    "errorHints": []
-  },
-  {
-    "url": "GET https://juice-shop.herokuapp.com/rest/admin/application-version",
+    "url": "GET https://demo.owasp-juice.shop/assets/i18n/en.json",
     "status": null,
     "server": null,
     "errorHints": [
@@ -56,7 +50,7 @@
     ]
   },
   {
-    "url": "GET https://juice-shop.herokuapp.com/assets/i18n/en.json",
+    "url": "GET https://demo.owasp-juice.shop/rest/admin/application-version",
     "status": null,
     "server": null,
     "errorHints": [
@@ -64,7 +58,7 @@
     ]
   },
   {
-    "url": "GET https://juice-shop.herokuapp.com/rest/admin/application-configuration",
+    "url": "GET https://demo.owasp-juice.shop/rest/admin/application-configuration",
     "status": null,
     "server": null,
     "errorHints": [
@@ -72,7 +66,7 @@
     ]
   },
   {
-    "url": "GET https://juice-shop.herokuapp.com/rest/languages",
+    "url": "GET https://demo.owasp-juice.shop/rest/products/search?q=",
     "status": null,
     "server": null,
     "errorHints": [
@@ -80,7 +74,7 @@
     ]
   },
   {
-    "url": "GET https://juice-shop.herokuapp.com/api/Challenges/?name=Score%20Board",
+    "url": "GET https://demo.owasp-juice.shop/rest/languages",
     "status": null,
     "server": null,
     "errorHints": [
@@ -88,7 +82,7 @@
     ]
   },
   {
-    "url": "GET https://juice-shop.herokuapp.com/api/Quantitys/",
+    "url": "GET https://demo.owasp-juice.shop/api/Challenges/?name=Score%20Board",
     "status": null,
     "server": null,
     "errorHints": [
@@ -96,7 +90,7 @@
     ]
   },
   {
-    "url": "GET https://juice-shop.herokuapp.com/rest/products/search?q=",
+    "url": "GET https://demo.owasp-juice.shop/api/Quantitys/",
     "status": null,
     "server": null,
     "errorHints": [

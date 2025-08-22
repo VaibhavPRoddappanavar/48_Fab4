@@ -1,22 +1,21 @@
 {
-  "generatedAt": "2025-08-21T20:39:03.018Z",
+  "generatedAt": "2025-08-22T04:41:59.548Z",
   "pages": [
-    "https://juice-shop.herokuapp.com/",
-    "https://juice-shop.herokuapp.com/#/login",
-    "https://juice-shop.herokuapp.com/#/contact",
-    "https://juice-shop.herokuapp.com/#/about",
-    "https://juice-shop.herokuapp.com/#/photo-wall",
-    "https://juice-shop.herokuapp.com/#/score-board",
-    "https://juice-shop.herokuapp.com/redirect?to=https://github.com/juice-shop/juice-shop",
-    "https://juice-shop.herokuapp.com/#/forgot-password"
+    "https://demo.owasp-juice.shop/",
+    "https://demo.owasp-juice.shop/#/login",
+    "https://demo.owasp-juice.shop/#/contact",
+    "https://demo.owasp-juice.shop/#/about",
+    "https://demo.owasp-juice.shop/#/photo-wall",
+    "https://demo.owasp-juice.shop/#/score-board",
+    "https://demo.owasp-juice.shop/redirect?to=https://github.com/juice-shop/juice-shop"
   ],
   "apiEndpoints": [
-    "GET https://juice-shop.herokuapp.com/rest/admin/application-version",
-    "GET https://juice-shop.herokuapp.com/assets/i18n/en.json",
-    "GET https://juice-shop.herokuapp.com/rest/admin/application-configuration",
-    "GET https://juice-shop.herokuapp.com/rest/languages",
-    "GET https://juice-shop.herokuapp.com/api/Challenges/?name=Score%20Board",
-    "GET https://juice-shop.herokuapp.com/api/Quantitys/",
-    "GET https://juice-shop.herokuapp.com/rest/products/search?q="
+    "GET https://demo.owasp-juice.shop/assets/i18n/en.json",
+    "GET https://demo.owasp-juice.shop/rest/admin/application-version",
+    "GET https://demo.owasp-juice.shop/rest/admin/application-configuration",
+    "GET https://demo.owasp-juice.shop/rest/products/search?q=",
+    "GET https://demo.owasp-juice.shop/rest/languages",
+    "GET https://demo.owasp-juice.shop/api/Challenges/?name=Score%20Board",
+    "GET https://demo.owasp-juice.shop/api/Quantitys/"
   ]
 }

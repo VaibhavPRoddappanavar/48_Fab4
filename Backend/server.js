@@ -5,6 +5,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import rateLimit from "express-rate-limit";
 import "dotenv/config";
+import apiRoutes from "./api-routes.js";
 
 const app = express();
 
@@ -45,13 +46,25 @@ connectDB();
 // Basic route
 app.get("/", (req, res) => {
   res.json({
-    message: "Welcome to MERN Stack API",
+    message: "🔒 Security Audit API - WebAuditAI",
     status: "Server is running successfully",
     timestamp: new Date().toISOString(),
+    version: "1.0.0",
+    endpoints: {
+      audit: "POST /api/audit",
+      status: "GET /api/audit/:id/status",
+      results: "GET /api/audit/:id/results",
+      download: "GET /api/audit/:id/download",
+      health: "GET /api/health",
+      audits: "GET /api/audits",
+    },
   });
 });
 
-// API routes (you can add your routes here)
+// Security Audit API routes
+app.use("/api", apiRoutes);
+
+// Legacy health check route
 app.get("/api/health", (req, res) => {
   res.json({
     status: "OK",

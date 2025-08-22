@@ -1,6 +1,6 @@
 {
-  "url": "https://demo.owasp-juice.shop/",
-  "timestamp": "2025-08-21T22:09:37.170Z",
+  "url": "https://demo.owasp-juice.shop",
+  "timestamp": "2025-08-22T04:43:42.620Z",
   "overallScore": 82,
   "scores": {
     "performance": 65,
@@ -13,21 +13,21 @@
     "performance": {
       "score": 65,
       "metrics": {
-        "domContentLoaded": 1.5999999046325684,
-        "loadComplete": 19.300000071525574,
-        "firstPaint": 4078.5999999046326,
-        "firstContentfulPaint": 7194,
-        "timeToInteractive": 4063.1999999284744,
+        "domContentLoaded": 0.7999999523162842,
+        "loadComplete": 12,
+        "firstPaint": 1592.2999999523163,
+        "firstContentfulPaint": 3924.600000023842,
+        "timeToInteractive": 1582.5,
         "dnsLookup": 0,
-        "tcpConnect": 1015.5,
-        "serverResponse": 1024.3000000715256,
+        "tcpConnect": 473.6999999284744,
+        "serverResponse": 507,
         "totalResources": 39,
         "transferSize": 9633,
         "encodedBodySize": 9333,
         "decodedBodySize": 80117,
         "largestContentfulPaint": 0,
         "cumulativeLayoutShift": 0,
-        "totalLoadTime": 17825,
+        "totalLoadTime": 5663,
         "responseStatus": 200,
         "responseHeaders": {
           "accept-ranges": "bytes",
@@ -35,13 +35,13 @@
           "cache-control": "public, max-age=0",
           "content-encoding": "br",
           "content-type": "text/html; charset=UTF-8",
-          "date": "Thu, 21 Aug 2025 22:09:15 GMT",
-          "etag": "W/\"138f5-198ce074c21\"",
+          "date": "Fri, 22 Aug 2025 04:43:32 GMT",
+          "etag": "W/\"138f5-198cee077b1\"",
           "feature-policy": "payment 'self'",
-          "last-modified": "Thu, 21 Aug 2025 19:07:21 GMT",
+          "last-modified": "Thu, 21 Aug 2025 23:04:33 GMT",
           "nel": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}",
-          "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=S6rYHJZV51gjh4%2Bq2QTufgpYfmId0sYGlN4FQbLNNp0%3D\\u0026sid=812dcc77-0bd0-43b1-a5f1-b25750382959\\u0026ts=1755814155\"}],\"max_age\":3600}",
-          "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=S6rYHJZV51gjh4%2Bq2QTufgpYfmId0sYGlN4FQbLNNp0%3D&sid=812dcc77-0bd0-43b1-a5f1-b25750382959&ts=1755814155\"",
+          "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=Z%2BHro4iongNGXvSmGuC%2Bal%2B6Uh6CV1Sg30ltCJ%2FTmxc%3D\\u0026sid=812dcc77-0bd0-43b1-a5f1-b25750382959\\u0026ts=1755837812\"}],\"max_age\":3600}",
+          "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=Z%2BHro4iongNGXvSmGuC%2Bal%2B6Uh6CV1Sg30ltCJ%2FTmxc%3D&sid=812dcc77-0bd0-43b1-a5f1-b25750382959&ts=1755837812\"",
           "server": "Heroku",
           "vary": "Accept-Encoding",
           "via": "1.1 heroku-router",
@@ -95,7 +95,7 @@
         }
       ],
       "summary": {
-        "totalElements": 423,
+        "totalElements": 421,
         "maxDomDepth": 21,
         "totalScripts": 7,
         "totalStylesheets": 2,
@@ -151,7 +151,7 @@
       "url": "https://demo.owasp-juice.shop/#/",
       "title": "OWASP Juice Shop",
       "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
-      "timestamp": "2025-08-21T22:09:37.168Z",
+      "timestamp": "2025-08-22T04:43:42.620Z",
       "viewport": {
         "width": 1920,
         "height": 1080,
@@ -173,16 +173,16 @@
         {
           "type": "slow-loading",
           "severity": "high",
-          "description": "Slow loading: 17825ms (should be < 3000ms)",
-          "currentValue": 17825,
+          "description": "Slow loading: 5663ms (should be < 3000ms)",
+          "currentValue": 5663,
           "targetValue": 3000,
           "unit": "ms"
         },
         {
           "type": "slow-fcp",
           "severity": "high",
-          "description": "Slow First Contentful Paint: 7194ms (should be < 1800ms)",
-          "currentValue": 7194,
+          "description": "Slow First Contentful Paint: 3925ms (should be < 1800ms)",
+          "currentValue": 3925,
           "targetValue": 1800,
           "unit": "ms"
         }
@@ -285,5 +285,5 @@
       }
     }
   },
-  "lastUpdated": "2025-08-21T22:09:37.700Z"
+  "lastUpdated": "2025-08-22T04:43:43.099Z"
 }

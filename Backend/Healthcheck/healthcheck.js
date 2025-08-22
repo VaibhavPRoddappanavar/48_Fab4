@@ -65,11 +65,14 @@ class WebHealthChecker {
 
     const startTime = Date.now();
 
-    // Navigate and collect timing metrics
+    // Navigate with better error handling for SPAs
     const response = await this.page.goto(this.url, {
-      waitUntil: "networkidle2",
-      timeout: 30000,
+      waitUntil: "domcontentloaded", // Changed from "networkidle2" to be more permissive
+      timeout: 45000, // Increased timeout
     });
+
+    // Wait a bit more for SPAs to settle
+    await new Promise(resolve => setTimeout(resolve, 2000));
 
     const loadTime = Date.now() - startTime;
 

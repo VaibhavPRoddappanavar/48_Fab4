@@ -11,9 +11,21 @@ const __dirname = path.dirname(__filename);
 // Simple breadth-first crawler using Puppeteer
 // Usage: node crawler.js <startUrl> [maxPages]
 
-async function crawl(startUrl, maxPages = 20) {
+async function crawl(startUrl, maxPages = 10) {
+  // Ensure URL has proper protocol
+  if (!startUrl.startsWith('http://') && !startUrl.startsWith('https://')) {
+    startUrl = 'https://' + startUrl;
+  }
+  
+  console.log(`🎯 Target URL: ${startUrl}`);
+  
   const startDomain = new URL(startUrl).hostname;
-  const browser = await puppeteer.launch({ headless: true });
+  console.log(`🌐 Target domain: ${startDomain}`);
+  
+  const browser = await puppeteer.launch({ 
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
+  });
 
   // Improved ignore list for noisy endpoints
   const IGNORED_PATTERNS = [
@@ -43,13 +55,19 @@ async function crawl(startUrl, maxPages = 20) {
   const normalizePage = (u) => {
     try {
       const nu = new URL(u);
+      // Ensure we're still on the same domain
+      if (nu.hostname !== startDomain) {
+        console.log(`⚠️ Skipping external domain: ${nu.hostname} (expected: ${startDomain})`);
+        return null;
+      }
       // keep hash because many SPA routes use it
       // normalize trailing slashes in pathname
       if (nu.pathname !== "/" && nu.pathname.endsWith("/"))
         nu.pathname = nu.pathname.replace(/\/+$/, "");
       return nu.toString();
     } catch (e) {
-      return u;
+      console.error(`❌ Error normalizing page URL: ${u}`, e.message);
+      return null;
     }
   };
 
@@ -57,21 +75,26 @@ async function crawl(startUrl, maxPages = 20) {
   const normalizeEndpoint = (u) => {
     try {
       const nu = new URL(u);
+      // Ensure we're still on the same domain  
+      if (nu.hostname !== startDomain) {
+        return null;
+      }
       nu.hash = "";
       return nu.toString();
     } catch (e) {
-      return u;
+      return null;
     }
   };
 
-  const queue = [normalizePage(startUrl)];
+  const queue = [startUrl];
+  
   // Timing/config for idle detector
-  const idleThreshold = 300; // ms without outstanding XHR/fetch to consider page idle
-  const maxWaitPerPage = 1200; // hard max per page
+  const idleThreshold = 500; // increased from 300ms
+  const maxWaitPerPage = 2000; // increased from 1200ms for better API detection
 
   // Quick-check settings: produce a small JSON file quickly
   const quickLimitPages = 8; // write quick file after this many pages visited
-  const quickTimeMs = 6000; // or after this many milliseconds since start
+  const quickTimeMs = 8000; // increased from 6000ms
   const startTime = Date.now();
   let quickWritten = false;
 
@@ -81,6 +104,19 @@ async function crawl(startUrl, maxPages = 20) {
     const url = queue.shift();
     if (visited.has(url)) continue;
     visited.add(url);
+    
+    // Verify we're still on the right domain
+    try {
+      const urlObj = new URL(url);
+      if (urlObj.hostname !== startDomain) {
+        console.log(`⚠️ Skipping URL on wrong domain: ${url}`);
+        continue;
+      }
+    } catch (e) {
+      console.error(`❌ Invalid URL: ${url}`);
+      continue;
+    }
+    
     discoveredPages.add(url);
 
     console.log(`🔍 Crawling page ${visited.size}/${maxPages}: ${url}`);
@@ -93,9 +129,8 @@ async function crawl(startUrl, maxPages = 20) {
       await pageInstance.setRequestInterception(true);
       pageInstance.on("request", (req) => {
         const rType = req.resourceType();
-        // Abort large/static resources that aren't needed
-        if (["image", "stylesheet", "font", "media"].includes(rType))
-          return req.abort();
+        // Allow more resource types for better SPA functionality
+        if (["image", "media"].includes(rType)) return req.abort();
         // Otherwise continue
         try {
           req.continue();
@@ -124,22 +159,32 @@ async function crawl(startUrl, maxPages = 20) {
           // process request/response and filter
           try {
             const reqUrl = req.url();
+            
+            // Check if request is to our target domain
+            const reqDomain = new URL(reqUrl).hostname;
+            if (reqDomain !== startDomain) {
+              return; // Skip external requests
+            }
+            
             if (IGNORED_PATTERNS.some((rx) => rx.test(reqUrl))) return;
+            
             const method = req.method();
             const response = req.response();
             const headers = response ? response.headers() : {};
-            const contentType =
-              (headers["content-type"] || headers["Content-Type"] || "") + "";
+            const contentType = (headers["content-type"] || headers["Content-Type"] || "") + "";
 
-            // Heuristic: accept endpoint if JSON response OR non-GET method OR path contains /api/ or /rest/
+            // Enhanced heuristic for OWASP Juice Shop:
             const isJson = /json/i.test(contentType);
-            let isApiPath = false;
-            try {
-              isApiPath = /\/api\/|\/rest\//i.test(new URL(reqUrl).pathname);
-            } catch (e) {}
-
-            if (isJson || method !== "GET" || isApiPath) {
-              apiEndpoints.add(`${method} ${normalizeEndpoint(reqUrl)}`);
+            const isApiPath = /\/api\/|\/rest\/|\/graphql/i.test(new URL(reqUrl).pathname);
+            const hasApiQuery = /\/(login|register|profile|products|basket|order|challenge|admin|user)/i.test(reqUrl);
+            
+            // More permissive detection for SPA applications like Juice Shop
+            if (isJson || method !== "GET" || isApiPath || hasApiQuery) {
+              const normalizedEndpoint = normalizeEndpoint(reqUrl);
+              if (normalizedEndpoint) {
+                apiEndpoints.add(`${method} ${normalizedEndpoint}`);
+                console.log(`🔍 Found API endpoint: ${method} ${normalizedEndpoint}`);
+              }
             }
           } catch (e) {
             // ignore processing errors
@@ -155,12 +200,95 @@ async function crawl(startUrl, maxPages = 20) {
         }
       });
 
-      // Navigate quickly: DOMContentLoaded and then wait for idle or timeout
-      await pageInstance.goto(url, {
+      // Navigate with better error handling
+      const response = await pageInstance.goto(url, {
         waitUntil: "domcontentloaded",
         timeout: 30000,
       });
+      
+      // Check if we got redirected to a different domain
+      const finalUrl = pageInstance.url();
+      const finalDomain = new URL(finalUrl).hostname;
+      if (finalDomain !== startDomain) {
+        console.log(`⚠️ Page ${url} redirected to different domain: ${finalDomain}. Skipping.`);
+        continue;
+      }
 
+      // For SPAs like OWASP Juice Shop, we need to trigger interactions to load API calls
+      try {
+        // Wait for Angular/SPA to fully load - using setTimeout instead of waitForTimeout
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // Try to trigger some interactions that might cause API calls
+        await pageInstance.evaluate(() => {
+          // Scroll to trigger lazy loading
+          window.scrollTo(0, document.body.scrollHeight);
+          
+          // Try to find and click common navigation elements
+          const selectors = [
+            'a[href*="login"]',
+            'a[href*="register"]', 
+            'a[href*="products"]',
+            'a[href*="basket"]',
+            'a[href*="search"]',
+            'button[aria-label*="menu"]',
+            '.mat-button',
+            '.mat-menu-trigger',
+            'mat-icon'
+          ];
+          
+          selectors.forEach(selector => {
+            try {
+              const elements = document.querySelectorAll(selector);
+              if (elements.length > 0) {
+                elements[0].click();
+              }
+            } catch (e) {
+              // Ignore click errors
+            }
+          });
+          
+          // For Angular apps, try to trigger route changes
+          if (window.location.hash === '' || window.location.hash === '#/') {
+            try {
+              // Common OWASP Juice Shop routes
+              const routes = ['#/search', '#/login', '#/register'];
+              routes.forEach((route, index) => {
+                setTimeout(() => {
+                  try {
+                    window.location.hash = route;
+                  } catch (e) {
+                    // Ignore navigation errors
+                  }
+                }, index * 200);
+              });
+            } catch (e) {
+              // Ignore navigation errors
+            }
+          }
+          
+          // Try to trigger search or product loading
+          const searchInput = document.querySelector('input[placeholder*="search" i], input[type="search"], #searchQuery');
+          if (searchInput) {
+            try {
+              searchInput.focus();
+              searchInput.value = 'apple';
+              searchInput.dispatchEvent(new Event('input', { bubbles: true }));
+              searchInput.dispatchEvent(new Event('change', { bubbles: true }));
+            } catch (e) {
+              // Ignore search errors
+            }
+          }
+        });
+        
+        // Wait a bit more for API calls to trigger - using setTimeout
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+      } catch (e) {
+        console.log(`⚠️ Error during SPA interaction: ${e.message}`);
+      }
+
+      // Wait for SPA to load and make API calls (enhanced waiting)
       const startWait = Date.now();
       while (Date.now() - startWait < maxWaitPerPage) {
         if (
@@ -168,13 +296,15 @@ async function crawl(startUrl, maxPages = 20) {
           Date.now() - lastRequestFinishedAt >= idleThreshold
         )
           break;
-        await pageInstance.waitForTimeout(100);
+        // Using setTimeout instead of waitForTimeout
+        await new Promise(resolve => setTimeout(resolve, 200));
       }
 
       // Extract links (only same-hostname links). Keep hash for SPA routes.
       const anchors = await pageInstance.$$eval("a[href]", (nodes) =>
         nodes.map((n) => n.getAttribute("href"))
       );
+      
       for (let href of anchors) {
         if (!href) continue;
         try {
@@ -183,6 +313,7 @@ async function crawl(startUrl, maxPages = 20) {
           if (hostname === startDomain) {
             const norm = normalizePage(absolute);
             if (
+              norm && 
               !visited.has(norm) &&
               !discoveredPages.has(norm) &&
               !queue.includes(norm)
@@ -208,7 +339,7 @@ async function crawl(startUrl, maxPages = 20) {
             };
             const quickPath = path.join(__dirname, "forquickcheck.json");
             fs.writeFileSync(quickPath, JSON.stringify(quickData, null, 2));
-            console.log(`Wrote quick check file (${quickPath})`);
+            console.log(`✅ Wrote quick check file (${quickPath}) - Pages: ${quickData.pages.length}, APIs: ${quickData.apiEndpoints.length}`);
             quickWritten = true;
           } catch (e) {
             console.error("Failed to write quick-check file", e.message);

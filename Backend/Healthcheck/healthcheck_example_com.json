@@ -1,0 +1,270 @@
+{
+  "url": "https://example.com",
+  "timestamp": "2025-08-22T07:44:04.056Z",
+  "overallScore": 86,
+  "scores": {
+    "performance": 72,
+    "accessibility": 100,
+    "bestPractices": 95,
+    "seo": 77,
+    "pwa": 50
+  },
+  "metrics": {
+    "performance": {
+      "score": 72,
+      "metrics": {
+        "domContentLoaded": 0,
+        "loadComplete": 0,
+        "firstPaint": 2128,
+        "firstContentfulPaint": 2128,
+        "timeToInteractive": 2104.699999999255,
+        "dnsLookup": 59.69999999925494,
+        "tcpConnect": 1756.5,
+        "serverResponse": 274.80000000074506,
+        "totalResources": 1,
+        "transferSize": 948,
+        "encodedBodySize": 648,
+        "decodedBodySize": 1256,
+        "largestContentfulPaint": 0,
+        "cumulativeLayoutShift": 0,
+        "totalLoadTime": 4110,
+        "responseStatus": 200,
+        "responseHeaders": {
+          "accept-ranges": "bytes",
+          "alt-svc": "h3=\":443\"; ma=93600,h3-29=\":443\"; ma=93600",
+          "cache-control": "max-age=3448",
+          "content-encoding": "gzip",
+          "content-length": "648",
+          "content-type": "text/html",
+          "date": "Fri, 22 Aug 2025 07:43:55 GMT",
+          "etag": "\"84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134\"",
+          "last-modified": "Mon, 13 Jan 2025 20:11:20 GMT",
+          "vary": "Accept-Encoding"
+        }
+      },
+      "opportunities": [
+        {
+          "type": "improve-fcp",
+          "description": "Improve First Contentful Paint",
+          "suggestion": "Optimize critical rendering path, reduce server response time"
+        }
+      ]
+    },
+    "accessibility": {
+      "score": 100,
+      "issues": [],
+      "summary": {
+        "totalImages": 0,
+        "imagesWithAlt": 0,
+        "totalForms": 0,
+        "totalHeadings": 1,
+        "elementsWithAria": 0,
+        "focusableElements": 1,
+        "contrastIssues": 0
+      }
+    },
+    "bestPractices": {
+      "score": 95,
+      "issues": [
+        {
+          "type": "missing-favicon",
+          "severity": "low",
+          "description": "Missing favicon"
+        }
+      ],
+      "summary": {
+        "totalElements": 13,
+        "maxDomDepth": 4,
+        "totalScripts": 0,
+        "totalStylesheets": 0,
+        "totalImages": 0,
+        "inlineStyles": 0,
+        "hasViewport": true,
+        "hasFavicon": false,
+        "hasCharset": true
+      }
+    },
+    "seo": {
+      "score": 77,
+      "issues": [
+        {
+          "type": "missing-meta-description",
+          "severity": "high",
+          "description": "Page missing meta description"
+        },
+        {
+          "type": "missing-lang-attribute",
+          "severity": "medium",
+          "description": "HTML missing lang attribute"
+        }
+      ],
+      "data": {
+        "title": "Example Domain",
+        "titleLength": 14,
+        "metaDescription": null,
+        "metaDescriptionLength": 0,
+        "h1Count": 1,
+        "h1Text": "Example Domain",
+        "canonical": null,
+        "language": "",
+        "robots": null,
+        "headingStructure": {
+          "h1": 1,
+          "h2": 0,
+          "h3": 0,
+          "h4": 0,
+          "h5": 0,
+          "h6": 0
+        }
+      }
+    },
+    "pwa": {
+      "score": 50,
+      "features": {
+        "hasServiceWorker": true,
+        "hasManifest": false,
+        "isResponsive": true,
+        "worksOffline": false,
+        "installable": false
+      },
+      "manifestUrl": null,
+      "viewport": "width=device-width, initial-scale=1"
+    },
+    "metadata": {
+      "url": "https://example.com/",
+      "title": "Example Domain",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/136.0.0.0 Safari/537.36",
+      "timestamp": "2025-08-22T07:44:04.054Z",
+      "viewport": {
+        "width": 1920,
+        "height": 1080,
+        "devicePixelRatio": 1
+      },
+      "technologies": {
+        "hasJQuery": false,
+        "hasReact": false,
+        "hasAngular": false,
+        "hasVue": false,
+        "hasBootstrap": false
+      }
+    }
+  },
+  "issueBreakdown": {
+    "performance": {
+      "score": 72,
+      "issues": [
+        {
+          "type": "slow-loading",
+          "severity": "high",
+          "description": "Slow loading: 4110ms (should be < 3000ms)",
+          "currentValue": 4110,
+          "targetValue": 3000,
+          "unit": "ms"
+        },
+        {
+          "type": "slow-fcp",
+          "severity": "high",
+          "description": "Slow First Contentful Paint: 2128ms (should be < 1800ms)",
+          "currentValue": 2128,
+          "targetValue": 1800,
+          "unit": "ms"
+        }
+      ],
+      "recommendations": [
+        "Optimize server response time, enable compression",
+        "Optimize critical rendering path, reduce render-blocking resources"
+      ],
+      "opportunities": [
+        {
+          "type": "improve-fcp",
+          "description": "Improve First Contentful Paint",
+          "suggestion": "Optimize critical rendering path, reduce server response time"
+        }
+      ]
+    },
+    "accessibility": {
+      "score": 100,
+      "issues": [],
+      "recommendations": [],
+      "stats": {
+        "totalImages": 0,
+        "imagesWithAlt": 0,
+        "totalForms": 0,
+        "totalHeadings": 1,
+        "elementsWithAria": 0,
+        "focusableElements": 1,
+        "contrastIssues": 0
+      }
+    },
+    "bestPractices": {
+      "score": 95,
+      "issues": [],
+      "recommendations": []
+    },
+    "seo": {
+      "score": 77,
+      "issues": [
+        {
+          "type": "missing-meta-description",
+          "severity": "high",
+          "description": "Page missing meta description"
+        },
+        {
+          "type": "missing-lang-attribute",
+          "severity": "medium",
+          "description": "HTML missing lang attribute"
+        }
+      ],
+      "recommendations": [
+        "Add <meta name=\"description\" content=\"...\">",
+        "Add lang attribute to <html> tag"
+      ],
+      "currentValues": {
+        "title": "Example Domain",
+        "titleLength": 14,
+        "metaDescription": null,
+        "metaDescriptionLength": 0,
+        "h1Count": 1,
+        "h1Text": "Example Domain",
+        "canonical": null,
+        "language": "",
+        "robots": null,
+        "headingStructure": {
+          "h1": 1,
+          "h2": 0,
+          "h3": 0,
+          "h4": 0,
+          "h5": 0,
+          "h6": 0
+        }
+      }
+    },
+    "pwa": {
+      "score": 50,
+      "issues": [
+        {
+          "type": "no-manifest",
+          "severity": "medium",
+          "description": "No Web App Manifest found"
+        },
+        {
+          "type": "not-installable",
+          "severity": "medium",
+          "description": "Not installable as PWA"
+        }
+      ],
+      "recommendations": [
+        "Add manifest.json for app-like experience",
+        "Ensure manifest has name, start_url, and icons"
+      ],
+      "features": {
+        "hasServiceWorker": true,
+        "hasManifest": false,
+        "isResponsive": true,
+        "worksOffline": false,
+        "installable": false
+      }
+    }
+  },
+  "lastUpdated": "2025-08-22T07:44:04.145Z"
+}

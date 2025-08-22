@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import { useNavigate, useSearchParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { 
   Shield, 
   Search, 
@@ -17,6 +17,7 @@ import {
 } from "lucide-react"
 import { Progress } from "@/components/ui/progress"
 import { Card, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 
@@ -170,78 +171,142 @@ export default function ScanProgress() {
   const [steps, setSteps] = useState<ScanStep[]>([])
   const [currentTip, setCurrentTip] = useState(0)
   const [timeElapsed, setTimeElapsed] = useState(0)
-  const [searchParams] = useSearchParams()
+  const [status, setStatus] = useState(null)
+  const [error, setError] = useState<string | null>(null)
+  const [scanUrl, setScanUrl] = useState("")
+  const [scanType, setScanType] = useState("quick")
+  const { auditId } = useParams()
   const navigate = useNavigate()
-  
-  const scanType = searchParams.get("type") || "quick"
-  const scanUrl = sessionStorage.getItem("scanUrl") || "example.com"
 
   useEffect(() => {
-    // Set steps based on scan type
-    const selectedSteps = scanType === "quick" ? quickScanSteps : deepScanSteps
-    setSteps(selectedSteps)
+    const pollStatus = async () => {
+      if (!auditId) return;
+
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/audit/${auditId}/status`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setStatus(data);
+          setScanUrl(data.url);
+          setScanType(data.scanType);
+
+          if (data.status === "completed") {
+            navigate(`/report/${auditId}`);
+          } else if (data.status === "failed") {
+            setError(data.error || "The scan failed.");
+          } else {
+            // Continue polling every 3 seconds
+            setTimeout(pollStatus, 3000);
+          }
+        } else {
+          setError("Failed to get scan status.");
+        }
+      } catch (err) {
+        setError("An error occurred while fetching scan status.");
+        console.error(err);
+      }
+    };
+
+    pollStatus();
+  }, [auditId, navigate]);
+
+  useEffect(() => {
+    if (!scanType) return;
     
-    // Timer for elapsed time
+    // Set steps based on scan type - NO SIMULATION, just display
+    const selectedSteps = scanType === "quick" ? quickScanSteps : deepScanSteps;
+    setSteps(selectedSteps);
+    
+    // Simple timer for elapsed time display
     const timeInterval = setInterval(() => {
-      setTimeElapsed(prev => prev + 1)
-    }, 1000)
+      setTimeElapsed(prev => prev + 1);
+    }, 1000);
 
     // Rotate tips every 4 seconds
     const tipInterval = setInterval(() => {
-      setCurrentTip((prev) => (prev + 1) % tips.length)
-    }, 4000)
+      setCurrentTip((prev) => (prev + 1) % tips.length);
+    }, 4000);
 
-    // Simulate scan progress
-    const totalSteps = selectedSteps.length
-    const totalTime = scanType === "quick" ? 50000 : 340000 // 50s for quick, 340s for deep
-    const stepDuration = totalTime / totalSteps
-    
-    const progressInterval = setInterval(() => {
-      setProgress((prev) => {
-        const newProgress = prev + (100 / (totalSteps * 30))
-        return Math.min(newProgress, 100)
-      })
-    }, stepDuration / 30)
-
-    const stepInterval = setInterval(() => {
-      setCurrentStep((prev) => {
-        const nextStep = prev + 1
-        if (nextStep < totalSteps) {
-          setSteps(prevSteps => 
-            prevSteps.map((step, index) => ({
-              ...step,
-              completed: index < nextStep
-            }))
-          )
-          return nextStep
-        } else {
-          // Scan complete
-          clearInterval(stepInterval)
-          clearInterval(progressInterval)
-          clearInterval(tipInterval)
-          clearInterval(timeInterval)
-          
-          setTimeout(() => {
-            navigate(`/${scanType}-scan-report`)
-          }, 2000)
-          
-          return prev
-        }
-      })
-    }, stepDuration)
+    // Update progress and steps based on actual backend status
+    if (status) {
+      // Calculate progress based on status
+      if (status.status === "completed") {
+        setProgress(100);
+        setCurrentStep(selectedSteps.length - 1);
+        setSteps(prevSteps => 
+          prevSteps.map(step => ({ ...step, completed: true }))
+        );
+      } else if (status.status === "running") {
+        // Estimate progress based on elapsed time (rough estimate)
+        const elapsed = timeElapsed;
+        const estimatedTotal = scanType === "quick" ? 90 : 300; // seconds
+        const estimatedProgress = Math.min((elapsed / estimatedTotal) * 100, 95);
+        setProgress(estimatedProgress);
+        
+        // Update current step based on progress
+        const stepIndex = Math.floor((estimatedProgress / 100) * selectedSteps.length);
+        setCurrentStep(Math.min(stepIndex, selectedSteps.length - 1));
+        
+        // Mark completed steps
+        setSteps(prevSteps => 
+          prevSteps.map((step, index) => ({
+            ...step,
+            completed: index < stepIndex
+          }))
+        );
+      }
+    }
 
     return () => {
-      clearInterval(stepInterval)
-      clearInterval(progressInterval) 
-      clearInterval(tipInterval)
-      clearInterval(timeInterval)
-    }
-  }, [scanType, navigate])
+      clearInterval(timeInterval);
+      clearInterval(tipInterval);
+    };
+  }, [scanType, status, timeElapsed]);
 
   const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60)
-    const secs = seconds % 60
-    return `${mins}:${secs.toString().padStart(2, '0')}`
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-hero4 text-foreground flex flex-col">
+        <Navigation />
+        <div className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <div className="text-red-500 text-xl font-bold mb-4">Error</div>
+            <p className="text-slate-300">{error}</p>
+            <Button 
+              onClick={() => navigate('/scan')} 
+              className="mt-4 bg-primary hover:bg-primary/90"
+            >
+              Start New Scan
+            </Button>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  // Show loading until we have backend data
+  if (!status || !scanUrl) {
+    return (
+      <div className="min-h-screen bg-gradient-hero4 text-foreground flex flex-col">
+        <Navigation />
+        <div className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary mx-auto mb-4"></div>
+            <h1 className="text-2xl font-bold mb-4">Connecting to Backend...</h1>
+            <p className="text-slate-300">Initializing security audit</p>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
   }
 
   return (

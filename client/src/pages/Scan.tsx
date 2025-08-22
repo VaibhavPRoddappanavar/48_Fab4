@@ -99,43 +99,36 @@ export default function Scan() {
     validateUrl(value)
   }
 
-  const handleScan = async (scanType: "quick" | "deep") => {
-    if (!url.trim()) {
-      toast({
-        title: "URL Required",
-        description: "Please enter a website URL to scan",
-        variant: "destructive"
-      })
+  const startScan = async (scanType: "quick" | "deep") => {
+    if (!url) {
+      setUrlError("Please enter a URL")
       return
     }
-
-    if (!isValidUrl) {
-      toast({
-        title: "Invalid URL",
-        description: urlError || "Please enter a valid website URL",
-        variant: "destructive"
-      })
-      return
-    }
-
     setIsLoading(true)
-    
-    // Clean and store the URL
-    let cleanUrl = url.trim()
-    if (!cleanUrl.startsWith('http://') && !cleanUrl.startsWith('https://')) {
-      cleanUrl = `https://${cleanUrl}`
+    setUrlError("")
+
+    try {
+      const response = await fetch("http://localhost:5000/api/audit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ url, scanType }),
+      })
+
+      const data = await response.json()
+
+      if (response.ok && data.success) {
+        navigate(`/scan-progress/${data.auditId}`)
+      } else {
+        setUrlError(data.message || "Failed to start scan")
+      }
+    } catch (err) {
+      setUrlError("An error occurred while trying to start the scan.")
+      console.error(err)
+    } finally {
+      setIsLoading(false)
     }
-    
-    sessionStorage.setItem("scanUrl", cleanUrl)
-    
-    toast({
-      title: "Scan Started",
-      description: `Starting ${scanType} scan for ${cleanUrl}`,
-    })
-    
-    setTimeout(() => {
-      navigate(`/scan-progress?type=${scanType}`)
-    }, 500)
   }
 
   return (
@@ -249,7 +242,7 @@ export default function Scan() {
                           }`}
                           onKeyDown={(e) => {
                             if (e.key === "Enter" && isValidUrl) {
-                              handleScan("quick")
+                              startScan("quick")
                             }
                           }}
                         />
@@ -292,7 +285,7 @@ export default function Scan() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <Button
                         size="lg"
-                        onClick={() => handleScan("quick")}
+                        onClick={() => startScan("quick")}
                         disabled={isLoading || !isValidUrl}
                         className="relative overflow-hidden bg-gradient-to-r from-primary to-primary-variant hover:from-primary/90 hover:to-primary-variant/90 text-white font-semibold px-6 py-4 text-base shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 group disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                       >
@@ -306,7 +299,7 @@ export default function Scan() {
 
                       <Button
                         size="lg"
-                        onClick={() => handleScan("deep")}
+                        onClick={() => startScan("deep")}
                         disabled={isLoading || !isValidUrl}
                         className="relative overflow-hidden bg-gradient-to-r from-primary to-primary-variant hover:from-primary/90 hover:to-primary-variant/90 text-white font-semibold px-6 py-4 text-base shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 group border-2 border-primary/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                       >

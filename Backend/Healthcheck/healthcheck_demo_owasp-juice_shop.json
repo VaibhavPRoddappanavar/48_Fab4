@@ -1,9 +1,9 @@
 {
-  "url": "https://demo.owasp-juice.shop",
-  "timestamp": "2025-08-22T04:43:42.620Z",
-  "overallScore": 82,
+  "url": "http://demo.owasp-juice.shop",
+  "timestamp": "2025-08-22T08:23:24.346Z",
+  "overallScore": 84,
   "scores": {
-    "performance": 65,
+    "performance": 72,
     "accessibility": 77,
     "bestPractices": 95,
     "seo": 92,
@@ -11,23 +11,23 @@
   },
   "metrics": {
     "performance": {
-      "score": 65,
+      "score": 72,
       "metrics": {
-        "domContentLoaded": 0.7999999523162842,
-        "loadComplete": 12,
-        "firstPaint": 1592.2999999523163,
-        "firstContentfulPaint": 3924.600000023842,
-        "timeToInteractive": 1582.5,
-        "dnsLookup": 0,
-        "tcpConnect": 473.6999999284744,
-        "serverResponse": 507,
+        "domContentLoaded": 1.1000000014901161,
+        "loadComplete": 7,
+        "firstPaint": 1820,
+        "firstContentfulPaint": 2704,
+        "timeToInteractive": 1813,
+        "dnsLookup": 224.5,
+        "tcpConnect": 509.2000000011176,
+        "serverResponse": 611.1000000014901,
         "totalResources": 39,
         "transferSize": 9633,
         "encodedBodySize": 9333,
         "decodedBodySize": 80117,
         "largestContentfulPaint": 0,
         "cumulativeLayoutShift": 0,
-        "totalLoadTime": 5663,
+        "totalLoadTime": 4688,
         "responseStatus": 200,
         "responseHeaders": {
           "accept-ranges": "bytes",
@@ -35,13 +35,13 @@
           "cache-control": "public, max-age=0",
           "content-encoding": "br",
           "content-type": "text/html; charset=UTF-8",
-          "date": "Fri, 22 Aug 2025 04:43:32 GMT",
-          "etag": "W/\"138f5-198cee077b1\"",
+          "date": "Fri, 22 Aug 2025 08:23:14 GMT",
+          "etag": "W/\"138f5-198d0dc2544\"",
           "feature-policy": "payment 'self'",
-          "last-modified": "Thu, 21 Aug 2025 23:04:33 GMT",
+          "last-modified": "Fri, 22 Aug 2025 08:19:05 GMT",
           "nel": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}",
-          "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=Z%2BHro4iongNGXvSmGuC%2Bal%2B6Uh6CV1Sg30ltCJ%2FTmxc%3D\\u0026sid=812dcc77-0bd0-43b1-a5f1-b25750382959\\u0026ts=1755837812\"}],\"max_age\":3600}",
-          "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=Z%2BHro4iongNGXvSmGuC%2Bal%2B6Uh6CV1Sg30ltCJ%2FTmxc%3D&sid=812dcc77-0bd0-43b1-a5f1-b25750382959&ts=1755837812\"",
+          "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=6jiT6jjnI9WvlALgfiG%2FibMrtygB2zMxeMJHL7zNmSQ%3D\\u0026sid=812dcc77-0bd0-43b1-a5f1-b25750382959\\u0026ts=1755850994\"}],\"max_age\":3600}",
+          "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=6jiT6jjnI9WvlALgfiG%2FibMrtygB2zMxeMJHL7zNmSQ%3D&sid=812dcc77-0bd0-43b1-a5f1-b25750382959&ts=1755850994\"",
           "server": "Heroku",
           "vary": "Accept-Encoding",
           "via": "1.1 heroku-router",
@@ -95,7 +95,7 @@
         }
       ],
       "summary": {
-        "totalElements": 421,
+        "totalElements": 423,
         "maxDomDepth": 21,
         "totalScripts": 7,
         "totalStylesheets": 2,
@@ -150,12 +150,12 @@
     "metadata": {
       "url": "https://demo.owasp-juice.shop/#/",
       "title": "OWASP Juice Shop",
-      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
-      "timestamp": "2025-08-22T04:43:42.620Z",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/136.0.0.0 Safari/537.36",
+      "timestamp": "2025-08-22T08:23:24.344Z",
       "viewport": {
         "width": 1920,
         "height": 1080,
-        "devicePixelRatio": 1.0000000298023224
+        "devicePixelRatio": 1
       },
       "technologies": {
         "hasJQuery": true,
@@ -168,21 +168,21 @@
   },
   "issueBreakdown": {
     "performance": {
-      "score": 65,
+      "score": 72,
       "issues": [
         {
           "type": "slow-loading",
           "severity": "high",
-          "description": "Slow loading: 5663ms (should be < 3000ms)",
-          "currentValue": 5663,
+          "description": "Slow loading: 4688ms (should be < 3000ms)",
+          "currentValue": 4688,
           "targetValue": 3000,
           "unit": "ms"
         },
         {
           "type": "slow-fcp",
           "severity": "high",
-          "description": "Slow First Contentful Paint: 3925ms (should be < 1800ms)",
-          "currentValue": 3925,
+          "description": "Slow First Contentful Paint: 2704ms (should be < 1800ms)",
+          "currentValue": 2704,
           "targetValue": 1800,
           "unit": "ms"
         }
@@ -285,5 +285,5 @@
       }
     }
   },
-  "lastUpdated": "2025-08-22T04:43:43.099Z"
+  "lastUpdated": "2025-08-22T08:23:24.532Z"
 }

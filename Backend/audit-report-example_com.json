@@ -1,0 +1,800 @@
+{
+  "url": "https://example.com",
+  "timestamp": "2025-08-22T07:42:36.523Z",
+  "crawlerResults": {
+    "quickCheck": {
+      "generatedAt": "2025-08-22T04:41:59.548Z",
+      "pages": [
+        "https://demo.owasp-juice.shop/",
+        "https://demo.owasp-juice.shop/#/login",
+        "https://demo.owasp-juice.shop/#/contact",
+        "https://demo.owasp-juice.shop/#/about",
+        "https://demo.owasp-juice.shop/#/photo-wall",
+        "https://demo.owasp-juice.shop/#/score-board",
+        "https://demo.owasp-juice.shop/redirect?to=https://github.com/juice-shop/juice-shop"
+      ],
+      "apiEndpoints": [
+        "GET https://demo.owasp-juice.shop/assets/i18n/en.json",
+        "GET https://demo.owasp-juice.shop/rest/admin/application-version",
+        "GET https://demo.owasp-juice.shop/rest/admin/application-configuration",
+        "GET https://demo.owasp-juice.shop/rest/products/search?q=",
+        "GET https://demo.owasp-juice.shop/rest/languages",
+        "GET https://demo.owasp-juice.shop/api/Challenges/?name=Score%20Board",
+        "GET https://demo.owasp-juice.shop/api/Quantitys/"
+      ]
+    },
+    "deepCheck": {
+      "generatedAt": "2025-08-22T07:42:38.293Z",
+      "pages": [
+        "https://example.com/"
+      ],
+      "apiEndpoints": []
+    },
+    "totalPages": 7,
+    "totalEndpoints": 7
+  },
+  "securityFindings": [
+    {
+      "route": "https://demo.owasp-juice.shop/",
+      "attack": "headers",
+      "evidence": "Critical headers missing: CSP, Server: Heroku",
+      "severity": "medium",
+      "solution": {
+        "solution": "Implement Content Security Policy (CSP) and remove the Server header to prevent information leakage and mitigate potential attacks.",
+        "remediation_steps": [
+          "Step 1: Implement a Content Security Policy (CSP) header to restrict the sources from which the browser is permitted to load resources.",
+          "Step 2: Remove or mask the Server header to prevent revealing the server software version.",
+          "Step 3: Test the application after implementing the changes to verify that the CSP is correctly configured and the Server header is no longer exposed."
+        ],
+        "code_snippet": "nginx:\nadd_header Content-Security-Policy \"default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; object-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; frame-src 'none';\";\nserver_tokens off;\n\nNode.js (using Helmet):\nconst helmet = require('helmet');\napp.use(helmet.contentSecurityPolicy({\n  directives: {\n    defaultSrc: [\"'self'\"],\n    scriptSrc: [\"'self'\", \"'unsafe-inline'\", \"'unsafe-eval'\"],\n    objectSrc: [\"'none'\"],\n    styleSrc: [\"'self'\", \"'unsafe-inline'\"],\n    imgSrc: [\"'self'\", \"data:\"],\n    mediaSrc: [\"'self'\"],\n    frameSrc: [\"'none'\"]\n  },\n}));\napp.use(helmet.hidePoweredBy());",
+        "resource_links": [
+          {
+            "type": "doc",
+            "title": "OWASP Content Security Policy Cheat Sheet",
+            "url": "https://owasp.org/www-project-cheat-sheets/cheatsheets/Content_Security_Policy_Cheat_Sheet.html",
+            "youtube_id": null
+          },
+          {
+            "type": "blog",
+            "title": "Understanding and Implementing Content Security Policy",
+            "url": "https://developers.google.com/web/fundamentals/security/csp",
+            "youtube_id": null
+          },
+          {
+            "type": "youtube",
+            "title": "Content Security Policy (CSP) Explained by Google",
+            "url": "https://www.youtube.com/watch?v=eJtLpq-w5g0",
+            "youtube_id": "eJtLpq-w5g0"
+          }
+        ],
+        "cwe_cve": "CWE-200",
+        "priority": "P2",
+        "estimated_effort": "low",
+        "confidence": "high",
+        "waf_rules": [
+          "SecRule RESPONSE_STATUS \"^[45]\" \"id:1001,phase:3,t:none,log,deny,msg:'Missing Security Header',chain\"\nSecRule RESPONSE_HEADERS:Content-Security-Policy \"!@rx .+\""
+        ],
+        "notes": "Properly configuring CSP requires careful planning and testing to avoid breaking legitimate functionality."
+      }
+    },
+    {
+      "route": "https://demo.owasp-juice.shop/#/login",
+      "attack": "headers",
+      "evidence": "Critical headers missing: CSP, Server: Heroku",
+      "severity": "medium",
+      "solution": {
+        "solution": "Implement Content Security Policy (CSP) and hide server information to mitigate potential information disclosure and cross-site scripting vulnerabilities.",
+        "remediation_steps": [
+          "Step 1: Implement CSP by configuring the web server to send the Content-Security-Policy header.",
+          "Step 2: Remove or mask the 'Server' header to prevent information leakage about the server technology being used.",
+          "Step 3: Test the implemented CSP and verify that the 'Server' header is no longer revealing sensitive information."
+        ],
+        "code_snippet": "```nginx\n# Nginx configuration\nadd_header Content-Security-Policy \"default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' data:; style-src 'self' 'unsafe-inline';\";\nserver_tokens off; # Hides the server version\n```\n```javascript\n// Node.js with Helmet\nconst helmet = require('helmet');\napp.use(helmet.contentSecurityPolicy({\n  directives: {\n    defaultSrc: [\"'self'\"],\n    scriptSrc: [\"'self'\", \"'unsafe-inline'\", \"'unsafe-eval'\"],\n    imgSrc: [\"'self'\", \"data:\"],\n    styleSrc: [\"'self'\", \"'unsafe-inline'\"]\n  }\n}));\napp.use(helmet.hidePoweredBy()); // Removes the X-Powered-By header\n```",
+        "resource_links": [
+          {
+            "type": "doc",
+            "title": "Content Security Policy (CSP)",
+            "url": "https://owasp.org/www-project-secure-headers/#content-security-policy",
+            "youtube_id": null
+          },
+          {
+            "type": "blog",
+            "title": "A Guide to Content Security Policy",
+            "url": "https://content-security-policy.com/",
+            "youtube_id": null
+          },
+          {
+            "type": "youtube",
+            "title": "Content Security Policy (CSP) - Computerphile",
+            "url": "https://youtube.com/watch?v=95J_I8b3Auo",
+            "youtube_id": "95J_I8b3Auo"
+          }
+        ],
+        "cwe_cve": "CWE-200",
+        "priority": "P2",
+        "estimated_effort": "low",
+        "confidence": "high",
+        "waf_rules": [
+          "SecRule RESPONSE_HEADERS:Server \"@rx .\" \"id:123456,phase:4,t:none,nolog,pass,ctl:header=Server:\""
+        ],
+        "notes": "Implementing a robust CSP is crucial for preventing XSS attacks. Carefully consider the allowed sources for scripts, styles, and other resources."
+      }
+    },
+    {
+      "route": "https://demo.owasp-juice.shop/#/contact",
+      "attack": "headers",
+      "evidence": "Critical headers missing: CSP, Server: Heroku",
+      "severity": "medium",
+      "solution": {
+        "solution": "Implement Content Security Policy (CSP) and hide server information to mitigate potential information disclosure and cross-site scripting risks.",
+        "remediation_steps": [
+          "Step 1: Configure your web server (e.g., Nginx, Apache) or application framework (e.g., Node.js with Helmet) to send appropriate HTTP response headers.",
+          "Step 2: Implement a Content Security Policy (CSP) that restricts the sources from which the browser is permitted to load resources.",
+          "Step 3: Remove or mask the Server header to prevent information disclosure about the server software in use.",
+          "Step 4: Test the configuration in a staging environment before deploying to production to ensure that it does not break existing functionality.",
+          "Step 5: Monitor the CSP reports in the browser's console or through a dedicated reporting tool to identify and address any violations."
+        ],
+        "code_snippet": "### Nginx configuration:\nadd_header Content-Security-Policy \"default-src 'self'; script-src 'self' 'unsafe-inline'; object-src 'none';\";\nserver_tokens off;\n### Node.js (with Helmet):\nconst helmet = require('helmet');\napp.use(helmet.contentSecurityPolicy({\n  directives: {\n    defaultSrc: [\"'self'\"],\n    scriptSrc: [\"'self'\", \"'unsafe-inline'\"]\n  }\n}));\napp.use(helmet.hidePoweredBy());",
+        "resource_links": [
+          {
+            "type": "doc",
+            "title": "OWASP Content Security Policy Cheat Sheet",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html",
+            "youtube_id": null
+          },
+          {
+            "type": "blog",
+            "title": "Hiding Server Information for Security",
+            "url": "https://www.keycdn.com/blog/hide-server-signature",
+            "youtube_id": null
+          },
+          {
+            "type": "youtube",
+            "title": "Content Security Policy Tutorial",
+            "url": "https://www.youtube.com/watch?v=jGjE6tVqjJg",
+            "youtube_id": "jGjE6tVqjJg"
+          }
+        ],
+        "cwe_cve": "CWE-200",
+        "priority": "P2",
+        "estimated_effort": "low",
+        "confidence": "high",
+        "waf_rules": [
+          "SecRule RESPONSE_HEADERS:Server \"@rx .\" \"id:123456,phase:3,t:none,nolog,pass,setvar:tx.remove_server_header=1\"",
+          "SecRule TX:remove_server_header \"1\" \"id:123457,phase:5,t:none,nolog,pass,ctl:respHeaderName=Server,ctl:respHeaderValue=\"\""
+        ],
+        "notes": "Ensure CSP policies are carefully tested to avoid unintended blocking of legitimate resources."
+      }
+    },
+    {
+      "route": "https://demo.owasp-juice.shop/#/about",
+      "attack": "headers",
+      "evidence": "Critical headers missing: CSP, Server: Heroku",
+      "severity": "medium",
+      "solution": {
+        "solution": "Implement Content Security Policy (CSP) and remove or mask the 'Server' header to enhance security.",
+        "remediation_steps": [
+          "Step 1: Configure CSP to restrict allowed sources for various content types (scripts, styles, images, etc.).",
+          "Step 2: Remove or mask the 'Server' header in your server configuration to prevent information leakage about your server software.",
+          "Step 3: Test the implemented CSP directives and header modifications to ensure they do not break site functionality."
+        ],
+        "code_snippet": "```nginx\nadd_header Content-Security-Policy \"default-src 'self'; script-src 'self' 'unsafe-inline' https://trusted.cdn.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self';\";\nserver_tokens off; # Disable showing server version\n```\n```javascript\n// Node.js using Helmet\nconst helmet = require('helmet');\napp.use(helmet.contentSecurityPolicy({\n  directives: {\n    defaultSrc: [\"'self'\"],\n    scriptSrc: [\"'self'\", \"'unsafe-inline'\", \"https://trusted.cdn.com\"],\n    styleSrc: [\"'self'\", \"'unsafe-inline'\"],\n    imgSrc: [\"'self'\", \"data:\"],\n    fontSrc: [\"'self'\"]\n  }\n}));\napp.use(helmet.hidePoweredBy()); // Removes the X-Powered-By header\n```",
+        "resource_links": [
+          {
+            "type": "doc",
+            "title": "OWASP Content Security Policy Cheat Sheet",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html",
+            "youtube_id": null
+          },
+          {
+            "type": "blog",
+            "title": "HTTP Security Headers - A Complete Guide",
+            "url": "https://www.scotthelme.co.uk/hardening-your-http-headers/",
+            "youtube_id": null
+          },
+          {
+            "type": "youtube",
+            "title": "Content Security Policy (CSP) - The Ultimate Guide",
+            "url": "https://www.youtube.com/watch?v=0z99m3j5LdI",
+            "youtube_id": "0z99m3j5LdI"
+          }
+        ],
+        "cwe_cve": "CWE-200",
+        "priority": "P2",
+        "estimated_effort": "low",
+        "confidence": "high",
+        "waf_rules": [
+          "SecRule RESPONSE_HEADERS:Server \"@rx .\" \"id:123456,phase:4,t:none,deny,msg:'Server Header Found',log,auditlog\""
+        ],
+        "notes": "Carefully evaluate CSP directives to avoid blocking legitimate resources. Monitor for CSP violations in your browser console and adjust accordingly."
+      }
+    },
+    {
+      "route": "https://demo.owasp-juice.shop/#/photo-wall",
+      "attack": "headers",
+      "evidence": "Critical headers missing: CSP, Server: Heroku",
+      "severity": "medium",
+      "solution": {
+        "solution": "Implement Content Security Policy (CSP) and hide server information to prevent information leakage.",
+        "remediation_steps": [
+          "Step 1: Configure your web server (e.g., Nginx, Apache) to send the Content-Security-Policy header.",
+          "Step 2: Remove or obfuscate the 'Server' header to prevent information leakage about the server software.",
+          "Step 3: Test the application to ensure CSP is functioning correctly and no unexpected behavior is introduced."
+        ],
+        "code_snippet": "nginx:\nadd_header Content-Security-Policy \"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:\";\nserver_tokens off;",
+        "resource_links": [
+          {
+            "type": "doc",
+            "title": "OWASP Content Security Policy Cheat Sheet",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html",
+            "youtube_id": null
+          },
+          {
+            "type": "blog",
+            "title": "A Guide to HTTP Security Headers",
+            "url": "https://scotthelme.co.uk/content-security-policy-an-introduction/",
+            "youtube_id": null
+          },
+          {
+            "type": "youtube",
+            "title": "Content Security Policy (CSP) - A Complete Guide",
+            "url": "https://www.youtube.com/watch?v=JjJ7P0zWrvY",
+            "youtube_id": "JjJ7P0zWrvY"
+          }
+        ],
+        "cwe_cve": "CWE-200",
+        "priority": "P2",
+        "estimated_effort": "low",
+        "confidence": "high",
+        "waf_rules": [
+          "SecRule RESPONSE_HEADERS:Server \"@rx .\" \"id:100,phase:3,deny,status:406,msg:'Server Header Detected'\""
+        ],
+        "notes": "Implementing CSP can break existing functionality if not configured carefully. Start with a report-only policy to identify issues."
+      }
+    },
+    {
+      "route": "https://demo.owasp-juice.shop/#/score-board",
+      "attack": "headers",
+      "evidence": "Critical headers missing: CSP, Server: Heroku",
+      "severity": "medium",
+      "solution": {
+        "solution": "Implement Content Security Policy (CSP) and hide server information to mitigate potential vulnerabilities.",
+        "remediation_steps": [
+          "Step 1: Configure the web server to send the Content-Security-Policy header with appropriate directives.",
+          "Step 2: Remove or obfuscate the Server header to prevent information disclosure.",
+          "Step 3: Test the website to ensure CSP is correctly implemented and no functionality is broken."
+        ],
+        "code_snippet": "nginx:\nadd_header Content-Security-Policy \"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:\";\nserver_tokens off; # hides the nginx version",
+        "resource_links": [
+          {
+            "type": "doc",
+            "title": "OWASP Content Security Policy Cheat Sheet",
+            "url": "https://owasp.org/www-project-secure-headers/",
+            "youtube_id": null
+          },
+          {
+            "type": "blog",
+            "title": "Understanding and Implementing Content Security Policy",
+            "url": "https://scotthelme.co.uk/content-security-policy-an-introduction/",
+            "youtube_id": null
+          },
+          {
+            "type": "youtube",
+            "title": "What is Content Security Policy (CSP)?",
+            "url": "https://www.youtube.com/watch?v=jVb4E9eK07k",
+            "youtube_id": "jVb4E9eK07k"
+          }
+        ],
+        "cwe_cve": "CWE-200",
+        "priority": "P2",
+        "estimated_effort": "low",
+        "confidence": "high",
+        "waf_rules": [
+          "SecRule RESPONSE_HEADERS:Server \"Heroku\" \"id:1234,phase:4,t:lowercase,deny,msg:'Server header is leaking information'\"",
+          "SecRuleUpdateTargetById 1234 RESPONSE_HEADERS:Server \"@rx Heroku\""
+        ],
+        "notes": "Carefully define CSP directives to avoid blocking legitimate resources. Consider using a report-uri directive for monitoring policy violations."
+      }
+    },
+    {
+      "route": "https://demo.owasp-juice.shop/redirect?to=https://github.com/juice-shop/juice-shop",
+      "attack": "sqli",
+      "payload": "https://demo.owasp-juice.shop/redirect?to=https://github.com/juice-shop/juice-shop&q=%27",
+      "evidence": "SQL error signature detected",
+      "severity": "critical",
+      "solution": {
+        "solution": "Implement proper input validation and sanitization, and utilize parameterized queries to prevent SQL injection.",
+        "remediation_steps": [
+          "Step 1: Implement strict input validation to filter special characters like quotes and semicolons in the 'to' parameter.",
+          "Step 2: Migrate to using parameterized queries or prepared statements in the backend database interactions to prevent SQL injection.",
+          "Step 3: Regularly scan and test the application for SQL injection vulnerabilities using automated tools and manual penetration testing."
+        ],
+        "code_snippet": "```javascript\nconst { query } = require('express-validator');\n\napp.get('/redirect', [\n  query('to').escape(),\n  query('q').escape()\n], (req, res) => {\n  const to = req.query.to;\n  const q = req.query.q;\n  // Example of parameterized query (using pg library):\n  const queryText = 'SELECT * FROM items WHERE name = $1 AND description = $2';\n  const values = [q, to];\n  client.query(queryText, values)\n    .then(result => {\n      // Handle result\n    })\n    .catch(err => {\n      console.error(err);\n    });\n  // Redirect logic here (after sanitization and parameterized query)\n});\n```",
+        "resource_links": [
+          {
+            "type": "doc",
+            "title": "OWASP SQL Injection Prevention Cheat Sheet",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html",
+            "youtube_id": null
+          },
+          {
+            "type": "blog",
+            "title": "Preventing SQL Injection in Node.js Applications",
+            "url": "https://snyk.io/blog/preventing-sql-injection-in-nodejs-applications/",
+            "youtube_id": null
+          },
+          {
+            "type": "youtube",
+            "title": "SQL Injection Explained",
+            "url": "https://www.youtube.com/watch?v=ciNHw38EyRc",
+            "youtube_id": "ciNHw38EyRc"
+          }
+        ],
+        "cwe_cve": "CWE-89",
+        "priority": "P0",
+        "estimated_effort": "med",
+        "confidence": "high",
+        "waf_rules": [
+          "SecRule REQUEST_URI \"'\" \"id:123456,phase:2,t:urlDecodeUni,t:htmlEntityDecode,deny,status:403,msg:'SQL Injection Attempt'\""
+        ],
+        "notes": "Ensure database user has least privilege access."
+      }
+    },
+    {
+      "route": "https://demo.owasp-juice.shop/redirect?to=https://github.com/juice-shop/juice-shop",
+      "attack": "headers",
+      "evidence": "Critical headers missing: Server: github.com",
+      "severity": "medium",
+      "solution": {
+        "solution": "Implement proper header configurations to prevent sensitive information leakage and enable security features.",
+        "remediation_steps": [
+          "Step 1: Configure the web server (e.g., Nginx, Apache) to suppress the 'Server' header or set it to a non-revealing value.",
+          "Step 2: Implement security-related headers like 'X-Frame-Options', 'X-Content-Type-Options', and 'Content-Security-Policy' to mitigate various attacks.",
+          "Step 3: Regularly review and update header configurations to align with current security best practices and address emerging threats."
+        ],
+        "code_snippet": "nginx:\nadd_header X-Frame-Options \"DENY\";\nadd_header X-Content-Type-Options \"nosniff\";\nadd_header Content-Security-Policy \"default-src 'self'\";\nserver_tokens off;",
+        "resource_links": [
+          {
+            "type": "doc",
+            "title": "OWASP Secure Headers Project",
+            "url": "https://owasp.org/www-project-secure-headers/",
+            "youtube_id": null
+          },
+          {
+            "type": "blog",
+            "title": "A Complete Guide to HTTP Security Headers",
+            "url": "https://scotthelme.co.uk/content-security-policy-an-introduction/",
+            "youtube_id": null
+          },
+          {
+            "type": "youtube",
+            "title": "HTTP Security Headers - Computerphile",
+            "url": "https://youtube.com/watch?v=UnijxkHxvyM",
+            "youtube_id": "UnijxkHxvyM"
+          }
+        ],
+        "cwe_cve": "CWE-200",
+        "priority": "P2",
+        "estimated_effort": "low",
+        "confidence": "high",
+        "waf_rules": [
+          "SecRuleRemoveById 932100"
+        ],
+        "notes": "Hiding the 'Server' header and implementing security headers enhance the application's security posture by reducing information leakage and mitigating common attacks."
+      }
+    }
+  ],
+  "securityFingerprints": [
+    {
+      "url": "https://demo.owasp-juice.shop/",
+      "status": 200,
+      "server": "Heroku",
+      "errorHints": []
+    },
+    {
+      "url": "https://demo.owasp-juice.shop/#/login",
+      "status": 200,
+      "server": "Heroku",
+      "errorHints": []
+    },
+    {
+      "url": "https://demo.owasp-juice.shop/#/contact",
+      "status": 200,
+      "server": "Heroku",
+      "errorHints": []
+    },
+    {
+      "url": "https://demo.owasp-juice.shop/#/about",
+      "status": 200,
+      "server": "Heroku",
+      "errorHints": []
+    },
+    {
+      "url": "https://demo.owasp-juice.shop/#/photo-wall",
+      "status": 200,
+      "server": "Heroku",
+      "errorHints": []
+    },
+    {
+      "url": "https://demo.owasp-juice.shop/#/score-board",
+      "status": 200,
+      "server": "Heroku",
+      "errorHints": []
+    },
+    {
+      "url": "https://demo.owasp-juice.shop/redirect?to=https://github.com/juice-shop/juice-shop",
+      "status": 200,
+      "server": "github.com",
+      "errorHints": []
+    },
+    {
+      "url": "GET https://demo.owasp-juice.shop/assets/i18n/en.json",
+      "status": null,
+      "server": null,
+      "errorHints": [
+        "Request failed: Invalid URL"
+      ]
+    },
+    {
+      "url": "GET https://demo.owasp-juice.shop/rest/admin/application-version",
+      "status": null,
+      "server": null,
+      "errorHints": [
+        "Request failed: Invalid URL"
+      ]
+    },
+    {
+      "url": "GET https://demo.owasp-juice.shop/rest/admin/application-configuration",
+      "status": null,
+      "server": null,
+      "errorHints": [
+        "Request failed: Invalid URL"
+      ]
+    },
+    {
+      "url": "GET https://demo.owasp-juice.shop/rest/products/search?q=",
+      "status": null,
+      "server": null,
+      "errorHints": [
+        "Request failed: Invalid URL"
+      ]
+    },
+    {
+      "url": "GET https://demo.owasp-juice.shop/rest/languages",
+      "status": null,
+      "server": null,
+      "errorHints": [
+        "Request failed: Invalid URL"
+      ]
+    },
+    {
+      "url": "GET https://demo.owasp-juice.shop/api/Challenges/?name=Score%20Board",
+      "status": null,
+      "server": null,
+      "errorHints": [
+        "Request failed: Invalid URL"
+      ]
+    },
+    {
+      "url": "GET https://demo.owasp-juice.shop/api/Quantitys/",
+      "status": null,
+      "server": null,
+      "errorHints": [
+        "Request failed: Invalid URL"
+      ]
+    }
+  ],
+  "healthCheck": {
+    "url": "https://example.com",
+    "timestamp": "2025-08-22T07:44:04.056Z",
+    "overallScore": 86,
+    "scores": {
+      "performance": 72,
+      "accessibility": 100,
+      "bestPractices": 95,
+      "seo": 77,
+      "pwa": 50
+    },
+    "metrics": {
+      "performance": {
+        "score": 72,
+        "metrics": {
+          "domContentLoaded": 0,
+          "loadComplete": 0,
+          "firstPaint": 2128,
+          "firstContentfulPaint": 2128,
+          "timeToInteractive": 2104.699999999255,
+          "dnsLookup": 59.69999999925494,
+          "tcpConnect": 1756.5,
+          "serverResponse": 274.80000000074506,
+          "totalResources": 1,
+          "transferSize": 948,
+          "encodedBodySize": 648,
+          "decodedBodySize": 1256,
+          "largestContentfulPaint": 0,
+          "cumulativeLayoutShift": 0,
+          "totalLoadTime": 4110,
+          "responseStatus": 200,
+          "responseHeaders": {
+            "accept-ranges": "bytes",
+            "alt-svc": "h3=\":443\"; ma=93600,h3-29=\":443\"; ma=93600",
+            "cache-control": "max-age=3448",
+            "content-encoding": "gzip",
+            "content-length": "648",
+            "content-type": "text/html",
+            "date": "Fri, 22 Aug 2025 07:43:55 GMT",
+            "etag": "\"84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134\"",
+            "last-modified": "Mon, 13 Jan 2025 20:11:20 GMT",
+            "vary": "Accept-Encoding"
+          }
+        },
+        "opportunities": [
+          {
+            "type": "improve-fcp",
+            "description": "Improve First Contentful Paint",
+            "suggestion": "Optimize critical rendering path, reduce server response time"
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "issues": [],
+        "summary": {
+          "totalImages": 0,
+          "imagesWithAlt": 0,
+          "totalForms": 0,
+          "totalHeadings": 1,
+          "elementsWithAria": 0,
+          "focusableElements": 1,
+          "contrastIssues": 0
+        }
+      },
+      "bestPractices": {
+        "score": 95,
+        "issues": [
+          {
+            "type": "missing-favicon",
+            "severity": "low",
+            "description": "Missing favicon"
+          }
+        ],
+        "summary": {
+          "totalElements": 13,
+          "maxDomDepth": 4,
+          "totalScripts": 0,
+          "totalStylesheets": 0,
+          "totalImages": 0,
+          "inlineStyles": 0,
+          "hasViewport": true,
+          "hasFavicon": false,
+          "hasCharset": true
+        }
+      },
+      "seo": {
+        "score": 77,
+        "issues": [
+          {
+            "type": "missing-meta-description",
+            "severity": "high",
+            "description": "Page missing meta description"
+          },
+          {
+            "type": "missing-lang-attribute",
+            "severity": "medium",
+            "description": "HTML missing lang attribute"
+          }
+        ],
+        "data": {
+          "title": "Example Domain",
+          "titleLength": 14,
+          "metaDescription": null,
+          "metaDescriptionLength": 0,
+          "h1Count": 1,
+          "h1Text": "Example Domain",
+          "canonical": null,
+          "language": "",
+          "robots": null,
+          "headingStructure": {
+            "h1": 1,
+            "h2": 0,
+            "h3": 0,
+            "h4": 0,
+            "h5": 0,
+            "h6": 0
+          }
+        }
+      },
+      "pwa": {
+        "score": 50,
+        "features": {
+          "hasServiceWorker": true,
+          "hasManifest": false,
+          "isResponsive": true,
+          "worksOffline": false,
+          "installable": false
+        },
+        "manifestUrl": null,
+        "viewport": "width=device-width, initial-scale=1"
+      },
+      "metadata": {
+        "url": "https://example.com/",
+        "title": "Example Domain",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/136.0.0.0 Safari/537.36",
+        "timestamp": "2025-08-22T07:44:04.054Z",
+        "viewport": {
+          "width": 1920,
+          "height": 1080,
+          "devicePixelRatio": 1
+        },
+        "technologies": {
+          "hasJQuery": false,
+          "hasReact": false,
+          "hasAngular": false,
+          "hasVue": false,
+          "hasBootstrap": false
+        }
+      }
+    },
+    "issueBreakdown": {
+      "performance": {
+        "score": 72,
+        "issues": [
+          {
+            "type": "slow-loading",
+            "severity": "high",
+            "description": "Slow loading: 4110ms (should be < 3000ms)",
+            "currentValue": 4110,
+            "targetValue": 3000,
+            "unit": "ms"
+          },
+          {
+            "type": "slow-fcp",
+            "severity": "high",
+            "description": "Slow First Contentful Paint: 2128ms (should be < 1800ms)",
+            "currentValue": 2128,
+            "targetValue": 1800,
+            "unit": "ms"
+          }
+        ],
+        "recommendations": [
+          "Optimize server response time, enable compression",
+          "Optimize critical rendering path, reduce render-blocking resources"
+        ],
+        "opportunities": [
+          {
+            "type": "improve-fcp",
+            "description": "Improve First Contentful Paint",
+            "suggestion": "Optimize critical rendering path, reduce server response time"
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "issues": [],
+        "recommendations": [],
+        "stats": {
+          "totalImages": 0,
+          "imagesWithAlt": 0,
+          "totalForms": 0,
+          "totalHeadings": 1,
+          "elementsWithAria": 0,
+          "focusableElements": 1,
+          "contrastIssues": 0
+        }
+      },
+      "bestPractices": {
+        "score": 95,
+        "issues": [],
+        "recommendations": []
+      },
+      "seo": {
+        "score": 77,
+        "issues": [
+          {
+            "type": "missing-meta-description",
+            "severity": "high",
+            "description": "Page missing meta description"
+          },
+          {
+            "type": "missing-lang-attribute",
+            "severity": "medium",
+            "description": "HTML missing lang attribute"
+          }
+        ],
+        "recommendations": [
+          "Add <meta name=\"description\" content=\"...\">",
+          "Add lang attribute to <html> tag"
+        ],
+        "currentValues": {
+          "title": "Example Domain",
+          "titleLength": 14,
+          "metaDescription": null,
+          "metaDescriptionLength": 0,
+          "h1Count": 1,
+          "h1Text": "Example Domain",
+          "canonical": null,
+          "language": "",
+          "robots": null,
+          "headingStructure": {
+            "h1": 1,
+            "h2": 0,
+            "h3": 0,
+            "h4": 0,
+            "h5": 0,
+            "h6": 0
+          }
+        }
+      },
+      "pwa": {
+        "score": 50,
+        "issues": [
+          {
+            "type": "no-manifest",
+            "severity": "medium",
+            "description": "No Web App Manifest found"
+          },
+          {
+            "type": "not-installable",
+            "severity": "medium",
+            "description": "Not installable as PWA"
+          }
+        ],
+        "recommendations": [
+          "Add manifest.json for app-like experience",
+          "Ensure manifest has name, start_url, and icons"
+        ],
+        "features": {
+          "hasServiceWorker": true,
+          "hasManifest": false,
+          "isResponsive": true,
+          "worksOffline": false,
+          "installable": false
+        }
+      }
+    },
+    "lastUpdated": "2025-08-22T07:44:04.145Z"
+  },
+  "scores": {
+    "security": {
+      "score": 19,
+      "breakdown": {
+        "critical": 1,
+        "high": 0,
+        "medium": 7,
+        "low": 0
+      },
+      "totalFindings": 8,
+      "deductions": 81
+    },
+    "health": 86,
+    "overall": 46
+  },
+  "summary": {
+    "riskLevel": "CRITICAL",
+    "riskColor": "🔴",
+    "recommendation": "Significant security vulnerabilities detected. Immediate action required.",
+    "scores": {
+      "overall": 46,
+      "security": 19,
+      "health": 86
+    },
+    "stats": {
+      "totalFindings": 8,
+      "criticalIssues": 1,
+      "pagesScanned": 7,
+      "endpointsFound": 7
+    },
+    "topIssues": [
+      {
+        "type": "sqli",
+        "route": "https://demo.owasp-juice.shop/redirect?to=https://github.com/juice-shop/juice-shop",
+        "severity": "critical",
+        "evidence": "SQL error signature detected",
+        "solution": "Implement proper input validation and sanitization, and utilize parameterized queries to prevent SQL injection."
+      }
+    ]
+  },
+  "executionTime": 87656,
+  "reportGenerated": "2025-08-22T07:44:04.179Z",
+  "version": "1.0.0"
+}

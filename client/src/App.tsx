@@ -10,6 +10,7 @@ import Landing from "./pages/Landing";
 import ScanProgress from "./pages/ScanProgress";
 import QuickScanReport from "./pages/QuickScanReport";
 import DeepScanReport from "./pages/DeepScanReport";
+import Report from "./pages/Report";
 import About from "./pages/About";
 import Pricing from "./pages/Pricing";
 import Contact from "./pages/Contact";
@@ -29,7 +30,8 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/scan" element={<Scan />} />
-            <Route path="/scan-progress" element={<ScanProgress />} />
+            <Route path="/scan-progress/:auditId" element={<ScanProgress />} />
+            <Route path="/report/:auditId" element={<Report />} />
             <Route path="/quick-scan-report" element={<QuickScanReport />} />
             <Route path="/deep-scan-report" element={<DeepScanReport />} />
             <Route path="/about" element={<About />} />

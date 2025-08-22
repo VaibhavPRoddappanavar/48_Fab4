@@ -1,6 +1,6 @@
 [
   {
-    "route": "https://demo.owasp-juice.shop/",
+    "route": "http://demo.owasp-juice.shop",
     "attack": "headers",
     "evidence": "Critical headers missing: CSP, Server: Heroku",
     "severity": "medium",
@@ -42,7 +42,7 @@
     }
   },
   {
-    "route": "https://demo.owasp-juice.shop/#/login",
+    "route": "http://demo.owasp-juice.shop/#/login",
     "attack": "headers",
     "evidence": "Critical headers missing: CSP, Server: Heroku",
     "severity": "medium",
@@ -84,7 +84,7 @@
     }
   },
   {
-    "route": "https://demo.owasp-juice.shop/#/contact",
+    "route": "http://demo.owasp-juice.shop/#/contact",
     "attack": "headers",
     "evidence": "Critical headers missing: CSP, Server: Heroku",
     "severity": "medium",
@@ -126,7 +126,7 @@
     }
   },
   {
-    "route": "https://demo.owasp-juice.shop/#/about",
+    "route": "http://demo.owasp-juice.shop/#/about",
     "attack": "headers",
     "evidence": "Critical headers missing: CSP, Server: Heroku",
     "severity": "medium",
@@ -168,7 +168,7 @@
     }
   },
   {
-    "route": "https://demo.owasp-juice.shop/#/photo-wall",
+    "route": "http://demo.owasp-juice.shop/#/photo-wall",
     "attack": "headers",
     "evidence": "Critical headers missing: CSP, Server: Heroku",
     "severity": "medium",
@@ -210,7 +210,7 @@
     }
   },
   {
-    "route": "https://demo.owasp-juice.shop/#/score-board",
+    "route": "http://demo.owasp-juice.shop/#/score-board",
     "attack": "headers",
     "evidence": "Critical headers missing: CSP, Server: Heroku",
     "severity": "medium",
@@ -252,18 +252,62 @@
     }
   },
   {
-    "route": "https://demo.owasp-juice.shop/redirect?to=https://github.com/juice-shop/juice-shop",
+    "route": "http://demo.owasp-juice.shop/redirect?to=https://github.com/juice-shop/juice-shop",
+    "attack": "sqli",
+    "payload": "http://demo.owasp-juice.shop/redirect?to=https://github.com/juice-shop/juice-shop&q=%27",
+    "evidence": "SQL error signature detected",
+    "severity": "critical",
+    "solution": {
+      "solution": "Use parameterized queries and input validation to prevent SQL injection",
+      "remediation_steps": [
+        "Replace dynamic SQL with parameterized queries or prepared statements",
+        "Validate and sanitize all user inputs before database operations",
+        "Implement least privilege database access controls",
+        "Use stored procedures with proper input validation"
+      ],
+      "code_snippet": "// Parameterized queries (Node.js + MySQL)\nconst query = 'SELECT * FROM users WHERE id = ? AND name = ?';\ndb.query(query, [userId, userName], (err, results) => {\n  // Handle results safely\n});\n\n// Prepared statements (PHP)\n$stmt = $pdo->prepare('SELECT * FROM users WHERE id = ? AND name = ?');\n$stmt->execute([$userId, $userName]);",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP SQL Injection Prevention",
+          "url": "https://owasp.org/www-community/attacks/SQL_Injection",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "SQL Injection Prevention Cheat Sheet",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "SQL Injection Explained",
+          "url": "https://www.youtube.com/watch?v=ciNHn38EyRc",
+          "youtube_id": "ciNHn38EyRc"
+        }
+      ],
+      "cwe_cve": "CWE-89",
+      "priority": "P0",
+      "estimated_effort": "med",
+      "confidence": "high",
+      "waf_rules": [],
+      "notes": "Auto-generated solution based on vulnerability type"
+    }
+  },
+  {
+    "route": "http://demo.owasp-juice.shop/redirect?to=https://github.com/juice-shop/juice-shop",
     "attack": "headers",
     "evidence": "Critical headers missing: Server: github.com",
     "severity": "medium",
     "solution": {
-      "solution": "Implement proper response headers to prevent information leakage and enforce security policies.",
+      "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
       "remediation_steps": [
-        "Step 1: Identify missing security headers such as Server, X-Frame-Options, X-Content-Type-Options, and Strict-Transport-Security.",
-        "Step 2: Configure the web server (e.g., Nginx, Apache) or application framework to add the missing headers.",
-        "Step 3: Verify the presence and correct configuration of these headers using browser developer tools or an online header checker."
+        "Configure Content Security Policy (CSP) to prevent XSS attacks",
+        "Enable HTTP Strict Transport Security (HSTS) for HTTPS enforcement",
+        "Add X-Frame-Options to prevent clickjacking attacks",
+        "Set X-Content-Type-Options to prevent MIME type sniffing"
       ],
-      "code_snippet": "nginx:\nadd_header X-Frame-Options \"DENY\";\nadd_header X-Content-Type-Options \"nosniff\";\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains; preload\";\nadd_header Server \"\";\n\nNode.js (using Helmet):\nconst helmet = require('helmet');\napp.use(helmet());",
+      "code_snippet": "// Node.js Express with Helmet\nconst helmet = require('helmet');\napp.use(helmet({\n  contentSecurityPolicy: {\n    directives: {\n      defaultSrc: [\"'self'\"],\n      styleSrc: [\"'self'\", \"'unsafe-inline'\"]\n    }\n  },\n  hsts: { maxAge: 31536000, includeSubDomains: true }\n}));\n\n// Nginx configuration\nadd_header X-Frame-Options \"SAMEORIGIN\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;",
       "resource_links": [
         {
           "type": "doc",
@@ -273,25 +317,65 @@
         },
         {
           "type": "blog",
-          "title": "A Complete Guide to HTTP Security Headers",
+          "title": "Security Headers Best Practices",
           "url": "https://securityheaders.com/",
           "youtube_id": null
         },
         {
           "type": "youtube",
-          "title": "HTTP Security Headers - Troy Hunt",
-          "url": "https://www.youtube.com/watch?v=UnlrzwZmzaI",
-          "youtube_id": "UnlrzwZmzaI"
+          "title": "Web Security Headers Explained",
+          "url": "https://www.youtube.com/watch?v=zEV3HOuM_Vw",
+          "youtube_id": "zEV3HOuM_Vw"
         }
       ],
-      "cwe_cve": "CWE-200",
-      "priority": "P2",
-      "estimated_effort": "low",
+      "cwe_cve": "CWE-16",
+      "priority": "P1",
+      "estimated_effort": "med",
       "confidence": "high",
-      "waf_rules": [
-        "SecRule RESPONSE_HEADERS:Server \"@rx .\" \"id:1001,phase:4,t:none,deny,msg:'Server Header Exposed'\""
+      "waf_rules": [],
+      "notes": "Auto-generated solution based on vulnerability type"
+    }
+  },
+  {
+    "route": "http://demo.owasp-juice.shop/#/forgot-password",
+    "attack": "headers",
+    "evidence": "Critical headers missing: CSP, Server: Heroku",
+    "severity": "medium",
+    "solution": {
+      "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
+      "remediation_steps": [
+        "Configure Content Security Policy (CSP) to prevent XSS attacks",
+        "Enable HTTP Strict Transport Security (HSTS) for HTTPS enforcement",
+        "Add X-Frame-Options to prevent clickjacking attacks",
+        "Set X-Content-Type-Options to prevent MIME type sniffing"
       ],
-      "notes": "Removing or masking the Server header prevents attackers from identifying the specific server software and version, reducing the risk of targeted exploits."
+      "code_snippet": "// Node.js Express with Helmet\nconst helmet = require('helmet');\napp.use(helmet({\n  contentSecurityPolicy: {\n    directives: {\n      defaultSrc: [\"'self'\"],\n      styleSrc: [\"'self'\", \"'unsafe-inline'\"]\n    }\n  },\n  hsts: { maxAge: 31536000, includeSubDomains: true }\n}));\n\n// Nginx configuration\nadd_header X-Frame-Options \"SAMEORIGIN\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;",
+      "resource_links": [
+        {
+          "type": "doc",
+          "title": "OWASP Secure Headers Project",
+          "url": "https://owasp.org/www-project-secure-headers/",
+          "youtube_id": null
+        },
+        {
+          "type": "blog",
+          "title": "Security Headers Best Practices",
+          "url": "https://securityheaders.com/",
+          "youtube_id": null
+        },
+        {
+          "type": "youtube",
+          "title": "Web Security Headers Explained",
+          "url": "https://www.youtube.com/watch?v=zEV3HOuM_Vw",
+          "youtube_id": "zEV3HOuM_Vw"
+        }
+      ],
+      "cwe_cve": "CWE-16",
+      "priority": "P1",
+      "estimated_effort": "med",
+      "confidence": "high",
+      "waf_rules": [],
+      "notes": "Auto-generated solution based on vulnerability type"
     }
   }
 ]

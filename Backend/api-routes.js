@@ -1,7 +1,7 @@
 // api-routes.js - Express API Routes for Security Audit
 import express from "express";
 import cors from "cors";
-import { AuditOrchestrator } from "./audit-orchestrator.js";
+import { testSingleUrlWorkflow } from "./test-workflow.js";
 import fs from "fs";
 import path from "path";
 
@@ -72,7 +72,7 @@ router.post("/audit", async (req, res) => {
       resultEndpoint: `/api/audit/${auditId}/results`,
     });
 
-    // Run audit asynchronously
+    // Run audit asynchronously using the test workflow
     runAuditAsync(auditId, url, scanType);
   } catch (error) {
     console.error("Audit start error:", error);
@@ -84,18 +84,24 @@ router.post("/audit", async (req, res) => {
   }
 });
 
-// Async audit runner
+// Async audit runner using test-workflow.js
 async function runAuditAsync(auditId, url, scanType) {
   try {
-    const orchestrator = new AuditOrchestrator();
-
+    console.log(`🚀 Starting ${scanType} audit for: ${url} (ID: ${auditId})`);
+    
     // Update progress
     auditResults.set(auditId, {
       ...auditResults.get(auditId),
       progress: "Preparing URL for security testing...",
     });
 
-    const result = await orchestrator.runSingleUrlAudit(url, scanType);
+    console.log(`📝 Audit ${auditId} progress updated: Preparing URL for security testing...`);
+
+    // Use the test workflow function
+    console.log(`🔧 Calling testSingleUrlWorkflow with URL: ${url}, scanType: ${scanType}`);
+    const result = await testSingleUrlWorkflow(url, scanType);
+    
+    console.log(`📊 Test workflow completed for ${auditId}:`, result.success ? 'SUCCESS' : 'FAILED');
 
     // Store final results
     auditResults.set(auditId, {
@@ -116,14 +122,21 @@ async function runAuditAsync(auditId, url, scanType) {
     console.log(`✅ Audit ${auditId} completed successfully`);
   } catch (error) {
     console.error(`❌ Audit ${auditId} failed:`, error);
+    console.error(`❌ Error stack:`, error.stack);
 
-    auditResults.set(auditId, {
-      ...auditResults.get(auditId),
-      status: "failed",
-      endTime: new Date().toISOString(),
-      error: error.message,
-      progress: `Failed: ${error.message}`,
-    });
+    // Ensure the audit record still exists in memory with error state
+    const existingAudit = auditResults.get(auditId);
+    if (existingAudit) {
+      auditResults.set(auditId, {
+        ...existingAudit,
+        status: "failed",
+        endTime: new Date().toISOString(),
+        error: error.message || "Unknown error occurred",
+        progress: `Failed: ${error.message || "Unknown error occurred"}`,
+      });
+    } else {
+      console.error(`❌ Critical: Audit ${auditId} not found in memory during error handling`);
+    }
   }
 }
 

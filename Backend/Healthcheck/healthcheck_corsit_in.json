@@ -1,0 +1,298 @@
+{
+  "url": "https://corsit.in",
+  "timestamp": "2025-08-22T10:48:22.048Z",
+  "overallScore": 78,
+  "scores": {
+    "performance": 65,
+    "accessibility": 77,
+    "bestPractices": 100,
+    "seo": 70,
+    "pwa": 50
+  },
+  "metrics": {
+    "performance": {
+      "score": 65,
+      "metrics": {
+        "domContentLoaded": 0.10000000009313226,
+        "loadComplete": 0,
+        "firstPaint": 7644,
+        "firstContentfulPaint": 8328,
+        "timeToInteractive": 597.2999999998137,
+        "dnsLookup": 81.5,
+        "tcpConnect": 263.09999999962747,
+        "serverResponse": 205.29999999981374,
+        "totalResources": 8,
+        "transferSize": 600,
+        "encodedBodySize": 300,
+        "decodedBodySize": 581,
+        "largestContentfulPaint": 0,
+        "cumulativeLayoutShift": 0.00003342013888888889,
+        "totalLoadTime": 10637,
+        "responseStatus": 200,
+        "responseHeaders": {
+          "accept-ranges": "bytes",
+          "age": "42",
+          "alt-svc": "h3=\":443\"; ma=86400",
+          "cache-control": "public, max-age=0, s-maxage=300",
+          "cf-cache-status": "HIT",
+          "cf-ray": "9731cbd49c318839-BLR",
+          "content-encoding": "br",
+          "content-length": "300",
+          "content-type": "text/html; charset=utf-8",
+          "date": "Fri, 22 Aug 2025 10:48:09 GMT",
+          "etag": "\"0ae1f7c401b78889a61426d65a0ccf11\"",
+          "last-modified": "Sat, 09 Aug 2025 18:18:04 UTC",
+          "server": "cloudflare",
+          "vary": "Accept-Encoding\nAccept-Encoding",
+          "x-content-type-options": "nosniff"
+        }
+      },
+      "opportunities": [
+        {
+          "type": "improve-fcp",
+          "description": "Improve First Contentful Paint",
+          "suggestion": "Optimize critical rendering path, reduce server response time"
+        }
+      ]
+    },
+    "accessibility": {
+      "score": 77,
+      "issues": [
+        {
+          "type": "missing-form-labels",
+          "severity": "high",
+          "count": 1,
+          "description": "Form inputs missing proper labels"
+        },
+        {
+          "type": "heading-hierarchy",
+          "severity": "medium",
+          "count": 1,
+          "description": "Improper heading hierarchy detected"
+        }
+      ],
+      "summary": {
+        "totalImages": 5,
+        "imagesWithAlt": 5,
+        "totalForms": 1,
+        "totalHeadings": 12,
+        "elementsWithAria": 10,
+        "focusableElements": 23,
+        "contrastIssues": 0
+      }
+    },
+    "bestPractices": {
+      "score": 100,
+      "issues": [],
+      "summary": {
+        "totalElements": 173,
+        "maxDomDepth": 11,
+        "totalScripts": 2,
+        "totalStylesheets": 1,
+        "totalImages": 5,
+        "inlineStyles": 4,
+        "hasViewport": true,
+        "hasFavicon": true,
+        "hasCharset": true
+      }
+    },
+    "seo": {
+      "score": 70,
+      "issues": [
+        {
+          "type": "missing-meta-description",
+          "severity": "high",
+          "description": "Page missing meta description"
+        },
+        {
+          "type": "missing-h1",
+          "severity": "high",
+          "description": "Page missing H1 heading"
+        }
+      ],
+      "data": {
+        "title": "CORSIT",
+        "titleLength": 6,
+        "metaDescription": null,
+        "metaDescriptionLength": 0,
+        "h1Count": 0,
+        "h1Text": null,
+        "canonical": null,
+        "language": "en",
+        "robots": null,
+        "headingStructure": {
+          "h1": 0,
+          "h2": 5,
+          "h3": 7,
+          "h4": 0,
+          "h5": 0,
+          "h6": 0
+        }
+      }
+    },
+    "pwa": {
+      "score": 50,
+      "features": {
+        "hasServiceWorker": true,
+        "hasManifest": false,
+        "isResponsive": true,
+        "worksOffline": false,
+        "installable": false
+      },
+      "manifestUrl": null,
+      "viewport": "width=device-width, initial-scale=1.0"
+    },
+    "metadata": {
+      "url": "https://www.corsit.in/",
+      "title": "CORSIT",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/136.0.0.0 Safari/537.36",
+      "timestamp": "2025-08-22T10:48:22.047Z",
+      "viewport": {
+        "width": 1920,
+        "height": 1080,
+        "devicePixelRatio": 1
+      },
+      "technologies": {
+        "hasJQuery": false,
+        "hasReact": false,
+        "hasAngular": false,
+        "hasVue": false,
+        "hasBootstrap": false
+      }
+    }
+  },
+  "issueBreakdown": {
+    "performance": {
+      "score": 65,
+      "issues": [
+        {
+          "type": "slow-loading",
+          "severity": "high",
+          "description": "Slow loading: 10637ms (should be < 3000ms)",
+          "currentValue": 10637,
+          "targetValue": 3000,
+          "unit": "ms"
+        },
+        {
+          "type": "slow-fcp",
+          "severity": "high",
+          "description": "Slow First Contentful Paint: 8328ms (should be < 1800ms)",
+          "currentValue": 8328,
+          "targetValue": 1800,
+          "unit": "ms"
+        }
+      ],
+      "recommendations": [
+        "Optimize server response time, enable compression",
+        "Optimize critical rendering path, reduce render-blocking resources"
+      ],
+      "opportunities": [
+        {
+          "type": "improve-fcp",
+          "description": "Improve First Contentful Paint",
+          "suggestion": "Optimize critical rendering path, reduce server response time"
+        }
+      ]
+    },
+    "accessibility": {
+      "score": 77,
+      "issues": [
+        {
+          "type": "missing-form-labels",
+          "severity": "high",
+          "description": "Form inputs missing proper labels",
+          "count": 1
+        },
+        {
+          "type": "heading-hierarchy",
+          "severity": "medium",
+          "description": "Improper heading hierarchy detected",
+          "count": 1
+        }
+      ],
+      "recommendations": [
+        "Add proper labels or aria-label attributes to form inputs",
+        "Use proper heading order (h1 → h2 → h3)"
+      ],
+      "stats": {
+        "totalImages": 5,
+        "imagesWithAlt": 5,
+        "totalForms": 1,
+        "totalHeadings": 12,
+        "elementsWithAria": 10,
+        "focusableElements": 23,
+        "contrastIssues": 0
+      }
+    },
+    "bestPractices": {
+      "score": 100,
+      "issues": [],
+      "recommendations": []
+    },
+    "seo": {
+      "score": 70,
+      "issues": [
+        {
+          "type": "missing-meta-description",
+          "severity": "high",
+          "description": "Page missing meta description"
+        },
+        {
+          "type": "missing-h1",
+          "severity": "high",
+          "description": "Page missing H1 heading"
+        }
+      ],
+      "recommendations": [
+        "Add <meta name=\"description\" content=\"...\">",
+        "Add exactly one H1 heading per page"
+      ],
+      "currentValues": {
+        "title": "CORSIT",
+        "titleLength": 6,
+        "metaDescription": null,
+        "metaDescriptionLength": 0,
+        "h1Count": 0,
+        "h1Text": null,
+        "canonical": null,
+        "language": "en",
+        "robots": null,
+        "headingStructure": {
+          "h1": 0,
+          "h2": 5,
+          "h3": 7,
+          "h4": 0,
+          "h5": 0,
+          "h6": 0
+        }
+      }
+    },
+    "pwa": {
+      "score": 50,
+      "issues": [
+        {
+          "type": "no-manifest",
+          "severity": "medium",
+          "description": "No Web App Manifest found"
+        },
+        {
+          "type": "not-installable",
+          "severity": "medium",
+          "description": "Not installable as PWA"
+        }
+      ],
+      "recommendations": [
+        "Add manifest.json for app-like experience",
+        "Ensure manifest has name, start_url, and icons"
+      ],
+      "features": {
+        "hasServiceWorker": true,
+        "hasManifest": false,
+        "isResponsive": true,
+        "worksOffline": false,
+        "installable": false
+      }
+    }
+  },
+  "lastUpdated": "2025-08-22T10:48:22.155Z"
+}

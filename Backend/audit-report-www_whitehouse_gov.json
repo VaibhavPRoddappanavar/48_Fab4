@@ -471,9 +471,7 @@
             "description": "Not installable as PWA"
           }
         ],
-        "recommendations": [
-          "Ensure manifest has name, start_url, and icons"
-        ],
+        "recommendations": ["Ensure manifest has name, start_url, and icons"],
         "features": {
           "hasServiceWorker": true,
           "hasManifest": true,

@@ -46,5 +46,53 @@
     "status": 404,
     "server": "Apache",
     "errorHints": []
+  },
+  {
+    "url": "GET https://demo.owasp-juice.shop/rest/admin/application-version",
+    "status": null,
+    "server": null,
+    "errorHints": ["Request failed: Invalid URL"]
+  },
+  {
+    "url": "GET https://demo.owasp-juice.shop/rest/admin/application-configuration",
+    "status": null,
+    "server": null,
+    "errorHints": ["Request failed: Invalid URL"]
+  },
+  {
+    "url": "GET https://demo.owasp-juice.shop/assets/i18n/en.json",
+    "status": null,
+    "server": null,
+    "errorHints": ["Request failed: Invalid URL"]
+  },
+  {
+    "url": "GET https://demo.owasp-juice.shop/rest/languages",
+    "status": null,
+    "server": null,
+    "errorHints": ["Request failed: Invalid URL"]
+  },
+  {
+    "url": "GET https://demo.owasp-juice.shop/rest/products/search?q=",
+    "status": null,
+    "server": null,
+    "errorHints": ["Request failed: Invalid URL"]
+  },
+  {
+    "url": "GET https://demo.owasp-juice.shop/api/Challenges/?name=Score%20Board",
+    "status": null,
+    "server": null,
+    "errorHints": ["Request failed: Invalid URL"]
+  },
+  {
+    "url": "GET https://demo.owasp-juice.shop/api/Quantitys/",
+    "status": null,
+    "server": null,
+    "errorHints": ["Request failed: Invalid URL"]
+  },
+  {
+    "url": "GET https://demo.owasp-juice.shop/api/SecurityQuestions/",
+    "status": null,
+    "server": null,
+    "errorHints": ["Request failed: Invalid URL"]
   }
 ]

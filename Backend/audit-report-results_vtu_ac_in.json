@@ -1,0 +1,596 @@
+{
+  "url": "https://results.vtu.ac.in",
+  "timestamp": "2025-08-22T10:30:57.074Z",
+  "crawlerResults": {
+    "quickCheck": {
+      "generatedAt": "2025-08-22T10:27:44.413Z",
+      "pages": [
+        "http://www.whitehouse.gov/",
+        "http://www.whitehouse.gov/#wp--skip-link--target",
+        "https://www.whitehouse.gov/",
+        "https://www.whitehouse.gov/news",
+        "http://www.whitehouse.gov/#",
+        "https://www.whitehouse.gov/articles",
+        "https://www.whitehouse.gov/briefings-statements",
+        "https://www.whitehouse.gov/fact-sheets"
+      ],
+      "apiEndpoints": []
+    },
+    "deepCheck": {
+      "generatedAt": "2025-08-22T10:31:04.406Z",
+      "pages": [
+        "https://results.vtu.ac.in",
+        "https://results.vtu.ac.in/index.php"
+      ],
+      "apiEndpoints": []
+    },
+    "totalPages": 8,
+    "totalEndpoints": 0
+  },
+  "securityFindings": [
+    {
+      "route": "https://www.whitehouse.gov/news",
+      "attack": "xss",
+      "payload": "https://www.whitehouse.gov/news?q=XSS_gadj",
+      "evidence": "Reflected input detected",
+      "severity": "high",
+      "solution": {
+        "solution": "Implement input validation, output encoding, and Content Security Policy",
+        "remediation_steps": [
+          "Validate and sanitize all user inputs on both client and server side",
+          "Implement proper output encoding based on context (HTML, JavaScript, CSS)",
+          "Deploy Content Security Policy (CSP) headers to restrict script execution",
+          "Use prepared statements and avoid dynamic HTML generation"
+        ],
+        "code_snippet": "// Input validation and sanitization\nconst validator = require('validator');\nconst xss = require('xss');\n\nfunction sanitizeInput(input) {\n  return xss(validator.escape(input));\n}\n\n// CSP Header\n\"Content-Security-Policy\": \"default-src 'self'; script-src 'self'\"",
+        "resource_links": [
+          {
+            "type": "doc",
+            "title": "OWASP XSS Prevention",
+            "url": "https://owasp.org/www-community/xss-filter-evasion-cheatsheet",
+            "youtube_id": null
+          },
+          {
+            "type": "blog",
+            "title": "XSS Prevention Guide",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html",
+            "youtube_id": null
+          },
+          {
+            "type": "youtube",
+            "title": "Cross-Site Scripting Explained",
+            "url": "https://www.youtube.com/watch?v=EoaDgUgS6QA",
+            "youtube_id": "EoaDgUgS6QA"
+          }
+        ],
+        "cwe_cve": "CWE-79",
+        "priority": "P0",
+        "estimated_effort": "med",
+        "confidence": "high",
+        "waf_rules": [],
+        "notes": "Auto-generated solution based on vulnerability type"
+      }
+    },
+    {
+      "route": "https://www.whitehouse.gov/articles",
+      "attack": "xss",
+      "payload": "https://www.whitehouse.gov/articles?q=XSS_xrut",
+      "evidence": "Reflected input detected",
+      "severity": "high",
+      "solution": {
+        "solution": "Implement input validation, output encoding, and Content Security Policy",
+        "remediation_steps": [
+          "Validate and sanitize all user inputs on both client and server side",
+          "Implement proper output encoding based on context (HTML, JavaScript, CSS)",
+          "Deploy Content Security Policy (CSP) headers to restrict script execution",
+          "Use prepared statements and avoid dynamic HTML generation"
+        ],
+        "code_snippet": "// Input validation and sanitization\nconst validator = require('validator');\nconst xss = require('xss');\n\nfunction sanitizeInput(input) {\n  return xss(validator.escape(input));\n}\n\n// CSP Header\n\"Content-Security-Policy\": \"default-src 'self'; script-src 'self'\"",
+        "resource_links": [
+          {
+            "type": "doc",
+            "title": "OWASP XSS Prevention",
+            "url": "https://owasp.org/www-community/xss-filter-evasion-cheatsheet",
+            "youtube_id": null
+          },
+          {
+            "type": "blog",
+            "title": "XSS Prevention Guide",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html",
+            "youtube_id": null
+          },
+          {
+            "type": "youtube",
+            "title": "Cross-Site Scripting Explained",
+            "url": "https://www.youtube.com/watch?v=EoaDgUgS6QA",
+            "youtube_id": "EoaDgUgS6QA"
+          }
+        ],
+        "cwe_cve": "CWE-79",
+        "priority": "P0",
+        "estimated_effort": "med",
+        "confidence": "high",
+        "waf_rules": [],
+        "notes": "Auto-generated solution based on vulnerability type"
+      }
+    },
+    {
+      "route": "https://www.whitehouse.gov/briefings-statements",
+      "attack": "xss",
+      "payload": "https://www.whitehouse.gov/briefings-statements?q=XSS_2vsj",
+      "evidence": "Reflected input detected",
+      "severity": "high",
+      "solution": {
+        "solution": "Implement input validation, output encoding, and Content Security Policy",
+        "remediation_steps": [
+          "Validate and sanitize all user inputs on both client and server side",
+          "Implement proper output encoding based on context (HTML, JavaScript, CSS)",
+          "Deploy Content Security Policy (CSP) headers to restrict script execution",
+          "Use prepared statements and avoid dynamic HTML generation"
+        ],
+        "code_snippet": "// Input validation and sanitization\nconst validator = require('validator');\nconst xss = require('xss');\n\nfunction sanitizeInput(input) {\n  return xss(validator.escape(input));\n}\n\n// CSP Header\n\"Content-Security-Policy\": \"default-src 'self'; script-src 'self'\"",
+        "resource_links": [
+          {
+            "type": "doc",
+            "title": "OWASP XSS Prevention",
+            "url": "https://owasp.org/www-community/xss-filter-evasion-cheatsheet",
+            "youtube_id": null
+          },
+          {
+            "type": "blog",
+            "title": "XSS Prevention Guide",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html",
+            "youtube_id": null
+          },
+          {
+            "type": "youtube",
+            "title": "Cross-Site Scripting Explained",
+            "url": "https://www.youtube.com/watch?v=EoaDgUgS6QA",
+            "youtube_id": "EoaDgUgS6QA"
+          }
+        ],
+        "cwe_cve": "CWE-79",
+        "priority": "P0",
+        "estimated_effort": "med",
+        "confidence": "high",
+        "waf_rules": [],
+        "notes": "Auto-generated solution based on vulnerability type"
+      }
+    },
+    {
+      "route": "https://www.whitehouse.gov/fact-sheets",
+      "attack": "xss",
+      "payload": "https://www.whitehouse.gov/fact-sheets?q=XSS_3it8",
+      "evidence": "Reflected input detected",
+      "severity": "high",
+      "solution": {
+        "solution": "Implement input validation, output encoding, and Content Security Policy",
+        "remediation_steps": [
+          "Validate and sanitize all user inputs on both client and server side",
+          "Implement proper output encoding based on context (HTML, JavaScript, CSS)",
+          "Deploy Content Security Policy (CSP) headers to restrict script execution",
+          "Use prepared statements and avoid dynamic HTML generation"
+        ],
+        "code_snippet": "// Input validation and sanitization\nconst validator = require('validator');\nconst xss = require('xss');\n\nfunction sanitizeInput(input) {\n  return xss(validator.escape(input));\n}\n\n// CSP Header\n\"Content-Security-Policy\": \"default-src 'self'; script-src 'self'\"",
+        "resource_links": [
+          {
+            "type": "doc",
+            "title": "OWASP XSS Prevention",
+            "url": "https://owasp.org/www-community/xss-filter-evasion-cheatsheet",
+            "youtube_id": null
+          },
+          {
+            "type": "blog",
+            "title": "XSS Prevention Guide",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html",
+            "youtube_id": null
+          },
+          {
+            "type": "youtube",
+            "title": "Cross-Site Scripting Explained",
+            "url": "https://www.youtube.com/watch?v=EoaDgUgS6QA",
+            "youtube_id": "EoaDgUgS6QA"
+          }
+        ],
+        "cwe_cve": "CWE-79",
+        "priority": "P0",
+        "estimated_effort": "med",
+        "confidence": "high",
+        "waf_rules": [],
+        "notes": "Auto-generated solution based on vulnerability type"
+      }
+    }
+  ],
+  "securityFingerprints": [
+    {
+      "url": "http://www.whitehouse.gov/",
+      "status": 200,
+      "server": "nginx",
+      "errorHints": []
+    },
+    {
+      "url": "http://www.whitehouse.gov/#wp--skip-link--target",
+      "status": 200,
+      "server": "nginx",
+      "errorHints": []
+    },
+    {
+      "url": "https://www.whitehouse.gov/",
+      "status": 200,
+      "server": "nginx",
+      "errorHints": []
+    },
+    {
+      "url": "https://www.whitehouse.gov/news",
+      "status": 200,
+      "server": "nginx",
+      "errorHints": []
+    },
+    {
+      "url": "http://www.whitehouse.gov/#",
+      "status": 200,
+      "server": "nginx",
+      "errorHints": []
+    },
+    {
+      "url": "https://www.whitehouse.gov/articles",
+      "status": 200,
+      "server": "nginx",
+      "errorHints": []
+    },
+    {
+      "url": "https://www.whitehouse.gov/briefings-statements",
+      "status": 200,
+      "server": "nginx",
+      "errorHints": []
+    },
+    {
+      "url": "https://www.whitehouse.gov/fact-sheets",
+      "status": 200,
+      "server": "nginx",
+      "errorHints": []
+    }
+  ],
+  "healthCheck": {
+    "url": "https://results.vtu.ac.in",
+    "timestamp": "2025-08-22T10:31:50.491Z",
+    "overallScore": 81,
+    "scores": {
+      "performance": 80,
+      "accessibility": 85,
+      "bestPractices": 95,
+      "seo": 62,
+      "pwa": 50
+    },
+    "metrics": {
+      "performance": {
+        "score": 80,
+        "metrics": {
+          "domContentLoaded": 1.6000000000931323,
+          "loadComplete": 4.600000000093132,
+          "firstPaint": 1252,
+          "firstContentfulPaint": 1252,
+          "timeToInteractive": 1342.1999999999534,
+          "dnsLookup": 48.9000000001397,
+          "tcpConnect": 437.29999999981374,
+          "serverResponse": 239.5,
+          "totalResources": 14,
+          "transferSize": 3013,
+          "encodedBodySize": 2713,
+          "decodedBodySize": 16047,
+          "largestContentfulPaint": 0,
+          "cumulativeLayoutShift": 0,
+          "totalLoadTime": 3353,
+          "responseStatus": 200,
+          "responseHeaders": {
+            "connection": "keep-alive",
+            "content-encoding": "gzip",
+            "content-type": "text/html; charset=UTF-8",
+            "date": "Fri, 22 Aug 2025 10:31:41 GMT",
+            "referrer-policy": "strict-origin-when-cross-origin",
+            "server": "nginx",
+            "strict-transport-security": "max-age=63072000; includeSubdomains;",
+            "transfer-encoding": "chunked",
+            "vary": "Accept-Encoding",
+            "x-content-type-options": "nosniff",
+            "x-frame-options": "deny",
+            "x-xss-protection": "1; mode=block"
+          }
+        },
+        "opportunities": []
+      },
+      "accessibility": {
+        "score": 85,
+        "issues": [
+          {
+            "type": "missing-alt-text",
+            "severity": "high",
+            "count": 1,
+            "description": "Images missing alt text for screen readers"
+          }
+        ],
+        "summary": {
+          "totalImages": 16,
+          "imagesWithAlt": 15,
+          "totalForms": 0,
+          "totalHeadings": 0,
+          "elementsWithAria": 0,
+          "focusableElements": 2,
+          "contrastIssues": 0
+        }
+      },
+      "bestPractices": {
+        "score": 95,
+        "issues": [
+          {
+            "type": "excessive-inline-styles",
+            "severity": "low",
+            "count": 49,
+            "description": "Many inline styles found, consider using CSS classes"
+          }
+        ],
+        "summary": {
+          "totalElements": 133,
+          "maxDomDepth": 14,
+          "totalScripts": 5,
+          "totalStylesheets": 3,
+          "totalImages": 16,
+          "inlineStyles": 49,
+          "hasViewport": true,
+          "hasFavicon": true,
+          "hasCharset": true
+        }
+      },
+      "seo": {
+        "score": 62,
+        "issues": [
+          {
+            "type": "missing-meta-description",
+            "severity": "high",
+            "description": "Page missing meta description"
+          },
+          {
+            "type": "missing-h1",
+            "severity": "high",
+            "description": "Page missing H1 heading"
+          },
+          {
+            "type": "missing-lang-attribute",
+            "severity": "medium",
+            "description": "HTML missing lang attribute"
+          }
+        ],
+        "data": {
+          "title": "VTU Result 2025",
+          "titleLength": 15,
+          "metaDescription": null,
+          "metaDescriptionLength": 0,
+          "h1Count": 0,
+          "h1Text": null,
+          "canonical": null,
+          "language": "",
+          "robots": null,
+          "headingStructure": {
+            "h1": 0,
+            "h2": 0,
+            "h3": 0,
+            "h4": 0,
+            "h5": 0,
+            "h6": 0
+          }
+        }
+      },
+      "pwa": {
+        "score": 50,
+        "features": {
+          "hasServiceWorker": true,
+          "hasManifest": false,
+          "isResponsive": true,
+          "worksOffline": false,
+          "installable": false
+        },
+        "manifestUrl": null,
+        "viewport": "width=device-width, initial-scale=1.0"
+      },
+      "metadata": {
+        "url": "https://results.vtu.ac.in/",
+        "title": "VTU Result 2025",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/136.0.0.0 Safari/537.36",
+        "timestamp": "2025-08-22T10:31:50.490Z",
+        "viewport": {
+          "width": 1920,
+          "height": 1080,
+          "devicePixelRatio": 1
+        },
+        "technologies": {
+          "hasJQuery": true,
+          "hasReact": false,
+          "hasAngular": false,
+          "hasVue": false,
+          "hasBootstrap": true
+        }
+      }
+    },
+    "issueBreakdown": {
+      "performance": {
+        "score": 80,
+        "issues": [
+          {
+            "type": "slow-loading",
+            "severity": "high",
+            "description": "Slow loading: 3353ms (should be < 3000ms)",
+            "currentValue": 3353,
+            "targetValue": 3000,
+            "unit": "ms"
+          }
+        ],
+        "recommendations": [
+          "Optimize server response time, enable compression"
+        ]
+      },
+      "accessibility": {
+        "score": 85,
+        "issues": [
+          {
+            "type": "missing-alt-text",
+            "severity": "high",
+            "description": "Images missing alt text for screen readers",
+            "count": 1
+          }
+        ],
+        "recommendations": [
+          "Add meaningful alt attributes to all images"
+        ],
+        "stats": {
+          "totalImages": 16,
+          "imagesWithAlt": 15,
+          "totalForms": 0,
+          "totalHeadings": 0,
+          "elementsWithAria": 0,
+          "focusableElements": 2,
+          "contrastIssues": 0
+        }
+      },
+      "bestPractices": {
+        "score": 95,
+        "issues": [],
+        "recommendations": []
+      },
+      "seo": {
+        "score": 62,
+        "issues": [
+          {
+            "type": "missing-meta-description",
+            "severity": "high",
+            "description": "Page missing meta description"
+          },
+          {
+            "type": "missing-h1",
+            "severity": "high",
+            "description": "Page missing H1 heading"
+          },
+          {
+            "type": "missing-lang-attribute",
+            "severity": "medium",
+            "description": "HTML missing lang attribute"
+          }
+        ],
+        "recommendations": [
+          "Add <meta name=\"description\" content=\"...\">",
+          "Add exactly one H1 heading per page",
+          "Add lang attribute to <html> tag"
+        ],
+        "currentValues": {
+          "title": "VTU Result 2025",
+          "titleLength": 15,
+          "metaDescription": null,
+          "metaDescriptionLength": 0,
+          "h1Count": 0,
+          "h1Text": null,
+          "canonical": null,
+          "language": "",
+          "robots": null,
+          "headingStructure": {
+            "h1": 0,
+            "h2": 0,
+            "h3": 0,
+            "h4": 0,
+            "h5": 0,
+            "h6": 0
+          }
+        }
+      },
+      "pwa": {
+        "score": 50,
+        "issues": [
+          {
+            "type": "no-manifest",
+            "severity": "medium",
+            "description": "No Web App Manifest found"
+          },
+          {
+            "type": "not-installable",
+            "severity": "medium",
+            "description": "Not installable as PWA"
+          }
+        ],
+        "recommendations": [
+          "Add manifest.json for app-like experience",
+          "Ensure manifest has name, start_url, and icons"
+        ],
+        "features": {
+          "hasServiceWorker": true,
+          "hasManifest": false,
+          "isResponsive": true,
+          "worksOffline": false,
+          "installable": false
+        }
+      }
+    },
+    "lastUpdated": "2025-08-22T10:31:50.567Z"
+  },
+  "scores": {
+    "security": {
+      "score": 40,
+      "breakdown": {
+        "critical": 0,
+        "high": 4,
+        "medium": 0,
+        "low": 0
+      },
+      "totalFindings": 4,
+      "deductions": 60
+    },
+    "health": 81,
+    "overall": 56
+  },
+  "summary": {
+    "riskLevel": "HIGH",
+    "riskColor": "🟠",
+    "recommendation": "Multiple security issues detected. Address critical and high severity findings immediately.",
+    "scores": {
+      "overall": 56,
+      "security": 40,
+      "health": 81
+    },
+    "stats": {
+      "totalFindings": 4,
+      "criticalIssues": 4,
+      "pagesScanned": 8,
+      "endpointsFound": 0
+    },
+    "topIssues": [
+      {
+        "type": "xss",
+        "route": "https://www.whitehouse.gov/news",
+        "severity": "high",
+        "evidence": "Reflected input detected",
+        "solution": "Implement input validation, output encoding, and Content Security Policy"
+      },
+      {
+        "type": "xss",
+        "route": "https://www.whitehouse.gov/articles",
+        "severity": "high",
+        "evidence": "Reflected input detected",
+        "solution": "Implement input validation, output encoding, and Content Security Policy"
+      },
+      {
+        "type": "xss",
+        "route": "https://www.whitehouse.gov/briefings-statements",
+        "severity": "high",
+        "evidence": "Reflected input detected",
+        "solution": "Implement input validation, output encoding, and Content Security Policy"
+      },
+      {
+        "type": "xss",
+        "route": "https://www.whitehouse.gov/fact-sheets",
+        "severity": "high",
+        "evidence": "Reflected input detected",
+        "solution": "Implement input validation, output encoding, and Content Security Policy"
+      }
+    ]
+  },
+  "executionTime": 53532,
+  "reportGenerated": "2025-08-22T10:31:50.606Z",
+  "version": "1.0.0"
+}

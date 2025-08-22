@@ -1,11 +1,11 @@
 {
-  "url": "http://demo.owasp-juice.shop",
-  "timestamp": "2025-08-22T08:43:54.861Z",
+  "url": "https://corsit.in",
+  "timestamp": "2025-08-22T10:47:18.117Z",
   "crawlerResults": {
     "quickCheck": {
-      "generatedAt": "2025-08-22T10:45:12.225Z",
+      "generatedAt": "2025-08-22T10:39:34.848Z",
       "pages": [
-        "http://demo.owasp-juice.shop/",
+        "http://demo.owasp-juice.shop",
         "http://demo.owasp-juice.shop/#/login",
         "http://demo.owasp-juice.shop/#/contact",
         "http://demo.owasp-juice.shop/#/about",
@@ -18,7 +18,6 @@
         "GET https://demo.owasp-juice.shop/rest/admin/application-version",
         "GET https://demo.owasp-juice.shop/rest/admin/application-configuration",
         "GET https://demo.owasp-juice.shop/assets/i18n/en.json",
-        "GET https://demo.owasp-juice.shop/rest/admin/application-configuration",
         "GET https://demo.owasp-juice.shop/rest/languages",
         "GET https://demo.owasp-juice.shop/rest/products/search?q=",
         "GET https://demo.owasp-juice.shop/api/Challenges/?name=Score%20Board",
@@ -27,41 +26,18 @@
       ]
     },
     "deepCheck": {
-      "generatedAt": "2025-08-22T08:44:46.339Z",
+      "generatedAt": "2025-08-22T10:47:29.284Z",
       "pages": [
-        "http://demo.owasp-juice.shop/",
-        "http://demo.owasp-juice.shop/#/login",
-        "http://demo.owasp-juice.shop/#/contact",
-        "http://demo.owasp-juice.shop/#/about",
-        "http://demo.owasp-juice.shop/#/photo-wall",
-        "http://demo.owasp-juice.shop/#/score-board",
-        "http://demo.owasp-juice.shop/redirect?to=https://github.com/juice-shop/juice-shop",
-        "http://demo.owasp-juice.shop/#/forgot-password",
-        "http://demo.owasp-juice.shop/#/register"
+        "https://corsit.in"
       ],
-      "apiEndpoints": [
-        "GET https://demo.owasp-juice.shop/rest/admin/application-version",
-        "GET https://demo.owasp-juice.shop/rest/admin/application-configuration",
-        "GET https://demo.owasp-juice.shop/assets/i18n/en.json",
-        "GET https://demo.owasp-juice.shop/rest/admin/application-configuration",
-        "GET https://demo.owasp-juice.shop/rest/languages",
-        "GET https://demo.owasp-juice.shop/rest/products/search?q=",
-        "GET https://demo.owasp-juice.shop/api/Challenges/?name=Score%20Board",
-        "GET https://demo.owasp-juice.shop/api/Quantitys/",
-        "GET https://demo.owasp-juice.shop/api/SecurityQuestions/",
-        "GET https://demo.owasp-juice.shop/rest/user/whoami",
-        "GET https://demo.owasp-juice.shop/rest/captcha/",
-        "GET https://demo.owasp-juice.shop/api/Feedbacks/",
-        "GET https://demo.owasp-juice.shop/rest/memories/",
-        "GET https://demo.owasp-juice.shop/api/Challenges/?sort=name"
-      ]
+      "apiEndpoints": []
     },
     "totalPages": 8,
     "totalEndpoints": 8
   },
   "securityFindings": [
     {
-      "route": "http://demo.owasp-juice.shop/",
+      "route": "http://demo.owasp-juice.shop",
       "attack": "headers",
       "evidence": "Critical headers missing: CSP, Server: Heroku",
       "severity": "medium",
@@ -442,7 +418,7 @@
   ],
   "securityFingerprints": [
     {
-      "url": "http://demo.owasp-juice.shop/",
+      "url": "http://demo.owasp-juice.shop",
       "status": 200,
       "server": "Heroku",
       "errorHints": []
@@ -493,101 +469,114 @@
       "url": "GET https://demo.owasp-juice.shop/rest/admin/application-version",
       "status": null,
       "server": null,
-      "errorHints": ["Request failed: Invalid URL"]
-    },
-    {
-      "url": "GET https://demo.owasp-juice.shop/rest/admin/application-version",
-      "status": null,
-      "server": null,
-      "errorHints": ["Request failed: Invalid URL"]
+      "errorHints": [
+        "Request failed: Invalid URL"
+      ]
     },
     {
       "url": "GET https://demo.owasp-juice.shop/rest/admin/application-configuration",
       "status": null,
       "server": null,
-      "errorHints": ["Request failed: Invalid URL"]
+      "errorHints": [
+        "Request failed: Invalid URL"
+      ]
+    },
+    {
+      "url": "GET https://demo.owasp-juice.shop/assets/i18n/en.json",
+      "status": null,
+      "server": null,
+      "errorHints": [
+        "Request failed: Invalid URL"
+      ]
     },
     {
       "url": "GET https://demo.owasp-juice.shop/rest/languages",
       "status": null,
       "server": null,
-      "errorHints": ["Request failed: Invalid URL"]
+      "errorHints": [
+        "Request failed: Invalid URL"
+      ]
     },
     {
       "url": "GET https://demo.owasp-juice.shop/rest/products/search?q=",
       "status": null,
       "server": null,
-      "errorHints": ["Request failed: Invalid URL"]
+      "errorHints": [
+        "Request failed: Invalid URL"
+      ]
     },
     {
       "url": "GET https://demo.owasp-juice.shop/api/Challenges/?name=Score%20Board",
       "status": null,
       "server": null,
-      "errorHints": ["Request failed: Invalid URL"]
+      "errorHints": [
+        "Request failed: Invalid URL"
+      ]
     },
     {
       "url": "GET https://demo.owasp-juice.shop/api/Quantitys/",
       "status": null,
       "server": null,
-      "errorHints": ["Request failed: Invalid URL"]
+      "errorHints": [
+        "Request failed: Invalid URL"
+      ]
     },
     {
       "url": "GET https://demo.owasp-juice.shop/api/SecurityQuestions/",
       "status": null,
       "server": null,
-      "errorHints": ["Request failed: Invalid URL"]
+      "errorHints": [
+        "Request failed: Invalid URL"
+      ]
     }
   ],
   "healthCheck": {
-    "url": "http://demo.owasp-juice.shop",
-    "timestamp": "2025-08-22T08:45:31.455Z",
-    "overallScore": 82,
+    "url": "https://corsit.in",
+    "timestamp": "2025-08-22T10:48:22.048Z",
+    "overallScore": 78,
     "scores": {
       "performance": 65,
       "accessibility": 77,
-      "bestPractices": 95,
-      "seo": 92,
+      "bestPractices": 100,
+      "seo": 70,
       "pwa": 50
     },
     "metrics": {
       "performance": {
         "score": 65,
         "metrics": {
-          "domContentLoaded": 1.400000000372529,
+          "domContentLoaded": 0.10000000009313226,
           "loadComplete": 0,
-          "firstPaint": 6608,
-          "firstContentfulPaint": 6940,
-          "timeToInteractive": 6601.5999999996275,
-          "dnsLookup": 193.69999999925494,
-          "tcpConnect": 429.2000000011176,
-          "serverResponse": 427,
-          "totalResources": 35,
-          "transferSize": 9633,
-          "encodedBodySize": 9333,
-          "decodedBodySize": 80117,
-          "largestContentfulPaint": 4704,
-          "cumulativeLayoutShift": 0,
-          "totalLoadTime": 8923,
+          "firstPaint": 7644,
+          "firstContentfulPaint": 8328,
+          "timeToInteractive": 597.2999999998137,
+          "dnsLookup": 81.5,
+          "tcpConnect": 263.09999999962747,
+          "serverResponse": 205.29999999981374,
+          "totalResources": 8,
+          "transferSize": 600,
+          "encodedBodySize": 300,
+          "decodedBodySize": 581,
+          "largestContentfulPaint": 0,
+          "cumulativeLayoutShift": 0.00003342013888888889,
+          "totalLoadTime": 10637,
           "responseStatus": 200,
           "responseHeaders": {
             "accept-ranges": "bytes",
-            "access-control-allow-origin": "*",
-            "cache-control": "public, max-age=0",
+            "age": "42",
+            "alt-svc": "h3=\":443\"; ma=86400",
+            "cache-control": "public, max-age=0, s-maxage=300",
+            "cf-cache-status": "HIT",
+            "cf-ray": "9731cbd49c318839-BLR",
             "content-encoding": "br",
-            "content-type": "text/html; charset=UTF-8",
-            "date": "Fri, 22 Aug 2025 08:45:17 GMT",
-            "etag": "W/\"138f5-198d0e71ca9\"",
-            "feature-policy": "payment 'self'",
-            "last-modified": "Fri, 22 Aug 2025 08:31:03 GMT",
-            "nel": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}",
-            "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=HT4s0IWApR4hbwRHzp2YAIUXVwwvhO%2BRQQAFu0pF70g%3D\\u0026sid=812dcc77-0bd0-43b1-a5f1-b25750382959\\u0026ts=1755852317\"}],\"max_age\":3600}",
-            "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=HT4s0IWApR4hbwRHzp2YAIUXVwwvhO%2BRQQAFu0pF70g%3D&sid=812dcc77-0bd0-43b1-a5f1-b25750382959&ts=1755852317\"",
-            "server": "Heroku",
-            "vary": "Accept-Encoding",
-            "via": "1.1 heroku-router",
-            "x-content-type-options": "nosniff",
-            "x-frame-options": "SAMEORIGIN",
-            "x-recruiting": "/#/jobs"
+            "content-length": "300",
+            "content-type": "text/html; charset=utf-8",
+            "date": "Fri, 22 Aug 2025 10:48:09 GMT",
+            "etag": "\"0ae1f7c401b78889a61426d65a0ccf11\"",
+            "last-modified": "Sat, 09 Aug 2025 18:18:04 UTC",
+            "server": "cloudflare",
+            "vary": "Accept-Encoding\nAccept-Encoding",
+            "x-content-type-options": "nosniff"
           }
         },
         "opportunities": [
@@ -595,11 +584,6 @@
             "type": "improve-fcp",
             "description": "Improve First Contentful Paint",
             "suggestion": "Optimize critical rendering path, reduce server response time"
-          },
-          {
-            "type": "improve-lcp",
-            "description": "Improve Largest Contentful Paint",
-            "suggestion": "Optimize largest content element, use faster hosting"
           }
         ]
       },
@@ -620,60 +604,58 @@
           }
         ],
         "summary": {
-          "totalImages": 13,
-          "imagesWithAlt": 13,
-          "totalForms": 0,
-          "totalHeadings": 6,
-          "elementsWithAria": 65,
-          "focusableElements": 26,
+          "totalImages": 5,
+          "imagesWithAlt": 5,
+          "totalForms": 1,
+          "totalHeadings": 12,
+          "elementsWithAria": 10,
+          "focusableElements": 23,
           "contrastIssues": 0
         }
       },
       "bestPractices": {
-        "score": 95,
-        "issues": [
-          {
-            "type": "excessive-inline-styles",
-            "severity": "low",
-            "count": 87,
-            "description": "Many inline styles found, consider using CSS classes"
-          }
-        ],
+        "score": 100,
+        "issues": [],
         "summary": {
-          "totalElements": 440,
-          "maxDomDepth": 21,
-          "totalScripts": 7,
-          "totalStylesheets": 2,
-          "totalImages": 13,
-          "inlineStyles": 87,
+          "totalElements": 173,
+          "maxDomDepth": 11,
+          "totalScripts": 2,
+          "totalStylesheets": 1,
+          "totalImages": 5,
+          "inlineStyles": 4,
           "hasViewport": true,
           "hasFavicon": true,
           "hasCharset": true
         }
       },
       "seo": {
-        "score": 92,
+        "score": 70,
         "issues": [
           {
-            "type": "multiple-h1",
-            "severity": "medium",
-            "description": "Multiple H1 headings found"
+            "type": "missing-meta-description",
+            "severity": "high",
+            "description": "Page missing meta description"
+          },
+          {
+            "type": "missing-h1",
+            "severity": "high",
+            "description": "Page missing H1 heading"
           }
         ],
         "data": {
-          "title": "OWASP Juice Shop",
-          "titleLength": 16,
-          "metaDescription": "Probably the most modern and sophisticated insecure web application",
-          "metaDescriptionLength": 67,
-          "h1Count": 2,
-          "h1Text": "Welcome to OWASP Juice Shop!",
+          "title": "CORSIT",
+          "titleLength": 6,
+          "metaDescription": null,
+          "metaDescriptionLength": 0,
+          "h1Count": 0,
+          "h1Text": null,
           "canonical": null,
           "language": "en",
           "robots": null,
           "headingStructure": {
-            "h1": 2,
-            "h2": 1,
-            "h3": 3,
+            "h1": 0,
+            "h2": 5,
+            "h3": 7,
             "h4": 0,
             "h5": 0,
             "h6": 0
@@ -690,20 +672,20 @@
           "installable": false
         },
         "manifestUrl": null,
-        "viewport": "width=device-width, initial-scale=1"
+        "viewport": "width=device-width, initial-scale=1.0"
       },
       "metadata": {
-        "url": "https://demo.owasp-juice.shop/#/",
-        "title": "OWASP Juice Shop",
+        "url": "https://www.corsit.in/",
+        "title": "CORSIT",
         "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/136.0.0.0 Safari/537.36",
-        "timestamp": "2025-08-22T08:45:31.452Z",
+        "timestamp": "2025-08-22T10:48:22.047Z",
         "viewport": {
           "width": 1920,
           "height": 1080,
           "devicePixelRatio": 1
         },
         "technologies": {
-          "hasJQuery": true,
+          "hasJQuery": false,
           "hasReact": false,
           "hasAngular": false,
           "hasVue": false,
@@ -718,43 +700,29 @@
           {
             "type": "slow-loading",
             "severity": "high",
-            "description": "Slow loading: 4637ms (should be < 3000ms)",
-            "currentValue": 4637,
+            "description": "Slow loading: 10637ms (should be < 3000ms)",
+            "currentValue": 10637,
             "targetValue": 3000,
             "unit": "ms"
           },
           {
             "type": "slow-fcp",
             "severity": "high",
-            "description": "Slow First Contentful Paint: 6940ms (should be < 1800ms)",
-            "currentValue": 6940,
+            "description": "Slow First Contentful Paint: 8328ms (should be < 1800ms)",
+            "currentValue": 8328,
             "targetValue": 1800,
-            "unit": "ms"
-          },
-          {
-            "type": "slow-lcp",
-            "severity": "high",
-            "description": "Slow Largest Contentful Paint: 4704ms (should be < 2500ms)",
-            "currentValue": 4704,
-            "targetValue": 2500,
             "unit": "ms"
           }
         ],
         "recommendations": [
           "Optimize server response time, enable compression",
-          "Optimize critical rendering path, reduce render-blocking resources",
-          "Optimize largest content element, use faster hosting"
+          "Optimize critical rendering path, reduce render-blocking resources"
         ],
         "opportunities": [
           {
             "type": "improve-fcp",
             "description": "Improve First Contentful Paint",
             "suggestion": "Optimize critical rendering path, reduce server response time"
-          },
-          {
-            "type": "improve-lcp",
-            "description": "Improve Largest Contentful Paint",
-            "suggestion": "Optimize largest content element, use faster hosting"
           }
         ]
       },
@@ -779,38 +747,52 @@
           "Use proper heading order (h1 → h2 → h3)"
         ],
         "stats": {
-          "totalImages": 13,
-          "imagesWithAlt": 13,
-          "totalForms": 0,
-          "totalHeadings": 6,
-          "elementsWithAria": 65,
-          "focusableElements": 26,
+          "totalImages": 5,
+          "imagesWithAlt": 5,
+          "totalForms": 1,
+          "totalHeadings": 12,
+          "elementsWithAria": 10,
+          "focusableElements": 23,
           "contrastIssues": 0
         }
       },
       "bestPractices": {
-        "score": 95,
+        "score": 100,
         "issues": [],
         "recommendations": []
       },
       "seo": {
-        "score": 92,
-        "issues": [],
-        "recommendations": [],
+        "score": 70,
+        "issues": [
+          {
+            "type": "missing-meta-description",
+            "severity": "high",
+            "description": "Page missing meta description"
+          },
+          {
+            "type": "missing-h1",
+            "severity": "high",
+            "description": "Page missing H1 heading"
+          }
+        ],
+        "recommendations": [
+          "Add <meta name=\"description\" content=\"...\">",
+          "Add exactly one H1 heading per page"
+        ],
         "currentValues": {
-          "title": "OWASP Juice Shop",
-          "titleLength": 16,
-          "metaDescription": "Probably the most modern and sophisticated insecure web application",
-          "metaDescriptionLength": 67,
-          "h1Count": 2,
-          "h1Text": "Welcome to OWASP Juice Shop!",
+          "title": "CORSIT",
+          "titleLength": 6,
+          "metaDescription": null,
+          "metaDescriptionLength": 0,
+          "h1Count": 0,
+          "h1Text": null,
           "canonical": null,
           "language": "en",
           "robots": null,
           "headingStructure": {
-            "h1": 2,
-            "h2": 1,
-            "h3": 3,
+            "h1": 0,
+            "h2": 5,
+            "h3": 7,
             "h4": 0,
             "h5": 0,
             "h6": 0
@@ -844,7 +826,7 @@
         }
       }
     },
-    "lastUpdated": "2025-08-22T10:46:36.661Z"
+    "lastUpdated": "2025-08-22T10:48:22.155Z"
   },
   "scores": {
     "security": {
@@ -858,17 +840,17 @@
       "totalFindings": 9,
       "deductions": 89
     },
-    "health": 82,
-    "overall": 39
+    "health": 78,
+    "overall": 38
   },
   "summary": {
     "riskLevel": "CRITICAL",
     "riskColor": "🔴",
     "recommendation": "Significant security vulnerabilities detected. Immediate action required.",
     "scores": {
-      "overall": 39,
+      "overall": 38,
       "security": 11,
-      "health": 82
+      "health": 78
     },
     "stats": {
       "totalFindings": 9,
@@ -886,7 +868,7 @@
       }
     ]
   },
-  "executionTime": 96808,
-  "reportGenerated": "2025-08-22T08:45:31.669Z",
+  "executionTime": 64048,
+  "reportGenerated": "2025-08-22T10:48:22.165Z",
   "version": "1.0.0"
 }

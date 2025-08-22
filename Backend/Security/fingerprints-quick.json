@@ -48,7 +48,7 @@
     "errorHints": []
   },
   {
-    "url": "GET https://demo.owasp-juice.shop/rest/admin/application-configuration",
+    "url": "GET https://demo.owasp-juice.shop/rest/admin/application-version",
     "status": null,
     "server": null,
     "errorHints": [
@@ -56,7 +56,7 @@
     ]
   },
   {
-    "url": "GET https://demo.owasp-juice.shop/rest/admin/application-version",
+    "url": "GET https://demo.owasp-juice.shop/rest/admin/application-configuration",
     "status": null,
     "server": null,
     "errorHints": [

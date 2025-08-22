@@ -1,0 +1,284 @@
+{
+  "url": "https://jnnce.ac.in/techfest/",
+  "timestamp": "2025-08-22T10:54:39.239Z",
+  "overallScore": 82,
+  "scores": {
+    "performance": 72,
+    "accessibility": 85,
+    "bestPractices": 95,
+    "seo": 77,
+    "pwa": 50
+  },
+  "metrics": {
+    "performance": {
+      "score": 72,
+      "metrics": {
+        "domContentLoaded": 43.10000000009313,
+        "loadComplete": 0,
+        "firstPaint": 2512,
+        "firstContentfulPaint": 2512,
+        "timeToInteractive": 2790.2999999998137,
+        "dnsLookup": 323.5,
+        "tcpConnect": 828.1000000000931,
+        "serverResponse": 665,
+        "totalResources": 24,
+        "transferSize": 27692,
+        "encodedBodySize": 27392,
+        "decodedBodySize": 27392,
+        "largestContentfulPaint": 0,
+        "cumulativeLayoutShift": 0,
+        "totalLoadTime": 4844,
+        "responseStatus": 200,
+        "responseHeaders": {
+          "accept-ranges": "bytes",
+          "connection": "Keep-Alive",
+          "content-length": "27392",
+          "content-type": "text/html",
+          "date": "Fri, 22 Aug 2025 10:54:29 GMT",
+          "keep-alive": "timeout=5, max=100",
+          "last-modified": "Tue, 12 Aug 2025 12:59:08 GMT",
+          "server": "Apache"
+        }
+      },
+      "opportunities": [
+        {
+          "type": "improve-fcp",
+          "description": "Improve First Contentful Paint",
+          "suggestion": "Optimize critical rendering path, reduce server response time"
+        }
+      ]
+    },
+    "accessibility": {
+      "score": 85,
+      "issues": [
+        {
+          "type": "missing-form-labels",
+          "severity": "high",
+          "count": 5,
+          "description": "Form inputs missing proper labels"
+        }
+      ],
+      "summary": {
+        "totalImages": 28,
+        "imagesWithAlt": 28,
+        "totalForms": 2,
+        "totalHeadings": 42,
+        "elementsWithAria": 0,
+        "focusableElements": 56,
+        "contrastIssues": 0
+      }
+    },
+    "bestPractices": {
+      "score": 95,
+      "issues": [
+        {
+          "type": "missing-favicon",
+          "severity": "low",
+          "description": "Missing favicon"
+        }
+      ],
+      "summary": {
+        "totalElements": 429,
+        "maxDomDepth": 10,
+        "totalScripts": 4,
+        "totalStylesheets": 4,
+        "totalImages": 28,
+        "inlineStyles": 6,
+        "hasViewport": true,
+        "hasFavicon": false,
+        "hasCharset": true
+      }
+    },
+    "seo": {
+      "score": 77,
+      "issues": [
+        {
+          "type": "missing-meta-description",
+          "severity": "high",
+          "description": "Page missing meta description"
+        },
+        {
+          "type": "multiple-h1",
+          "severity": "medium",
+          "description": "Multiple H1 headings found"
+        }
+      ],
+      "data": {
+        "title": "YUGMA TECHFEST 2025",
+        "titleLength": 19,
+        "metaDescription": null,
+        "metaDescriptionLength": 0,
+        "h1Count": 3,
+        "h1Text": "YUGMA TECHFEST 2025",
+        "canonical": null,
+        "language": "en",
+        "robots": null,
+        "headingStructure": {
+          "h1": 3,
+          "h2": 6,
+          "h3": 33,
+          "h4": 0,
+          "h5": 0,
+          "h6": 0
+        }
+      }
+    },
+    "pwa": {
+      "score": 50,
+      "features": {
+        "hasServiceWorker": true,
+        "hasManifest": false,
+        "isResponsive": true,
+        "worksOffline": false,
+        "installable": false
+      },
+      "manifestUrl": null,
+      "viewport": "width=device-width, initial-scale=1.0"
+    },
+    "metadata": {
+      "url": "https://jnnce.ac.in/techfest/",
+      "title": "YUGMA TECHFEST 2025",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/136.0.0.0 Safari/537.36",
+      "timestamp": "2025-08-22T10:54:39.237Z",
+      "viewport": {
+        "width": 1920,
+        "height": 1080,
+        "devicePixelRatio": 1
+      },
+      "technologies": {
+        "hasJQuery": false,
+        "hasReact": false,
+        "hasAngular": false,
+        "hasVue": false,
+        "hasBootstrap": false
+      }
+    }
+  },
+  "issueBreakdown": {
+    "performance": {
+      "score": 72,
+      "issues": [
+        {
+          "type": "slow-loading",
+          "severity": "high",
+          "description": "Slow loading: 4844ms (should be < 3000ms)",
+          "currentValue": 4844,
+          "targetValue": 3000,
+          "unit": "ms"
+        },
+        {
+          "type": "slow-fcp",
+          "severity": "high",
+          "description": "Slow First Contentful Paint: 2512ms (should be < 1800ms)",
+          "currentValue": 2512,
+          "targetValue": 1800,
+          "unit": "ms"
+        }
+      ],
+      "recommendations": [
+        "Optimize server response time, enable compression",
+        "Optimize critical rendering path, reduce render-blocking resources"
+      ],
+      "opportunities": [
+        {
+          "type": "improve-fcp",
+          "description": "Improve First Contentful Paint",
+          "suggestion": "Optimize critical rendering path, reduce server response time"
+        }
+      ]
+    },
+    "accessibility": {
+      "score": 85,
+      "issues": [
+        {
+          "type": "missing-form-labels",
+          "severity": "high",
+          "description": "Form inputs missing proper labels",
+          "count": 5
+        }
+      ],
+      "recommendations": [
+        "Add proper labels or aria-label attributes to form inputs"
+      ],
+      "stats": {
+        "totalImages": 28,
+        "imagesWithAlt": 28,
+        "totalForms": 2,
+        "totalHeadings": 42,
+        "elementsWithAria": 0,
+        "focusableElements": 56,
+        "contrastIssues": 0
+      }
+    },
+    "bestPractices": {
+      "score": 95,
+      "issues": [],
+      "recommendations": []
+    },
+    "seo": {
+      "score": 77,
+      "issues": [
+        {
+          "type": "missing-meta-description",
+          "severity": "high",
+          "description": "Page missing meta description"
+        },
+        {
+          "type": "multiple-h1",
+          "severity": "medium",
+          "description": "Multiple H1 headings found"
+        }
+      ],
+      "recommendations": [
+        "Add <meta name=\"description\" content=\"...\">",
+        "Use only one H1 heading per page"
+      ],
+      "currentValues": {
+        "title": "YUGMA TECHFEST 2025",
+        "titleLength": 19,
+        "metaDescription": null,
+        "metaDescriptionLength": 0,
+        "h1Count": 3,
+        "h1Text": "YUGMA TECHFEST 2025",
+        "canonical": null,
+        "language": "en",
+        "robots": null,
+        "headingStructure": {
+          "h1": 3,
+          "h2": 6,
+          "h3": 33,
+          "h4": 0,
+          "h5": 0,
+          "h6": 0
+        }
+      }
+    },
+    "pwa": {
+      "score": 50,
+      "issues": [
+        {
+          "type": "no-manifest",
+          "severity": "medium",
+          "description": "No Web App Manifest found"
+        },
+        {
+          "type": "not-installable",
+          "severity": "medium",
+          "description": "Not installable as PWA"
+        }
+      ],
+      "recommendations": [
+        "Add manifest.json for app-like experience",
+        "Ensure manifest has name, start_url, and icons"
+      ],
+      "features": {
+        "hasServiceWorker": true,
+        "hasManifest": false,
+        "isResponsive": true,
+        "worksOffline": false,
+        "installable": false
+      }
+    }
+  },
+  "lastUpdated": "2025-08-22T10:54:39.415Z"
+}

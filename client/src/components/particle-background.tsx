@@ -30,13 +30,13 @@ export function ParticleBackground() {
     };
 
     useEffect(() => {
-        // Create 60 particles with random positions, timing, and sizes
+        // Create 60 particles with random positions, timing, and larger sizes
         const newParticles = Array.from({ length: 60 }, (_, i) => ({
             id: i,
             left: Math.random() * 100,
             animationDelay: 0 + Math.random() * 20, 
             animationDuration: 10 + Math.random() * 15,
-            size: 1.5 + Math.random() * 2.5,
+            size: 2.5 + Math.random() * 4, // Increased from 1.5 + Math.random() * 2.5
             char: getRandomChar()
         }));
         setParticles(newParticles);
@@ -74,10 +74,10 @@ export function ParticleBackground() {
                             {Array.from({ length: 20 }).map((_, j) => (
                                 <div
                                     key={`char-${j}`}
-                                    className="text-green-400 font-mono text-sm leading-5 text-center binary-glow-soft font-medium"
+                                    className="text-green-400 font-mono text-base leading-6 text-center binary-glow-soft font-medium" // Increased from text-sm to text-base
                                     style={{
-                                        opacity: 0.4 + Math.random() * 0.5,
-                                        textShadow: '0 0 8px #10B981, 0 0 16px #10B981'
+                                        opacity: 0.6 + Math.random() * 0.4, // Increased from 0.4 + Math.random() * 0.5
+                                        textShadow: '0 0 12px #10B981, 0 0 24px #10B981, 0 0 36px #10B981' // Enhanced glow
                                     }}
                                 >
                                     {getRandomChar()}
@@ -93,7 +93,7 @@ export function ParticleBackground() {
                 <div
                     key={particle.id}
                     className={`absolute bg-green-400 rounded-full particle-float-smooth transition-opacity duration-1000 ${
-                        isInitialized ? 'opacity-80' : 'opacity-0'
+                        isInitialized ? 'opacity-90' : 'opacity-0' // Increased from opacity-80
                     }`}
                     style={{
                         width: `${particle.size}px`,
@@ -102,7 +102,7 @@ export function ParticleBackground() {
                         top: '-20px',
                         animationDelay: `${particle.animationDelay}s`,
                         animationDuration: `${particle.animationDuration}s`,
-                        boxShadow: `0 0 ${particle.size * 3}px #10B981, 0 0 ${particle.size * 6}px #10B981`
+                        boxShadow: `0 0 ${particle.size * 4}px #10B981, 0 0 ${particle.size * 8}px #10B981, 0 0 ${particle.size * 12}px #059669` // Enhanced glow with triple shadow
                     }}
                 />
             ))}
@@ -111,15 +111,15 @@ export function ParticleBackground() {
             {Array.from({ length: 15 }).map((_, i) => (
                 <div
                     key={`char-orb-${i}`}
-                    className={`absolute text-green-400 font-mono text-xs font-medium particle-orb-delayed transition-opacity duration-1500 ${
-                        isInitialized ? 'opacity-60' : 'opacity-0'
+                    className={`absolute text-green-400 font-mono text-sm font-medium particle-orb-delayed transition-opacity duration-1500 ${
+                        isInitialized ? 'opacity-75' : 'opacity-0' // Increased from opacity-60
                     }`}
                     style={{
                         left: `${Math.random() * 100}%`,
                         top: '-30px',
                         animationDelay: `${2 + Math.random() * 25}s`, // Start after 2 seconds
                         animationDuration: `${20 + Math.random() * 20}s`,
-                        textShadow: '0 0 15px #10B981, 0 0 30px #10B981'
+                        textShadow: '0 0 20px #10B981, 0 0 40px #10B981, 0 0 60px #059669' // Enhanced glow with triple shadow
                     }}
                 >
                     {getRandomChar()}

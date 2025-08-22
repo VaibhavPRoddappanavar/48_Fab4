@@ -1056,12 +1056,12 @@ export const generateAuditPDF = async (reportData) => {
     });
 
     const page = await browser.newPage();
-    
+
     // Set viewport and background
     await page.setViewport({ width: 1920, height: 1080 });
-    
+
     // Enable background colors for PDF
-    await page.emulateMediaType('print');
+    await page.emulateMediaType("print");
 
     // Generate HTML content
     console.log("📄 Generating HTML content...");
@@ -1073,7 +1073,7 @@ export const generateAuditPDF = async (reportData) => {
       waitUntil: "networkidle0",
       timeout: 30000,
     });
-    
+
     // Add additional CSS to ensure background colors are preserved
     await page.addStyleTag({
       content: `
@@ -1090,7 +1090,7 @@ export const generateAuditPDF = async (reportData) => {
           background: #0F172A !important; 
           min-height: 100vh !important;
         }
-      `
+      `,
     });
 
     // Configure PDF options
@@ -1105,7 +1105,8 @@ export const generateAuditPDF = async (reportData) => {
         left: "10mm",
       },
       displayHeaderFooter: true,
-      headerTemplate: '<div style="background: #0F172A; width: 100%; height: 100%;"></div>',
+      headerTemplate:
+        '<div style="background: #0F172A; width: 100%; height: 100%;"></div>',
       footerTemplate: `
         <div style="font-size: 10px; color: #94A3B8; width: 100%; text-align: center; background: #0F172A; padding: 10px 0;">
           <span>Page <span class="pageNumber"></span> of <span class="totalPages"></span> • WebAudit AI Premium Report</span>

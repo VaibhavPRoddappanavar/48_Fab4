@@ -307,6 +307,19 @@ function Report() {
   const pwaData = healthCheck?.metrics?.pwa || {};
   const issueBreakdown = healthCheck?.issueBreakdown || {};
   
+  // Helper function to extract numeric score from potentially nested objects
+  const extractScore = (score) => {
+    if (typeof score === 'number') return score;
+    if (typeof score === 'object' && score !== null) {
+      // If it's an object, try to extract the score property
+      if (typeof score.score === 'number') return score.score;
+      // If no score property, return 0 as fallback
+      return 0;
+    }
+    // If score is undefined, null, or not a valid type, return 0
+    return 0;
+  };
+  
   // Additional data not yet displayed
   const crawlerResults = results?.crawlerResults || auditData?.crawlerResults || {};
   const securityFingerprints = results?.securityFingerprints || auditData?.securityFingerprints || [];
@@ -331,11 +344,11 @@ function Report() {
             <div className="absolute top-0 right-0">
               <Button 
                 size="lg"
-                onClick={() => window.open(`http://localhost:5000/api/audit/${auditId}/download`, '_blank')}
+                onClick={() => window.open(`http://localhost:5000/api/audit/${auditId}/download-pdf`, '_blank')}
                 className="bg-gradient-to-r from-primary to-primary-variant hover:from-primary/90 hover:to-primary-variant/90 text-white font-semibold px-6 py-3 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 <Download className="h-5 w-5 mr-2" />
-                Download JSON
+                Download Report PDF
               </Button>
             </div>
 
@@ -408,7 +421,7 @@ function Report() {
                     className="text-center"
                   >
                     <ScoreCircle 
-                      score={summary?.scores?.overall || 0} 
+                      score={extractScore(summary?.scores?.overall)} 
                       label="Overall" 
                       size="lg" 
                     />
@@ -431,7 +444,7 @@ function Report() {
                     className="text-center"
                   >
                     <ScoreCircle 
-                      score={summary?.scores?.security || 0} 
+                      score={extractScore(summary?.scores?.security)} 
                       label="Security" 
                       size="lg" 
                     />
@@ -454,7 +467,7 @@ function Report() {
                     className="text-center"
                   >
                     <ScoreCircle 
-                      score={summary?.scores?.health || 0} 
+                      score={extractScore(summary?.scores?.health)} 
                       label="Health" 
                       size="lg" 
                     />
@@ -766,7 +779,7 @@ function Report() {
                               </div>
                               Performance Analysis
                               <ScoreCircle 
-                                score={healthCheck.scores.performance || 0} 
+                                score={extractScore(healthCheck.scores.performance)} 
                                 label="" 
                                 size="sm" 
                               />
@@ -941,7 +954,7 @@ function Report() {
                               </div>
                               Accessibility Analysis
                               <ScoreCircle 
-                                score={healthCheck.scores.accessibility || 0} 
+                                score={extractScore(healthCheck.scores.accessibility)} 
                                 label="" 
                                 size="sm" 
                               />
@@ -1056,7 +1069,7 @@ function Report() {
                               </div>
                               SEO Analysis
                               <ScoreCircle 
-                                score={healthCheck.scores.seo || 0} 
+                                score={extractScore(healthCheck.scores.seo)} 
                                 label="" 
                                 size="sm" 
                               />
@@ -1177,7 +1190,7 @@ function Report() {
                               </div>
                               Best Practices Analysis
                               <ScoreCircle 
-                                score={healthCheck.scores.bestPractices || 0} 
+                                score={extractScore(healthCheck.scores.bestPractices)} 
                                 label="" 
                                 size="sm" 
                               />
@@ -1248,61 +1261,137 @@ function Report() {
                   </Collapsible>
                 </motion.div>
 
-          {/* Download Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="text-center"
-          >
-            <div className="flex flex-col lg:flex-row gap-6 justify-center items-center">
-              {/* JSON Download Card */}
-              <Card className="inline-block bg-gradient-to-br from-slate-900/90 to-slate-800/60 border border-slate-700/50 backdrop-blur-xl">
-                <CardContent className="p-8">
-                  <div className="flex flex-col items-center gap-4">
-                    <div className="w-16 h-16 bg-gradient-to-r from-primary to-primary-variant rounded-2xl flex items-center justify-center">
-                      <Download className="h-8 w-8 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold text-white mb-2">Export Full Report</h3>
-                      <p className="text-slate-400 mb-4">Download the complete audit results in JSON format</p>
-                    </div>
-                    <Button 
-                      size="lg"
-                      onClick={() => window.open(`http://localhost:5000/api/audit/${auditId}/download`, '_blank')}
-                      className="bg-gradient-to-r from-primary to-primary-variant hover:from-primary/90 hover:to-primary-variant/90 text-white font-semibold px-8 py-3 transition-all duration: 300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                {/* PWA Section - MISSING SECTION */}
+                {healthCheck.scores.pwa && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 1.0 }}
+                  >
+                    <Collapsible 
+                      open={expandedSections.pwa} 
+                      onOpenChange={() => toggleSection('pwa')}
                     >
-                      <Download className="h-5 w-5 mr-2" />
-                      Download Report (JSON)
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+                      <Card className="relative bg-gradient-to-br from-slate-900/90 via-slate-800/60 to-slate-900/90 border border-slate-700/50 backdrop-blur-xl overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-cyan-500/5" />
+                        
+                        <CollapsibleTrigger className="w-full">
+                          <CardHeader className="relative">
+                            <CardTitle className="flex items-center justify-between">
+                              <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 bg-gradient-to-r from-indigo-500 to-cyan-500 rounded-xl flex items-center justify-center">
+                                  <Smartphone className="h-6 w-6 text-white" />
+                                </div>
+                                PWA Analysis
+                                <ScoreCircle 
+                                  score={extractScore(healthCheck.scores.pwa)} 
+                                  label="" 
+                                  size="sm" 
+                                />
+                              </div>
+                              <ChevronDown className={`h-6 w-6 text-slate-400 transition-transform duration-200 ${expandedSections.pwa ? 'rotate-180' : ''}`} />
+                            </CardTitle>
+                          </CardHeader>
+                        </CollapsibleTrigger>
+                        
+                        <CollapsibleContent>
+                          <CardContent className="relative space-y-6">
+                            {/* PWA Features */}
+                            {pwaData.features && (
+                              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/30">
+                                  <h4 className="font-semibold text-white mb-2">Service Worker</h4>
+                                  <div className={`text-2xl font-bold ${pwaData.features.hasServiceWorker ? 'text-green-400' : 'text-red-400'}`}>
+                                    {pwaData.features.hasServiceWorker ? '✓' : '✗'}
+                                  </div>
+                                  <p className="text-xs text-slate-400">Registered</p>
+                                </div>
 
-              {/* PDF Download Card */}
-              <Card className="inline-block bg-gradient-to-br from-blue-900/90 to-blue-800/60 border border-blue-700/50 backdrop-blur-xl">
-                <CardContent className="p-8">
-                  <div className="flex flex-col items-center gap-4">
-                    <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center">
-                      <FileText className="h-8 w-8 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold text-white mb-2">Premium PDF Report</h3>
-                      <p className="text-slate-400 mb-4">Beautiful, formatted report perfect for presentations</p>
-                    </div>
-                    <Button 
-                      size="lg"
-                      onClick={() => window.open(`http://localhost:5000/api/audit/${auditId}/download-pdf`, '_blank')}
-                      className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold px-8 py-3 transition-all duration: 300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                    >
-                      <FileText className="h-5 w-5 mr-2" />
-                      Download Report (PDF)
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </motion.div>
+                                <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/30">
+                                  <h4 className="font-semibold text-white mb-2">Web Manifest</h4>
+                                  <div className={`text-2xl font-bold ${pwaData.features.hasManifest ? 'text-green-400' : 'text-red-400'}`}>
+                                    {pwaData.features.hasManifest ? '✓' : '✗'}
+                                  </div>
+                                  <p className="text-xs text-slate-400">Available</p>
+                                </div>
+
+                                <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/30">
+                                  <h4 className="font-semibold text-white mb-2">Installable</h4>
+                                  <div className={`text-2xl font-bold ${pwaData.features.installable ? 'text-green-400' : 'text-red-400'}`}>
+                                    {pwaData.features.installable ? '✓' : '✗'}
+                                  </div>
+                                  <p className="text-xs text-slate-400">App-like</p>
+                                </div>
+
+                                <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/30">
+                                  <h4 className="font-semibold text-white mb-2">Responsive</h4>
+                                  <div className={`text-2xl font-bold ${pwaData.features.isResponsive ? 'text-green-400' : 'text-red-400'}`}>
+                                    {pwaData.features.isResponsive ? '✓' : '✗'}
+                                  </div>
+                                  <p className="text-xs text-slate-400">Design</p>
+                                </div>
+
+                                <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/30">
+                                  <h4 className="font-semibold text-white mb-2">Offline</h4>
+                                  <div className={`text-2xl font-bold ${pwaData.features.worksOffline ? 'text-green-400' : 'text-red-400'}`}>
+                                    {pwaData.features.worksOffline ? '✓' : '✗'}
+                                  </div>
+                                  <p className="text-xs text-slate-400">Support</p>
+                                </div>
+
+                                {pwaData.viewport && (
+                                  <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/30">
+                                    <h4 className="font-semibold text-white mb-2">Viewport</h4>
+                                    <div className="text-sm text-indigo-400">
+                                      {pwaData.viewport}
+                                    </div>
+                                    <p className="text-xs text-slate-400">Meta Tag</p>
+                                  </div>
+                                )}
+                              </div>
+                            )}
+
+                            {/* PWA Issues */}
+                            {issueBreakdown.pwa?.issues && (
+                              <div className="space-y-4">
+                                <h4 className="font-semibold text-white text-lg">PWA Issues</h4>
+                                {issueBreakdown.pwa.issues.map((issue, index) => (
+                                  <div key={index} className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/30">
+                                    <div className="flex items-start gap-3">
+                                      <div className={`w-3 h-3 rounded-full mt-1 ${getSeverityColor(issue.severity)}`}></div>
+                                      <div>
+                                        <h5 className="font-medium text-white">{issue.description}</h5>
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))}
+                                
+                                {/* PWA Recommendations */}
+                                {issueBreakdown.pwa?.recommendations && (
+                                  <div className="mt-4">
+                                    <h5 className="font-medium text-white mb-3">PWA Recommendations:</h5>
+                                    <ul className="space-y-2">
+                                      {issueBreakdown.pwa.recommendations.map((rec, i) => (
+                                        <li key={i} className="flex items-start gap-3 text-sm text-slate-300">
+                                          <ChevronRight className="h-4 w-4 text-indigo-400 mt-0.5 flex-shrink-0" />
+                                          <span>{rec}</span>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                          </CardContent>
+                        </CollapsibleContent>
+                      </Card>
+                    </Collapsible>
+                  </motion.div>
+                )}
+              </>
+            )}
+
+          </div>
 
         </div>
       </div>

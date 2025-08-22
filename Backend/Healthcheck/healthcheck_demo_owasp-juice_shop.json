@@ -1,9 +1,9 @@
 {
-  "url": "http://demo.owasp-juice.shop",
-  "timestamp": "2025-08-22T08:45:31.455Z",
-  "overallScore": 82,
+  "url": "http://demo.owasp-juice.shop/",
+  "timestamp": "2025-08-22T10:46:36.170Z",
+  "overallScore": 78,
   "scores": {
-    "performance": 65,
+    "performance": 47,
     "accessibility": 77,
     "bestPractices": 95,
     "seo": 92,
@@ -11,23 +11,23 @@
   },
   "metrics": {
     "performance": {
-      "score": 65,
+      "score": 47,
       "metrics": {
-        "domContentLoaded": 1.400000000372529,
-        "loadComplete": 0,
-        "firstPaint": 6608,
-        "firstContentfulPaint": 6940,
-        "timeToInteractive": 6601.5999999996275,
-        "dnsLookup": 193.69999999925494,
-        "tcpConnect": 429.2000000011176,
-        "serverResponse": 427,
-        "totalResources": 35,
+        "domContentLoaded": 5.199999928474426,
+        "loadComplete": 5.800000071525574,
+        "firstPaint": 1188,
+        "firstContentfulPaint": 2752,
+        "timeToInteractive": 1127,
+        "dnsLookup": 40.199999928474426,
+        "tcpConnect": 385.60000002384186,
+        "serverResponse": 459.1999999284744,
+        "totalResources": 39,
         "transferSize": 9633,
         "encodedBodySize": 9333,
         "decodedBodySize": 80117,
-        "largestContentfulPaint": 0,
+        "largestContentfulPaint": 4704,
         "cumulativeLayoutShift": 0,
-        "totalLoadTime": 8923,
+        "totalLoadTime": 4637,
         "responseStatus": 200,
         "responseHeaders": {
           "accept-ranges": "bytes",
@@ -35,13 +35,13 @@
           "cache-control": "public, max-age=0",
           "content-encoding": "br",
           "content-type": "text/html; charset=UTF-8",
-          "date": "Fri, 22 Aug 2025 08:45:17 GMT",
+          "date": "Fri, 22 Aug 2025 10:46:29 GMT",
           "etag": "W/\"138f5-198d0e71ca9\"",
           "feature-policy": "payment 'self'",
           "last-modified": "Fri, 22 Aug 2025 08:31:03 GMT",
           "nel": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}",
-          "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=HT4s0IWApR4hbwRHzp2YAIUXVwwvhO%2BRQQAFu0pF70g%3D\\u0026sid=812dcc77-0bd0-43b1-a5f1-b25750382959\\u0026ts=1755852317\"}],\"max_age\":3600}",
-          "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=HT4s0IWApR4hbwRHzp2YAIUXVwwvhO%2BRQQAFu0pF70g%3D&sid=812dcc77-0bd0-43b1-a5f1-b25750382959&ts=1755852317\"",
+          "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=DBjnKpxQ4blUbA5VMdvDOE3gbMCOontIR0RlIR5vgnk%3D\\u0026sid=812dcc77-0bd0-43b1-a5f1-b25750382959\\u0026ts=1755859589\"}],\"max_age\":3600}",
+          "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=DBjnKpxQ4blUbA5VMdvDOE3gbMCOontIR0RlIR5vgnk%3D&sid=812dcc77-0bd0-43b1-a5f1-b25750382959&ts=1755859589\"",
           "server": "Heroku",
           "vary": "Accept-Encoding",
           "via": "1.1 heroku-router",
@@ -55,6 +55,11 @@
           "type": "improve-fcp",
           "description": "Improve First Contentful Paint",
           "suggestion": "Optimize critical rendering path, reduce server response time"
+        },
+        {
+          "type": "improve-lcp",
+          "description": "Improve Largest Contentful Paint",
+          "suggestion": "Optimize largest content element, use faster hosting"
         }
       ]
     },
@@ -79,8 +84,8 @@
         "imagesWithAlt": 13,
         "totalForms": 0,
         "totalHeadings": 6,
-        "elementsWithAria": 64,
-        "focusableElements": 25,
+        "elementsWithAria": 65,
+        "focusableElements": 26,
         "contrastIssues": 0
       }
     },
@@ -90,17 +95,17 @@
         {
           "type": "excessive-inline-styles",
           "severity": "low",
-          "count": 85,
+          "count": 87,
           "description": "Many inline styles found, consider using CSS classes"
         }
       ],
       "summary": {
-        "totalElements": 423,
+        "totalElements": 440,
         "maxDomDepth": 21,
         "totalScripts": 7,
         "totalStylesheets": 2,
         "totalImages": 13,
-        "inlineStyles": 85,
+        "inlineStyles": 87,
         "hasViewport": true,
         "hasFavicon": true,
         "hasCharset": true
@@ -150,8 +155,8 @@
     "metadata": {
       "url": "https://demo.owasp-juice.shop/#/",
       "title": "OWASP Juice Shop",
-      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/136.0.0.0 Safari/537.36",
-      "timestamp": "2025-08-22T08:45:31.452Z",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/136.0.0.0 Safari/537.36",
+      "timestamp": "2025-08-22T10:46:36.169Z",
       "viewport": {
         "width": 1920,
         "height": 1080,
@@ -168,34 +173,48 @@
   },
   "issueBreakdown": {
     "performance": {
-      "score": 65,
+      "score": 47,
       "issues": [
         {
           "type": "slow-loading",
           "severity": "high",
-          "description": "Slow loading: 8923ms (should be < 3000ms)",
-          "currentValue": 8923,
+          "description": "Slow loading: 4637ms (should be < 3000ms)",
+          "currentValue": 4637,
           "targetValue": 3000,
           "unit": "ms"
         },
         {
           "type": "slow-fcp",
           "severity": "high",
-          "description": "Slow First Contentful Paint: 6940ms (should be < 1800ms)",
-          "currentValue": 6940,
+          "description": "Slow First Contentful Paint: 2752ms (should be < 1800ms)",
+          "currentValue": 2752,
           "targetValue": 1800,
+          "unit": "ms"
+        },
+        {
+          "type": "slow-lcp",
+          "severity": "high",
+          "description": "Slow Largest Contentful Paint: 4704ms (should be < 2500ms)",
+          "currentValue": 4704,
+          "targetValue": 2500,
           "unit": "ms"
         }
       ],
       "recommendations": [
         "Optimize server response time, enable compression",
-        "Optimize critical rendering path, reduce render-blocking resources"
+        "Optimize critical rendering path, reduce render-blocking resources",
+        "Optimize largest content element, use faster hosting"
       ],
       "opportunities": [
         {
           "type": "improve-fcp",
           "description": "Improve First Contentful Paint",
           "suggestion": "Optimize critical rendering path, reduce server response time"
+        },
+        {
+          "type": "improve-lcp",
+          "description": "Improve Largest Contentful Paint",
+          "suggestion": "Optimize largest content element, use faster hosting"
         }
       ]
     },
@@ -224,8 +243,8 @@
         "imagesWithAlt": 13,
         "totalForms": 0,
         "totalHeadings": 6,
-        "elementsWithAria": 64,
-        "focusableElements": 25,
+        "elementsWithAria": 65,
+        "focusableElements": 26,
         "contrastIssues": 0
       }
     },
@@ -285,5 +304,5 @@
       }
     }
   },
-  "lastUpdated": "2025-08-22T08:45:31.658Z"
+  "lastUpdated": "2025-08-22T10:46:36.661Z"
 }

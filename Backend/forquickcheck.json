@@ -1,23 +1,14 @@
 {
-  "generatedAt": "2025-08-22T08:44:08.704Z",
+  "generatedAt": "2025-08-22T11:10:22.067Z",
   "pages": [
-    "http://demo.owasp-juice.shop",
-    "http://demo.owasp-juice.shop/#/login",
-    "http://demo.owasp-juice.shop/#/contact",
-    "http://demo.owasp-juice.shop/#/about",
-    "http://demo.owasp-juice.shop/#/photo-wall",
-    "http://demo.owasp-juice.shop/#/score-board",
-    "http://demo.owasp-juice.shop/redirect?to=https://github.com/juice-shop/juice-shop",
-    "http://demo.owasp-juice.shop/#/forgot-password"
+    "http://jnnce.ac.in",
+    "http://jnnce.ac.in/index.html",
+    "http://jnnce.ac.in/aboutjnnce.html",
+    "http://jnnce.ac.in/vision.html",
+    "http://jnnce.ac.in/aboutnes.html",
+    "http://jnnce.ac.in/messagefromprincipal.html",
+    "http://jnnce.ac.in/messagefrompresident.html",
+    "http://jnnce.ac.in/messagefromsecretary.html"
   ],
-  "apiEndpoints": [
-    "GET https://demo.owasp-juice.shop/rest/admin/application-configuration",
-    "GET https://demo.owasp-juice.shop/rest/admin/application-version",
-    "GET https://demo.owasp-juice.shop/assets/i18n/en.json",
-    "GET https://demo.owasp-juice.shop/rest/languages",
-    "GET https://demo.owasp-juice.shop/rest/products/search?q=",
-    "GET https://demo.owasp-juice.shop/api/Challenges/?name=Score%20Board",
-    "GET https://demo.owasp-juice.shop/api/Quantitys/",
-    "GET https://demo.owasp-juice.shop/api/SecurityQuestions/"
-  ]
+  "apiEndpoints": []
 }

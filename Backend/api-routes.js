@@ -2,6 +2,7 @@
 import express from "express";
 import cors from "cors";
 import { testSingleUrlWorkflow } from "./test-workflow.js";
+import { generateAuditPDF, savePDFToFile } from "./pdf-generator.js";
 import fs from "fs";
 import path from "path";
 
@@ -88,20 +89,27 @@ router.post("/audit", async (req, res) => {
 async function runAuditAsync(auditId, url, scanType) {
   try {
     console.log(`🚀 Starting ${scanType} audit for: ${url} (ID: ${auditId})`);
-    
+
     // Update progress
     auditResults.set(auditId, {
       ...auditResults.get(auditId),
       progress: "Preparing URL for security testing...",
     });
 
-    console.log(`📝 Audit ${auditId} progress updated: Preparing URL for security testing...`);
+    console.log(
+      `📝 Audit ${auditId} progress updated: Preparing URL for security testing...`
+    );
 
     // Use the test workflow function
-    console.log(`🔧 Calling testSingleUrlWorkflow with URL: ${url}, scanType: ${scanType}`);
+    console.log(
+      `🔧 Calling testSingleUrlWorkflow with URL: ${url}, scanType: ${scanType}`
+    );
     const result = await testSingleUrlWorkflow(url, scanType);
-    
-    console.log(`📊 Test workflow completed for ${auditId}:`, result.success ? 'SUCCESS' : 'FAILED');
+
+    console.log(
+      `📊 Test workflow completed for ${auditId}:`,
+      result.success ? "SUCCESS" : "FAILED"
+    );
 
     // Store final results
     auditResults.set(auditId, {
@@ -135,7 +143,9 @@ async function runAuditAsync(auditId, url, scanType) {
         progress: `Failed: ${error.message || "Unknown error occurred"}`,
       });
     } else {
-      console.error(`❌ Critical: Audit ${auditId} not found in memory during error handling`);
+      console.error(
+        `❌ Critical: Audit ${auditId} not found in memory during error handling`
+      );
     }
   }
 }
@@ -250,6 +260,72 @@ router.get("/audit/:id/download", (req, res) => {
   }
 
   res.download(reportPath, `security-audit-report-${auditId}.json`);
+});
+
+// GET /api/audit/:id/download-pdf - Download report as PDF
+router.get("/audit/:id/download-pdf", async (req, res) => {
+  const auditId = req.params.id;
+  const audit = auditResults.get(auditId);
+
+  if (!audit) {
+    return res.status(404).json({
+      success: false,
+      error: "Audit not found",
+      message: "Invalid audit ID or audit expired",
+    });
+  }
+
+  if (!audit.result) {
+    return res.status(404).json({
+      success: false,
+      error: "Report not found or audit not completed",
+      message: "Audit may still be in progress or failed",
+    });
+  }
+
+  try {
+    console.log(`📄 Generating PDF for audit ${auditId}`);
+    console.log(`📊 Audit status: ${audit.status}`);
+    console.log(`📈 Report data structure:`, {
+      hasUrl: !!audit.result.url,
+      hasTimestamp: !!audit.result.timestamp,
+      hasCrawlerResults: !!audit.result.crawlerResults,
+      hasSecurityFindings: !!audit.result.securityFindings,
+      securityFindingsLength: audit.result.securityFindings?.length || 0,
+      hasHealthcheckResults: !!audit.result.healthcheckResults,
+      healthcheckResultsLength: audit.result.healthcheckResults?.length || 0,
+    });
+
+    // Generate PDF buffer
+    const pdfBuffer = await generateAuditPDF(audit.result);
+
+    // Set headers for PDF download
+    const urlDomain = (audit.url || "unknown")
+      .replace(/https?:\/\//, "")
+      .replace(/[\/\:]/g, "_");
+    const timestamp = new Date().toISOString().split("T")[0];
+    const filename = `WebAudit-AI-Report-${urlDomain}-${timestamp}.pdf`;
+
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
+    res.setHeader("Content-Length", pdfBuffer.length);
+
+    // Send PDF buffer
+    res.send(pdfBuffer);
+
+    console.log(
+      `✅ PDF generated successfully for audit ${auditId}, size: ${pdfBuffer.length} bytes`
+    );
+  } catch (error) {
+    console.error(`❌ PDF generation failed for audit ${auditId}:`, error);
+    console.error(`❌ Error stack:`, error.stack);
+    res.status(500).json({
+      success: false,
+      error: "Failed to generate PDF report",
+      message: error.message,
+      details: process.env.NODE_ENV === "development" ? error.stack : undefined,
+    });
+  }
 });
 
 // GET /api/health - API health check

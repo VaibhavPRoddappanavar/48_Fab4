@@ -1,114 +1,50 @@
 [
   {
-    "url": "http://demo.owasp-juice.shop",
+    "url": "https://jnnce.ac.in/",
     "status": 200,
-    "server": "Heroku",
+    "server": "Apache",
     "errorHints": []
   },
   {
-    "url": "http://demo.owasp-juice.shop/#/login",
+    "url": "https://jnnce.ac.in/index.html",
     "status": 200,
-    "server": "Heroku",
+    "server": "Apache",
     "errorHints": []
   },
   {
-    "url": "http://demo.owasp-juice.shop/#/contact",
-    "status": 200,
-    "server": "Heroku",
+    "url": "https://jnnce.ac.in/aboutjnnce.html",
+    "status": 404,
+    "server": "Apache",
     "errorHints": []
   },
   {
-    "url": "http://demo.owasp-juice.shop/#/about",
-    "status": 200,
-    "server": "Heroku",
+    "url": "https://jnnce.ac.in/vision.html",
+    "status": 404,
+    "server": "Apache",
     "errorHints": []
   },
   {
-    "url": "http://demo.owasp-juice.shop/#/photo-wall",
-    "status": 200,
-    "server": "Heroku",
+    "url": "https://jnnce.ac.in/aboutnes.html",
+    "status": 404,
+    "server": "Apache",
     "errorHints": []
   },
   {
-    "url": "http://demo.owasp-juice.shop/#/score-board",
-    "status": 200,
-    "server": "Heroku",
+    "url": "https://jnnce.ac.in/messagefromprincipal.html",
+    "status": 404,
+    "server": "Apache",
     "errorHints": []
   },
   {
-    "url": "http://demo.owasp-juice.shop/redirect?to=https://github.com/juice-shop/juice-shop",
-    "status": 200,
-    "server": "github.com",
+    "url": "https://jnnce.ac.in/messagefrompresident.html",
+    "status": 404,
+    "server": "Apache",
     "errorHints": []
   },
   {
-    "url": "http://demo.owasp-juice.shop/#/forgot-password",
-    "status": 200,
-    "server": "Heroku",
+    "url": "https://jnnce.ac.in/messagefromsecretary.html",
+    "status": 404,
+    "server": "Apache",
     "errorHints": []
-  },
-  {
-    "url": "GET https://demo.owasp-juice.shop/rest/admin/application-configuration",
-    "status": null,
-    "server": null,
-    "errorHints": [
-      "Request failed: Invalid URL"
-    ]
-  },
-  {
-    "url": "GET https://demo.owasp-juice.shop/rest/admin/application-version",
-    "status": null,
-    "server": null,
-    "errorHints": [
-      "Request failed: Invalid URL"
-    ]
-  },
-  {
-    "url": "GET https://demo.owasp-juice.shop/assets/i18n/en.json",
-    "status": null,
-    "server": null,
-    "errorHints": [
-      "Request failed: Invalid URL"
-    ]
-  },
-  {
-    "url": "GET https://demo.owasp-juice.shop/rest/languages",
-    "status": null,
-    "server": null,
-    "errorHints": [
-      "Request failed: Invalid URL"
-    ]
-  },
-  {
-    "url": "GET https://demo.owasp-juice.shop/rest/products/search?q=",
-    "status": null,
-    "server": null,
-    "errorHints": [
-      "Request failed: Invalid URL"
-    ]
-  },
-  {
-    "url": "GET https://demo.owasp-juice.shop/api/Challenges/?name=Score%20Board",
-    "status": null,
-    "server": null,
-    "errorHints": [
-      "Request failed: Invalid URL"
-    ]
-  },
-  {
-    "url": "GET https://demo.owasp-juice.shop/api/Quantitys/",
-    "status": null,
-    "server": null,
-    "errorHints": [
-      "Request failed: Invalid URL"
-    ]
-  },
-  {
-    "url": "GET https://demo.owasp-juice.shop/api/SecurityQuestions/",
-    "status": null,
-    "server": null,
-    "errorHints": [
-      "Request failed: Invalid URL"
-    ]
   }
 ]

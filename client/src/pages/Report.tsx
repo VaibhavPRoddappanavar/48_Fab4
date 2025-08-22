@@ -818,27 +818,53 @@ function Report() {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="text-center"
           >
-            <Card className="inline-block bg-gradient-to-br from-slate-900/90 to-slate-800/60 border border-slate-700/50 backdrop-blur-xl">
-              <CardContent className="p-8">
-                <div className="flex flex-col items-center gap-4">
-                  <div className="w-16 h-16 bg-gradient-to-r from-primary to-primary-variant rounded-2xl flex items-center justify-center">
-                    <Download className="h-8 w-8 text-white" />
+            <div className="flex flex-col lg:flex-row gap-6 justify-center items-center">
+              {/* JSON Download Card */}
+              <Card className="inline-block bg-gradient-to-br from-slate-900/90 to-slate-800/60 border border-slate-700/50 backdrop-blur-xl">
+                <CardContent className="p-8">
+                  <div className="flex flex-col items-center gap-4">
+                    <div className="w-16 h-16 bg-gradient-to-r from-primary to-primary-variant rounded-2xl flex items-center justify-center">
+                      <Download className="h-8 w-8 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-white mb-2">Export Full Report</h3>
+                      <p className="text-slate-400 mb-4">Download the complete audit results in JSON format</p>
+                    </div>
+                    <Button 
+                      size="lg"
+                      onClick={() => window.open(`http://localhost:5000/api/audit/${auditId}/download`, '_blank')}
+                      className="bg-gradient-to-r from-primary to-primary-variant hover:from-primary/90 hover:to-primary-variant/90 text-white font-semibold px-8 py-3 transition-all duration: 300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                    >
+                      <Download className="h-5 w-5 mr-2" />
+                      Download Report (JSON)
+                    </Button>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-white mb-2">Export Full Report</h3>
-                    <p className="text-slate-400 mb-4">Download the complete audit results in JSON format</p>
+                </CardContent>
+              </Card>
+
+              {/* PDF Download Card */}
+              <Card className="inline-block bg-gradient-to-br from-blue-900/90 to-blue-800/60 border border-blue-700/50 backdrop-blur-xl">
+                <CardContent className="p-8">
+                  <div className="flex flex-col items-center gap-4">
+                    <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center">
+                      <FileText className="h-8 w-8 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-white mb-2">Premium PDF Report</h3>
+                      <p className="text-slate-400 mb-4">Beautiful, formatted report perfect for presentations</p>
+                    </div>
+                    <Button 
+                      size="lg"
+                      onClick={() => window.open(`http://localhost:5000/api/audit/${auditId}/download-pdf`, '_blank')}
+                      className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold px-8 py-3 transition-all duration: 300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                    >
+                      <FileText className="h-5 w-5 mr-2" />
+                      Download Report (PDF)
+                    </Button>
                   </div>
-                  <Button 
-                    size="lg"
-                    onClick={() => window.open(`http://localhost:5000/api/audit/${auditId}/download`, '_blank')}
-                    className="bg-gradient-to-r from-primary to-primary-variant hover:from-primary/90 hover:to-primary-variant/90 text-white font-semibold px-8 py-3 transition-all duration: 300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                  >
-                    <Download className="h-5 w-5 mr-2" />
-                    Download Report (JSON)
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </div>
           </motion.div>
 
         </div>

@@ -1,0 +1,363 @@
+{
+  "url": "https://jnnce.ac.in/",
+  "timestamp": "2025-08-22T11:07:50.045Z",
+  "overallScore": 64,
+  "scores": {
+    "performance": 40,
+    "accessibility": 77,
+    "bestPractices": 85,
+    "seo": 54,
+    "pwa": 50
+  },
+  "metrics": {
+    "performance": {
+      "score": 40,
+      "metrics": {
+        "domContentLoaded": 99.69999992847443,
+        "loadComplete": 0,
+        "firstPaint": 4120,
+        "firstContentfulPaint": 4120,
+        "timeToInteractive": 2662.100000023842,
+        "dnsLookup": 0,
+        "tcpConnect": 0,
+        "serverResponse": 1390.5,
+        "totalResources": 46,
+        "transferSize": 102020,
+        "encodedBodySize": 101720,
+        "decodedBodySize": 101720,
+        "largestContentfulPaint": 7452,
+        "cumulativeLayoutShift": 0,
+        "totalLoadTime": 6450,
+        "responseStatus": 200,
+        "responseHeaders": {
+          "accept-ranges": "bytes",
+          "connection": "Keep-Alive",
+          "content-length": "101720",
+          "content-type": "text/html",
+          "date": "Fri, 22 Aug 2025 11:07:42 GMT",
+          "keep-alive": "timeout=5, max=98",
+          "last-modified": "Thu, 14 Aug 2025 17:22:13 GMT",
+          "server": "Apache"
+        }
+      },
+      "opportunities": [
+        {
+          "type": "improve-fcp",
+          "description": "Improve First Contentful Paint",
+          "suggestion": "Optimize critical rendering path, reduce server response time"
+        },
+        {
+          "type": "improve-lcp",
+          "description": "Improve Largest Contentful Paint",
+          "suggestion": "Optimize largest content element, use faster hosting"
+        }
+      ]
+    },
+    "accessibility": {
+      "score": 77,
+      "issues": [
+        {
+          "type": "missing-alt-text",
+          "severity": "high",
+          "count": 31,
+          "description": "Images missing alt text for screen readers"
+        },
+        {
+          "type": "heading-hierarchy",
+          "severity": "medium",
+          "count": 3,
+          "description": "Improper heading hierarchy detected"
+        }
+      ],
+      "summary": {
+        "totalImages": 86,
+        "imagesWithAlt": 55,
+        "totalForms": 0,
+        "totalHeadings": 41,
+        "elementsWithAria": 30,
+        "focusableElements": 498,
+        "contrastIssues": 0
+      }
+    },
+    "bestPractices": {
+      "score": 85,
+      "issues": [
+        {
+          "type": "large-dom-size",
+          "severity": "medium",
+          "count": 1715,
+          "description": "Large DOM size may impact performance"
+        },
+        {
+          "type": "excessive-inline-styles",
+          "severity": "low",
+          "count": 132,
+          "description": "Many inline styles found, consider using CSS classes"
+        }
+      ],
+      "summary": {
+        "totalElements": 1715,
+        "maxDomDepth": 16,
+        "totalScripts": 17,
+        "totalStylesheets": 12,
+        "totalImages": 86,
+        "inlineStyles": 132,
+        "hasViewport": true,
+        "hasFavicon": true,
+        "hasCharset": true
+      }
+    },
+    "seo": {
+      "score": 54,
+      "issues": [
+        {
+          "type": "title-too-long",
+          "severity": "medium",
+          "description": "Title tag too long (over 60 characters)"
+        },
+        {
+          "type": "missing-meta-description",
+          "severity": "high",
+          "description": "Page missing meta description"
+        },
+        {
+          "type": "missing-h1",
+          "severity": "high",
+          "description": "Page missing H1 heading"
+        },
+        {
+          "type": "missing-lang-attribute",
+          "severity": "medium",
+          "description": "HTML missing lang attribute"
+        }
+      ],
+      "data": {
+        "title": "JNNCE | Jawaharlal Nehru New College of Engineering, Shivamogga",
+        "titleLength": 63,
+        "metaDescription": null,
+        "metaDescriptionLength": 0,
+        "h1Count": 0,
+        "h1Text": null,
+        "canonical": null,
+        "language": "",
+        "robots": null,
+        "headingStructure": {
+          "h1": 0,
+          "h2": 8,
+          "h3": 12,
+          "h4": 21,
+          "h5": 0,
+          "h6": 0
+        }
+      }
+    },
+    "pwa": {
+      "score": 50,
+      "features": {
+        "hasServiceWorker": true,
+        "hasManifest": false,
+        "isResponsive": true,
+        "worksOffline": false,
+        "installable": false
+      },
+      "manifestUrl": null,
+      "viewport": "width=device-width, initial-scale=1"
+    },
+    "metadata": {
+      "url": "https://jnnce.ac.in/jnndemo/",
+      "title": "JNNCE | Jawaharlal Nehru New College of Engineering, Shivamogga",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/136.0.0.0 Safari/537.36",
+      "timestamp": "2025-08-22T11:07:50.044Z",
+      "viewport": {
+        "width": 1920,
+        "height": 1080,
+        "devicePixelRatio": 1
+      },
+      "technologies": {
+        "hasJQuery": true,
+        "hasReact": false,
+        "hasAngular": false,
+        "hasVue": false,
+        "hasBootstrap": true
+      }
+    }
+  },
+  "issueBreakdown": {
+    "performance": {
+      "score": 40,
+      "issues": [
+        {
+          "type": "slow-loading",
+          "severity": "high",
+          "description": "Slow loading: 6450ms (should be < 3000ms)",
+          "currentValue": 6450,
+          "targetValue": 3000,
+          "unit": "ms"
+        },
+        {
+          "type": "slow-fcp",
+          "severity": "high",
+          "description": "Slow First Contentful Paint: 4120ms (should be < 1800ms)",
+          "currentValue": 4120,
+          "targetValue": 1800,
+          "unit": "ms"
+        },
+        {
+          "type": "slow-lcp",
+          "severity": "high",
+          "description": "Slow Largest Contentful Paint: 7452ms (should be < 2500ms)",
+          "currentValue": 7452,
+          "targetValue": 2500,
+          "unit": "ms"
+        }
+      ],
+      "recommendations": [
+        "Optimize server response time, enable compression",
+        "Optimize critical rendering path, reduce render-blocking resources",
+        "Optimize largest content element, use faster hosting"
+      ],
+      "opportunities": [
+        {
+          "type": "improve-fcp",
+          "description": "Improve First Contentful Paint",
+          "suggestion": "Optimize critical rendering path, reduce server response time"
+        },
+        {
+          "type": "improve-lcp",
+          "description": "Improve Largest Contentful Paint",
+          "suggestion": "Optimize largest content element, use faster hosting"
+        }
+      ]
+    },
+    "accessibility": {
+      "score": 77,
+      "issues": [
+        {
+          "type": "missing-alt-text",
+          "severity": "high",
+          "description": "Images missing alt text for screen readers",
+          "count": 31
+        },
+        {
+          "type": "heading-hierarchy",
+          "severity": "medium",
+          "description": "Improper heading hierarchy detected",
+          "count": 3
+        }
+      ],
+      "recommendations": [
+        "Add meaningful alt attributes to all images",
+        "Use proper heading order (h1 → h2 → h3)"
+      ],
+      "stats": {
+        "totalImages": 86,
+        "imagesWithAlt": 55,
+        "totalForms": 0,
+        "totalHeadings": 41,
+        "elementsWithAria": 30,
+        "focusableElements": 498,
+        "contrastIssues": 0
+      }
+    },
+    "bestPractices": {
+      "score": 85,
+      "issues": [
+        {
+          "type": "large-dom-size",
+          "severity": "medium",
+          "description": "Large DOM size may impact performance",
+          "count": 1715,
+          "depth": null
+        },
+        {
+          "type": "excessive-inline-styles",
+          "severity": "low",
+          "description": "Many inline styles found, consider using CSS classes",
+          "count": 132,
+          "depth": null
+        }
+      ],
+      "recommendations": [
+        "Reduce total elements, use pagination or lazy loading",
+        "Move inline styles to CSS classes"
+      ]
+    },
+    "seo": {
+      "score": 54,
+      "issues": [
+        {
+          "type": "title-too-long",
+          "severity": "medium",
+          "description": "Title tag too long (over 60 characters)"
+        },
+        {
+          "type": "missing-meta-description",
+          "severity": "high",
+          "description": "Page missing meta description"
+        },
+        {
+          "type": "missing-h1",
+          "severity": "high",
+          "description": "Page missing H1 heading"
+        },
+        {
+          "type": "missing-lang-attribute",
+          "severity": "medium",
+          "description": "HTML missing lang attribute"
+        }
+      ],
+      "recommendations": [
+        "Keep title under 60 characters",
+        "Add <meta name=\"description\" content=\"...\">",
+        "Add exactly one H1 heading per page",
+        "Add lang attribute to <html> tag"
+      ],
+      "currentValues": {
+        "title": "JNNCE | Jawaharlal Nehru New College of Engineering, Shivamogga",
+        "titleLength": 63,
+        "metaDescription": null,
+        "metaDescriptionLength": 0,
+        "h1Count": 0,
+        "h1Text": null,
+        "canonical": null,
+        "language": "",
+        "robots": null,
+        "headingStructure": {
+          "h1": 0,
+          "h2": 8,
+          "h3": 12,
+          "h4": 21,
+          "h5": 0,
+          "h6": 0
+        }
+      }
+    },
+    "pwa": {
+      "score": 50,
+      "issues": [
+        {
+          "type": "no-manifest",
+          "severity": "medium",
+          "description": "No Web App Manifest found"
+        },
+        {
+          "type": "not-installable",
+          "severity": "medium",
+          "description": "Not installable as PWA"
+        }
+      ],
+      "recommendations": [
+        "Add manifest.json for app-like experience",
+        "Ensure manifest has name, start_url, and icons"
+      ],
+      "features": {
+        "hasServiceWorker": true,
+        "hasManifest": false,
+        "isResponsive": true,
+        "worksOffline": false,
+        "installable": false
+      }
+    }
+  },
+  "lastUpdated": "2025-08-22T11:07:50.497Z"
+}

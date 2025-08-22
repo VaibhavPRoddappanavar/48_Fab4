@@ -1,68 +1,154 @@
 {
-  "url": "http://demo.owasp-juice.shop/",
-  "timestamp": "2025-08-22T10:45:02.597Z",
+  "url": "https://jnnce.ac.in/",
+  "timestamp": "2025-08-22T11:05:40.041Z",
   "crawlerResults": {
     "quickCheck": {
-      "generatedAt": "2025-08-22T10:45:12.225Z",
+      "generatedAt": "2025-08-22T11:05:52.887Z",
       "pages": [
-        "http://demo.owasp-juice.shop/",
-        "http://demo.owasp-juice.shop/#/login",
-        "http://demo.owasp-juice.shop/#/contact",
-        "http://demo.owasp-juice.shop/#/about",
-        "http://demo.owasp-juice.shop/#/photo-wall",
-        "http://demo.owasp-juice.shop/#/score-board",
-        "http://demo.owasp-juice.shop/redirect?to=https://github.com/juice-shop/juice-shop",
-        "http://demo.owasp-juice.shop/#/forgot-password"
+        "https://jnnce.ac.in/",
+        "https://jnnce.ac.in/index.html",
+        "https://jnnce.ac.in/aboutjnnce.html",
+        "https://jnnce.ac.in/vision.html",
+        "https://jnnce.ac.in/aboutnes.html",
+        "https://jnnce.ac.in/messagefromprincipal.html",
+        "https://jnnce.ac.in/messagefrompresident.html",
+        "https://jnnce.ac.in/messagefromsecretary.html"
       ],
-      "apiEndpoints": [
-        "GET https://demo.owasp-juice.shop/rest/admin/application-version",
-        "GET https://demo.owasp-juice.shop/assets/i18n/en.json",
-        "GET https://demo.owasp-juice.shop/rest/admin/application-configuration",
-        "GET https://demo.owasp-juice.shop/rest/languages",
-        "GET https://demo.owasp-juice.shop/rest/products/search?q=",
-        "GET https://demo.owasp-juice.shop/api/Challenges/?name=Score%20Board",
-        "GET https://demo.owasp-juice.shop/api/Quantitys/",
-        "GET https://demo.owasp-juice.shop/api/SecurityQuestions/"
-      ]
+      "apiEndpoints": []
     },
     "deepCheck": {
-      "generatedAt": "2025-08-22T10:46:00.501Z",
+      "generatedAt": "2025-08-22T11:06:57.405Z",
       "pages": [
-        "http://demo.owasp-juice.shop/",
-        "http://demo.owasp-juice.shop/#/login",
-        "http://demo.owasp-juice.shop/#/contact",
-        "http://demo.owasp-juice.shop/#/about",
-        "http://demo.owasp-juice.shop/#/photo-wall",
-        "http://demo.owasp-juice.shop/#/score-board",
-        "http://demo.owasp-juice.shop/redirect?to=https://github.com/juice-shop/juice-shop",
-        "http://demo.owasp-juice.shop/#/forgot-password",
-        "http://demo.owasp-juice.shop/#/register"
+        "https://jnnce.ac.in/",
+        "https://jnnce.ac.in/index.html",
+        "https://jnnce.ac.in/aboutjnnce.html",
+        "https://jnnce.ac.in/vision.html",
+        "https://jnnce.ac.in/aboutnes.html",
+        "https://jnnce.ac.in/messagefromprincipal.html",
+        "https://jnnce.ac.in/messagefrompresident.html",
+        "https://jnnce.ac.in/messagefromsecretary.html",
+        "https://jnnce.ac.in/messagefromac.html",
+        "https://jnnce.ac.in/#",
+        "https://jnnce.ac.in/governingcouncil.html",
+        "https://jnnce.ac.in/pdf/JNNCE-Committees-Statuatory.pdf",
+        "https://jnnce.ac.in/pdf/JNNCE-Committees-Admin.pdf",
+        "https://jnnce.ac.in/principal.html",
+        "https://jnnce.ac.in/keyfunctionaries.html",
+        "https://jnnce.ac.in/administrativesection.html",
+        "https://jnnce.ac.in/downloads.html",
+        "https://jnnce.ac.in/ranking.html",
+        "https://jnnce.ac.in/greenpolicy.html",
+        "https://jnnce.ac.in/empbenefits.html",
+        "https://jnnce.ac.in/automation.html",
+        "https://jnnce.ac.in/contactus.html",
+        "https://jnnce.ac.in/ug.html",
+        "https://jnnce.ac.in/pg.html",
+        "https://jnnce.ac.in/phd.html",
+        "https://jnnce.ac.in/prospectus.html",
+        "https://jnnce.ac.in/admissioncontact.html",
+        "https://jnnce.ac.in/departments.html",
+        "https://jnnce.ac.in/deptce.html",
+        "https://jnnce.ac.in/deptme.html",
+        "https://jnnce.ac.in/depteee.html",
+        "https://jnnce.ac.in/deptece.html",
+        "https://jnnce.ac.in/deptcse.html",
+        "https://jnnce.ac.in/deptise.html",
+        "https://jnnce.ac.in/depttce.html",
+        "https://jnnce.ac.in/depaiml.html",
+        "https://jnnce.ac.in/deptrai.html",
+        "https://jnnce.ac.in/deptms.html",
+        "https://jnnce.ac.in/deptmca.html",
+        "https://jnnce.ac.in/deptphy.html",
+        "https://jnnce.ac.in/deptche.html",
+        "https://jnnce.ac.in/deptmat.html",
+        "https://jnnce.ac.in/coe.html",
+        "https://jnnce.ac.in/iei.html",
+        "https://jnnce.ac.in/csi.html",
+        "https://jnnce.ac.in/sae.html",
+        "https://jnnce.ac.in/iif.html",
+        "https://jnnce.ac.in/iete.html",
+        "https://jnnce.ac.in/iste.html",
+        "https://jnnce.ac.in/ieee.html",
+        "https://jnnce.ac.in/mou.html",
+        "https://jnnce.ac.in/newsletter.html",
+        "https://jnnce.ac.in/library.html",
+        "https://jnnce.ac.in/hostel.html",
+        "https://jnnce.ac.in/sports.html",
+        "https://jnnce.ac.in/transport.html",
+        "https://jnnce.ac.in/mcentre.html",
+        "https://jnnce.ac.in/jssc.html",
+        "https://jnnce.ac.in/guesthouse.html",
+        "https://jnnce.ac.in/pof.html",
+        "https://jnnce.ac.in/cba.html",
+        "https://jnnce.ac.in/cant.html",
+        "https://jnnce.ac.in/scholarship.html",
+        "https://jnnce.ac.in/mentoring.html",
+        "https://jnnce.ac.in/antiragging.html",
+        "https://jnnce.ac.in/exam.html",
+        "https://jnnce.ac.in/feepayment.html",
+        "https://jnnce.ac.in/nss.html",
+        "https://jnnce.ac.in/redcross.html",
+        "https://jnnce.ac.in/cc.html",
+        "https://jnnce.ac.in/nptel.html",
+        "https://jnnce.ac.in/culturalcrew.html",
+        "https://jnnce.ac.in/studentclubs.html",
+        "https://jnnce.ac.in/accidentalinsurance.html",
+        "https://jnnce.ac.in/meritoriousawards.html",
+        "https://jnnce.ac.in/cie.html",
+        "https://jnnce.ac.in/nainc.html",
+        "https://jnnce.ac.in/newgeniedc.html",
+        "https://jnnce.ac.in/cart.html",
+        "https://jnnce.ac.in/tbi.html",
+        "https://jnnce.ac.in/cieinit.html",
+        "https://jnnce.ac.in/startupsd.html",
+        "https://jnnce.ac.in/rcentre.html",
+        "https://jnnce.ac.in/rpark.html",
+        "https://jnnce.ac.in/consultaancy.html",
+        "https://jnnce.ac.in/eav.html",
+        "https://jnnce.ac.in/jjem.html",
+        "https://jnnce.ac.in/funding.html",
+        "https://jnnce.ac.in/placement.html",
+        "https://jnnce.ac.in/training.html",
+        "http://jnnce.ac.in/internship",
+        "https://jnnce.ac.in/iqac.html",
+        "https://jnnce.ac.in/cm.html",
+        "https://jnnce.ac.in/iqacmembers.html",
+        "https://jnnce.ac.in/iqac_calendar.pdf",
+        "https://jnnce.ac.in/iqacmeepro.html",
+        "https://jnnce.ac.in/alumni.html",
+        "https://jnnce.ac.in/gallery.html",
+        "https://jnnce.ac.in/campuslife.html",
+        "https://jnnce.ac.in/media.html",
+        "https://jnnce.ac.in/jnncecareer.html",
+        "https://jnnce.ac.in/nirf.html",
+        "https://jnnce.ac.in/contact.html",
+        "https://jnnce.ac.in/ciecontact.html",
+        "https://jnnce.ac.in/facility.html",
+        "https://jnnce.ac.in/research.html",
+        "https://jnnce.ac.in/grievance.html",
+        "https://jnnce.ac.in/pdf/jnnce_newsletter.pdf",
+        "https://jnnce.ac.in/result.html",
+        "https://jnnce.ac.in/admission.html",
+        "https://jnnce.ac.in/index.html#",
+        "https://jnnce.ac.in/team.html",
+        "https://jnnce.ac.in/magazines.html",
+        "https://jnnce.ac.in/certificates.html",
+        "https://jnnce.ac.in/events.html",
+        "https://jnnce.ac.in/index.html#events",
+        "https://jnnce.ac.in/tug%20of%20thunder.html",
+        "https://jnnce.ac.in/throwball.html"
       ],
-      "apiEndpoints": [
-        "GET https://demo.owasp-juice.shop/rest/admin/application-version",
-        "GET https://demo.owasp-juice.shop/assets/i18n/en.json",
-        "GET https://demo.owasp-juice.shop/rest/admin/application-configuration",
-        "GET https://demo.owasp-juice.shop/rest/languages",
-        "GET https://demo.owasp-juice.shop/rest/products/search?q=",
-        "GET https://demo.owasp-juice.shop/api/Challenges/?name=Score%20Board",
-        "GET https://demo.owasp-juice.shop/api/Quantitys/",
-        "GET https://demo.owasp-juice.shop/api/SecurityQuestions/",
-        "GET https://demo.owasp-juice.shop/rest/user/whoami",
-        "GET https://demo.owasp-juice.shop/rest/captcha/",
-        "GET https://demo.owasp-juice.shop/api/Feedbacks/",
-        "GET https://demo.owasp-juice.shop/rest/memories/",
-        "GET https://demo.owasp-juice.shop/api/Challenges/?sort=name"
-      ]
+      "apiEndpoints": []
     },
     "totalPages": 8,
-    "totalEndpoints": 8
+    "totalEndpoints": 0
   },
   "securityFindings": [
     {
-      "route": "http://demo.owasp-juice.shop/",
+      "route": "https://jnnce.ac.in/",
       "attack": "headers",
-      "evidence": "Critical headers missing: CSP, Server: Heroku",
-      "severity": "medium",
+      "evidence": "Critical headers missing: CSP, X-Frame-Options, Server: Apache",
+      "severity": "high",
       "solution": {
         "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
         "remediation_steps": [
@@ -93,259 +179,6 @@
           }
         ],
         "cwe_cve": "CWE-16",
-        "priority": "P1",
-        "estimated_effort": "med",
-        "confidence": "high",
-        "waf_rules": [],
-        "notes": "Auto-generated solution based on vulnerability type"
-      }
-    },
-    {
-      "route": "http://demo.owasp-juice.shop/#/login",
-      "attack": "headers",
-      "evidence": "Critical headers missing: CSP, Server: Heroku",
-      "severity": "medium",
-      "solution": {
-        "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
-        "remediation_steps": [
-          "Configure Content Security Policy (CSP) to prevent XSS attacks",
-          "Enable HTTP Strict Transport Security (HSTS) for HTTPS enforcement",
-          "Add X-Frame-Options to prevent clickjacking attacks",
-          "Set X-Content-Type-Options to prevent MIME type sniffing"
-        ],
-        "code_snippet": "// Node.js Express with Helmet\nconst helmet = require('helmet');\napp.use(helmet({\n  contentSecurityPolicy: {\n    directives: {\n      defaultSrc: [\"'self'\"],\n      styleSrc: [\"'self'\", \"'unsafe-inline'\"]\n    }\n  },\n  hsts: { maxAge: 31536000, includeSubDomains: true }\n}));\n\n// Nginx configuration\nadd_header X-Frame-Options \"SAMEORIGIN\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;",
-        "resource_links": [
-          {
-            "type": "doc",
-            "title": "OWASP Secure Headers Project",
-            "url": "https://owasp.org/www-project-secure-headers/",
-            "youtube_id": null
-          },
-          {
-            "type": "blog",
-            "title": "Security Headers Best Practices",
-            "url": "https://securityheaders.com/",
-            "youtube_id": null
-          },
-          {
-            "type": "youtube",
-            "title": "Web Security Headers Explained",
-            "url": "https://www.youtube.com/watch?v=zEV3HOuM_Vw",
-            "youtube_id": "zEV3HOuM_Vw"
-          }
-        ],
-        "cwe_cve": "CWE-16",
-        "priority": "P1",
-        "estimated_effort": "med",
-        "confidence": "high",
-        "waf_rules": [],
-        "notes": "Auto-generated solution based on vulnerability type"
-      }
-    },
-    {
-      "route": "http://demo.owasp-juice.shop/#/contact",
-      "attack": "headers",
-      "evidence": "Critical headers missing: CSP, Server: Heroku",
-      "severity": "medium",
-      "solution": {
-        "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
-        "remediation_steps": [
-          "Configure Content Security Policy (CSP) to prevent XSS attacks",
-          "Enable HTTP Strict Transport Security (HSTS) for HTTPS enforcement",
-          "Add X-Frame-Options to prevent clickjacking attacks",
-          "Set X-Content-Type-Options to prevent MIME type sniffing"
-        ],
-        "code_snippet": "// Node.js Express with Helmet\nconst helmet = require('helmet');\napp.use(helmet({\n  contentSecurityPolicy: {\n    directives: {\n      defaultSrc: [\"'self'\"],\n      styleSrc: [\"'self'\", \"'unsafe-inline'\"]\n    }\n  },\n  hsts: { maxAge: 31536000, includeSubDomains: true }\n}));\n\n// Nginx configuration\nadd_header X-Frame-Options \"SAMEORIGIN\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;",
-        "resource_links": [
-          {
-            "type": "doc",
-            "title": "OWASP Secure Headers Project",
-            "url": "https://owasp.org/www-project-secure-headers/",
-            "youtube_id": null
-          },
-          {
-            "type": "blog",
-            "title": "Security Headers Best Practices",
-            "url": "https://securityheaders.com/",
-            "youtube_id": null
-          },
-          {
-            "type": "youtube",
-            "title": "Web Security Headers Explained",
-            "url": "https://www.youtube.com/watch?v=zEV3HOuM_Vw",
-            "youtube_id": "zEV3HOuM_Vw"
-          }
-        ],
-        "cwe_cve": "CWE-16",
-        "priority": "P1",
-        "estimated_effort": "med",
-        "confidence": "high",
-        "waf_rules": [],
-        "notes": "Auto-generated solution based on vulnerability type"
-      }
-    },
-    {
-      "route": "http://demo.owasp-juice.shop/#/about",
-      "attack": "headers",
-      "evidence": "Critical headers missing: CSP, Server: Heroku",
-      "severity": "medium",
-      "solution": {
-        "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
-        "remediation_steps": [
-          "Configure Content Security Policy (CSP) to prevent XSS attacks",
-          "Enable HTTP Strict Transport Security (HSTS) for HTTPS enforcement",
-          "Add X-Frame-Options to prevent clickjacking attacks",
-          "Set X-Content-Type-Options to prevent MIME type sniffing"
-        ],
-        "code_snippet": "// Node.js Express with Helmet\nconst helmet = require('helmet');\napp.use(helmet({\n  contentSecurityPolicy: {\n    directives: {\n      defaultSrc: [\"'self'\"],\n      styleSrc: [\"'self'\", \"'unsafe-inline'\"]\n    }\n  },\n  hsts: { maxAge: 31536000, includeSubDomains: true }\n}));\n\n// Nginx configuration\nadd_header X-Frame-Options \"SAMEORIGIN\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;",
-        "resource_links": [
-          {
-            "type": "doc",
-            "title": "OWASP Secure Headers Project",
-            "url": "https://owasp.org/www-project-secure-headers/",
-            "youtube_id": null
-          },
-          {
-            "type": "blog",
-            "title": "Security Headers Best Practices",
-            "url": "https://securityheaders.com/",
-            "youtube_id": null
-          },
-          {
-            "type": "youtube",
-            "title": "Web Security Headers Explained",
-            "url": "https://www.youtube.com/watch?v=zEV3HOuM_Vw",
-            "youtube_id": "zEV3HOuM_Vw"
-          }
-        ],
-        "cwe_cve": "CWE-16",
-        "priority": "P1",
-        "estimated_effort": "med",
-        "confidence": "high",
-        "waf_rules": [],
-        "notes": "Auto-generated solution based on vulnerability type"
-      }
-    },
-    {
-      "route": "http://demo.owasp-juice.shop/#/photo-wall",
-      "attack": "headers",
-      "evidence": "Critical headers missing: CSP, Server: Heroku",
-      "severity": "medium",
-      "solution": {
-        "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
-        "remediation_steps": [
-          "Configure Content Security Policy (CSP) to prevent XSS attacks",
-          "Enable HTTP Strict Transport Security (HSTS) for HTTPS enforcement",
-          "Add X-Frame-Options to prevent clickjacking attacks",
-          "Set X-Content-Type-Options to prevent MIME type sniffing"
-        ],
-        "code_snippet": "// Node.js Express with Helmet\nconst helmet = require('helmet');\napp.use(helmet({\n  contentSecurityPolicy: {\n    directives: {\n      defaultSrc: [\"'self'\"],\n      styleSrc: [\"'self'\", \"'unsafe-inline'\"]\n    }\n  },\n  hsts: { maxAge: 31536000, includeSubDomains: true }\n}));\n\n// Nginx configuration\nadd_header X-Frame-Options \"SAMEORIGIN\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;",
-        "resource_links": [
-          {
-            "type": "doc",
-            "title": "OWASP Secure Headers Project",
-            "url": "https://owasp.org/www-project-secure-headers/",
-            "youtube_id": null
-          },
-          {
-            "type": "blog",
-            "title": "Security Headers Best Practices",
-            "url": "https://securityheaders.com/",
-            "youtube_id": null
-          },
-          {
-            "type": "youtube",
-            "title": "Web Security Headers Explained",
-            "url": "https://www.youtube.com/watch?v=zEV3HOuM_Vw",
-            "youtube_id": "zEV3HOuM_Vw"
-          }
-        ],
-        "cwe_cve": "CWE-16",
-        "priority": "P1",
-        "estimated_effort": "med",
-        "confidence": "high",
-        "waf_rules": [],
-        "notes": "Auto-generated solution based on vulnerability type"
-      }
-    },
-    {
-      "route": "http://demo.owasp-juice.shop/#/score-board",
-      "attack": "headers",
-      "evidence": "Critical headers missing: CSP, Server: Heroku",
-      "severity": "medium",
-      "solution": {
-        "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
-        "remediation_steps": [
-          "Configure Content Security Policy (CSP) to prevent XSS attacks",
-          "Enable HTTP Strict Transport Security (HSTS) for HTTPS enforcement",
-          "Add X-Frame-Options to prevent clickjacking attacks",
-          "Set X-Content-Type-Options to prevent MIME type sniffing"
-        ],
-        "code_snippet": "// Node.js Express with Helmet\nconst helmet = require('helmet');\napp.use(helmet({\n  contentSecurityPolicy: {\n    directives: {\n      defaultSrc: [\"'self'\"],\n      styleSrc: [\"'self'\", \"'unsafe-inline'\"]\n    }\n  },\n  hsts: { maxAge: 31536000, includeSubDomains: true }\n}));\n\n// Nginx configuration\nadd_header X-Frame-Options \"SAMEORIGIN\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;",
-        "resource_links": [
-          {
-            "type": "doc",
-            "title": "OWASP Secure Headers Project",
-            "url": "https://owasp.org/www-project-secure-headers/",
-            "youtube_id": null
-          },
-          {
-            "type": "blog",
-            "title": "Security Headers Best Practices",
-            "url": "https://securityheaders.com/",
-            "youtube_id": null
-          },
-          {
-            "type": "youtube",
-            "title": "Web Security Headers Explained",
-            "url": "https://www.youtube.com/watch?v=zEV3HOuM_Vw",
-            "youtube_id": "zEV3HOuM_Vw"
-          }
-        ],
-        "cwe_cve": "CWE-16",
-        "priority": "P1",
-        "estimated_effort": "med",
-        "confidence": "high",
-        "waf_rules": [],
-        "notes": "Auto-generated solution based on vulnerability type"
-      }
-    },
-    {
-      "route": "http://demo.owasp-juice.shop/redirect?to=https://github.com/juice-shop/juice-shop",
-      "attack": "sqli",
-      "payload": "http://demo.owasp-juice.shop/redirect?to=https://github.com/juice-shop/juice-shop&q=%27",
-      "evidence": "SQL error signature detected",
-      "severity": "critical",
-      "solution": {
-        "solution": "Use parameterized queries and input validation to prevent SQL injection",
-        "remediation_steps": [
-          "Replace dynamic SQL with parameterized queries or prepared statements",
-          "Validate and sanitize all user inputs before database operations",
-          "Implement least privilege database access controls",
-          "Use stored procedures with proper input validation"
-        ],
-        "code_snippet": "// Parameterized queries (Node.js + MySQL)\nconst query = 'SELECT * FROM users WHERE id = ? AND name = ?';\ndb.query(query, [userId, userName], (err, results) => {\n  // Handle results safely\n});\n\n// Prepared statements (PHP)\n$stmt = $pdo->prepare('SELECT * FROM users WHERE id = ? AND name = ?');\n$stmt->execute([$userId, $userName]);",
-        "resource_links": [
-          {
-            "type": "doc",
-            "title": "OWASP SQL Injection Prevention",
-            "url": "https://owasp.org/www-community/attacks/SQL_Injection",
-            "youtube_id": null
-          },
-          {
-            "type": "blog",
-            "title": "SQL Injection Prevention Cheat Sheet",
-            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html",
-            "youtube_id": null
-          },
-          {
-            "type": "youtube",
-            "title": "SQL Injection Explained",
-            "url": "https://www.youtube.com/watch?v=ciNHn38EyRc",
-            "youtube_id": "ciNHn38EyRc"
-          }
-        ],
-        "cwe_cve": "CWE-89",
         "priority": "P0",
         "estimated_effort": "med",
         "confidence": "high",
@@ -354,10 +187,10 @@
       }
     },
     {
-      "route": "http://demo.owasp-juice.shop/redirect?to=https://github.com/juice-shop/juice-shop",
+      "route": "https://jnnce.ac.in/index.html",
       "attack": "headers",
-      "evidence": "Critical headers missing: Server: github.com",
-      "severity": "medium",
+      "evidence": "Critical headers missing: CSP, X-Frame-Options, Server: Apache",
+      "severity": "high",
       "solution": {
         "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
         "remediation_steps": [
@@ -388,7 +221,7 @@
           }
         ],
         "cwe_cve": "CWE-16",
-        "priority": "P1",
+        "priority": "P0",
         "estimated_effort": "med",
         "confidence": "high",
         "waf_rules": [],
@@ -396,10 +229,10 @@
       }
     },
     {
-      "route": "http://demo.owasp-juice.shop/#/forgot-password",
+      "route": "https://jnnce.ac.in/aboutjnnce.html",
       "attack": "headers",
-      "evidence": "Critical headers missing: CSP, Server: Heroku",
-      "severity": "medium",
+      "evidence": "Critical headers missing: CSP, X-Frame-Options, Server: Apache",
+      "severity": "high",
       "solution": {
         "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
         "remediation_steps": [
@@ -430,7 +263,217 @@
           }
         ],
         "cwe_cve": "CWE-16",
-        "priority": "P1",
+        "priority": "P0",
+        "estimated_effort": "med",
+        "confidence": "high",
+        "waf_rules": [],
+        "notes": "Auto-generated solution based on vulnerability type"
+      }
+    },
+    {
+      "route": "https://jnnce.ac.in/vision.html",
+      "attack": "headers",
+      "evidence": "Critical headers missing: CSP, X-Frame-Options, Server: Apache",
+      "severity": "high",
+      "solution": {
+        "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
+        "remediation_steps": [
+          "Configure Content Security Policy (CSP) to prevent XSS attacks",
+          "Enable HTTP Strict Transport Security (HSTS) for HTTPS enforcement",
+          "Add X-Frame-Options to prevent clickjacking attacks",
+          "Set X-Content-Type-Options to prevent MIME type sniffing"
+        ],
+        "code_snippet": "// Node.js Express with Helmet\nconst helmet = require('helmet');\napp.use(helmet({\n  contentSecurityPolicy: {\n    directives: {\n      defaultSrc: [\"'self'\"],\n      styleSrc: [\"'self'\", \"'unsafe-inline'\"]\n    }\n  },\n  hsts: { maxAge: 31536000, includeSubDomains: true }\n}));\n\n// Nginx configuration\nadd_header X-Frame-Options \"SAMEORIGIN\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;",
+        "resource_links": [
+          {
+            "type": "doc",
+            "title": "OWASP Secure Headers Project",
+            "url": "https://owasp.org/www-project-secure-headers/",
+            "youtube_id": null
+          },
+          {
+            "type": "blog",
+            "title": "Security Headers Best Practices",
+            "url": "https://securityheaders.com/",
+            "youtube_id": null
+          },
+          {
+            "type": "youtube",
+            "title": "Web Security Headers Explained",
+            "url": "https://www.youtube.com/watch?v=zEV3HOuM_Vw",
+            "youtube_id": "zEV3HOuM_Vw"
+          }
+        ],
+        "cwe_cve": "CWE-16",
+        "priority": "P0",
+        "estimated_effort": "med",
+        "confidence": "high",
+        "waf_rules": [],
+        "notes": "Auto-generated solution based on vulnerability type"
+      }
+    },
+    {
+      "route": "https://jnnce.ac.in/aboutnes.html",
+      "attack": "headers",
+      "evidence": "Critical headers missing: CSP, X-Frame-Options, Server: Apache",
+      "severity": "high",
+      "solution": {
+        "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
+        "remediation_steps": [
+          "Configure Content Security Policy (CSP) to prevent XSS attacks",
+          "Enable HTTP Strict Transport Security (HSTS) for HTTPS enforcement",
+          "Add X-Frame-Options to prevent clickjacking attacks",
+          "Set X-Content-Type-Options to prevent MIME type sniffing"
+        ],
+        "code_snippet": "// Node.js Express with Helmet\nconst helmet = require('helmet');\napp.use(helmet({\n  contentSecurityPolicy: {\n    directives: {\n      defaultSrc: [\"'self'\"],\n      styleSrc: [\"'self'\", \"'unsafe-inline'\"]\n    }\n  },\n  hsts: { maxAge: 31536000, includeSubDomains: true }\n}));\n\n// Nginx configuration\nadd_header X-Frame-Options \"SAMEORIGIN\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;",
+        "resource_links": [
+          {
+            "type": "doc",
+            "title": "OWASP Secure Headers Project",
+            "url": "https://owasp.org/www-project-secure-headers/",
+            "youtube_id": null
+          },
+          {
+            "type": "blog",
+            "title": "Security Headers Best Practices",
+            "url": "https://securityheaders.com/",
+            "youtube_id": null
+          },
+          {
+            "type": "youtube",
+            "title": "Web Security Headers Explained",
+            "url": "https://www.youtube.com/watch?v=zEV3HOuM_Vw",
+            "youtube_id": "zEV3HOuM_Vw"
+          }
+        ],
+        "cwe_cve": "CWE-16",
+        "priority": "P0",
+        "estimated_effort": "med",
+        "confidence": "high",
+        "waf_rules": [],
+        "notes": "Auto-generated solution based on vulnerability type"
+      }
+    },
+    {
+      "route": "https://jnnce.ac.in/messagefromprincipal.html",
+      "attack": "headers",
+      "evidence": "Critical headers missing: CSP, X-Frame-Options, Server: Apache",
+      "severity": "high",
+      "solution": {
+        "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
+        "remediation_steps": [
+          "Configure Content Security Policy (CSP) to prevent XSS attacks",
+          "Enable HTTP Strict Transport Security (HSTS) for HTTPS enforcement",
+          "Add X-Frame-Options to prevent clickjacking attacks",
+          "Set X-Content-Type-Options to prevent MIME type sniffing"
+        ],
+        "code_snippet": "// Node.js Express with Helmet\nconst helmet = require('helmet');\napp.use(helmet({\n  contentSecurityPolicy: {\n    directives: {\n      defaultSrc: [\"'self'\"],\n      styleSrc: [\"'self'\", \"'unsafe-inline'\"]\n    }\n  },\n  hsts: { maxAge: 31536000, includeSubDomains: true }\n}));\n\n// Nginx configuration\nadd_header X-Frame-Options \"SAMEORIGIN\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;",
+        "resource_links": [
+          {
+            "type": "doc",
+            "title": "OWASP Secure Headers Project",
+            "url": "https://owasp.org/www-project-secure-headers/",
+            "youtube_id": null
+          },
+          {
+            "type": "blog",
+            "title": "Security Headers Best Practices",
+            "url": "https://securityheaders.com/",
+            "youtube_id": null
+          },
+          {
+            "type": "youtube",
+            "title": "Web Security Headers Explained",
+            "url": "https://www.youtube.com/watch?v=zEV3HOuM_Vw",
+            "youtube_id": "zEV3HOuM_Vw"
+          }
+        ],
+        "cwe_cve": "CWE-16",
+        "priority": "P0",
+        "estimated_effort": "med",
+        "confidence": "high",
+        "waf_rules": [],
+        "notes": "Auto-generated solution based on vulnerability type"
+      }
+    },
+    {
+      "route": "https://jnnce.ac.in/messagefrompresident.html",
+      "attack": "headers",
+      "evidence": "Critical headers missing: CSP, X-Frame-Options, Server: Apache",
+      "severity": "high",
+      "solution": {
+        "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
+        "remediation_steps": [
+          "Configure Content Security Policy (CSP) to prevent XSS attacks",
+          "Enable HTTP Strict Transport Security (HSTS) for HTTPS enforcement",
+          "Add X-Frame-Options to prevent clickjacking attacks",
+          "Set X-Content-Type-Options to prevent MIME type sniffing"
+        ],
+        "code_snippet": "// Node.js Express with Helmet\nconst helmet = require('helmet');\napp.use(helmet({\n  contentSecurityPolicy: {\n    directives: {\n      defaultSrc: [\"'self'\"],\n      styleSrc: [\"'self'\", \"'unsafe-inline'\"]\n    }\n  },\n  hsts: { maxAge: 31536000, includeSubDomains: true }\n}));\n\n// Nginx configuration\nadd_header X-Frame-Options \"SAMEORIGIN\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;",
+        "resource_links": [
+          {
+            "type": "doc",
+            "title": "OWASP Secure Headers Project",
+            "url": "https://owasp.org/www-project-secure-headers/",
+            "youtube_id": null
+          },
+          {
+            "type": "blog",
+            "title": "Security Headers Best Practices",
+            "url": "https://securityheaders.com/",
+            "youtube_id": null
+          },
+          {
+            "type": "youtube",
+            "title": "Web Security Headers Explained",
+            "url": "https://www.youtube.com/watch?v=zEV3HOuM_Vw",
+            "youtube_id": "zEV3HOuM_Vw"
+          }
+        ],
+        "cwe_cve": "CWE-16",
+        "priority": "P0",
+        "estimated_effort": "med",
+        "confidence": "high",
+        "waf_rules": [],
+        "notes": "Auto-generated solution based on vulnerability type"
+      }
+    },
+    {
+      "route": "https://jnnce.ac.in/messagefromsecretary.html",
+      "attack": "headers",
+      "evidence": "Critical headers missing: CSP, X-Frame-Options, Server: Apache",
+      "severity": "high",
+      "solution": {
+        "solution": "Implement comprehensive security headers to protect against common web vulnerabilities",
+        "remediation_steps": [
+          "Configure Content Security Policy (CSP) to prevent XSS attacks",
+          "Enable HTTP Strict Transport Security (HSTS) for HTTPS enforcement",
+          "Add X-Frame-Options to prevent clickjacking attacks",
+          "Set X-Content-Type-Options to prevent MIME type sniffing"
+        ],
+        "code_snippet": "// Node.js Express with Helmet\nconst helmet = require('helmet');\napp.use(helmet({\n  contentSecurityPolicy: {\n    directives: {\n      defaultSrc: [\"'self'\"],\n      styleSrc: [\"'self'\", \"'unsafe-inline'\"]\n    }\n  },\n  hsts: { maxAge: 31536000, includeSubDomains: true }\n}));\n\n// Nginx configuration\nadd_header X-Frame-Options \"SAMEORIGIN\" always;\nadd_header X-Content-Type-Options \"nosniff\" always;\nadd_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;",
+        "resource_links": [
+          {
+            "type": "doc",
+            "title": "OWASP Secure Headers Project",
+            "url": "https://owasp.org/www-project-secure-headers/",
+            "youtube_id": null
+          },
+          {
+            "type": "blog",
+            "title": "Security Headers Best Practices",
+            "url": "https://securityheaders.com/",
+            "youtube_id": null
+          },
+          {
+            "type": "youtube",
+            "title": "Web Security Headers Explained",
+            "url": "https://www.youtube.com/watch?v=zEV3HOuM_Vw",
+            "youtube_id": "zEV3HOuM_Vw"
+          }
+        ],
+        "cwe_cve": "CWE-16",
+        "priority": "P0",
         "estimated_effort": "med",
         "confidence": "high",
         "waf_rules": [],
@@ -440,168 +483,94 @@
   ],
   "securityFingerprints": [
     {
-      "url": "http://demo.owasp-juice.shop/",
+      "url": "https://jnnce.ac.in/",
       "status": 200,
-      "server": "Heroku",
+      "server": "Apache",
       "errorHints": []
     },
     {
-      "url": "http://demo.owasp-juice.shop/#/login",
+      "url": "https://jnnce.ac.in/index.html",
       "status": 200,
-      "server": "Heroku",
+      "server": "Apache",
       "errorHints": []
     },
     {
-      "url": "http://demo.owasp-juice.shop/#/contact",
-      "status": 200,
-      "server": "Heroku",
+      "url": "https://jnnce.ac.in/aboutjnnce.html",
+      "status": 404,
+      "server": "Apache",
       "errorHints": []
     },
     {
-      "url": "http://demo.owasp-juice.shop/#/about",
-      "status": 200,
-      "server": "Heroku",
+      "url": "https://jnnce.ac.in/vision.html",
+      "status": 404,
+      "server": "Apache",
       "errorHints": []
     },
     {
-      "url": "http://demo.owasp-juice.shop/#/photo-wall",
-      "status": 200,
-      "server": "Heroku",
+      "url": "https://jnnce.ac.in/aboutnes.html",
+      "status": 404,
+      "server": "Apache",
       "errorHints": []
     },
     {
-      "url": "http://demo.owasp-juice.shop/#/score-board",
-      "status": 200,
-      "server": "Heroku",
+      "url": "https://jnnce.ac.in/messagefromprincipal.html",
+      "status": 404,
+      "server": "Apache",
       "errorHints": []
     },
     {
-      "url": "http://demo.owasp-juice.shop/redirect?to=https://github.com/juice-shop/juice-shop",
-      "status": 200,
-      "server": "github.com",
+      "url": "https://jnnce.ac.in/messagefrompresident.html",
+      "status": 404,
+      "server": "Apache",
       "errorHints": []
     },
     {
-      "url": "http://demo.owasp-juice.shop/#/forgot-password",
-      "status": 200,
-      "server": "Heroku",
+      "url": "https://jnnce.ac.in/messagefromsecretary.html",
+      "status": 404,
+      "server": "Apache",
       "errorHints": []
-    },
-    {
-      "url": "GET https://demo.owasp-juice.shop/rest/admin/application-version",
-      "status": null,
-      "server": null,
-      "errorHints": [
-        "Request failed: Invalid URL"
-      ]
-    },
-    {
-      "url": "GET https://demo.owasp-juice.shop/assets/i18n/en.json",
-      "status": null,
-      "server": null,
-      "errorHints": [
-        "Request failed: Invalid URL"
-      ]
-    },
-    {
-      "url": "GET https://demo.owasp-juice.shop/rest/admin/application-configuration",
-      "status": null,
-      "server": null,
-      "errorHints": [
-        "Request failed: Invalid URL"
-      ]
-    },
-    {
-      "url": "GET https://demo.owasp-juice.shop/rest/languages",
-      "status": null,
-      "server": null,
-      "errorHints": [
-        "Request failed: Invalid URL"
-      ]
-    },
-    {
-      "url": "GET https://demo.owasp-juice.shop/rest/products/search?q=",
-      "status": null,
-      "server": null,
-      "errorHints": [
-        "Request failed: Invalid URL"
-      ]
-    },
-    {
-      "url": "GET https://demo.owasp-juice.shop/api/Challenges/?name=Score%20Board",
-      "status": null,
-      "server": null,
-      "errorHints": [
-        "Request failed: Invalid URL"
-      ]
-    },
-    {
-      "url": "GET https://demo.owasp-juice.shop/api/Quantitys/",
-      "status": null,
-      "server": null,
-      "errorHints": [
-        "Request failed: Invalid URL"
-      ]
-    },
-    {
-      "url": "GET https://demo.owasp-juice.shop/api/SecurityQuestions/",
-      "status": null,
-      "server": null,
-      "errorHints": [
-        "Request failed: Invalid URL"
-      ]
     }
   ],
   "healthCheck": {
-    "url": "http://demo.owasp-juice.shop/",
-    "timestamp": "2025-08-22T10:46:36.170Z",
-    "overallScore": 78,
+    "url": "https://jnnce.ac.in/",
+    "timestamp": "2025-08-22T11:07:50.045Z",
+    "overallScore": 64,
     "scores": {
-      "performance": 47,
+      "performance": 40,
       "accessibility": 77,
-      "bestPractices": 95,
-      "seo": 92,
+      "bestPractices": 85,
+      "seo": 54,
       "pwa": 50
     },
     "metrics": {
       "performance": {
-        "score": 47,
+        "score": 40,
         "metrics": {
-          "domContentLoaded": 5.199999928474426,
-          "loadComplete": 5.800000071525574,
-          "firstPaint": 1188,
-          "firstContentfulPaint": 2752,
-          "timeToInteractive": 1127,
-          "dnsLookup": 40.199999928474426,
-          "tcpConnect": 385.60000002384186,
-          "serverResponse": 459.1999999284744,
-          "totalResources": 39,
-          "transferSize": 9633,
-          "encodedBodySize": 9333,
-          "decodedBodySize": 80117,
-          "largestContentfulPaint": 4704,
+          "domContentLoaded": 99.69999992847443,
+          "loadComplete": 0,
+          "firstPaint": 4120,
+          "firstContentfulPaint": 4120,
+          "timeToInteractive": 2662.100000023842,
+          "dnsLookup": 0,
+          "tcpConnect": 0,
+          "serverResponse": 1390.5,
+          "totalResources": 46,
+          "transferSize": 102020,
+          "encodedBodySize": 101720,
+          "decodedBodySize": 101720,
+          "largestContentfulPaint": 7452,
           "cumulativeLayoutShift": 0,
-          "totalLoadTime": 4637,
+          "totalLoadTime": 6450,
           "responseStatus": 200,
           "responseHeaders": {
             "accept-ranges": "bytes",
-            "access-control-allow-origin": "*",
-            "cache-control": "public, max-age=0",
-            "content-encoding": "br",
-            "content-type": "text/html; charset=UTF-8",
-            "date": "Fri, 22 Aug 2025 10:46:29 GMT",
-            "etag": "W/\"138f5-198d0e71ca9\"",
-            "feature-policy": "payment 'self'",
-            "last-modified": "Fri, 22 Aug 2025 08:31:03 GMT",
-            "nel": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}",
-            "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=DBjnKpxQ4blUbA5VMdvDOE3gbMCOontIR0RlIR5vgnk%3D\\u0026sid=812dcc77-0bd0-43b1-a5f1-b25750382959\\u0026ts=1755859589\"}],\"max_age\":3600}",
-            "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=DBjnKpxQ4blUbA5VMdvDOE3gbMCOontIR0RlIR5vgnk%3D&sid=812dcc77-0bd0-43b1-a5f1-b25750382959&ts=1755859589\"",
-            "server": "Heroku",
-            "vary": "Accept-Encoding",
-            "via": "1.1 heroku-router",
-            "x-content-type-options": "nosniff",
-            "x-frame-options": "SAMEORIGIN",
-            "x-recruiting": "/#/jobs"
+            "connection": "Keep-Alive",
+            "content-length": "101720",
+            "content-type": "text/html",
+            "date": "Fri, 22 Aug 2025 11:07:42 GMT",
+            "keep-alive": "timeout=5, max=98",
+            "last-modified": "Thu, 14 Aug 2025 17:22:13 GMT",
+            "server": "Apache"
           }
         },
         "opportunities": [
@@ -621,74 +590,95 @@
         "score": 77,
         "issues": [
           {
-            "type": "missing-form-labels",
+            "type": "missing-alt-text",
             "severity": "high",
-            "count": 1,
-            "description": "Form inputs missing proper labels"
+            "count": 31,
+            "description": "Images missing alt text for screen readers"
           },
           {
             "type": "heading-hierarchy",
             "severity": "medium",
-            "count": 1,
+            "count": 3,
             "description": "Improper heading hierarchy detected"
           }
         ],
         "summary": {
-          "totalImages": 13,
-          "imagesWithAlt": 13,
+          "totalImages": 86,
+          "imagesWithAlt": 55,
           "totalForms": 0,
-          "totalHeadings": 6,
-          "elementsWithAria": 65,
-          "focusableElements": 26,
+          "totalHeadings": 41,
+          "elementsWithAria": 30,
+          "focusableElements": 498,
           "contrastIssues": 0
         }
       },
       "bestPractices": {
-        "score": 95,
+        "score": 85,
         "issues": [
+          {
+            "type": "large-dom-size",
+            "severity": "medium",
+            "count": 1715,
+            "description": "Large DOM size may impact performance"
+          },
           {
             "type": "excessive-inline-styles",
             "severity": "low",
-            "count": 87,
+            "count": 132,
             "description": "Many inline styles found, consider using CSS classes"
           }
         ],
         "summary": {
-          "totalElements": 440,
-          "maxDomDepth": 21,
-          "totalScripts": 7,
-          "totalStylesheets": 2,
-          "totalImages": 13,
-          "inlineStyles": 87,
+          "totalElements": 1715,
+          "maxDomDepth": 16,
+          "totalScripts": 17,
+          "totalStylesheets": 12,
+          "totalImages": 86,
+          "inlineStyles": 132,
           "hasViewport": true,
           "hasFavicon": true,
           "hasCharset": true
         }
       },
       "seo": {
-        "score": 92,
+        "score": 54,
         "issues": [
           {
-            "type": "multiple-h1",
+            "type": "title-too-long",
             "severity": "medium",
-            "description": "Multiple H1 headings found"
+            "description": "Title tag too long (over 60 characters)"
+          },
+          {
+            "type": "missing-meta-description",
+            "severity": "high",
+            "description": "Page missing meta description"
+          },
+          {
+            "type": "missing-h1",
+            "severity": "high",
+            "description": "Page missing H1 heading"
+          },
+          {
+            "type": "missing-lang-attribute",
+            "severity": "medium",
+            "description": "HTML missing lang attribute"
           }
         ],
         "data": {
-          "title": "OWASP Juice Shop",
-          "titleLength": 16,
-          "metaDescription": "Probably the most modern and sophisticated insecure web application",
-          "metaDescriptionLength": 67,
-          "h1Count": 2,
-          "h1Text": "Welcome to OWASP Juice Shop!",
+          "title": "JNNCE | Jawaharlal Nehru New College of Engineering, Shivamogga",
+          "titleLength": 63,
+          "metaDescription": null,
+          "metaDescriptionLength": 0,
+          "h1Count": 0,
+          "h1Text": null,
           "canonical": null,
-          "language": "en",
+          "language": "",
           "robots": null,
           "headingStructure": {
-            "h1": 2,
-            "h2": 1,
-            "h3": 3,
-            "h4": 0,
+            "h1": 0,
+            "h2": 8,
+            "h3": 12,
+            "h4": 21,
             "h5": 0,
             "h6": 0
           }
@@ -707,10 +697,10 @@
         "viewport": "width=device-width, initial-scale=1"
       },
       "metadata": {
-        "url": "https://demo.owasp-juice.shop/#/",
-        "title": "OWASP Juice Shop",
+        "url": "https://jnnce.ac.in/jnndemo/",
+        "title": "JNNCE | Jawaharlal Nehru New College of Engineering, Shivamogga",
         "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/136.0.0.0 Safari/537.36",
-        "timestamp": "2025-08-22T10:46:36.169Z",
+        "timestamp": "2025-08-22T11:07:50.044Z",
         "viewport": {
           "width": 1920,
           "height": 1080,
@@ -721,35 +711,35 @@
           "hasReact": false,
           "hasAngular": false,
           "hasVue": false,
-          "hasBootstrap": false
+          "hasBootstrap": true
         }
       }
     },
     "issueBreakdown": {
       "performance": {
-        "score": 47,
+        "score": 40,
         "issues": [
           {
             "type": "slow-loading",
             "severity": "high",
-            "description": "Slow loading: 4637ms (should be < 3000ms)",
-            "currentValue": 4637,
+            "description": "Slow loading: 6450ms (should be < 3000ms)",
+            "currentValue": 6450,
             "targetValue": 3000,
             "unit": "ms"
           },
           {
             "type": "slow-fcp",
             "severity": "high",
-            "description": "Slow First Contentful Paint: 2752ms (should be < 1800ms)",
-            "currentValue": 2752,
+            "description": "Slow First Contentful Paint: 4120ms (should be < 1800ms)",
+            "currentValue": 4120,
             "targetValue": 1800,
             "unit": "ms"
           },
           {
             "type": "slow-lcp",
             "severity": "high",
-            "description": "Slow Largest Contentful Paint: 4704ms (should be < 2500ms)",
-            "currentValue": 4704,
+            "description": "Slow Largest Contentful Paint: 7452ms (should be < 2500ms)",
+            "currentValue": 7452,
             "targetValue": 2500,
             "unit": "ms"
           }
@@ -776,56 +766,100 @@
         "score": 77,
         "issues": [
           {
-            "type": "missing-form-labels",
+            "type": "missing-alt-text",
             "severity": "high",
-            "description": "Form inputs missing proper labels",
-            "count": 1
+            "description": "Images missing alt text for screen readers",
+            "count": 31
           },
           {
             "type": "heading-hierarchy",
             "severity": "medium",
             "description": "Improper heading hierarchy detected",
-            "count": 1
+            "count": 3
           }
         ],
         "recommendations": [
-          "Add proper labels or aria-label attributes to form inputs",
+          "Add meaningful alt attributes to all images",
           "Use proper heading order (h1 → h2 → h3)"
         ],
         "stats": {
-          "totalImages": 13,
-          "imagesWithAlt": 13,
+          "totalImages": 86,
+          "imagesWithAlt": 55,
           "totalForms": 0,
-          "totalHeadings": 6,
-          "elementsWithAria": 65,
-          "focusableElements": 26,
+          "totalHeadings": 41,
+          "elementsWithAria": 30,
+          "focusableElements": 498,
           "contrastIssues": 0
         }
       },
       "bestPractices": {
-        "score": 95,
-        "issues": [],
-        "recommendations": []
+        "score": 85,
+        "issues": [
+          {
+            "type": "large-dom-size",
+            "severity": "medium",
+            "description": "Large DOM size may impact performance",
+            "count": 1715,
+            "depth": null
+          },
+          {
+            "type": "excessive-inline-styles",
+            "severity": "low",
+            "description": "Many inline styles found, consider using CSS classes",
+            "count": 132,
+            "depth": null
+          }
+        ],
+        "recommendations": [
+          "Reduce total elements, use pagination or lazy loading",
+          "Move inline styles to CSS classes"
+        ]
       },
       "seo": {
-        "score": 92,
-        "issues": [],
-        "recommendations": [],
+        "score": 54,
+        "issues": [
+          {
+            "type": "title-too-long",
+            "severity": "medium",
+            "description": "Title tag too long (over 60 characters)"
+          },
+          {
+            "type": "missing-meta-description",
+            "severity": "high",
+            "description": "Page missing meta description"
+          },
+          {
+            "type": "missing-h1",
+            "severity": "high",
+            "description": "Page missing H1 heading"
+          },
+          {
+            "type": "missing-lang-attribute",
+            "severity": "medium",
+            "description": "HTML missing lang attribute"
+          }
+        ],
+        "recommendations": [
+          "Keep title under 60 characters",
+          "Add <meta name=\"description\" content=\"...\">",
+          "Add exactly one H1 heading per page",
+          "Add lang attribute to <html> tag"
+        ],
         "currentValues": {
-          "title": "OWASP Juice Shop",
-          "titleLength": 16,
-          "metaDescription": "Probably the most modern and sophisticated insecure web application",
-          "metaDescriptionLength": 67,
-          "h1Count": 2,
-          "h1Text": "Welcome to OWASP Juice Shop!",
+          "title": "JNNCE | Jawaharlal Nehru New College of Engineering, Shivamogga",
+          "titleLength": 63,
+          "metaDescription": null,
+          "metaDescriptionLength": 0,
+          "h1Count": 0,
+          "h1Text": null,
           "canonical": null,
-          "language": "en",
+          "language": "",
           "robots": null,
           "headingStructure": {
-            "h1": 2,
-            "h2": 1,
-            "h3": 3,
-            "h4": 0,
+            "h1": 0,
+            "h2": 8,
+            "h3": 12,
+            "h4": 21,
             "h5": 0,
             "h6": 0
           }
@@ -858,49 +892,87 @@
         }
       }
     },
-    "lastUpdated": "2025-08-22T10:46:36.661Z"
+    "lastUpdated": "2025-08-22T11:07:50.497Z"
   },
   "scores": {
     "security": {
-      "score": 11,
+      "score": 0,
       "breakdown": {
-        "critical": 1,
-        "high": 0,
-        "medium": 8,
+        "critical": 0,
+        "high": 8,
+        "medium": 0,
         "low": 0
       },
-      "totalFindings": 9,
-      "deductions": 89
+      "totalFindings": 8,
+      "deductions": 120
     },
-    "health": 78,
-    "overall": 38
+    "health": 64,
+    "overall": null
   },
   "summary": {
     "riskLevel": "CRITICAL",
     "riskColor": "🔴",
     "recommendation": "Significant security vulnerabilities detected. Immediate action required.",
     "scores": {
-      "overall": 38,
-      "security": 11,
-      "health": 78
+      "overall": null,
+      "security": {
+        "score": 0,
+        "breakdown": {
+          "critical": 0,
+          "high": 8,
+          "medium": 0,
+          "low": 0
+        },
+        "totalFindings": 8,
+        "deductions": 120
+      },
+      "health": 64
     },
     "stats": {
-      "totalFindings": 9,
-      "criticalIssues": 1,
+      "totalFindings": 8,
+      "criticalIssues": 8,
       "pagesScanned": 8,
-      "endpointsFound": 8
+      "endpointsFound": 0
     },
     "topIssues": [
       {
-        "type": "sqli",
-        "route": "http://demo.owasp-juice.shop/redirect?to=https://github.com/juice-shop/juice-shop",
-        "severity": "critical",
-        "evidence": "SQL error signature detected",
-        "solution": "Use parameterized queries and input validation to prevent SQL injection"
+        "type": "headers",
+        "route": "https://jnnce.ac.in/",
+        "severity": "high",
+        "evidence": "Critical headers missing: CSP, X-Frame-Options, Server: Apache",
+        "solution": "Implement comprehensive security headers to protect against common web vulnerabilities"
+      },
+      {
+        "type": "headers",
+        "route": "https://jnnce.ac.in/index.html",
+        "severity": "high",
+        "evidence": "Critical headers missing: CSP, X-Frame-Options, Server: Apache",
+        "solution": "Implement comprehensive security headers to protect against common web vulnerabilities"
+      },
+      {
+        "type": "headers",
+        "route": "https://jnnce.ac.in/aboutjnnce.html",
+        "severity": "high",
+        "evidence": "Critical headers missing: CSP, X-Frame-Options, Server: Apache",
+        "solution": "Implement comprehensive security headers to protect against common web vulnerabilities"
+      },
+      {
+        "type": "headers",
+        "route": "https://jnnce.ac.in/vision.html",
+        "severity": "high",
+        "evidence": "Critical headers missing: CSP, X-Frame-Options, Server: Apache",
+        "solution": "Implement comprehensive security headers to protect against common web vulnerabilities"
+      },
+      {
+        "type": "headers",
+        "route": "https://jnnce.ac.in/aboutnes.html",
+        "severity": "high",
+        "evidence": "Critical headers missing: CSP, X-Frame-Options, Server: Apache",
+        "solution": "Implement comprehensive security headers to protect against common web vulnerabilities"
       }
     ]
   },
-  "executionTime": 94102,
-  "reportGenerated": "2025-08-22T10:46:36.699Z",
+  "executionTime": 130488,
+  "reportGenerated": "2025-08-22T11:07:50.529Z",
   "version": "1.0.0"
 }

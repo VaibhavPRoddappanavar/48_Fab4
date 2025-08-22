@@ -1,0 +1,299 @@
+{
+  "url": "http://www.whitehouse.gov",
+  "timestamp": "2025-08-22T11:03:25.876Z",
+  "overallScore": 80,
+  "scores": {
+    "performance": 72,
+    "accessibility": 77,
+    "bestPractices": 95,
+    "seo": 77,
+    "pwa": 75
+  },
+  "metrics": {
+    "performance": {
+      "score": 72,
+      "metrics": {
+        "domContentLoaded": 1.2999999523162842,
+        "loadComplete": 0.5,
+        "firstPaint": 2308,
+        "firstContentfulPaint": 2308,
+        "timeToInteractive": 1720.8000000715256,
+        "dnsLookup": 72.30000007152557,
+        "tcpConnect": 157.79999995231628,
+        "serverResponse": 367.10000002384186,
+        "totalResources": 52,
+        "transferSize": 32689,
+        "encodedBodySize": 32389,
+        "decodedBodySize": 166288,
+        "largestContentfulPaint": 0,
+        "cumulativeLayoutShift": 1.6075102880658435e-7,
+        "totalLoadTime": 3895,
+        "responseStatus": 200,
+        "responseHeaders": {
+          "accept-ranges": "bytes",
+          "cache-control": "max-age=300, must-revalidate",
+          "content-encoding": "br",
+          "content-security-policy": "upgrade-insecure-requests; frame-ancestors 'none'",
+          "content-type": "text/html; charset=UTF-8",
+          "date": "Fri, 22 Aug 2025 11:03:19 GMT",
+          "referrer-policy": "strict-origin-when-cross-origin",
+          "server": "nginx",
+          "strict-transport-security": "max-age=31536000;includeSubdomains;preload",
+          "vary": "Accept-Encoding",
+          "x-cache": "HIT",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "DENY",
+          "x-rq": "bom1 0 30 9980",
+          "x-xss-protection": "1; mode=block"
+        }
+      },
+      "opportunities": [
+        {
+          "type": "improve-fcp",
+          "description": "Improve First Contentful Paint",
+          "suggestion": "Optimize critical rendering path, reduce server response time"
+        }
+      ]
+    },
+    "accessibility": {
+      "score": 77,
+      "issues": [
+        {
+          "type": "missing-form-labels",
+          "severity": "high",
+          "count": 4,
+          "description": "Form inputs missing proper labels"
+        },
+        {
+          "type": "heading-hierarchy",
+          "severity": "medium",
+          "count": 1,
+          "description": "Improper heading hierarchy detected"
+        }
+      ],
+      "summary": {
+        "totalImages": 16,
+        "imagesWithAlt": 16,
+        "totalForms": 3,
+        "totalHeadings": 10,
+        "elementsWithAria": 44,
+        "focusableElements": 85,
+        "contrastIssues": 0
+      }
+    },
+    "bestPractices": {
+      "score": 95,
+      "issues": [
+        {
+          "type": "excessive-inline-styles",
+          "severity": "low",
+          "count": 39,
+          "description": "Many inline styles found, consider using CSS classes"
+        }
+      ],
+      "summary": {
+        "totalElements": 549,
+        "maxDomDepth": 18,
+        "totalScripts": 18,
+        "totalStylesheets": 9,
+        "totalImages": 16,
+        "inlineStyles": 39,
+        "hasViewport": true,
+        "hasFavicon": true,
+        "hasCharset": true
+      }
+    },
+    "seo": {
+      "score": 77,
+      "issues": [
+        {
+          "type": "meta-description-too-long",
+          "severity": "medium",
+          "description": "Meta description too long (over 160 characters)"
+        },
+        {
+          "type": "missing-h1",
+          "severity": "high",
+          "description": "Page missing H1 heading"
+        }
+      ],
+      "data": {
+        "title": "The White House",
+        "titleLength": 15,
+        "metaDescription": "President Donald J. Trump and Vice President JD Vance are committed to lowering costs for all Americans, securing our borders, unleashing American energy dominance, restoring peace through strength, and making all Americans safe and secure once again.",
+        "metaDescriptionLength": 251,
+        "h1Count": 0,
+        "h1Text": null,
+        "canonical": "https://www.whitehouse.gov/",
+        "language": "en-US",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+        "headingStructure": {
+          "h1": 0,
+          "h2": 8,
+          "h3": 2,
+          "h4": 0,
+          "h5": 0,
+          "h6": 0
+        }
+      }
+    },
+    "pwa": {
+      "score": 75,
+      "features": {
+        "hasServiceWorker": true,
+        "hasManifest": true,
+        "isResponsive": true,
+        "worksOffline": false,
+        "installable": false
+      },
+      "manifestUrl": "https://www.whitehouse.gov/wp-content/images/site.webmanifest",
+      "viewport": "width=device-width, initial-scale=1"
+    },
+    "metadata": {
+      "url": "https://www.whitehouse.gov/",
+      "title": "The White House",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/136.0.0.0 Safari/537.36",
+      "timestamp": "2025-08-22T11:03:25.869Z",
+      "viewport": {
+        "width": 1920,
+        "height": 1080,
+        "devicePixelRatio": 1
+      },
+      "technologies": {
+        "hasJQuery": false,
+        "hasReact": false,
+        "hasAngular": false,
+        "hasVue": false,
+        "hasBootstrap": false
+      }
+    }
+  },
+  "issueBreakdown": {
+    "performance": {
+      "score": 72,
+      "issues": [
+        {
+          "type": "slow-loading",
+          "severity": "high",
+          "description": "Slow loading: 3895ms (should be < 3000ms)",
+          "currentValue": 3895,
+          "targetValue": 3000,
+          "unit": "ms"
+        },
+        {
+          "type": "slow-fcp",
+          "severity": "high",
+          "description": "Slow First Contentful Paint: 2308ms (should be < 1800ms)",
+          "currentValue": 2308,
+          "targetValue": 1800,
+          "unit": "ms"
+        }
+      ],
+      "recommendations": [
+        "Optimize server response time, enable compression",
+        "Optimize critical rendering path, reduce render-blocking resources"
+      ],
+      "opportunities": [
+        {
+          "type": "improve-fcp",
+          "description": "Improve First Contentful Paint",
+          "suggestion": "Optimize critical rendering path, reduce server response time"
+        }
+      ]
+    },
+    "accessibility": {
+      "score": 77,
+      "issues": [
+        {
+          "type": "missing-form-labels",
+          "severity": "high",
+          "description": "Form inputs missing proper labels",
+          "count": 4
+        },
+        {
+          "type": "heading-hierarchy",
+          "severity": "medium",
+          "description": "Improper heading hierarchy detected",
+          "count": 1
+        }
+      ],
+      "recommendations": [
+        "Add proper labels or aria-label attributes to form inputs",
+        "Use proper heading order (h1 → h2 → h3)"
+      ],
+      "stats": {
+        "totalImages": 16,
+        "imagesWithAlt": 16,
+        "totalForms": 3,
+        "totalHeadings": 10,
+        "elementsWithAria": 44,
+        "focusableElements": 85,
+        "contrastIssues": 0
+      }
+    },
+    "bestPractices": {
+      "score": 95,
+      "issues": [],
+      "recommendations": []
+    },
+    "seo": {
+      "score": 77,
+      "issues": [
+        {
+          "type": "meta-description-too-long",
+          "severity": "medium",
+          "description": "Meta description too long (over 160 characters)"
+        },
+        {
+          "type": "missing-h1",
+          "severity": "high",
+          "description": "Page missing H1 heading"
+        }
+      ],
+      "recommendations": [
+        "Keep meta description under 160 characters",
+        "Add exactly one H1 heading per page"
+      ],
+      "currentValues": {
+        "title": "The White House",
+        "titleLength": 15,
+        "metaDescription": "President Donald J. Trump and Vice President JD Vance are committed to lowering costs for all Americans, securing our borders, unleashing American energy dominance, restoring peace through strength, and making all Americans safe and secure once again.",
+        "metaDescriptionLength": 251,
+        "h1Count": 0,
+        "h1Text": null,
+        "canonical": "https://www.whitehouse.gov/",
+        "language": "en-US",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+        "headingStructure": {
+          "h1": 0,
+          "h2": 8,
+          "h3": 2,
+          "h4": 0,
+          "h5": 0,
+          "h6": 0
+        }
+      }
+    },
+    "pwa": {
+      "score": 75,
+      "issues": [
+        {
+          "type": "not-installable",
+          "severity": "medium",
+          "description": "Not installable as PWA"
+        }
+      ],
+      "recommendations": [
+        "Ensure manifest has name, start_url, and icons"
+      ],
+      "features": {
+        "hasServiceWorker": true,
+        "hasManifest": true,
+        "isResponsive": true,
+        "worksOffline": false,
+        "installable": false
+      }
+    }
+  },
+  "lastUpdated": "2025-08-22T11:03:28.043Z"
+}
